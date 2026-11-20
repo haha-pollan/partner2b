@@ -34,3 +34,16 @@ h1,h2,h3{font-family:'Archivo',sans-serif;margin:0}
 .facts dd{margin:2px 0 0;font-size:18px;font-weight:700}
 .card{background:#ECECEE;color:#0A0A0B;padding:26px 28px 34px}
 @media (max-width:1100px){.h1big{font-size:64px}.limepanel{width:100%;clip-path:none}.row{flex-wrap:wrap}.rowmeta{display:none}.bigword{font-size:96px}}
+.prose{max-width:820px;font-size:18px;line-height:1.7;color:#D5D6D9}
+.prose h2{font-family:'Archivo',sans-serif;font-weight:800;font-size:34px;letter-spacing:-.03em;line-height:1.15;margin:56px 0 16px;color:#ECECEE}
+.prose h3{font-family:'Archivo',sans-serif;font-weight:800;font-size:24px;letter-spacing:-.02em;line-height:1.2;margin:36px 0 12px;color:#A8FF5C}
+.prose h4{font-weight:700;font-size:19px;margin:28px 0 8px;color:#ECECEE}
+.prose p{margin:0 0 18px}
+.prose ul,.prose ol{margin:0 0 22px;padding-left:26px}
+.prose li{margin:0 0 8px}
+.prose a{color:#A8FF5C;text-decoration:underline}
+.prose strong{color:#ECECEE}
+.prose img{max-width:100%;height:auto;border-radius:12px;margin:24px 0}
+.prose blockquote{margin:24px 0;padding:4px 0 4px 20px;border-left:3px solid #A8FF5C;color:#ECECEE}
+.prose table{border-collapse:collapse;width:100%;margin:24px 0}
+.prose th,.prose td{border:1px solid #3A3B40;padding:10px 12px;text-align:left}
