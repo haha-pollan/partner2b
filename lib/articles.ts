@@ -47,7 +47,8 @@ const PALETTES: { bg: string; fg: string; accent: string; kind: string }[] = [
   { bg: "#A8FF5C", fg: "#0A0A0B", accent: "#0A0A0B", kind: "hex" },
   { bg: "#3A3B40", fg: "#ECECEE", accent: "#A8FF5C", kind: "stairs" },
 ];
-export function coverFor(slug: string) {
+export function coverFor(slug: string, i?: number) {
+  if (i !== undefined) return PALETTES[i % PALETTES.length];
   let h = 0;
   for (const c of slug) h = (h * 31 + c.charCodeAt(0)) >>> 0;
   return PALETTES[h % PALETTES.length];

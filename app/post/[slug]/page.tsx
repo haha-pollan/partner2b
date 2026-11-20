@@ -29,7 +29,9 @@ export default async function Article({ params }: { params: Promise<{ slug: stri
   const { slug } = await params;
   const a = await getArticle(slug);
   if (!a) notFound();
-  const more = (await getArticles()).filter((x) => x.slug !== a.slug).slice(0, 3);
+  const list = await getArticles();
+  const idx = list.findIndex((x) => x.slug === a.slug);
+  const more = list.map((x, i) => ({ ...x, i })).filter((x) => x.slug !== a.slug).slice(0, 3);
   const ld = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -54,7 +56,7 @@ export default async function Article({ params }: { params: Promise<{ slug: stri
               <p style={{ margin: "18px 0 0", fontSize: 16, fontWeight: 700 }}>{dateLabel(a.published_at)}</p>
             </div>
             <div style={{ flex: "0 0 380px", maxWidth: "100%", transform: "rotate(3deg)", marginTop: 16 }}>
-              <Cover slug={a.slug} title={a.title} />
+              <Cover slug={a.slug} i={idx < 0 ? undefined : idx} />
             </div>
           </div>
         </div>
@@ -68,7 +70,7 @@ export default async function Article({ params }: { params: Promise<{ slug: stri
           <div style={{ display: "flex", flexWrap: "wrap", gap: 32, marginTop: 36 }}>
             {more.map((m) => (
               <Link key={m.slug} href={`/post/${m.slug}`} style={{ flex: "1 1 300px", maxWidth: 400, display: "flex", flexDirection: "column", gap: 14 }}>
-                <Cover slug={m.slug} title={m.title} />
+                <Cover slug={m.slug} i={m.i} />
                 <h3 style={{ fontWeight: 800, fontSize: 20, letterSpacing: "-0.03em", lineHeight: 1.2 }}>{m.title}</h3>
               </Link>
             ))}
