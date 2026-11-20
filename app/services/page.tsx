@@ -81,6 +81,15 @@ const THEMES: Theme[] = [
 
 const WORDS = ["Go-to-market", "Partner ecosystems", "Demand generation", "Automation", "AI development"];
 const MAIL = "mailto:info@partner2b.com?subject=Partner2B%20services";
+const SEGMENTS: { t: string; p: string; kind: string }[] = [
+  { t: "AI Vendors", p: "Every competitor claims category leadership before the category exists. We help you say something buyers believe.", kind: "diamond" },
+  { t: "B2B SaaS", p: "Feature comparisons are a race to the bottom. We build the story that gets you chosen, not just compared.", kind: "bars" },
+  { t: "Fintech", p: "Compliance slows everything down, and buyers assume the worst until proven otherwise. We market inside that reality.", kind: "grid" },
+  { t: "Cybersecurity", p: "Trust builds through ecosystems, not louder claims. We grow you through the partners and integrations buyers already trust.", kind: "hex" },
+  { t: "Manufacturing & Logistics", p: "Long sales cycles punish anything that sounds like fluff. Technical buyers respond to specifics, not slogans.", kind: "stairs" },
+  { t: "Tech Services & Agencies", p: "Referrals only get you so far. We build the visibility that brings clients to you, not the other way around.", kind: "slants" },
+];
+
 const btnA: React.CSSProperties = { background: "#0A0A0B", color: "#A8FF5C", fontWeight: 400, fontFamily: "'Michroma',sans-serif", padding: "16px 30px", borderRadius: 12, fontSize: 13 };
 const btnB: React.CSSProperties = { background: "#fff", color: "#0A0A0B", fontWeight: 400, fontFamily: "'Michroma',sans-serif", padding: "16px 30px", borderRadius: 12, fontSize: 13 };
 
@@ -129,6 +138,30 @@ export default function Services() {
         </div>
 
       </div>
+
+      {/* Segments */}
+      <section style={{ background: "#0A0A0B", color: "#ECECEE", padding: "72px 0 80px" }}>
+        <div className="wrap">
+          <h2 style={{ fontWeight: 400, fontSize: "clamp(20px,2.6vw,34px)", letterSpacing: 0, lineHeight: 1.15 }}>
+            <span style={{ display: "block" }}>We Know Your</span>
+            <span style={{ display: "block", color: "#A8FF5C" }}>Category</span>
+          </h2>
+          <p style={{ margin: "18px 0 0", maxWidth: 620, fontSize: 18, lineHeight: 1.5, color: "#B9BABD" }}>
+            From strategy and recruitment to enablement and co-marketing. One AI-first team runs your full partner marketing program.
+          </p>
+          <div style={{ marginTop: 40, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 20 }}>
+            {SEGMENTS.map((g) => (
+              <div key={g.t} className="cut" style={{ background: "#131416", border: "1px solid #2A2B2F", borderTop: "3px solid #A8FF5C", padding: "26px 28px 30px" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 14, minHeight: 44 }}>
+                  <Glyph kind={g.kind} fg="#A8FF5C" size={30} />
+                  <h3 style={{ fontWeight: 400, fontSize: 14, letterSpacing: 0, lineHeight: 1.3 }}>{g.t}</h3>
+                </div>
+                <p style={{ margin: "16px 0 0", minHeight: 96, fontSize: 16, lineHeight: 1.55, color: "#B9BABD" }}>{g.p}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Steps */}
       {STEPS.map((s, i) => (

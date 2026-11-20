@@ -1,5 +1,5 @@
 *{box-sizing:border-box}
-body{margin:0;background:#fff;font-family:'Inter',system-ui,sans-serif;color:#0B0B0C}
+body{margin:0;background:#fff;font-family:'Sora',system-ui,sans-serif;color:#0B0B0C}
 a{color:inherit;text-decoration:none}
 h1,h2,h3{font-family:'Michroma',sans-serif;font-weight:400;margin:0}
 .cut{clip-path:polygon(0 0,100% 0,100% calc(100% - 36px),calc(100% - 36px) 100%,0 100%)}
