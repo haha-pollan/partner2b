@@ -9,6 +9,8 @@ export function Footer() {
         <Logo variant="light" />
         <div style={{ display: "flex", gap: 28, flexWrap: "wrap", fontSize: 16, fontWeight: 600 }}>
           <Link href="/directory">Directory</Link>
+          <Link href="/privacy">Privacy</Link>
+          <Link href="/terms">Terms</Link>
         </div>
         <div style={{ fontSize: 15, color: "#85868B" }}>© 2026 Partner2B</div>
       </div>
