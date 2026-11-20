@@ -110,7 +110,7 @@ p{text-wrap:pretty}
   .typename{font-size:17px!important}
   .typecnt{font-size:12px!important;white-space:nowrap}
   .typeglyph{display:none!important}
-  .lblcol{flex-direction:row!important;flex-wrap:wrap;gap:10px!important;align-items:flex-start!important;justify-content:center}
+  .lblcol{flex-direction:row!important;flex-wrap:wrap;gap:10px!important;align-items:flex-start!important;justify-content:flex-end}
   .mockcard{padding:22px 20px 28px!important}
   .splitL{padding:44px 20px 60px!important;clip-path:none!important}
   .splitR{padding:44px 20px 52px!important}
