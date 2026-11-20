@@ -22,7 +22,7 @@ export default async function PostIndex() {
           <Nav />
           <div className="wrap" style={{ padding: "24px 40px 120px" }}>
             <h1 className="h1big">Blog</h1>
-            <p style={{ margin: "24px 0 0", maxWidth: 620, fontSize: 21, lineHeight: 1.5, fontWeight: 500 }}>
+            <p style={{ margin: "24px 0 0", maxWidth: 620, fontSize: 21, lineHeight: 1.5, fontWeight: 400 }}>
               Practical articles on B2B partner programs, ecosystems and co-selling
             </p>
           </div>
@@ -33,8 +33,8 @@ export default async function PostIndex() {
           {all.map((a, i) => (
             <Link key={a.slug} href={`/post/${a.slug}`} style={{ flex: "1 1 340px", maxWidth: 420, display: "flex", flexDirection: "column", gap: 18 }}>
               <Cover slug={a.slug} title={a.title} i={i} />
-              <div style={{ fontSize: 14, fontWeight: 700, color: "#85868B" }}>{dateLabel(a.published_at)}</div>
-              <h2 style={{ fontWeight: 400, fontSize: 13, letterSpacing: 0, lineHeight: 1.2 }}>{a.title}</h2>
+              <div style={{ fontSize: 14, fontWeight: 500, color: "#85868B" }}>{dateLabel(a.published_at)}</div>
+              <h2 style={{ fontWeight: 400, fontSize: 17, letterSpacing: 0, lineHeight: 1.2 }}>{a.title}</h2>
             </Link>
           ))}
         </div>

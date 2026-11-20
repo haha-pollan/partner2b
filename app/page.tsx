@@ -24,7 +24,7 @@ const ROWS: [string, string, string, number][] = [
   ["#0A0A0B", "#A8FF5C", "#A8FF5C", 20],
 ];
 
-const label: React.CSSProperties = { background: "#A8FF5C", color: "#0A0A0B", fontWeight: 800, fontSize: 14, padding: "7px 14px", borderRadius: 8, whiteSpace: "nowrap" };
+const label: React.CSSProperties = { background: "#A8FF5C", color: "#0A0A0B", fontWeight: 600, fontSize: 14, padding: "7px 14px", borderRadius: 8, whiteSpace: "nowrap" };
 
 export default async function Home() {
   const all = await getPrograms();
@@ -49,7 +49,7 @@ export default async function Home() {
               <span style={{ display: "block" }}>partner program</span>
               <span style={{ display: "block" }}>that fits</span>
             </h1>
-            <p style={{ margin: "24px 0 0", maxWidth: 560, fontSize: 21, lineHeight: 1.5, fontWeight: 500 }}>
+            <p style={{ margin: "24px 0 0", maxWidth: 560, fontSize: 21, lineHeight: 1.5, fontWeight: 400 }}>
               A free directory of public partner programs. Every listing is built from public information and links to its source
             </p>
             <form method="get" action="/directory" className="search" role="search">
@@ -63,8 +63,8 @@ export default async function Home() {
               <Link key={p!.id} href={`/directory/${p!.slug}`} className="cut" style={{ marginLeft: ml, transform: `rotate(${rot}deg)`, background: bg, color: fg, padding: "22px 26px", display: "flex", alignItems: "center", gap: 18 }}>
                 <Tile type={p!.primary_type} size={64} domain={p!.domain} />
                 <div style={{ minWidth: 0 }}>
-                  <div style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 16, letterSpacing: 0, lineHeight: 1.1 }}>{p!.company}</div>
-                  <div style={{ marginTop: 6, fontSize: 15, fontWeight: 700, opacity: 0.8 }}>{p!.primary_type}</div>
+                  <div style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 21, letterSpacing: 0, lineHeight: 1.1 }}>{p!.company}</div>
+                  <div style={{ marginTop: 6, fontSize: 15, fontWeight: 500, opacity: 0.8 }}>{p!.primary_type}</div>
                 </div>
               </Link>
             ))}
@@ -84,7 +84,7 @@ export default async function Home() {
       {/* Browse by type */}
       <section style={{ padding: "64px 0 96px" }}>
         <div className="wrap">
-          <h2 style={{ fontWeight: 400, fontSize: 34, letterSpacing: 0, color: "#0A0A0B" }}>Browse by program type</h2>
+          <h2 style={{ fontWeight: 400, fontSize: 44, letterSpacing: 0, color: "#0A0A0B" }}>Browse by program type</h2>
         </div>
         <div style={{ marginTop: 40 }}>
           {TYPES.map((t, i) => {
@@ -92,11 +92,11 @@ export default async function Home() {
             const n = all.filter((p) => p.program_types.includes(t)).length;
             return (
               <Link key={t} href={`/directory?type=${encodeURIComponent(t)}`} style={{ display: "flex", alignItems: "center", gap: 24, background: bg, color: tx, padding: "16px 40px", marginLeft: `${ind}%` }}>
-                <span style={{ fontSize: 14, fontWeight: 800, width: 28 }}>{String(i + 1).padStart(2, "0")}</span>
-                <span style={{ flex: 1, fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 26, letterSpacing: 0 }}>{t}</span>
-                <span style={{ fontSize: 15, fontWeight: 700 }}>{n} programs</span>
+                <span style={{ fontSize: 14, fontWeight: 600, width: 28 }}>{String(i + 1).padStart(2, "0")}</span>
+                <span style={{ flex: 1, fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 34, letterSpacing: 0 }}>{t}</span>
+                <span style={{ fontSize: 15, fontWeight: 500 }}>{n} programs</span>
                 <Glyph kind={KIND[t]} fg={gl} size={34} />
-                <span style={{ width: 44, height: 44, borderRadius: "50%", border: `2px solid ${tx}`, display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, fontSize: 20 }}>→</span>
+                <span style={{ width: 44, height: 44, borderRadius: "50%", border: `2px solid ${tx}`, display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 600, fontSize: 20 }}>→</span>
               </Link>
             );
           })}
@@ -108,7 +108,7 @@ export default async function Home() {
       {/* What every listing shows */}
       <section style={{ padding: "40px 0 120px", color: "#ECECEE" }}>
         <div className="wrap">
-          <h2 style={{ fontWeight: 400, fontSize: 34, letterSpacing: 0 }}>What every listing shows</h2>
+          <h2 style={{ fontWeight: 400, fontSize: 44, letterSpacing: 0 }}>What every listing shows</h2>
           <div style={{ marginTop: 56, display: "flex", alignItems: "center", justifyContent: "center", gap: 28, flexWrap: "wrap" }}>
             <div style={{ display: "flex", flexDirection: "column", gap: 56, alignItems: "flex-end" }}>
               <span style={label}>Type of program</span>
@@ -117,12 +117,12 @@ export default async function Home() {
             </div>
             <div className="cut" style={{ width: 620, maxWidth: "100%", background: "#0A0A0B", padding: "28px 32px 36px" }}>
               <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16 }}>
-                <span style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 17, letterSpacing: 0 }}>[Company name]</span>
+                <span style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 22, letterSpacing: 0 }}>[Company name]</span>
                 <span className="pill" style={{ background: "#A8FF5C", color: "#0A0A0B" }}>Reseller program</span>
               </div>
               {[["Commission", "[Published rate]"], ["Region", "[Region]"], ["Source", "[Official program page]"]].map(([k, v]) => (
                 <div key={k} style={{ display: "flex", justifyContent: "space-between", borderTop: "1px solid #3A3B40", padding: "14px 0", fontSize: 16 }}>
-                  <span style={{ color: "#85868B" }}>{k}</span><span style={{ fontWeight: 700 }}>{v}</span>
+                  <span style={{ color: "#85868B" }}>{k}</span><span style={{ fontWeight: 500 }}>{v}</span>
                 </div>
               ))}
               <div style={{ display: "flex", gap: 12, marginTop: 14 }}>
@@ -141,12 +141,12 @@ export default async function Home() {
       {/* For partners / For vendors */}
       <section style={{ display: "flex", flexWrap: "wrap", color: "#0A0A0B" }}>
         <div style={{ flex: "1 1 520px", background: "#A8FF5C", padding: "96px 80px 96px 40px", clipPath: "polygon(0 0,100% 0,92% 50%,100% 100%,0 100%)" }}>
-          <h2 style={{ fontWeight: 400, fontSize: 38, letterSpacing: 0, lineHeight: 1 }}>For partners</h2>
-          <p style={{ margin: "20px 0 0", maxWidth: 420, fontSize: 19, lineHeight: 1.5, fontWeight: 500 }}>Compare programs and find the ones that fit your business.</p>
+          <h2 style={{ fontWeight: 400, fontSize: 49, letterSpacing: 0, lineHeight: 1 }}>For partners</h2>
+          <p style={{ margin: "20px 0 0", maxWidth: 420, fontSize: 19, lineHeight: 1.5, fontWeight: 400 }}>Compare programs and find the ones that fit your business.</p>
           <Link href="/directory" style={{ display: "inline-block", marginTop: 28, background: "#0A0A0B", color: "#A8FF5C", fontWeight: 400, fontFamily: "'Michroma',sans-serif", padding: "14px 26px", borderRadius: 12, fontSize: 12 }}>Browse programs</Link>
         </div>
         <div style={{ flex: "1 1 520px", padding: "96px 40px 96px 80px", color: "#ECECEE" }}>
-          <h2 style={{ fontWeight: 400, fontSize: 38, letterSpacing: 0, lineHeight: 1 }}>For vendors</h2>
+          <h2 style={{ fontWeight: 400, fontSize: 49, letterSpacing: 0, lineHeight: 1 }}>For vendors</h2>
           <p style={{ margin: "20px 0 0", maxWidth: 420, fontSize: 19, lineHeight: 1.5, color: "#B9BABD" }}>Claim your listing for free and keep your terms accurate.</p>
           <Link href="/claim" style={{ display: "inline-block", marginTop: 28, background: "#A8FF5C", color: "#0A0A0B", fontWeight: 400, fontFamily: "'Michroma',sans-serif", padding: "14px 26px", borderRadius: 12, fontSize: 12 }}>Claim a listing</Link>
         </div>
@@ -156,7 +156,7 @@ export default async function Home() {
       <section style={{ padding: "120px 0 140px", color: "#ECECEE" }}>
         <div className="wrap" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 48, flexWrap: "wrap" }}>
           <div style={{ flex: "1 1 460px" }}>
-            <h2 style={{ fontWeight: 400, fontSize: 34, letterSpacing: 0, lineHeight: 1.05 }}>
+            <h2 style={{ fontWeight: 400, fontSize: 44, letterSpacing: 0, lineHeight: 1.05 }}>
               <span style={{ display: "block" }}>Run a partner program?</span>
               <span style={{ display: "block", color: "#A8FF5C" }}>Claim your listing</span>
             </h2>
@@ -165,7 +165,7 @@ export default async function Home() {
           <Link href="/claim" className="cut" style={{ flex: "0 0 400px", maxWidth: "100%", transform: "rotate(3deg)", background: "#A8FF5C", color: "#0A0A0B", padding: "28px 30px 32px", display: "block" }}>
             {["Company name", "Program page URL", "Work email"].map((k) => (
               <div key={k} style={{ marginBottom: 14 }}>
-                <div style={{ fontSize: 13, fontWeight: 800 }}>{k}</div>
+                <div style={{ fontSize: 13, fontWeight: 600 }}>{k}</div>
                 <div style={{ marginTop: 6, background: "#0A0A0B", borderRadius: 8, height: 42 }} />
               </div>
             ))}

@@ -104,12 +104,12 @@ export default function Services() {
           <div className="wrap" style={{ padding: "24px 40px 110px", display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 40, flexWrap: "wrap" }}>
             <div style={{ flex: "0 0 auto", maxWidth: "min(100%, 800px)" }}>
               <span className="pill">For B2B companies</span>
-              <h1 style={{ margin: "20px 0 0", fontWeight: 400, fontSize: "clamp(20px,2.6vw,36px)", lineHeight: 1, letterSpacing: 0 }}>
+              <h1 style={{ margin: "20px 0 0", fontWeight: 400, fontSize: "clamp(26px,3.4vw,47px)", lineHeight: 1, letterSpacing: 0 }}>
                 <span style={{ display: "block" }}>Want to grow</span>
                 <span style={{ display: "block" }}>through partners?</span>
                 <span style={{ display: "block" }}>Start with your GTM</span>
               </h1>
-              <p style={{ margin: "24px 0 0", maxWidth: 560, fontSize: 21, lineHeight: 1.5, fontWeight: 500 }}>
+              <p style={{ margin: "24px 0 0", maxWidth: 560, fontSize: 21, lineHeight: 1.5, fontWeight: 400 }}>
                 B2B partner programs work when the offer, the pipeline and the operations behind them are ready. We help with all three, in that order.
               </p>
               <div style={{ display: "flex", gap: 14, flexWrap: "wrap", marginTop: 32 }}>
@@ -128,8 +128,8 @@ export default function Services() {
                     <Glyph kind={s.kind} fg={gl} size={38} />
                   </div>
                   <div style={{ minWidth: 0 }}>
-                    <div style={{ fontSize: 14, fontWeight: 800, opacity: 0.8 }}>Step {s.n}</div>
-                    <div style={{ marginTop: 4, fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 14, letterSpacing: 0, lineHeight: 1.1 }}>{s.title}</div>
+                    <div style={{ fontSize: 14, fontWeight: 600, opacity: 0.8 }}>Step {s.n}</div>
+                    <div style={{ marginTop: 4, fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 18, letterSpacing: 0, lineHeight: 1.1 }}>{s.title}</div>
                   </div>
                 </a>
               ))}
@@ -143,7 +143,7 @@ export default function Services() {
       <section style={{ background: "#0A0A0B", backgroundImage: "radial-gradient(#2A2B2F 1.3px, transparent 1.6px)", backgroundSize: "26px 26px", color: "#ECECEE", padding: "72px 0 96px", position: "relative", overflow: "hidden" }}>
         <div className="wrap" style={{ position: "relative" }}>
           <span className="pill" style={{ background: "#A8FF5C", color: "#0A0A0B" }}>Your vertical</span>
-          <h2 style={{ margin: "18px 0 0", fontWeight: 400, fontSize: "clamp(20px,2.6vw,34px)", letterSpacing: 0, lineHeight: 1.15 }}>
+          <h2 style={{ margin: "18px 0 0", fontWeight: 400, fontSize: "clamp(26px,3.4vw,44px)", letterSpacing: 0, lineHeight: 1.15 }}>
             We Know Your <span style={{ color: "#A8FF5C" }}>Category</span>
           </h2>
           <p style={{ margin: "18px 0 0", maxWidth: 620, fontSize: 18, lineHeight: 1.5, color: "#B9BABD" }}>
@@ -163,8 +163,8 @@ export default function Services() {
                     <div style={{ flex: "0 0 56px", width: 56, height: 56, borderRadius: 14, border: `2px solid ${T.gl}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
                       <Glyph kind={g.kind} fg={T.gl} size={32} />
                     </div>
-                    <h3 style={{ fontWeight: 400, fontSize: 14, letterSpacing: 0, lineHeight: 1.3, flex: 1 }}>{g.t}</h3>
-                    <span style={{ fontFamily: "'Michroma',sans-serif", fontSize: 22, color: T.num }}>{String(i + 1).padStart(2, "0")}</span>
+                    <h3 style={{ fontWeight: 400, fontSize: 18, letterSpacing: 0, lineHeight: 1.3, flex: 1 }}>{g.t}</h3>
+                    <span style={{ fontFamily: "'Michroma',sans-serif", fontSize: 29, color: T.num }}>{String(i + 1).padStart(2, "0")}</span>
                   </div>
                   <p style={{ margin: "20px 0 0", minHeight: 96, fontSize: 16, lineHeight: 1.55, color: T.sub }}>{g.p}</p>
                 </div>
@@ -180,21 +180,21 @@ export default function Services() {
         <section id={s.id} style={{ background: THEMES[i].bg, color: THEMES[i].tx, padding: "110px 0", position: "relative" }}>
           <div className="wrap">
             <div style={{ display: "flex", alignItems: "flex-end", gap: 28, flexWrap: "wrap" }}>
-              <span style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 72, lineHeight: 0.8, letterSpacing: 0, color: THEMES[i].num }}>{s.n}</span>
+              <span style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 94, lineHeight: 0.8, letterSpacing: 0, color: THEMES[i].num }}>{s.n}</span>
               <div style={{ flex: "1 1 420px" }}>
-                <h2 style={{ fontWeight: 400, fontSize: "clamp(19px,2.5vw,34px)", letterSpacing: 0, lineHeight: 1.05 }}>{s.title}</h2>
+                <h2 style={{ fontWeight: 400, fontSize: "clamp(25px,3.2vw,44px)", letterSpacing: 0, lineHeight: 1.05 }}>{s.title}</h2>
                 <p style={{ margin: "14px 0 0", maxWidth: 620, fontSize: 19, lineHeight: 1.5, color: THEMES[i].sub }}>{s.lead}</p>
               </div>
             </div>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 24, marginTop: 56 }}>
               {s.svcs.map((v) => (
                 <article key={v.title} className="cut" style={{ flex: "1 1 320px", background: v.hot ? THEMES[i].hot : THEMES[i].card, color: v.hot ? THEMES[i].hotTx : THEMES[i].ctx, padding: "30px 30px 40px", display: "flex", flexDirection: "column" }}>
-                  <span style={{ alignSelf: "flex-start", fontSize: 13, fontWeight: 800, padding: "5px 12px", borderRadius: 999, background: v.hot ? "#0A0A0B" : THEMES[i].ctag, color: v.hot ? "#A8FF5C" : THEMES[i].ctagTx }}>{v.tag}</span>
-                  <h3 style={{ margin: "20px 0 0", minHeight: 58, fontWeight: 400, fontSize: 14, letterSpacing: 0, lineHeight: 1.2 }}>{v.title}</h3>
+                  <span style={{ alignSelf: "flex-start", fontSize: 13, fontWeight: 600, padding: "5px 12px", borderRadius: 999, background: v.hot ? "#0A0A0B" : THEMES[i].ctag, color: v.hot ? "#A8FF5C" : THEMES[i].ctagTx }}>{v.tag}</span>
+                  <h3 style={{ margin: "20px 0 0", minHeight: 58, fontWeight: 400, fontSize: 18, letterSpacing: 0, lineHeight: 1.2 }}>{v.title}</h3>
                   <p style={{ margin: "12px 0 0", minHeight: 78, fontSize: 16, lineHeight: 1.5, color: v.hot ? "#0A0A0B" : THEMES[i].csub }}>{v.text}</p>
                   <ul style={{ listStyle: "none", margin: "22px 0 0", padding: "20px 0 0", borderTop: `1px solid ${v.hot ? "#0A0A0B" : THEMES[i].line}`, display: "grid", gap: 12 }}>
                     {v.items.map((it) => (
-                      <li key={it} style={{ display: "flex", alignItems: "center", gap: 12, fontSize: 15, fontWeight: 600 }}>
+                      <li key={it} style={{ display: "flex", alignItems: "center", gap: 12, fontSize: 15, fontWeight: 500 }}>
                         <span style={{ flex: "0 0 14px" }}><Glyph kind="diamond" size={14} fg={v.hot ? "#0A0A0B" : THEMES[i].gl} /></span>
                         {it}
                       </li>
@@ -226,7 +226,7 @@ export default function Services() {
       {/* Why us */}
       <section style={{ background: "#131416", color: "#ECECEE", padding: "110px 0 130px" }}>
         <div className="wrap">
-          <h2 style={{ fontWeight: 400, fontSize: "clamp(20px,2.6vw,34px)", letterSpacing: 0, lineHeight: 1.05 }}>
+          <h2 style={{ fontWeight: 400, fontSize: "clamp(26px,3.4vw,44px)", letterSpacing: 0, lineHeight: 1.05 }}>
             Why B2B tech companies <span style={{ color: "#A8FF5C" }}>work with us</span>
           </h2>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 36, marginTop: 64, justifyContent: "center" }}>
@@ -235,8 +235,8 @@ export default function Services() {
                 <div style={{ width: 64, height: 64, borderRadius: 14, border: `2px solid ${w.fg}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
                   <Glyph kind={w.kind} fg={w.fg} size={38} />
                 </div>
-                <h3 style={{ margin: "22px 0 0", fontWeight: 400, fontSize: 17, letterSpacing: 0, lineHeight: 1.1 }}>{w.t}</h3>
-                <p style={{ margin: "10px 0 0", fontSize: 17, lineHeight: 1.45, fontWeight: 500, opacity: 0.85 }}>{w.p}</p>
+                <h3 style={{ margin: "22px 0 0", fontWeight: 400, fontSize: 22, letterSpacing: 0, lineHeight: 1.1 }}>{w.t}</h3>
+                <p style={{ margin: "10px 0 0", fontSize: 17, lineHeight: 1.45, fontWeight: 400, opacity: 0.85 }}>{w.p}</p>
               </div>
             ))}
           </div>
@@ -247,7 +247,7 @@ export default function Services() {
       <section style={{ padding: "120px 0 140px", color: "#ECECEE" }}>
         <div className="wrap" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 48, flexWrap: "wrap" }}>
           <div style={{ flex: "1 1 460px" }}>
-            <h2 style={{ fontWeight: 400, fontSize: "clamp(22px,2.8vw,34px)", letterSpacing: 0, lineHeight: 1.05 }}>
+            <h2 style={{ fontWeight: 400, fontSize: "clamp(29px,3.6vw,44px)", letterSpacing: 0, lineHeight: 1.05 }}>
               <span style={{ display: "block" }}>Ready to grow</span>
               <span style={{ display: "block", color: "#A8FF5C" }}>through partners?</span>
             </h2>
@@ -256,7 +256,7 @@ export default function Services() {
           <a href={MAIL} className="cut" style={{ flex: "0 0 400px", maxWidth: "100%", transform: "rotate(3deg)", background: "#A8FF5C", color: "#0A0A0B", padding: "28px 30px 32px", display: "block" }}>
             {["Company name", "Work email", "Where growth is stuck"].map((k) => (
               <div key={k} style={{ marginBottom: 14 }}>
-                <div style={{ fontSize: 13, fontWeight: 800 }}>{k}</div>
+                <div style={{ fontSize: 13, fontWeight: 600 }}>{k}</div>
                 <div style={{ marginTop: 6, background: "#0A0A0B", borderRadius: 8, height: 42 }} />
               </div>
             ))}

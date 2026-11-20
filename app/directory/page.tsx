@@ -103,7 +103,7 @@ export default async function DirectoryPage({ searchParams }: { searchParams: Pr
         <div className="wrap" style={{ padding: "24px 40px 96px", display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 40, flexWrap: "wrap" }}>
           <div style={{ flex: "0 0 auto", maxWidth: "100%" }}>
             <h1 className="h1big"><span style={{ display: "block" }}>Browse partner</span><span style={{ display: "block" }}>programs</span></h1>
-            <p style={{ margin: "24px 0 0", maxWidth: 720, fontSize: 21, lineHeight: 1.5, fontWeight: 500 }}>
+            <p style={{ margin: "24px 0 0", maxWidth: 720, fontSize: 21, lineHeight: 1.5, fontWeight: 400 }}>
               {all.length} public B2B programs. Every listing links to its official page
             </p>
             <form method="get" action="/directory" className="search" role="search">
@@ -113,7 +113,7 @@ export default async function DirectoryPage({ searchParams }: { searchParams: Pr
             </form>
           </div>
           <div className="cut" style={{ flex: "0 0 360px", margin: "40px 40px 0 0", transform: "rotate(-4deg)", background: "#0A0A0B", color: "#ECECEE", padding: "32px 34px" }}>
-            <div style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 43, letterSpacing: 0, lineHeight: 1, color: "#A8FF5C" }}>{all.length}</div>
+            <div style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 56, letterSpacing: 0, lineHeight: 1, color: "#A8FF5C" }}>{all.length}</div>
             <div style={{ marginTop: 10, fontSize: 19, lineHeight: 1.4 }}>programs, free to browse</div>
           </div>
         </div>
@@ -123,8 +123,8 @@ export default async function DirectoryPage({ searchParams }: { searchParams: Pr
         <div className="wrap" style={{ display: "flex", gap: 32, alignItems: "flex-start", flexWrap: "wrap" }}>
           <aside className="side cut">
             <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: 18 }}>
-              <div style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 17, letterSpacing: 0 }}>Filters</div>
-              <Link href="/directory" style={{ fontSize: 15, fontWeight: 700, color: "#A8FF5C" }}>Clear all</Link>
+              <div style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 22, letterSpacing: 0 }}>Filters</div>
+              <Link href="/directory" style={{ fontSize: 15, fontWeight: 500, color: "#A8FF5C" }}>Clear all</Link>
             </div>
             <AutoForm q={f.q}>
               {group("Program type", "type", TYPES, f.type, (p, v) => p.program_types.includes(v))}
@@ -145,10 +145,10 @@ export default async function DirectoryPage({ searchParams }: { searchParams: Pr
             {chips.length > 0 && (
               <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center", marginBottom: 20 }}>
                 {chips.map((c) => (<Link key={c.label} href={c.href} className="chip">{c.label}<span style={{ color: "#ECECEE" }}>×</span></Link>))}
-                <Link href="/directory" style={{ fontSize: 15, fontWeight: 800, textDecoration: "underline" }}>Clear all</Link>
+                <Link href="/directory" style={{ fontSize: 15, fontWeight: 600, textDecoration: "underline" }}>Clear all</Link>
               </div>
             )}
-            <div style={{ marginBottom: 20, fontSize: 18, fontWeight: 700 }}>
+            <div style={{ marginBottom: 20, fontSize: 18, fontWeight: 500 }}>
               {results.length === 0 ? "No programs match these filters" : `Showing ${(cur - 1) * PAGE + 1} to ${(cur - 1) * PAGE + shown.length} of ${results.length} programs`}
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
@@ -156,12 +156,12 @@ export default async function DirectoryPage({ searchParams }: { searchParams: Pr
                 <Link key={p.id} href={`/directory/${p.slug}`} className="row cut">
                   <Tile type={p.primary_type} domain={p.domain} />
                   <div style={{ flex: "1 1 0", minWidth: 0 }}>
-                    <div style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 18, letterSpacing: 0, lineHeight: 1.1, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
-                      {p.company}{p.product_note ? <span style={{ fontSize: 16, fontWeight: 600, color: "#55565B", letterSpacing: 0, marginLeft: 10 }}>{p.product_note}</span> : null}
+                    <div style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 23, letterSpacing: 0, lineHeight: 1.1, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                      {p.company}{p.product_note ? <span style={{ fontSize: 16, fontWeight: 500, color: "#55565B", letterSpacing: 0, marginLeft: 10 }}>{p.product_note}</span> : null}
                     </div>
                     <div style={{ marginTop: 8, display: "flex", gap: 8, alignItems: "center" }}>
                       <span className="pill">{p.primary_type}</span>
-                      <span style={{ color: "#55565B", fontSize: 14, fontWeight: 700, whiteSpace: "nowrap" }}>{p.region}</span>
+                      <span style={{ color: "#55565B", fontSize: 14, fontWeight: 500, whiteSpace: "nowrap" }}>{p.region}</span>
                     </div>
                     <div style={{ marginTop: 10, fontSize: 16, color: "#3A3B40", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{p.description}</div>
                     <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "nowrap", overflow: "hidden" }}>
@@ -170,8 +170,8 @@ export default async function DirectoryPage({ searchParams }: { searchParams: Pr
                       {p.feature_tags.find((x) => FEATURES.includes(x)) && <span className="tag">{p.feature_tags.find((x) => FEATURES.includes(x))}</span>}
                     </div>
                   </div>
-                  <div className="rowmeta" style={{ flex: "0 0 170px", fontSize: 14, color: "#55565B", fontWeight: 600, lineHeight: 1.5 }}>Program types<div style={{ fontSize: 17, color: "#0A0A0B", fontWeight: 800 }}>{p.program_types.slice(0, 2).join(", ")}{p.program_types.length > 2 ? ` +${p.program_types.length - 2}` : ""}</div></div>
-                  <div className="rowmeta" style={{ flex: "0 0 110px", fontSize: 14, color: "#55565B", fontWeight: 600, lineHeight: 1.5 }}>Partner tiers<div style={{ fontSize: 17, color: "#0A0A0B", fontWeight: 800 }}>{p.tiers.length > 0 ? `${p.tiers.length} ${p.tiers.length === 1 ? "tier" : "tiers"}` : "Not listed"}</div></div>
+                  <div className="rowmeta" style={{ flex: "0 0 170px", fontSize: 14, color: "#55565B", fontWeight: 500, lineHeight: 1.5 }}>Program types<div style={{ fontSize: 17, color: "#0A0A0B", fontWeight: 600 }}>{p.program_types.slice(0, 2).join(", ")}{p.program_types.length > 2 ? ` +${p.program_types.length - 2}` : ""}</div></div>
+                  <div className="rowmeta" style={{ flex: "0 0 110px", fontSize: 14, color: "#55565B", fontWeight: 500, lineHeight: 1.5 }}>Partner tiers<div style={{ fontSize: 17, color: "#0A0A0B", fontWeight: 600 }}>{p.tiers.length > 0 ? `${p.tiers.length} ${p.tiers.length === 1 ? "tier" : "tiers"}` : "Not listed"}</div></div>
                   <div className="arrow">→</div>
                 </Link>
               ))}
