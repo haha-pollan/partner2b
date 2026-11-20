@@ -5,6 +5,8 @@ export const CATEGORIES = [
   "Spend management and AP", "Finance and accounting software", "Payroll and HR",
   "Customer service and contact center", "Conversational and voice AI", "Sales and CRM",
   "Cloud and infrastructure", "Cybersecurity", "Data and analytics",
+  "IT management and DevOps", "Low-code and collaboration", "Content and digital experience",
+  "Ecommerce and marketing tech", "Construction, real estate and field operations", "Life sciences and healthcare",
 ];
 export const ISSUES = [
   "The link is broken or wrong", "The terms are out of date", "The category or type is wrong",
