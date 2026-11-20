@@ -20,7 +20,7 @@ export default async function PostIndex() {
         <div style={{ position: "relative", overflow: "hidden", color: "#0A0A0B" }}>
           <div className="limepanel" />
           <Nav />
-          <div className="wrap" style={{ padding: "24px 40px 120px" }}>
+          <div className="wrap" style={{ padding: "24px 40px clamp(36px,9vw,120px)" }}>
             <h1 className="h1big">Blog</h1>
             <p style={{ margin: "24px 0 0", maxWidth: 620, fontSize: 21, lineHeight: 1.5, fontWeight: 300 }}>
               Practical articles on B2B partner programs, ecosystems and co-selling
@@ -28,7 +28,7 @@ export default async function PostIndex() {
           </div>
         </div>
       </div>
-      <section style={{ background: "#131416", color: "#ECECEE", padding: "90px 0 120px" }}>
+      <section style={{ background: "#131416", color: "#ECECEE", padding: "clamp(36px,9vw,90px) 0 clamp(36px,9vw,120px)" }}>
         <div className="wrap" style={{ display: "flex", flexWrap: "wrap", gap: 36 }}>
           {all.map((a, i) => (
             <Link key={a.slug} href={`/post/${a.slug}`} style={{ flex: "1 1 340px", maxWidth: 420, display: "flex", flexDirection: "column", gap: 18 }}>

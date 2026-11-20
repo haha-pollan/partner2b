@@ -37,18 +37,18 @@ export function FormPage({ kind, listings, defaultListing }: { kind: Kind; listi
         <div style={{ position: "relative", overflow: "hidden", color: "#0A0A0B" }}>
           <div className="limepanel" style={{ width: 1040 }} />
           <Nav />
-          <div className="wrap" style={{ padding: "24px 40px 90px", display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 40, flexWrap: "wrap" }}>
+          <div className="wrap" style={{ padding: "24px 40px clamp(36px,9vw,90px)", display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 40, flexWrap: "wrap" }}>
             <div style={{ maxWidth: "100%" }}>
               <h1 className="h1big" style={{ fontSize: kind === "report" ? "clamp(26px,3.6vw,56px)" : "clamp(28px,4vw,64px)" }}>{c.title}</h1>
               <p style={{ margin: "22px 0 0", maxWidth: 560, fontSize: 21, lineHeight: 1.5, fontWeight: 300 }}>{c.intro}</p>
             </div>
-            <div className="cut" style={{ flex: "0 0 320px", margin: "20px 40px 0 0", transform: "rotate(-4deg)", background: "#0A0A0B", color: "#ECECEE", padding: "28px 32px" }}>
+            <div className="cut statcard" style={{ flex: "0 0 320px", margin: "20px 40px 0 0", transform: "rotate(-4deg)", background: "#0A0A0B", color: "#ECECEE", padding: "28px 32px" }}>
               <div style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 49, letterSpacing: 0, lineHeight: 1, color: "#A8FF5C" }}>{c.badge}</div>
               <div style={{ marginTop: 8, fontSize: 18 }}>{c.badgeSub}</div>
             </div>
           </div>
         </div>
-        <div className="wrap" style={{ padding: "40px 40px 120px", display: "flex", gap: 32, alignItems: "flex-start", flexWrap: "wrap" }}>
+        <div className="wrap" style={{ padding: "40px 40px clamp(36px,9vw,120px)", display: "flex", gap: 32, alignItems: "flex-start", flexWrap: "wrap" }}>
           <div className="cut" style={{ flex: "1 1 640px", minWidth: 0, background: "#0A0A0B", color: "#ECECEE", padding: "36px 40px 44px", position: "relative" }}>
             <h2 style={{ fontWeight: 400, fontSize: 23, letterSpacing: 0 }}>{c.card}</h2>
             <SubmissionForm kind={kind} listings={listings} defaultListing={defaultListing} />
@@ -64,7 +64,7 @@ export function FormPage({ kind, listings, defaultListing }: { kind: Kind; listi
           </div>
         </div>
       </div>
-      <div style={{ background: "#131416", color: "#ECECEE", padding: "90px 0 100px" }}>
+      <div style={{ background: "#131416", color: "#ECECEE", padding: "clamp(36px,9vw,90px) 0 clamp(36px,9vw,100px)" }}>
         <div className="wrap" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 32, flexWrap: "wrap" }}>
           <div>
             <h2 style={{ fontWeight: 400, fontSize: 40, letterSpacing: 0, lineHeight: 1.05 }}>{c.band.a}<span style={{ color: "#A8FF5C" }}>{c.band.b}</span></h2>

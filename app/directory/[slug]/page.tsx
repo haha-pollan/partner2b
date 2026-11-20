@@ -41,7 +41,7 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
       <div style={{ position: "relative", overflow: "hidden", color: "#0A0A0B" }}>
         <div className="limepanel" />
         <Nav />
-        <div className="wrap" style={{ padding: "8px 40px 80px" }}>
+        <div className="wrap" style={{ padding: "8px 40px clamp(36px,9vw,80px)" }}>
           <div style={{ fontSize: 15, fontWeight: 400, display: "flex", gap: 8, flexWrap: "wrap" }}>
             <Link href="/directory" style={{ textDecoration: "underline" }}>Directory</Link><span>/</span>
             <span>{p.product_category}</span><span>/</span><span>{p.company}</span>
@@ -72,7 +72,7 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
         </div>
       </div>
 
-      <div style={{ position: "relative", color: "#0A0A0B", padding: "80px 0 96px" }}>
+      <div style={{ position: "relative", color: "#0A0A0B", padding: "clamp(36px,9vw,80px) 0 clamp(36px,9vw,96px)" }}>
         <div className="wrap" style={{ display: "flex", gap: 40, alignItems: "flex-start", flexWrap: "wrap" }}>
           <div style={{ flex: "1 1 620px", minWidth: 0 }}>
             <section style={{ marginBottom: 64 }}>
@@ -160,7 +160,7 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
           </div>
         </div>
       )}
-      <div style={{ background: "#131416", color: "#ECECEE", padding: "90px 0 100px" }}>
+      <div style={{ background: "#131416", color: "#ECECEE", padding: "clamp(36px,9vw,90px) 0 clamp(36px,9vw,100px)" }}>
         <div className="wrap" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 32, flexWrap: "wrap" }}>
           <div>
             <h2 style={{ fontWeight: 400, fontSize: 40, letterSpacing: 0, lineHeight: 1.05 }}>Is this your program? <span style={{ color: "#A8FF5C" }}>Claim it for free</span></h2>

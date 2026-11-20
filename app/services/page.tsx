@@ -101,7 +101,7 @@ export default function Services() {
         <div style={{ position: "relative", overflow: "hidden", color: "#0A0A0B" }}>
           <div className="limepanel" />
           <Nav />
-          <div className="wrap" style={{ padding: "24px 40px 110px", display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 40, flexWrap: "wrap" }}>
+          <div className="wrap" style={{ padding: "24px 40px clamp(36px,9vw,110px)", display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 40, flexWrap: "wrap" }}>
             <div style={{ flex: "0 0 auto", maxWidth: "min(100%, 800px)" }}>
               <span className="pill">For B2B companies</span>
               <h1 style={{ margin: "20px 0 0", fontWeight: 400, fontSize: "clamp(26px,3.4vw,47px)", lineHeight: 1, letterSpacing: 0 }}>
@@ -123,7 +123,7 @@ export default function Services() {
                 { s: STEPS[1], bg: "#ECECEE", fg: "#0A0A0B", gl: "#0A0A0B", rot: 3, ml: 36 },
                 { s: STEPS[2], bg: "#A8FF5C", fg: "#0A0A0B", gl: "#0A0A0B", rot: -3, ml: 12 },
               ].map(({ s, bg, fg, gl, rot, ml }) => (
-                <a key={s.id} href={`#${s.id}`} className="cut" style={{ marginLeft: ml, transform: `rotate(${rot}deg)`, background: bg, color: fg, padding: "22px 26px", display: "flex", alignItems: "center", gap: 18 }}>
+                <a key={s.id} href={`#${s.id}`} className="cut hcard" style={{ marginLeft: ml, transform: `rotate(${rot}deg)`, background: bg, color: fg, padding: "22px 26px", display: "flex", alignItems: "center", gap: 18 }}>
                   <div style={{ flex: "0 0 64px", width: 64, height: 64, borderRadius: 14, border: `2px solid ${gl}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
                     <Glyph kind={s.kind} fg={gl} size={38} />
                   </div>
@@ -140,7 +140,7 @@ export default function Services() {
       </div>
 
       {/* Segments */}
-      <section style={{ background: "#0A0A0B", backgroundImage: "radial-gradient(#2A2B2F 1.3px, transparent 1.6px)", backgroundSize: "26px 26px", color: "#ECECEE", padding: "72px 0 96px", position: "relative", overflow: "hidden" }}>
+      <section style={{ background: "#0A0A0B", backgroundImage: "radial-gradient(#2A2B2F 1.3px, transparent 1.6px)", backgroundSize: "26px 26px", color: "#ECECEE", padding: "clamp(36px,9vw,72px) 0 clamp(36px,9vw,96px)", position: "relative", overflow: "hidden" }}>
         <div className="wrap" style={{ position: "relative" }}>
           <span className="pill" style={{ background: "#A8FF5C", color: "#0A0A0B" }}>Your vertical</span>
           <h2 style={{ margin: "18px 0 0", fontWeight: 400, fontSize: "clamp(26px,3.4vw,44px)", letterSpacing: 0, lineHeight: 1.15 }}>
@@ -177,10 +177,10 @@ export default function Services() {
       {/* Steps */}
       {STEPS.map((s, i) => (
         <Fragment key={s.id}>
-        <section id={s.id} style={{ background: THEMES[i].bg, color: THEMES[i].tx, padding: "110px 0", position: "relative" }}>
+        <section id={s.id} style={{ background: THEMES[i].bg, color: THEMES[i].tx, padding: "clamp(36px,9vw,110px) 0", position: "relative" }}>
           <div className="wrap">
             <div style={{ display: "flex", alignItems: "flex-end", gap: 28, flexWrap: "wrap" }}>
-              <span style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 94, lineHeight: 0.8, letterSpacing: 0, color: THEMES[i].num }}>{s.n}</span>
+              <span className="bignum" style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 94, lineHeight: 0.8, letterSpacing: 0, color: THEMES[i].num }}>{s.n}</span>
               <div style={{ flex: "1 1 420px" }}>
                 <h2 style={{ fontWeight: 400, fontSize: "clamp(25px,3.2vw,44px)", letterSpacing: 0, lineHeight: 1.05 }}>{s.title}</h2>
                 <p style={{ margin: "14px 0 0", maxWidth: 620, fontSize: 19, lineHeight: 1.5, color: THEMES[i].sub }}>{s.lead}</p>
@@ -224,7 +224,7 @@ export default function Services() {
       ))}
 
       {/* Why us */}
-      <section style={{ background: "#131416", color: "#ECECEE", padding: "110px 0 130px" }}>
+      <section style={{ background: "#131416", color: "#ECECEE", padding: "clamp(36px,9vw,110px) 0 clamp(36px,9vw,130px)" }}>
         <div className="wrap">
           <h2 style={{ fontWeight: 400, fontSize: "clamp(26px,3.4vw,44px)", letterSpacing: 0, lineHeight: 1.05 }}>
             Why B2B tech companies <span style={{ color: "#A8FF5C" }}>work with us</span>
@@ -244,7 +244,7 @@ export default function Services() {
       </section>
 
       {/* CTA band */}
-      <section style={{ padding: "120px 0 140px", color: "#ECECEE" }}>
+      <section style={{ padding: "clamp(36px,9vw,120px) 0 clamp(36px,9vw,140px)", color: "#ECECEE" }}>
         <div className="wrap" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 48, flexWrap: "wrap" }}>
           <div style={{ flex: "1 1 460px" }}>
             <h2 style={{ fontWeight: 400, fontSize: "clamp(29px,3.6vw,44px)", letterSpacing: 0, lineHeight: 1.05 }}>

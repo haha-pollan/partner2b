@@ -4,6 +4,7 @@ import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { Tile } from "@/components/Tile";
 import { AutoForm } from "./AutoForm";
+import { FiltersToggle } from "./FiltersToggle";
 import CountUp from "@/components/CountUp";
 import { getPrograms, commissionLabel, type Program } from "@/lib/programs";
 
@@ -101,7 +102,7 @@ export default async function DirectoryPage({ searchParams }: { searchParams: Pr
       <div style={{ position: "relative", overflow: "hidden", color: "#0A0A0B" }}>
         <div className="limepanel" />
         <Nav />
-        <div className="wrap" style={{ padding: "24px 40px 96px", display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 40, flexWrap: "wrap" }}>
+        <div className="wrap" style={{ padding: "24px 40px clamp(36px,9vw,96px)", display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 40, flexWrap: "wrap" }}>
           <div style={{ flex: "0 0 auto", maxWidth: "100%" }}>
             <h1 className="h1big"><span style={{ display: "block" }}>Browse partner</span><span style={{ display: "block" }}>programs</span></h1>
             <p style={{ margin: "24px 0 0", maxWidth: 720, fontSize: 21, lineHeight: 1.5, fontWeight: 300 }}>
@@ -113,16 +114,17 @@ export default async function DirectoryPage({ searchParams }: { searchParams: Pr
               <button type="submit">Search</button>
             </form>
           </div>
-          <div className="cut" style={{ flex: "0 0 360px", margin: "40px 40px 0 0", transform: "rotate(-4deg)", background: "#0A0A0B", color: "#ECECEE", padding: "32px 34px" }}>
+          <div className="cut statcard" style={{ flex: "0 0 360px", margin: "40px 40px 0 0", transform: "rotate(-4deg)", background: "#0A0A0B", color: "#ECECEE", padding: "32px 34px" }}>
             <div style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 56, letterSpacing: 0, lineHeight: 1, color: "#A8FF5C" }}><CountUp to={all.length} /></div>
             <div style={{ marginTop: 10, fontSize: 19, lineHeight: 1.4 }}>programs, free to browse</div>
           </div>
         </div>
       </div>
 
-      <div style={{ position: "relative", color: "#0A0A0B", padding: "96px 0 112px" }}>
+      <div style={{ position: "relative", color: "#0A0A0B", padding: "clamp(36px,9vw,96px) 0 clamp(36px,9vw,112px)" }}>
         <div className="wrap" style={{ display: "flex", gap: 32, alignItems: "flex-start", flexWrap: "wrap" }}>
           <aside className="side cut">
+            <FiltersToggle active={chips.length}>
             <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: 18 }}>
               <div style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 22, letterSpacing: 0 }}>Filters</div>
               <Link href="/directory" style={{ fontSize: 15, fontWeight: 400, color: "#A8FF5C" }}>Clear all</Link>
@@ -140,6 +142,7 @@ export default async function DirectoryPage({ searchParams }: { searchParams: Pr
                 </select>
               </details>
             </AutoForm>
+                      </FiltersToggle>
           </aside>
 
           <div style={{ flex: "1 1 600px", minWidth: 0 }}>
