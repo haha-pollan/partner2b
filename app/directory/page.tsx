@@ -4,6 +4,7 @@ import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { Tile } from "@/components/Tile";
 import { AutoForm } from "./AutoForm";
+import CountUp from "@/components/CountUp";
 import { getPrograms, commissionLabel, type Program } from "@/lib/programs";
 
 export const revalidate = 600;
@@ -113,7 +114,7 @@ export default async function DirectoryPage({ searchParams }: { searchParams: Pr
             </form>
           </div>
           <div className="cut" style={{ flex: "0 0 360px", margin: "40px 40px 0 0", transform: "rotate(-4deg)", background: "#0A0A0B", color: "#ECECEE", padding: "32px 34px" }}>
-            <div style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 56, letterSpacing: 0, lineHeight: 1, color: "#A8FF5C" }}>{all.length}</div>
+            <div style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 56, letterSpacing: 0, lineHeight: 1, color: "#A8FF5C" }}><CountUp to={all.length} /></div>
             <div style={{ marginTop: 10, fontSize: 19, lineHeight: 1.4 }}>programs, free to browse</div>
           </div>
         </div>
