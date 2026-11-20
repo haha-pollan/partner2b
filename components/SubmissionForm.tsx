@@ -18,9 +18,9 @@ export function SubmissionForm({ kind, listings, defaultListing }: { kind: Kind;
   if (state.ok) {
     return (
       <div style={{ padding: "8px 0 24px" }}>
-        <div style={{ fontFamily: "'Archivo',sans-serif", fontWeight: 800, fontSize: 32, letterSpacing: "-0.03em", color: "#A8FF5C" }}>Thank you. We received it</div>
+        <div style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 19, letterSpacing: 0, color: "#A8FF5C" }}>Thank you. We received it</div>
         <p style={{ marginTop: 14, fontSize: 18, lineHeight: 1.5, color: "#B9BABD" }}>We will review it and get back to you if we need anything else.</p>
-        <Link href="/directory" style={{ display: "inline-block", marginTop: 22, background: "#A8FF5C", color: "#0A0A0B", fontWeight: 800, padding: "14px 26px", borderRadius: 12 }}>Back to the directory</Link>
+        <Link href="/directory" style={{ display: "inline-block", marginTop: 22, background: "#A8FF5C", color: "#0A0A0B", fontWeight: 400, fontFamily: "'Michroma',sans-serif", padding: "14px 26px", borderRadius: 12 }}>Back to the directory</Link>
       </div>
     );
   }
@@ -119,7 +119,7 @@ export function SubmissionForm({ kind, listings, defaultListing }: { kind: Kind;
       )}
 
       {state.error && <div role="alert" style={{ marginTop: 22, color: "#FF9B9B", fontSize: 16, fontWeight: 700 }}>{state.error}</div>}
-      <button type="submit" disabled={pending} style={{ marginTop: 28, background: "#A8FF5C", color: "#0A0A0B", fontWeight: 800, fontSize: 17, padding: "16px 30px", border: 0, borderRadius: 12, cursor: "pointer", opacity: pending ? 0.6 : 1 }}>
+      <button type="submit" disabled={pending} style={{ marginTop: 28, background: "#A8FF5C", color: "#0A0A0B", fontWeight: 400, fontFamily: "'Michroma',sans-serif", fontSize: 14, padding: "16px 30px", border: 0, borderRadius: 12, cursor: "pointer", opacity: pending ? 0.6 : 1 }}>
         {kind === "submit" ? "Submit program" : kind === "claim" ? "Request to claim" : "Send correction"}
       </button>
       <p style={{ marginTop: 18, fontSize: 14, color: "#85868B", lineHeight: 1.5 }}>

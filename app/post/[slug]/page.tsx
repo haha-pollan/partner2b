@@ -52,7 +52,7 @@ export default async function Article({ params }: { params: Promise<{ slug: stri
           <div className="wrap" style={{ padding: "24px 40px 80px", display: "flex", gap: 48, alignItems: "flex-start", flexWrap: "wrap" }}>
             <div style={{ flex: "1 1 520px", maxWidth: 760 }}>
               <Link href="/post" className="pill">All articles</Link>
-              <h1 style={{ margin: "20px 0 0", fontWeight: 800, fontSize: "clamp(30px,3.6vw,52px)", letterSpacing: "-0.04em", lineHeight: 1.05 }}>{a.title}</h1>
+              <h1 style={{ margin: "20px 0 0", fontWeight: 400, fontSize: "clamp(18px,2.2vw,31px)", letterSpacing: 0, lineHeight: 1.05 }}>{a.title}</h1>
               <p style={{ margin: "18px 0 0", fontSize: 16, fontWeight: 700 }}>{dateLabel(a.published_at)}</p>
             </div>
             <div style={{ flex: "0 0 380px", maxWidth: "100%", transform: "rotate(2deg)", marginTop: 16 }}>
@@ -66,12 +66,12 @@ export default async function Article({ params }: { params: Promise<{ slug: stri
       </section>
       <section style={{ padding: "90px 0", color: "#ECECEE" }}>
         <div className="wrap">
-          <h2 style={{ fontWeight: 800, fontSize: 40, letterSpacing: "-0.04em" }}>More articles</h2>
+          <h2 style={{ fontWeight: 400, fontSize: 24, letterSpacing: 0 }}>More articles</h2>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 32, marginTop: 36 }}>
             {more.map((m) => (
               <Link key={m.slug} href={`/post/${m.slug}`} style={{ flex: "1 1 300px", maxWidth: 400, display: "flex", flexDirection: "column", gap: 14 }}>
                 <Cover slug={m.slug} title={m.title} i={m.i} />
-                <h3 style={{ fontWeight: 800, fontSize: 20, letterSpacing: "-0.03em", lineHeight: 1.2 }}>{m.title}</h3>
+                <h3 style={{ fontWeight: 400, fontSize: 12, letterSpacing: 0, lineHeight: 1.2 }}>{m.title}</h3>
               </Link>
             ))}
           </div>
@@ -79,8 +79,8 @@ export default async function Article({ params }: { params: Promise<{ slug: stri
       </section>
       <section style={{ background: "#A8FF5C", color: "#0A0A0B", padding: "80px 0" }}>
         <div className="wrap" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 32, flexWrap: "wrap" }}>
-          <h2 style={{ flex: "1 1 420px", fontWeight: 800, fontSize: "clamp(30px,4vw,48px)", letterSpacing: "-0.04em", lineHeight: 1.05 }}>Want to grow through partners?</h2>
-          <Link href="/services" style={{ background: "#0A0A0B", color: "#A8FF5C", fontWeight: 800, padding: "16px 30px", borderRadius: 12, fontSize: 16 }}>See our services</Link>
+          <h2 style={{ flex: "1 1 420px", fontWeight: 400, fontSize: "clamp(18px,2.4vw,29px)", letterSpacing: 0, lineHeight: 1.05 }}>Want to grow through partners?</h2>
+          <Link href="/services" style={{ background: "#0A0A0B", color: "#A8FF5C", fontWeight: 400, fontFamily: "'Michroma',sans-serif", padding: "16px 30px", borderRadius: 12, fontSize: 13 }}>See our services</Link>
         </div>
       </section>
       <Footer />

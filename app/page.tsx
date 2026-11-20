@@ -63,7 +63,7 @@ export default async function Home() {
               <Link key={p!.id} href={`/directory/${p!.slug}`} className="cut" style={{ marginLeft: ml, transform: `rotate(${rot}deg)`, background: bg, color: fg, padding: "22px 26px", display: "flex", alignItems: "center", gap: 18 }}>
                 <Tile type={p!.primary_type} size={64} domain={p!.domain} />
                 <div style={{ minWidth: 0 }}>
-                  <div style={{ fontFamily: "'Archivo',sans-serif", fontWeight: 800, fontSize: 26, letterSpacing: "-0.03em", lineHeight: 1.1 }}>{p!.company}</div>
+                  <div style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 16, letterSpacing: 0, lineHeight: 1.1 }}>{p!.company}</div>
                   <div style={{ marginTop: 6, fontSize: 15, fontWeight: 700, opacity: 0.8 }}>{p!.primary_type}</div>
                 </div>
               </Link>
@@ -75,7 +75,7 @@ export default async function Home() {
       {/* Marquee band */}
       <div aria-hidden="true" style={{ position: "relative", height: 150, overflow: "hidden" }}>
         {[{ bg: "#0A0A0B", fg: "#A8FF5C", rot: 2, top: 34 }, { bg: "#A8FF5C", fg: "#0A0A0B", rot: -2, top: 44 }].map((b, i) => (
-          <div key={i} style={{ position: "absolute", left: -40, right: -40, top: b.top, transform: `rotate(${b.rot}deg)`, background: b.bg, color: b.fg, padding: "14px 0", whiteSpace: "nowrap", overflow: "hidden", fontFamily: "'Archivo',sans-serif", fontWeight: 800, fontSize: 34, letterSpacing: "-0.02em", textTransform: "uppercase" }}>
+          <div key={i} style={{ position: "absolute", left: -40, right: -40, top: b.top, transform: `rotate(${b.rot}deg)`, background: b.bg, color: b.fg, padding: "14px 0", whiteSpace: "nowrap", overflow: "hidden", fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 20, letterSpacing: 0, textTransform: "uppercase" }}>
             {Array.from({ length: 3 }).map((_, k) => TYPES.map((t) => `${t} ◆ `).join("")).join("")}
           </div>
         ))}
@@ -84,7 +84,7 @@ export default async function Home() {
       {/* Browse by type */}
       <section style={{ padding: "64px 0 96px" }}>
         <div className="wrap">
-          <h2 style={{ fontWeight: 800, fontSize: 56, letterSpacing: "-0.04em", color: "#0A0A0B" }}>Browse by program type</h2>
+          <h2 style={{ fontWeight: 400, fontSize: 34, letterSpacing: 0, color: "#0A0A0B" }}>Browse by program type</h2>
         </div>
         <div style={{ marginTop: 40 }}>
           {TYPES.map((t, i) => {
@@ -93,7 +93,7 @@ export default async function Home() {
             return (
               <Link key={t} href={`/directory?type=${encodeURIComponent(t)}`} style={{ display: "flex", alignItems: "center", gap: 24, background: bg, color: tx, padding: "16px 40px", marginLeft: `${ind}%` }}>
                 <span style={{ fontSize: 14, fontWeight: 800, width: 28 }}>{String(i + 1).padStart(2, "0")}</span>
-                <span style={{ flex: 1, fontFamily: "'Archivo',sans-serif", fontWeight: 800, fontSize: 44, letterSpacing: "-0.04em" }}>{t}</span>
+                <span style={{ flex: 1, fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 26, letterSpacing: 0 }}>{t}</span>
                 <span style={{ fontSize: 15, fontWeight: 700 }}>{n} programs</span>
                 <Glyph kind={KIND[t]} fg={gl} size={34} />
                 <span style={{ width: 44, height: 44, borderRadius: "50%", border: `2px solid ${tx}`, display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, fontSize: 20 }}>→</span>
@@ -108,7 +108,7 @@ export default async function Home() {
       {/* What every listing shows */}
       <section style={{ padding: "40px 0 120px", color: "#ECECEE" }}>
         <div className="wrap">
-          <h2 style={{ fontWeight: 800, fontSize: 56, letterSpacing: "-0.04em" }}>What every listing shows</h2>
+          <h2 style={{ fontWeight: 400, fontSize: 34, letterSpacing: 0 }}>What every listing shows</h2>
           <div style={{ marginTop: 56, display: "flex", alignItems: "center", justifyContent: "center", gap: 28, flexWrap: "wrap" }}>
             <div style={{ display: "flex", flexDirection: "column", gap: 56, alignItems: "flex-end" }}>
               <span style={label}>Type of program</span>
@@ -117,7 +117,7 @@ export default async function Home() {
             </div>
             <div className="cut" style={{ width: 620, maxWidth: "100%", background: "#0A0A0B", padding: "28px 32px 36px" }}>
               <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16 }}>
-                <span style={{ fontFamily: "'Archivo',sans-serif", fontWeight: 800, fontSize: 28, letterSpacing: "-0.03em" }}>[Company name]</span>
+                <span style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 17, letterSpacing: 0 }}>[Company name]</span>
                 <span className="pill" style={{ background: "#A8FF5C", color: "#0A0A0B" }}>Reseller program</span>
               </div>
               {[["Commission", "[Published rate]"], ["Region", "[Region]"], ["Source", "[Official program page]"]].map(([k, v]) => (
@@ -126,8 +126,8 @@ export default async function Home() {
                 </div>
               ))}
               <div style={{ display: "flex", gap: 12, marginTop: 14 }}>
-                <span style={{ background: "#A8FF5C", color: "#0A0A0B", fontWeight: 800, padding: "12px 20px", borderRadius: 10, fontSize: 15 }}>Go to program</span>
-                <span style={{ border: "1.5px solid #55565B", fontWeight: 800, padding: "12px 20px", borderRadius: 10, fontSize: 15 }}>Report a correction</span>
+                <span style={{ background: "#A8FF5C", color: "#0A0A0B", fontWeight: 400, fontFamily: "'Michroma',sans-serif", padding: "12px 20px", borderRadius: 10, fontSize: 12 }}>Go to program</span>
+                <span style={{ border: "1.5px solid #55565B", fontWeight: 400, fontFamily: "'Michroma',sans-serif", padding: "12px 20px", borderRadius: 10, fontSize: 12 }}>Report a correction</span>
               </div>
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 56, alignItems: "flex-start" }}>
@@ -141,14 +141,14 @@ export default async function Home() {
       {/* For partners / For vendors */}
       <section style={{ display: "flex", flexWrap: "wrap", color: "#0A0A0B" }}>
         <div style={{ flex: "1 1 520px", background: "#A8FF5C", padding: "96px 80px 96px 40px", clipPath: "polygon(0 0,100% 0,92% 50%,100% 100%,0 100%)" }}>
-          <h2 style={{ fontWeight: 800, fontSize: 64, letterSpacing: "-0.04em", lineHeight: 1 }}>For partners</h2>
+          <h2 style={{ fontWeight: 400, fontSize: 38, letterSpacing: 0, lineHeight: 1 }}>For partners</h2>
           <p style={{ margin: "20px 0 0", maxWidth: 420, fontSize: 19, lineHeight: 1.5, fontWeight: 500 }}>Compare programs and find the ones that fit your business.</p>
-          <Link href="/directory" style={{ display: "inline-block", marginTop: 28, background: "#0A0A0B", color: "#A8FF5C", fontWeight: 800, padding: "14px 26px", borderRadius: 12, fontSize: 15 }}>Browse programs</Link>
+          <Link href="/directory" style={{ display: "inline-block", marginTop: 28, background: "#0A0A0B", color: "#A8FF5C", fontWeight: 400, fontFamily: "'Michroma',sans-serif", padding: "14px 26px", borderRadius: 12, fontSize: 12 }}>Browse programs</Link>
         </div>
         <div style={{ flex: "1 1 520px", padding: "96px 40px 96px 80px", color: "#ECECEE" }}>
-          <h2 style={{ fontWeight: 800, fontSize: 64, letterSpacing: "-0.04em", lineHeight: 1 }}>For vendors</h2>
+          <h2 style={{ fontWeight: 400, fontSize: 38, letterSpacing: 0, lineHeight: 1 }}>For vendors</h2>
           <p style={{ margin: "20px 0 0", maxWidth: 420, fontSize: 19, lineHeight: 1.5, color: "#B9BABD" }}>Claim your listing for free and keep your terms accurate.</p>
-          <Link href="/claim" style={{ display: "inline-block", marginTop: 28, background: "#A8FF5C", color: "#0A0A0B", fontWeight: 800, padding: "14px 26px", borderRadius: 12, fontSize: 15 }}>Claim a listing</Link>
+          <Link href="/claim" style={{ display: "inline-block", marginTop: 28, background: "#A8FF5C", color: "#0A0A0B", fontWeight: 400, fontFamily: "'Michroma',sans-serif", padding: "14px 26px", borderRadius: 12, fontSize: 12 }}>Claim a listing</Link>
         </div>
       </section>
 
@@ -156,7 +156,7 @@ export default async function Home() {
       <section style={{ padding: "120px 0 140px", color: "#ECECEE" }}>
         <div className="wrap" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 48, flexWrap: "wrap" }}>
           <div style={{ flex: "1 1 460px" }}>
-            <h2 style={{ fontWeight: 800, fontSize: 56, letterSpacing: "-0.04em", lineHeight: 1.05 }}>
+            <h2 style={{ fontWeight: 400, fontSize: 34, letterSpacing: 0, lineHeight: 1.05 }}>
               <span style={{ display: "block" }}>Run a partner program?</span>
               <span style={{ display: "block", color: "#A8FF5C" }}>Claim your listing</span>
             </h2>
@@ -169,7 +169,7 @@ export default async function Home() {
                 <div style={{ marginTop: 6, background: "#0A0A0B", borderRadius: 8, height: 42 }} />
               </div>
             ))}
-            <div style={{ marginTop: 20, background: "#0A0A0B", color: "#A8FF5C", fontWeight: 800, textAlign: "center", padding: "14px", borderRadius: 10 }}>Claim a listing</div>
+            <div style={{ marginTop: 20, background: "#0A0A0B", color: "#A8FF5C", fontWeight: 400, fontFamily: "'Michroma',sans-serif", textAlign: "center", padding: "14px", borderRadius: 10 }}>Claim a listing</div>
           </Link>
         </div>
       </section>

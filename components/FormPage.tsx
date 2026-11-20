@@ -39,25 +39,25 @@ export function FormPage({ kind, listings, defaultListing }: { kind: Kind; listi
           <Nav />
           <div className="wrap" style={{ padding: "24px 40px 90px", display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 40, flexWrap: "wrap" }}>
             <div style={{ maxWidth: "100%" }}>
-              <h1 className="h1big" style={{ fontSize: 88 }}>{c.title}</h1>
+              <h1 className="h1big" style={{ fontSize: 53 }}>{c.title}</h1>
               <p style={{ margin: "22px 0 0", maxWidth: 560, fontSize: 21, lineHeight: 1.5, fontWeight: 500 }}>{c.intro}</p>
             </div>
             <div className="cut" style={{ flex: "0 0 320px", margin: "20px 40px 0 0", transform: "rotate(-4deg)", background: "#0A0A0B", color: "#ECECEE", padding: "28px 32px" }}>
-              <div style={{ fontFamily: "'Archivo',sans-serif", fontWeight: 800, fontSize: 64, letterSpacing: "-0.05em", lineHeight: 1, color: "#A8FF5C" }}>{c.badge}</div>
+              <div style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 38, letterSpacing: 0, lineHeight: 1, color: "#A8FF5C" }}>{c.badge}</div>
               <div style={{ marginTop: 8, fontSize: 18 }}>{c.badgeSub}</div>
             </div>
           </div>
         </div>
         <div className="wrap" style={{ padding: "40px 40px 120px", display: "flex", gap: 32, alignItems: "flex-start", flexWrap: "wrap" }}>
           <div className="cut" style={{ flex: "1 1 640px", minWidth: 0, background: "#0A0A0B", color: "#ECECEE", padding: "36px 40px 44px", position: "relative" }}>
-            <h2 style={{ fontWeight: 800, fontSize: 30, letterSpacing: "-0.03em" }}>{c.card}</h2>
+            <h2 style={{ fontWeight: 400, fontSize: 18, letterSpacing: 0 }}>{c.card}</h2>
             <SubmissionForm kind={kind} listings={listings} defaultListing={defaultListing} />
           </div>
           <div className="cut" style={{ flex: "0 0 340px", background: "#ECECEE", color: "#0A0A0B", padding: "28px 28px 34px" }}>
-            <h3 style={{ fontWeight: 800, fontSize: 24, letterSpacing: "-0.03em", paddingBottom: 12, borderBottom: "2px solid #0A0A0B" }}>What happens next</h3>
+            <h3 style={{ fontWeight: 400, fontSize: 14, letterSpacing: 0, paddingBottom: 12, borderBottom: "2px solid #0A0A0B" }}>What happens next</h3>
             {c.steps.map((t, i) => (
               <div key={i} style={{ display: "flex", gap: 18, alignItems: "flex-start", padding: "16px 0", borderBottom: i < 2 ? "2px solid #0A0A0B" : 0 }}>
-                <span style={{ fontFamily: "'Archivo',sans-serif", fontWeight: 800, fontSize: 36, letterSpacing: "-0.04em", lineHeight: 1 }}>{String(i + 1).padStart(2, "0")}</span>
+                <span style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 22, letterSpacing: 0, lineHeight: 1 }}>{String(i + 1).padStart(2, "0")}</span>
                 <span style={{ fontSize: 16, fontWeight: 600, lineHeight: 1.4, paddingTop: 4 }}>{t}</span>
               </div>
             ))}
@@ -67,10 +67,10 @@ export function FormPage({ kind, listings, defaultListing }: { kind: Kind; listi
       <div style={{ background: "#131416", color: "#ECECEE", padding: "90px 0 100px" }}>
         <div className="wrap" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 32, flexWrap: "wrap" }}>
           <div>
-            <h2 style={{ fontWeight: 800, fontSize: 52, letterSpacing: "-0.04em", lineHeight: 1.05 }}>{c.band.a}<span style={{ color: "#A8FF5C" }}>{c.band.b}</span></h2>
+            <h2 style={{ fontWeight: 400, fontSize: 31, letterSpacing: 0, lineHeight: 1.05 }}>{c.band.a}<span style={{ color: "#A8FF5C" }}>{c.band.b}</span></h2>
             <p style={{ margin: "16px 0 0", fontSize: 20, color: "#B9BABD" }}>{c.band.sub}</p>
           </div>
-          <Link href={c.band.href} style={{ background: "#A8FF5C", color: "#0A0A0B", fontWeight: 800, padding: "16px 30px", borderRadius: 12, fontSize: 17 }}>{c.band.cta}</Link>
+          <Link href={c.band.href} style={{ background: "#A8FF5C", color: "#0A0A0B", fontWeight: 400, fontFamily: "'Michroma',sans-serif", padding: "16px 30px", borderRadius: 12, fontSize: 14 }}>{c.band.cta}</Link>
         </div>
       </div>
       <Footer />

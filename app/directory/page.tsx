@@ -113,7 +113,7 @@ export default async function DirectoryPage({ searchParams }: { searchParams: Pr
             </form>
           </div>
           <div className="cut" style={{ flex: "0 0 360px", margin: "40px 40px 0 0", transform: "rotate(-4deg)", background: "#0A0A0B", color: "#ECECEE", padding: "32px 34px" }}>
-            <div style={{ fontFamily: "'Archivo',sans-serif", fontWeight: 800, fontSize: 72, letterSpacing: "-0.05em", lineHeight: 1, color: "#A8FF5C" }}>{all.length}</div>
+            <div style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 43, letterSpacing: 0, lineHeight: 1, color: "#A8FF5C" }}>{all.length}</div>
             <div style={{ marginTop: 10, fontSize: 19, lineHeight: 1.4 }}>programs, free to browse</div>
           </div>
         </div>
@@ -123,7 +123,7 @@ export default async function DirectoryPage({ searchParams }: { searchParams: Pr
         <div className="wrap" style={{ display: "flex", gap: 32, alignItems: "flex-start", flexWrap: "wrap" }}>
           <aside className="side cut">
             <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: 18 }}>
-              <div style={{ fontFamily: "'Archivo',sans-serif", fontWeight: 800, fontSize: 28, letterSpacing: "-0.03em" }}>Filters</div>
+              <div style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 17, letterSpacing: 0 }}>Filters</div>
               <Link href="/directory" style={{ fontSize: 15, fontWeight: 700, color: "#A8FF5C" }}>Clear all</Link>
             </div>
             <AutoForm q={f.q}>
@@ -156,7 +156,7 @@ export default async function DirectoryPage({ searchParams }: { searchParams: Pr
                 <Link key={p.id} href={`/directory/${p.slug}`} className="row cut">
                   <Tile type={p.primary_type} domain={p.domain} />
                   <div style={{ flex: "1 1 0", minWidth: 0 }}>
-                    <div style={{ fontFamily: "'Archivo',sans-serif", fontWeight: 800, fontSize: 30, letterSpacing: "-0.03em", lineHeight: 1.1, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                    <div style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 18, letterSpacing: 0, lineHeight: 1.1, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
                       {p.company}{p.product_note ? <span style={{ fontSize: 16, fontWeight: 600, color: "#55565B", letterSpacing: 0, marginLeft: 10 }}>{p.product_note}</span> : null}
                     </div>
                     <div style={{ marginTop: 8, display: "flex", gap: 8, alignItems: "center" }}>
