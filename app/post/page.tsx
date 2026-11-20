@@ -34,7 +34,7 @@ export default async function PostIndex() {
             <Link key={a.slug} href={`/post/${a.slug}`} style={{ flex: "1 1 340px", maxWidth: 420, display: "flex", flexDirection: "column", gap: 18 }}>
               <Cover slug={a.slug} title={a.title} i={i} />
               <div style={{ fontSize: 14, fontWeight: 400, color: "#85868B" }}>{dateLabel(a.published_at)}</div>
-              <h2 style={{ fontWeight: 400, fontSize: 17, letterSpacing: 0, lineHeight: 1.2 }}>{a.title}</h2>
+              <h2 style={{ fontWeight: 400, fontSize: 19, letterSpacing: 0, lineHeight: 1.3 }}>{a.title}</h2>
             </Link>
           ))}
         </div>
