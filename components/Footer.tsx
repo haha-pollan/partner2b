@@ -4,7 +4,7 @@ import { Logo } from "./Logo";
 export function Footer() {
   return (
     <footer style={{ background: "#0A0A0B", color: "#ECECEE", position: "relative", overflow: "hidden", minHeight: 380 }}>
-      <div className="bigword" aria-hidden="true">Partner2B</div>
+      <div className="bigword" aria-hidden="true" style={{ bottom: 58 }}>Partner2B</div>
       <div style={{ position: "relative", maxWidth: 1360, margin: "0 auto", padding: "48px 40px 0", display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 32, flexWrap: "wrap" }}>
         <div style={{ maxWidth: 400 }}>
           <Link href="/" aria-label="Partner2B home"><Logo variant="light" /></Link>
@@ -17,10 +17,14 @@ export function Footer() {
           <Link href="/services">Services</Link>
           <Link href="/post">Blog</Link>
           <Link href="/submit">Submit a program</Link>
+        </div>
+      </div>
+      <div style={{ position: "absolute", left: 40, right: 40, bottom: 18, display: "flex", justifyContent: "space-between", alignItems: "center", gap: 16, flexWrap: "wrap", fontSize: 12, fontWeight: 300, color: "#85868B" }}>
+        <span>© 2026 Partner2B</span>
+        <span style={{ display: "flex", gap: 20 }}>
           <Link href="/privacy">Privacy</Link>
           <Link href="/terms">Terms</Link>
-        </div>
-        <div style={{ fontSize: 15, color: "#85868B" }}>© 2026 Partner2B</div>
+        </span>
       </div>
     </footer>
   );
