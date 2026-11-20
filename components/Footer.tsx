@@ -19,13 +19,13 @@ export function Footer() {
           <Link href="/submit">Submit a program</Link>
         </div>
       </div>
-      <div style={{ position: "absolute", left: 40, right: 40, bottom: 18, display: "flex", justifyContent: "space-between", alignItems: "center", gap: 16, flexWrap: "wrap", fontSize: 12, fontWeight: 300, color: "#85868B" }}>
+      <div style={{ position: "absolute", left: 0, right: 0, bottom: 18 }}><div style={{ maxWidth: 1360, margin: "0 auto", padding: "0 40px", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 16, flexWrap: "wrap", fontSize: 12, fontWeight: 300, color: "#85868B" }}>
         <span>© 2026 Partner2B</span>
         <span style={{ display: "flex", gap: 20 }}>
           <Link href="/privacy">Privacy</Link>
           <Link href="/terms">Terms</Link>
         </span>
-      </div>
+      </div></div>
     </footer>
   );
 }
