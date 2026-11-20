@@ -37,19 +37,3 @@ export async function getArticle(slug: string): Promise<Article | null> {
 
 export const dateLabel = (d: string) =>
   new Date(d + "T00:00:00Z").toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
-
-// Cover design: one of six palettes and glyph kinds, chosen from the slug so it stays stable
-const PALETTES: { bg: string; fg: string; accent: string; kind: string }[] = [
-  { bg: "#A8FF5C", fg: "#0A0A0B", accent: "#0A0A0B", kind: "diamond" },
-  { bg: "#0A0A0B", fg: "#ECECEE", accent: "#A8FF5C", kind: "bars" },
-  { bg: "#ECECEE", fg: "#0A0A0B", accent: "#0A0A0B", kind: "grid" },
-  { bg: "#1C1D20", fg: "#ECECEE", accent: "#A8FF5C", kind: "slants" },
-  { bg: "#A8FF5C", fg: "#0A0A0B", accent: "#0A0A0B", kind: "hex" },
-  { bg: "#3A3B40", fg: "#ECECEE", accent: "#A8FF5C", kind: "stairs" },
-];
-export function coverFor(slug: string, i?: number) {
-  if (i !== undefined) return PALETTES[i % PALETTES.length];
-  let h = 0;
-  for (const c of slug) h = (h * 31 + c.charCodeAt(0)) >>> 0;
-  return PALETTES[h % PALETTES.length];
-}
