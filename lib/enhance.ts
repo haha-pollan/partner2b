@@ -86,7 +86,8 @@ function infographic(html: string): string {
 
 export function enhance(html: string): string {
   if (!html) return "";
-  let out = html;
+  // drop empty headings (they would render as stray accent bars)
+  let out = html.replace(/<h([2-4])[^>]*>(?:\s|&nbsp;|<br\s*\/?>|<\/?(?:strong|b|em|span)[^>]*>)*<\/h\1>/gi, "");
   // TL;DR callout
   out = out.replace(/^\s*<p>\s*<strong>\s*(TL;?DR:?)\s*<\/strong>\s*([\s\S]*?)<\/p>/i, (_m, label, rest) => `<div class="callout"><span class="callout-label">${label.replace(/:$/, "")}</span><p>${rest.trim()}</p></div>`);
   const ig = infographic(out);
