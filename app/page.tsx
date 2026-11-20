@@ -103,8 +103,6 @@ export default async function Home() {
         </div>
       </section>
 
-      </div>
-      <div>
       {/* What every listing shows */}
       <section style={{ padding: "40px 0 120px", color: "#ECECEE" }}>
         <div className="wrap">
