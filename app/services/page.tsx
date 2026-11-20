@@ -72,6 +72,13 @@ const WHY = [
   { t: "One accountable team", p: "Growth and engineering run under one plan, with no agency handoffs.", kind: "diamond", bg: "#A8FF5C", fg: "#0A0A0B", rot: -2 },
 ];
 
+type Theme = { bg: string; tx: string; sub: string; num: string; card: string; ctx: string; csub: string; ctag: string; ctagTx: string; line: string; gl: string; hot: string; hotTx: string };
+const THEMES: Theme[] = [
+  { bg: "#fff url(/mesh-program.svg) center / cover no-repeat", tx: "#0A0A0B", sub: "#1C1D20", num: "#0A0A0B", card: "#0A0A0B", ctx: "#ECECEE", csub: "#B9BABD", ctag: "#2A2B2F", ctagTx: "#B9BABD", line: "#3A3B40", gl: "#A8FF5C", hot: "#A8FF5C", hotTx: "#0A0A0B" },
+  { bg: "#0A0A0B", tx: "#ECECEE", sub: "#B9BABD", num: "#A8FF5C", card: "#ECECEE", ctx: "#0A0A0B", csub: "#3A3B40", ctag: "#0A0A0B", ctagTx: "#A8FF5C", line: "#B9BABD", gl: "#0A0A0B", hot: "#A8FF5C", hotTx: "#0A0A0B" },
+  { bg: "#A8FF5C", tx: "#0A0A0B", sub: "#1C1D20", num: "#0A0A0B", card: "#0A0A0B", ctx: "#ECECEE", csub: "#B9BABD", ctag: "#2A2B2F", ctagTx: "#B9BABD", line: "#3A3B40", gl: "#A8FF5C", hot: "#ECECEE", hotTx: "#0A0A0B" },
+];
+
 const WORDS = ["Go-to-market", "Partner ecosystems", "Demand generation", "Automation", "AI development"];
 const MAIL = "mailto:info@partner2b.com?subject=Partner2B%20services";
 const btnA: React.CSSProperties = { background: "#0A0A0B", color: "#A8FF5C", fontWeight: 800, padding: "16px 30px", borderRadius: 12, fontSize: 16 };
@@ -126,25 +133,25 @@ export default function Services() {
       {/* Steps */}
       {STEPS.map((s, i) => (
         <Fragment key={s.id}>
-        <section id={s.id} style={{ background: i % 2 ? "#0A0A0B" : "#131416", color: "#ECECEE", padding: "110px 0", position: "relative" }}>
+        <section id={s.id} style={{ background: THEMES[i].bg, color: THEMES[i].tx, padding: "110px 0", position: "relative" }}>
           <div className="wrap">
             <div style={{ display: "flex", alignItems: "flex-end", gap: 28, flexWrap: "wrap" }}>
-              <span style={{ fontFamily: "'Archivo',sans-serif", fontWeight: 800, fontSize: 120, lineHeight: 0.8, letterSpacing: "-0.05em", color: "#A8FF5C" }}>{s.n}</span>
+              <span style={{ fontFamily: "'Archivo',sans-serif", fontWeight: 800, fontSize: 120, lineHeight: 0.8, letterSpacing: "-0.05em", color: THEMES[i].num }}>{s.n}</span>
               <div style={{ flex: "1 1 420px" }}>
                 <h2 style={{ fontWeight: 800, fontSize: "clamp(32px,4.2vw,56px)", letterSpacing: "-0.04em", lineHeight: 1.05 }}>{s.title}</h2>
-                <p style={{ margin: "14px 0 0", maxWidth: 620, fontSize: 19, lineHeight: 1.5, color: "#B9BABD" }}>{s.lead}</p>
+                <p style={{ margin: "14px 0 0", maxWidth: 620, fontSize: 19, lineHeight: 1.5, color: THEMES[i].sub }}>{s.lead}</p>
               </div>
             </div>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 24, marginTop: 56 }}>
               {s.svcs.map((v) => (
-                <article key={v.title} className="cut" style={{ flex: "1 1 320px", background: v.hot ? "#A8FF5C" : "#1C1D20", color: v.hot ? "#0A0A0B" : "#ECECEE", padding: "30px 30px 40px", display: "flex", flexDirection: "column" }}>
-                  <span style={{ alignSelf: "flex-start", fontSize: 13, fontWeight: 800, padding: "5px 12px", borderRadius: 999, background: v.hot ? "#0A0A0B" : "#2A2B2F", color: v.hot ? "#A8FF5C" : "#B9BABD" }}>{v.tag}</span>
+                <article key={v.title} className="cut" style={{ flex: "1 1 320px", background: v.hot ? THEMES[i].hot : THEMES[i].card, color: v.hot ? THEMES[i].hotTx : THEMES[i].ctx, padding: "30px 30px 40px", display: "flex", flexDirection: "column" }}>
+                  <span style={{ alignSelf: "flex-start", fontSize: 13, fontWeight: 800, padding: "5px 12px", borderRadius: 999, background: v.hot ? "#0A0A0B" : THEMES[i].ctag, color: v.hot ? "#A8FF5C" : THEMES[i].ctagTx }}>{v.tag}</span>
                   <h3 style={{ margin: "20px 0 0", minHeight: 58, fontWeight: 800, fontSize: 24, letterSpacing: "-0.03em", lineHeight: 1.2 }}>{v.title}</h3>
-                  <p style={{ margin: "12px 0 0", minHeight: 78, fontSize: 16, lineHeight: 1.5, color: v.hot ? "#0A0A0B" : "#B9BABD" }}>{v.text}</p>
-                  <ul style={{ listStyle: "none", margin: "22px 0 0", padding: "20px 0 0", borderTop: `1px solid ${v.hot ? "#0A0A0B" : "#3A3B40"}`, display: "grid", gap: 12 }}>
+                  <p style={{ margin: "12px 0 0", minHeight: 78, fontSize: 16, lineHeight: 1.5, color: v.hot ? "#0A0A0B" : THEMES[i].csub }}>{v.text}</p>
+                  <ul style={{ listStyle: "none", margin: "22px 0 0", padding: "20px 0 0", borderTop: `1px solid ${v.hot ? "#0A0A0B" : THEMES[i].line}`, display: "grid", gap: 12 }}>
                     {v.items.map((it) => (
                       <li key={it} style={{ display: "flex", alignItems: "center", gap: 12, fontSize: 15, fontWeight: 600 }}>
-                        <span style={{ flex: "0 0 14px" }}><Glyph kind="diamond" size={14} fg={v.hot ? "#0A0A0B" : "#A8FF5C"} /></span>
+                        <span style={{ flex: "0 0 14px" }}><Glyph kind="diamond" size={14} fg={v.hot ? "#0A0A0B" : THEMES[i].gl} /></span>
                         {it}
                       </li>
                     ))}
@@ -153,14 +160,14 @@ export default function Services() {
               ))}
             </div>
             {i === 0 && (
-              <Link href="/directory" style={{ display: "inline-block", marginTop: 32, background: "#A8FF5C", color: "#0A0A0B", fontWeight: 800, padding: "14px 26px", borderRadius: 12, fontSize: 15 }}>
+              <Link href="/directory" style={{ display: "inline-block", marginTop: 32, background: "#0A0A0B", color: "#A8FF5C", fontWeight: 800, padding: "14px 26px", borderRadius: 12, fontSize: 15 }}>
                 See how real partner programs are built
               </Link>
             )}
           </div>
         </section>
-        {i === 1 && (
-    <div aria-hidden="true" style={{ position: "relative", height: 150, overflow: "hidden", background: "linear-gradient(#0A0A0B 50%, #131416 50%)" }}>
+        {i === 0 && (
+    <div aria-hidden="true" style={{ position: "relative", height: 150, overflow: "hidden", background: "linear-gradient(#cfd0d3 50%, #0A0A0B 50%)" }}>
       {[{ bg: "#0A0A0B", fg: "#A8FF5C", rot: 2, top: 34 }, { bg: "#A8FF5C", fg: "#0A0A0B", rot: -2, top: 44 }].map((b, i) => (
         <div key={i} style={{ position: "absolute", left: -40, right: -40, top: b.top, transform: `rotate(${b.rot}deg)`, background: b.bg, color: b.fg, padding: "14px 0", whiteSpace: "nowrap", overflow: "hidden", fontFamily: "'Archivo',sans-serif", fontWeight: 800, fontSize: 34, letterSpacing: "-0.02em", textTransform: "uppercase" }}>
           {Array.from({ length: 3 }).map(() => WORDS.map((t) => `${t} ◆ `).join("")).join("")}
