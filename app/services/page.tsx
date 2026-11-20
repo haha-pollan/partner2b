@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { Nav } from "@/components/Nav";
@@ -71,12 +72,6 @@ const WHY = [
   { t: "One accountable team", p: "Growth and engineering run under one plan, with no agency handoffs.", kind: "diamond", bg: "#A8FF5C", fg: "#0A0A0B", rot: -2 },
 ];
 
-const ROWS: [string, string, string, number][] = [
-  ["#ECECEE", "#0A0A0B", "#0A0A0B", 0],
-  ["#A8FF5C", "#0A0A0B", "#0A0A0B", 8],
-  ["#0A0A0B", "#A8FF5C", "#A8FF5C", 16],
-];
-
 const WORDS = ["Go-to-market", "Partner ecosystems", "Demand generation", "Automation", "AI development"];
 const MAIL = "mailto:info@partner2b.com?subject=Partner2B%20services";
 const btnA: React.CSSProperties = { background: "#0A0A0B", color: "#A8FF5C", fontWeight: 800, padding: "16px 30px", borderRadius: 12, fontSize: 16 };
@@ -126,40 +121,12 @@ export default function Services() {
           </div>
         </div>
 
-        {/* Marquee band */}
-        <div aria-hidden="true" style={{ position: "relative", height: 150, overflow: "hidden" }}>
-          {[{ bg: "#0A0A0B", fg: "#A8FF5C", rot: 2, top: 34 }, { bg: "#A8FF5C", fg: "#0A0A0B", rot: -2, top: 44 }].map((b, i) => (
-            <div key={i} style={{ position: "absolute", left: -40, right: -40, top: b.top, transform: `rotate(${b.rot}deg)`, background: b.bg, color: b.fg, padding: "14px 0", whiteSpace: "nowrap", overflow: "hidden", fontFamily: "'Archivo',sans-serif", fontWeight: 800, fontSize: 34, letterSpacing: "-0.02em", textTransform: "uppercase" }}>
-              {Array.from({ length: 3 }).map(() => WORDS.map((t) => `${t} ◆ `).join("")).join("")}
-            </div>
-          ))}
-        </div>
-
-        {/* Staircase index */}
-        <section style={{ padding: "64px 0 96px" }}>
-          <div className="wrap">
-            <h2 style={{ fontWeight: 800, fontSize: "clamp(34px,4.4vw,56px)", letterSpacing: "-0.04em", color: "#0A0A0B" }}>Nine services, three steps</h2>
-          </div>
-          <div style={{ marginTop: 40 }}>
-            {STEPS.map((s, i) => {
-              const [bg, tx, gl, ind] = ROWS[i];
-              return (
-                <a key={s.id} href={`#${s.id}`} style={{ display: "flex", alignItems: "center", gap: 24, background: bg, color: tx, padding: "18px 40px", marginLeft: `${ind}%`, flexWrap: "wrap" }}>
-                  <span style={{ fontSize: 14, fontWeight: 800, width: 28 }}>{s.n}</span>
-                  <span style={{ flex: "1 1 280px", fontFamily: "'Archivo',sans-serif", fontWeight: 800, fontSize: "clamp(26px,3vw,44px)", letterSpacing: "-0.04em" }}>{s.title}</span>
-                  <span style={{ fontSize: 15, fontWeight: 700 }}>3 services</span>
-                  <Glyph kind={s.kind} fg={gl} size={34} />
-                  <span style={{ width: 44, height: 44, borderRadius: "50%", border: `2px solid ${tx}`, display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, fontSize: 20 }}>↓</span>
-                </a>
-              );
-            })}
-          </div>
-        </section>
       </div>
 
       {/* Steps */}
       {STEPS.map((s, i) => (
-        <section key={s.id} id={s.id} style={{ background: i % 2 ? "#0A0A0B" : "#131416", color: "#ECECEE", padding: "110px 0", position: "relative" }}>
+        <Fragment key={s.id}>
+        <section id={s.id} style={{ background: i % 2 ? "#0A0A0B" : "#131416", color: "#ECECEE", padding: "110px 0", position: "relative" }}>
           <div className="wrap">
             <div style={{ display: "flex", alignItems: "flex-end", gap: 28, flexWrap: "wrap" }}>
               <span style={{ fontFamily: "'Archivo',sans-serif", fontWeight: 800, fontSize: 120, lineHeight: 0.8, letterSpacing: "-0.05em", color: "#A8FF5C" }}>{s.n}</span>
@@ -192,6 +159,17 @@ export default function Services() {
             )}
           </div>
         </section>
+        {i === 1 && (
+    <div aria-hidden="true" style={{ position: "relative", height: 150, overflow: "hidden", background: "linear-gradient(#0A0A0B 50%, #131416 50%)" }}>
+      {[{ bg: "#0A0A0B", fg: "#A8FF5C", rot: 2, top: 34 }, { bg: "#A8FF5C", fg: "#0A0A0B", rot: -2, top: 44 }].map((b, i) => (
+        <div key={i} style={{ position: "absolute", left: -40, right: -40, top: b.top, transform: `rotate(${b.rot}deg)`, background: b.bg, color: b.fg, padding: "14px 0", whiteSpace: "nowrap", overflow: "hidden", fontFamily: "'Archivo',sans-serif", fontWeight: 800, fontSize: 34, letterSpacing: "-0.02em", textTransform: "uppercase" }}>
+          {Array.from({ length: 3 }).map(() => WORDS.map((t) => `${t} ◆ `).join("")).join("")}
+        </div>
+      ))}
+    </div>
+
+        )}
+        </Fragment>
       ))}
 
       {/* Why us */}
