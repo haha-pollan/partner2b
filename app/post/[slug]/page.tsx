@@ -5,6 +5,7 @@ import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { Cover } from "@/components/Cover";
 import { getArticle, getArticles, dateLabel } from "@/lib/articles";
+import { enhance } from "@/lib/enhance";
 
 export const revalidate = 600;
 export const dynamicParams = true;
@@ -62,7 +63,7 @@ export default async function Article({ params }: { params: Promise<{ slug: stri
         </div>
       </div>
       <section style={{ background: "#131416", color: "#ECECEE", padding: "80px 0 100px" }}>
-        <article className="wrap prose" dangerouslySetInnerHTML={{ __html: a.content_html ?? "" }} />
+        <article className="wrap prose" dangerouslySetInnerHTML={{ __html: enhance(a.content_html ?? "") }} />
       </section>
       <section style={{ padding: "90px 0", color: "#ECECEE" }}>
         <div className="wrap">
