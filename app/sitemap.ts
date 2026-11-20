@@ -7,6 +7,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const posts = await getArticles();
   return [
     { url: "https://partner2b.com/directory" },
+    { url: "https://partner2b.com/program-builder" },
     { url: "https://partner2b.com/services" },
     { url: "https://partner2b.com/post" },
     { url: "https://partner2b.com/privacy" },
