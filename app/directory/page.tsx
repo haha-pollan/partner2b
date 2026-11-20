@@ -9,7 +9,7 @@ import { getPrograms, commissionLabel, type Program } from "@/lib/programs";
 export const revalidate = 600;
 export const metadata: Metadata = {
   title: "Partner2B Directory: browse B2B partner programs",
-  description: "Search and filter public B2B partner programs by type, product category, commission model and region.",
+  description: "Search and filter public B2B partner programs by type, product category, commission model, features and region. Every listing links to its official page.",
 };
 
 const TYPES = ["Reseller", "Referral", "Technology", "Services", "MSP", "OEM or white label"];

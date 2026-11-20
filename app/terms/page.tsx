@@ -4,7 +4,7 @@ import { TERMS } from "@/lib/legal";
 
 export const metadata: Metadata = {
   title: "Terms of use | Partner2B Directory",
-  description: "The rules for using Partner2B Directory.",
+  description: "Terms of use for Partner2B Directory, including how listings are compiled from public information and how to ask for a correction.",
   alternates: { canonical: "/terms" },
 };
 

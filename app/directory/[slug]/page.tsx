@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!p) return {};
   return {
     title: `${p.company} partner program | Partner2B Directory`,
-    description: companyDescription(p),
+    description: `${p.company} ${p.primary_type.toLowerCase()} partner program: tiers, commission and region as published, with a link to the official page. Free on Partner2B Directory.`,
     alternates: { canonical: `/directory/${p.slug}` },
   };
 }

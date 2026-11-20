@@ -4,7 +4,7 @@ import { PRIVACY } from "@/lib/legal";
 
 export const metadata: Metadata = {
   title: "Privacy policy | Partner2B Directory",
-  description: "How Partner2B Directory handles personal data.",
+  description: "How Bonobee Inc. collects and uses personal data on Partner2B Directory, including form submissions, email contact and your rights.",
   alternates: { canonical: "/privacy" },
 };
 

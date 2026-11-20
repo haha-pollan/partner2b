@@ -5,6 +5,7 @@ import { getPrograms } from "@/lib/programs";
 export const revalidate = 600;
 export const metadata: Metadata = {
   title: "Claim a listing | Partner2B Directory",
+  description: "Run a partner program? Claim your listing on Partner2B Directory for free, correct your terms and keep them current.",
   alternates: { canonical: "/claim" },
 };
 

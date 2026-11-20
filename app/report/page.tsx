@@ -5,6 +5,7 @@ import { getPrograms } from "@/lib/programs";
 export const revalidate = 600;
 export const metadata: Metadata = {
   title: "Report a correction | Partner2B Directory",
+  description: "Spotted a mistake in a partner program listing? Tell us what changed and we will check it against the official program page.",
   alternates: { canonical: "/report" },
 };
 

@@ -8,7 +8,7 @@ import { getArticles, dateLabel } from "@/lib/articles";
 export const revalidate = 600;
 export const metadata: Metadata = {
   title: "Partner Marketing Blog | Partner Program Insights | Partner2B",
-  description: "Articles on B2B partner programs, partner ecosystems, co-selling and channel growth from Partner2B.",
+  description: "Practical articles on B2B partner programs, partner ecosystems, co-selling and partner marketing, from the team behind Partner2B.",
   alternates: { canonical: "/post" },
 };
 

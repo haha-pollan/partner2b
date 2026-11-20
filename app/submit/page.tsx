@@ -5,6 +5,7 @@ import { getPrograms } from "@/lib/programs";
 export const revalidate = 600;
 export const metadata: Metadata = {
   title: "Submit a program | Partner2B Directory",
+  description: "Submit a B2B partner program to the free Partner2B Directory. Share the official program page and we will review it before it goes live.",
   alternates: { canonical: "/submit" },
 };
 
