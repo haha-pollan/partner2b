@@ -7,7 +7,7 @@ export function Footer() {
       <div className="bigword" aria-hidden="true">Partner2B</div>
       <div style={{ position: "relative", maxWidth: 1360, margin: "0 auto", padding: "48px 40px 0", display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 32, flexWrap: "wrap" }}>
         <Link href="/" aria-label="Partner2B home"><Logo variant="light" /></Link>
-        <div style={{ display: "flex", gap: 28, flexWrap: "wrap", fontSize: 16, fontWeight: 500 }}>
+        <div style={{ display: "flex", gap: 28, flexWrap: "wrap", fontSize: 16, fontWeight: 400 }}>
           <Link href="/directory">Directory</Link>
           <Link href="/services">Services</Link>
           <Link href="/post">Blog</Link>

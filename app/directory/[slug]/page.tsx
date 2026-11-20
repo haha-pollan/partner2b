@@ -42,7 +42,7 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
         <div className="limepanel" />
         <Nav />
         <div className="wrap" style={{ padding: "8px 40px 80px" }}>
-          <div style={{ fontSize: 15, fontWeight: 500, display: "flex", gap: 8, flexWrap: "wrap" }}>
+          <div style={{ fontSize: 15, fontWeight: 400, display: "flex", gap: 8, flexWrap: "wrap" }}>
             <Link href="/directory" style={{ textDecoration: "underline" }}>Directory</Link><span>/</span>
             <span>{p.product_category}</span><span>/</span><span>{p.company}</span>
           </div>
@@ -50,8 +50,8 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
             <Tile type={p.primary_type} size={120} domain={p.domain} />
             <h1 style={{ fontWeight: 400, fontSize: 72, lineHeight: 1, letterSpacing: 0 }}>{p.company}</h1>
           </div>
-          {p.product_note && <div style={{ marginTop: 12, fontSize: 20, fontWeight: 500 }}>{p.product_note}</div>}
-          <p style={{ margin: "24px 0 0", maxWidth: 760, fontSize: 22, lineHeight: 1.5, fontWeight: 400 }}>{p.description}</p>
+          {p.product_note && <div style={{ marginTop: 12, fontSize: 20, fontWeight: 400 }}>{p.product_note}</div>}
+          <p style={{ margin: "24px 0 0", maxWidth: 760, fontSize: 22, lineHeight: 1.5, fontWeight: 300 }}>{p.description}</p>
           <div style={{ marginTop: 28, display: "flex", gap: 10, flexWrap: "wrap" }}>
             {p.program_types.map((t) => (<span key={t} className="pill">{t}</span>))}
             <span className="tag" style={{ background: "#ECECEE" }}>{p.region}</span>
@@ -59,13 +59,13 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
             {p.commission_models.some((c) => c !== "Not published") && <span className="tag" style={{ background: "#ECECEE" }}>{commissionLabel(p)}</span>}
           </div>
           <div style={{ marginTop: 36, display: "flex", gap: 10, flexWrap: "wrap", maxWidth: 800 }}>
-            <a href={p.program_url} target="_blank" rel="noopener noreferrer" style={{ display: "inline-block", background: "#0A0A0B", color: "#A8FF5C", fontWeight: 400, fontFamily: "'Michroma',sans-serif", fontSize: 12, padding: "14px 24px", borderRadius: 10 }}>
+            <a href={p.program_url} target="_blank" rel="noopener noreferrer" style={{ display: "inline-block", background: "#0A0A0B", color: "#A8FF5C", fontWeight: 400, fontFamily: "'Michroma',sans-serif", fontSize: 14, padding: "14px 24px", borderRadius: 10 }}>
               Visit the official program page
             </a>
-            <Link href={`/claim?listing=${p.slug}`} style={{ display: "inline-block", border: "2px solid #0A0A0B", color: "#0A0A0B", fontWeight: 400, fontFamily: "'Michroma',sans-serif", fontSize: 12, padding: "12px 22px", borderRadius: 10 }}>
+            <Link href={`/claim?listing=${p.slug}`} style={{ display: "inline-block", border: "2px solid #0A0A0B", color: "#0A0A0B", fontWeight: 400, fontFamily: "'Michroma',sans-serif", fontSize: 14, padding: "12px 22px", borderRadius: 10 }}>
               Claim this listing
             </Link>
-            <Link href={`/report?listing=${p.slug}`} style={{ display: "inline-block", border: "2px solid #0A0A0B", color: "#0A0A0B", fontWeight: 400, fontFamily: "'Michroma',sans-serif", fontSize: 12, padding: "12px 22px", borderRadius: 10 }}>
+            <Link href={`/report?listing=${p.slug}`} style={{ display: "inline-block", border: "2px solid #0A0A0B", color: "#0A0A0B", fontWeight: 400, fontFamily: "'Michroma',sans-serif", fontSize: 14, padding: "12px 22px", borderRadius: 10 }}>
               Report a correction
             </Link>
           </div>
@@ -77,7 +77,7 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
           <div style={{ flex: "1 1 620px", minWidth: 0 }}>
             <section style={{ marginBottom: 64 }}>
               <h2 style={{ fontWeight: 400, fontSize: 34, letterSpacing: 0 }}>About {p.company}</h2>
-              <p style={{ margin: "20px 0 0", maxWidth: 760, fontSize: 20, lineHeight: 1.6, fontWeight: 400 }}>{companyDescription(p)}</p>
+              <p style={{ margin: "20px 0 0", maxWidth: 760, fontSize: 20, lineHeight: 1.6, fontWeight: 300 }}>{companyDescription(p)}</p>
             </section>
             {p.tiers.length > 0 && (
               <section>
@@ -86,7 +86,7 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
                   {p.tiers.map((t, i) => (
                     <div key={t} className="card cut">
                       <div style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 24, color: "#A8FF5C", background: "#0A0A0B", display: "inline-block", padding: "2px 12px" }}>{i + 1}</div>
-                      <div style={{ marginTop: 14, fontSize: 20, fontWeight: 600, lineHeight: 1.25 }}>{t}</div>
+                      <div style={{ marginTop: 14, fontSize: 20, fontWeight: 500, lineHeight: 1.25 }}>{t}</div>
                     </div>
                   ))}
                 </div>
@@ -114,7 +114,7 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
                   {p.how_it_works.map((step, i) => (
                     <div key={i} style={{ display: "flex", gap: 28, alignItems: "center", padding: "18px 0", borderTop: i === 0 ? 0 : "2px solid #0A0A0B" }}>
                       <div style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 40, letterSpacing: 0, lineHeight: 1, flex: "0 0 80px" }}>{String(i + 1).padStart(2, "0")}</div>
-                      <div style={{ fontSize: 20, fontWeight: 500, lineHeight: 1.35 }}>{step}</div>
+                      <div style={{ fontSize: 20, fontWeight: 400, lineHeight: 1.35 }}>{step}</div>
                     </div>
                   ))}
                 </div>
@@ -135,10 +135,10 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
               
             </dl>
             <div style={{ marginTop: 28, paddingTop: 22, borderTop: "1px solid #3A3B40" }}>
-              <div style={{ fontSize: 14, color: "#85868B", fontWeight: 500 }}>Source</div>
-              <a href={p.program_url} target="_blank" rel="noopener noreferrer" style={{ display: "inline-block", marginTop: 4, fontSize: 18, fontWeight: 500, color: "#A8FF5C", textDecoration: "underline" }}>Official {p.company} partner program page</a>
+              <div style={{ fontSize: 14, color: "#85868B", fontWeight: 400 }}>Source</div>
+              <a href={p.program_url} target="_blank" rel="noopener noreferrer" style={{ display: "inline-block", marginTop: 4, fontSize: 18, fontWeight: 400, color: "#A8FF5C", textDecoration: "underline" }}>Official {p.company} partner program page</a>
               <p style={{ margin: "18px 0 0", fontSize: 15, lineHeight: 1.5, color: "#B9BABD" }}>Information on this page comes from the public page above</p>
-              <Link href={`/report?listing=${p.slug}`} style={{ display: "block", marginTop: 16, background: "#A8FF5C", color: "#0A0A0B", fontWeight: 400, fontFamily: "'Michroma',sans-serif", fontSize: 12, textAlign: "center", padding: "14px", borderRadius: 10 }}>Report a correction</Link>
+              <Link href={`/report?listing=${p.slug}`} style={{ display: "block", marginTop: 16, background: "#A8FF5C", color: "#0A0A0B", fontWeight: 400, fontFamily: "'Michroma',sans-serif", fontSize: 14, textAlign: "center", padding: "14px", borderRadius: 10 }}>Report a correction</Link>
             </div>
           </aside>
         </div>

@@ -40,7 +40,7 @@ export function FormPage({ kind, listings, defaultListing }: { kind: Kind; listi
           <div className="wrap" style={{ padding: "24px 40px 90px", display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 40, flexWrap: "wrap" }}>
             <div style={{ maxWidth: "100%" }}>
               <h1 className="h1big" style={{ fontSize: 69 }}>{c.title}</h1>
-              <p style={{ margin: "22px 0 0", maxWidth: 560, fontSize: 21, lineHeight: 1.5, fontWeight: 400 }}>{c.intro}</p>
+              <p style={{ margin: "22px 0 0", maxWidth: 560, fontSize: 21, lineHeight: 1.5, fontWeight: 300 }}>{c.intro}</p>
             </div>
             <div className="cut" style={{ flex: "0 0 320px", margin: "20px 40px 0 0", transform: "rotate(-4deg)", background: "#0A0A0B", color: "#ECECEE", padding: "28px 32px" }}>
               <div style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 49, letterSpacing: 0, lineHeight: 1, color: "#A8FF5C" }}>{c.badge}</div>
@@ -58,7 +58,7 @@ export function FormPage({ kind, listings, defaultListing }: { kind: Kind; listi
             {c.steps.map((t, i) => (
               <div key={i} style={{ display: "flex", gap: 18, alignItems: "flex-start", padding: "16px 0", borderBottom: i < 2 ? "2px solid #0A0A0B" : 0 }}>
                 <span style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 29, letterSpacing: 0, lineHeight: 1 }}>{String(i + 1).padStart(2, "0")}</span>
-                <span style={{ fontSize: 16, fontWeight: 500, lineHeight: 1.4, paddingTop: 4 }}>{t}</span>
+                <span style={{ fontSize: 16, fontWeight: 400, lineHeight: 1.4, paddingTop: 4 }}>{t}</span>
               </div>
             ))}
           </div>

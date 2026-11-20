@@ -9,7 +9,7 @@ const init: FormState = { ok: false };
 
 const inputS: React.CSSProperties = { width: "100%", background: "#1C1D20", color: "#ECECEE", border: "1px solid #2A2B2F", borderRadius: 10, padding: "14px 16px", font: "inherit", fontSize: 17 };
 const Lbl = ({ t, req }: { t: string; req?: boolean }) => (
-  <label style={{ display: "block", fontSize: 15, fontWeight: 600, margin: "22px 0 8px" }}>{t}{req && <span style={{ color: "#A8FF5C" }}> *</span>}</label>
+  <label style={{ display: "block", fontSize: 15, fontWeight: 500, margin: "22px 0 8px" }}>{t}{req && <span style={{ color: "#A8FF5C" }}> *</span>}</label>
 );
 const Hint = ({ t }: { t: string }) => <div style={{ marginTop: 8, fontSize: 14, color: "#85868B" }}>{t}</div>;
 
@@ -50,7 +50,7 @@ export function SubmissionForm({ kind, listings, defaultListing }: { kind: Kind;
           <Lbl t="Program type" />
           <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
             {TYPES.map((t) => (
-              <label key={t} style={{ display: "inline-flex", alignItems: "center", gap: 10, background: "#1C1D20", border: "1px solid #2A2B2F", borderRadius: 999, padding: "10px 16px", fontSize: 15, fontWeight: 500, cursor: "pointer" }}>
+              <label key={t} style={{ display: "inline-flex", alignItems: "center", gap: 10, background: "#1C1D20", border: "1px solid #2A2B2F", borderRadius: 999, padding: "10px 16px", fontSize: 15, fontWeight: 400, cursor: "pointer" }}>
                 <input type="checkbox" name="program_types" value={t} style={{ width: 18, height: 18, accentColor: "#A8FF5C" }} />{t}
               </label>
             ))}
@@ -118,7 +118,7 @@ export function SubmissionForm({ kind, listings, defaultListing }: { kind: Kind;
         </label>
       )}
 
-      {state.error && <div role="alert" style={{ marginTop: 22, color: "#FF9B9B", fontSize: 16, fontWeight: 500 }}>{state.error}</div>}
+      {state.error && <div role="alert" style={{ marginTop: 22, color: "#FF9B9B", fontSize: 16, fontWeight: 400 }}>{state.error}</div>}
       <button type="submit" disabled={pending} style={{ marginTop: 28, background: "#A8FF5C", color: "#0A0A0B", fontWeight: 400, fontFamily: "'Michroma',sans-serif", fontSize: 14, padding: "16px 30px", border: 0, borderRadius: 12, cursor: "pointer", opacity: pending ? 0.6 : 1 }}>
         {kind === "submit" ? "Submit program" : kind === "claim" ? "Request to claim" : "Send correction"}
       </button>

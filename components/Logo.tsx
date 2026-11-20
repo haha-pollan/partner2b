@@ -10,7 +10,7 @@ export function Logo({ variant = "dark", size = 28 }: { variant?: "dark" | "ligh
           <polygon key={i} points={pts} fill={fill} stroke={fill} strokeWidth="0.6" />
         ))}
       </svg>
-      <span style={{ fontFamily: "'Zen Dots', sans-serif", fontWeight: 400, fontSize: size, letterSpacing: "-0.03em", lineHeight: 1, color: onLime ? "#0A0A0B" : "#ECECEE" }}>
+      <span style={{ fontFamily: "'Zen Dots', sans-serif", fontWeight: 300, fontSize: size, letterSpacing: "-0.03em", lineHeight: 1, color: onLime ? "#0A0A0B" : "#ECECEE" }}>
         Partner
         <span style={onLime ? { color: "#A8FF5C", background: "#0A0A0B", padding: "3px 9px 4px", marginLeft: 5 } : { color: "#A8FF5C" }}>2B</span>
       </span>
