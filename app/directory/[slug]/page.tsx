@@ -56,7 +56,7 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
             {p.program_types.map((t) => (<span key={t} className="pill">{t}</span>))}
             <span className="tag" style={{ background: "#ECECEE" }}>{p.region}</span>
             <span className="tag" style={{ background: "#ECECEE" }}>{p.product_category}</span>
-            <span className="tag" style={{ background: "#ECECEE" }}>{commissionLabel(p)}</span>
+            {p.commission_models.some((c) => c !== "Not published") && <span className="tag" style={{ background: "#ECECEE" }}>{commissionLabel(p)}</span>}
           </div>
           <div style={{ marginTop: 36, display: "flex", gap: 10, flexWrap: "wrap", maxWidth: 800 }}>
             <a href={p.program_url} target="_blank" rel="noopener noreferrer" style={{ display: "inline-block", background: "#0A0A0B", color: "#A8FF5C", fontWeight: 800, fontSize: 15, padding: "14px 24px", borderRadius: 10 }}>
