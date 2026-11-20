@@ -10,7 +10,7 @@ p{text-wrap:pretty}
 .navcta{background:#0A0A0B;color:#A8FF5C;font-weight:400;font-size:14px;padding:15px 24px;border-radius:12px}
 .bigword{position:absolute;left:40px;bottom:16px;font-family:'Zen Dots',sans-serif;font-weight:400;font-size:170px;line-height:.8;letter-spacing:-.03em;color:#2A2B2F;white-space:nowrap}
 .limepanel{position:absolute;left:0;top:0;width:1010px;max-width:100%;height:100%;background:#A8FF5C;clip-path:polygon(0 0,100% 0,86% 100%,0 100%)}
-.h1big{font-weight:400;font-size:clamp(34px,4.6vw,72px);line-height:1.1;letter-spacing:0}
+.h1big{font-weight:400;font-size:clamp(32px,4.2vw,68px);line-height:1.1;letter-spacing:0}
 .search{margin:36px 0 0;width:640px;max-width:100%;background:#0A0A0B;border-radius:14px;padding:10px 10px 10px 26px;display:flex;align-items:center;justify-content:space-between;gap:16px}
 .search input{flex:1 1 0;min-width:0;background:transparent;border:0;outline:0;font:inherit;font-size:18px;color:#ECECEE}
 .search button{background:#A8FF5C;color:#0A0A0B;font-family:'Michroma',sans-serif;font-weight:400;font-size:14px;padding:16px 30px;border:0;border-radius:10px;cursor:pointer}

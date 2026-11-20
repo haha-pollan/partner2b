@@ -48,7 +48,7 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 28, marginTop: 28, flexWrap: "wrap" }}>
             <Tile type={p.primary_type} size={120} domain={p.domain} />
-            <h1 style={{ fontWeight: 400, fontSize: "clamp(26px,4.6vw,72px)", lineHeight: 1, letterSpacing: 0 }}>{p.company}</h1>
+            <h1 style={{ fontWeight: 400, fontSize: "clamp(26px,4.2vw,68px)", lineHeight: 1, letterSpacing: 0 }}>{p.company}</h1>
           </div>
           {p.product_note && <div style={{ marginTop: 12, fontSize: 20, fontWeight: 400 }}>{p.product_note}</div>}
           <p style={{ margin: "24px 0 0", maxWidth: 760, fontSize: 22, lineHeight: 1.5, fontWeight: 300 }}>{p.description}</p>
