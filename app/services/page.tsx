@@ -5,136 +5,161 @@ import { Footer } from "@/components/Footer";
 import { Glyph } from "@/components/Tile";
 
 export const metadata: Metadata = {
-  title: "Partner2B Services: get ready to grow through partners",
+  title: "Partner2B Services: B2B go-to-market and partner ecosystems",
   description:
-    "Go-to-market, partner ecosystems, demand generation and operations. Nine services that get a company ready to grow through partners.",
+    "Go-to-market, partner ecosystems, demand generation and operations for B2B companies that want to grow through partners.",
   alternates: { canonical: "/services" },
 };
 
 type Svc = { tag: string; title: string; text: string; items: string[]; hot?: boolean };
-type Step = { n: string; title: string; lead: string; svcs: Svc[] };
+type Step = { id: string; n: string; title: string; lead: string; kind: string; svcs: Svc[] };
 
 const STEPS: Step[] = [
   {
-    n: "01",
+    id: "gtm", n: "01", kind: "diamond",
     title: "Get your go-to-market ready",
     lead: "A partner can only sell what is clear. Start with the offer, the message and the channel.",
     svcs: [
-      {
-        tag: "Market strategy",
-        title: "Marketing strategy & positioning",
-        text: "Clear positioning and messaging that differentiate your offer, shorten sales cycles, and defend pricing power against competitors.",
-        items: ["Positioning and messaging audit", "Competitive category research", "Quarterly execution roadmap", "Objection handling playbooks"],
-      },
-      {
-        tag: "Sales alignment",
-        title: "Go-to-market & sales enablement",
-        text: "Sales collateral and enablement playbooks that equip internal champions to close deals without margin-killing discounts.",
-        items: ["Multi-channel lead campaigns", "Funnel conversion optimization", "Targeted ABM programs", "Pipeline attribution tracking"],
-      },
-      {
-        tag: "Partner channels",
-        title: "Partner ecosystems & co-selling",
-        text: "Channel recruitment and co-selling programs that create a predictable second revenue stream at a lower customer acquisition cost.",
-        items: ["Partner ICP definition", "Marketplace setup", "Co-marketing playbooks", "Co-selling workflows"],
-        hot: true,
-      },
+      { tag: "Market strategy", title: "Marketing strategy & positioning",
+        text: "Positioning and messaging that set your offer apart, shorten B2B sales cycles and defend your pricing.",
+        items: ["Positioning and messaging audit", "Competitive category research", "Quarterly execution roadmap", "Objection handling playbooks"] },
+      { tag: "Sales alignment", title: "Go-to-market & sales enablement",
+        text: "Playbooks and collateral that equip your sales team to close B2B deals without margin-killing discounts.",
+        items: ["Sales collateral and decks", "Battlecards and pitch scripts", "Champion enablement training", "Pipeline attribution tracking"] },
+      { tag: "Partner channels", title: "Partner ecosystems & co-selling", hot: true,
+        text: "Channel recruitment and co-selling programs that add a predictable second revenue stream at lower CAC.",
+        items: ["Partner ICP definition", "Marketplace setup", "Co-marketing playbooks", "Co-selling workflows"] },
     ],
   },
   {
-    n: "02",
+    id: "pipeline", n: "02", kind: "bars",
     title: "Fill the pipeline",
-    lead: "Once the offer is clear, bring in buyers and partners through the channels that convert.",
+    lead: "Once the offer is clear, bring in B2B buyers and partners through the channels that convert.",
     svcs: [
-      {
-        tag: "Search and acquisition",
-        title: "Digital marketing & SEO/AEO",
-        text: "Search visibility, AI engine optimization (AEO), and paid acquisition targeted at buyers actively evaluating solutions.",
-        items: ["SEO and AEO optimization", "Paid ad management", "Email lifecycle flows", "High-intent search targeting"],
-      },
-      {
-        tag: "Pipeline acquisition",
-        title: "Demand & lead generation",
-        text: "Repeatable inbound and outbound acquisition channels that generate verified buyer pipeline without burning budget.",
-        items: ["Multi-channel lead campaigns", "Funnel conversion optimization", "Targeted ABM programs", "Pipeline attribution tracking"],
-      },
-      {
-        tag: "Digital conversion",
-        title: "Website development & conversion",
-        text: "Modern B2B website architecture and messaging paths engineered to turn technical traffic into qualified sales opportunities.",
-        items: ["Redesign wireframes", "Conversion optimization", "UX message mapping", "Deployment"],
-      },
+      { tag: "Search and acquisition", title: "Digital marketing & SEO/AEO",
+        text: "Search and AI engine visibility plus paid acquisition aimed at B2B buyers who are evaluating solutions.",
+        items: ["SEO and AEO optimization", "Paid ad management", "Email lifecycle flows", "High-intent search targeting"] },
+      { tag: "Pipeline acquisition", title: "Demand & lead generation",
+        text: "Repeatable inbound and outbound channels that build verified B2B pipeline without burning budget.",
+        items: ["Multi-channel lead campaigns", "Funnel conversion optimization", "Targeted ABM programs", "Pipeline attribution tracking"] },
+      { tag: "Digital conversion", title: "Website development & conversion",
+        text: "B2B website architecture and message paths built to turn technical traffic into qualified opportunities.",
+        items: ["Redesign wireframes", "Conversion optimization", "UX message mapping", "Deployment"] },
     ],
   },
   {
-    n: "03",
+    id: "ops", n: "03", kind: "grid",
     title: "Run it without friction",
-    lead: "Growth through partners adds volume. Operations and systems keep delivery fast and margins intact.",
+    lead: "Partners add volume. Operations and systems keep delivery fast and margins intact.",
     svcs: [
-      {
-        tag: "Operational efficiency",
-        title: "Process audit & opportunity mapping",
-        text: "End-to-end workflow audits that locate delivery bottlenecks and identify where automation yields direct cost reductions.",
-        items: ["Workflow process mapping", "Bottleneck diagnostics", "Automation ROI roadmap", "Systems stack audit"],
-      },
-      {
-        tag: "Process automation",
-        title: "Workflow automation & systems",
-        text: "Re-engineering operational handoffs and connecting internal tools to compress delivery cycles and protect gross margin.",
-        items: ["CRM and operational sync", "Client onboarding pipelines", "API data orchestration", "Operational bottleneck removal"],
-      },
-      {
-        tag: "Systems development",
-        title: "Production systems & AI development",
-        text: "Building custom software, modern backend integrations, and autonomous AI agents designed to transform delivery capacity.",
-        items: ["Custom agent architecture", "Core systems modernization", "API and database integration", "Production deployment monitoring"],
-      },
+      { tag: "Operational efficiency", title: "Process audit & opportunity mapping",
+        text: "End-to-end workflow audits that find delivery bottlenecks and show where automation cuts cost.",
+        items: ["Workflow process mapping", "Bottleneck diagnostics", "Automation ROI roadmap", "Systems stack audit"] },
+      { tag: "Process automation", title: "Workflow automation & systems",
+        text: "Re-engineered handoffs and connected tools that shorten delivery cycles and protect gross margin.",
+        items: ["CRM and operational sync", "Client onboarding pipelines", "API data orchestration", "Operational bottleneck removal"] },
+      { tag: "Systems development", title: "Production systems & AI development",
+        text: "Custom software, backend integrations and autonomous AI agents that expand your delivery capacity.",
+        items: ["Custom agent architecture", "Core systems modernization", "API and database integration", "Production deployment monitoring"] },
     ],
   },
 ];
 
 const WHY = [
-  {
-    t: "Diagnostic range",
-    p: "Marketing agencies push more ads, while dev shops push more code. We are not biased toward either. Every recommendation targets your actual constraint, not whichever service an agency happens to sell.",
-  },
-  {
-    t: "Senior execution",
-    p: "No junior account managers learning on your budget. Every program, campaign, and automation deployment is led directly by operators who have run revenue and operations at the executive level.",
-  },
-  {
-    t: "One accountable team",
-    p: "No handoffs between separate growth and engineering agencies who have never spoken to each other. Pipeline generation and operational delivery run together under one unified plan.",
-  },
+  { t: "Diagnostic range", p: "Unbiased advice. We fix your real constraint, not what an agency sells.", kind: "hex", bg: "#0A0A0B", fg: "#ECECEE", rot: -2 },
+  { t: "Senior execution", p: "Led by operators who have run B2B revenue and operations at executive level.", kind: "bars", bg: "#ECECEE", fg: "#0A0A0B", rot: 2 },
+  { t: "One accountable team", p: "Growth and engineering run under one plan, with no agency handoffs.", kind: "diamond", bg: "#A8FF5C", fg: "#0A0A0B", rot: -2 },
 ];
 
+const ROWS: [string, string, string, number][] = [
+  ["#ECECEE", "#0A0A0B", "#0A0A0B", 0],
+  ["#A8FF5C", "#0A0A0B", "#0A0A0B", 8],
+  ["#0A0A0B", "#A8FF5C", "#A8FF5C", 16],
+];
+
+const WORDS = ["Go-to-market", "Partner ecosystems", "Demand generation", "Automation", "AI development"];
 const MAIL = "mailto:info@partner2b.com?subject=Partner2B%20services";
+const btnA: React.CSSProperties = { background: "#0A0A0B", color: "#A8FF5C", fontWeight: 800, padding: "16px 30px", borderRadius: 12, fontSize: 16 };
+const btnB: React.CSSProperties = { background: "#fff", color: "#0A0A0B", fontWeight: 800, padding: "16px 30px", borderRadius: 12, fontSize: 16 };
 
 export default function Services() {
   return (
     <div style={{ background: "#0A0A0B", overflow: "hidden" }}>
       <div style={{ background: "#fff url(/mesh-program.svg) top / 100% 130% no-repeat" }}>
+        {/* Hero */}
         <div style={{ position: "relative", overflow: "hidden", color: "#0A0A0B" }}>
+          <div className="limepanel" />
           <Nav />
-          <div className="wrap" style={{ padding: "40px 40px 120px" }}>
-            <span className="pill">Services</span>
-            <h1 style={{ margin: "22px 0 0", fontWeight: 800, fontSize: "clamp(40px,6.4vw,92px)", letterSpacing: "-0.045em", lineHeight: 1, maxWidth: 1000 }}>
-              Want to grow through partners? Start with your go-to-market
-            </h1>
-            <p style={{ margin: "26px 0 0", maxWidth: 640, fontSize: 21, lineHeight: 1.5, fontWeight: 500 }}>
-              Partner programs work when the offer, the pipeline and the operations behind them are ready. We help with all three, in that order.
-            </p>
-            <div style={{ display: "flex", gap: 14, flexWrap: "wrap", marginTop: 34 }}>
-              <a href={MAIL} style={{ background: "#0A0A0B", color: "#A8FF5C", fontWeight: 800, padding: "15px 28px", borderRadius: 12, fontSize: 16 }}>Talk to us</a>
-              <Link href="/directory" style={{ border: "1.5px solid #0A0A0B", fontWeight: 800, padding: "14px 26px", borderRadius: 12, fontSize: 16 }}>Browse partner programs</Link>
+          <div className="wrap" style={{ padding: "24px 40px 110px", display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 40, flexWrap: "wrap" }}>
+            <div style={{ flex: "0 0 auto", maxWidth: "100%" }}>
+              <span className="pill">For B2B companies</span>
+              <h1 style={{ margin: "20px 0 0", fontWeight: 800, fontSize: "clamp(44px,6.2vw,88px)", lineHeight: 1, letterSpacing: "-0.05em" }}>
+                <span style={{ display: "block" }}>Want to grow</span>
+                <span style={{ display: "block" }}>through partners?</span>
+                <span style={{ display: "block" }}>Start with your GTM</span>
+              </h1>
+              <p style={{ margin: "24px 0 0", maxWidth: 560, fontSize: 21, lineHeight: 1.5, fontWeight: 500 }}>
+                B2B partner programs work when the offer, the pipeline and the operations behind them are ready. We help with all three, in that order.
+              </p>
+              <div style={{ display: "flex", gap: 14, flexWrap: "wrap", marginTop: 32 }}>
+                <a href={MAIL} style={btnA}>Talk to us</a>
+                <Link href="/directory" style={btnB}>Browse partner programs</Link>
+              </div>
+            </div>
+            <div style={{ flex: "0 0 380px", maxWidth: "100%", display: "flex", flexDirection: "column", gap: 22, marginTop: 20 }}>
+              {[
+                { s: STEPS[0], bg: "#0A0A0B", fg: "#ECECEE", gl: "#A8FF5C", rot: -5, ml: 0 },
+                { s: STEPS[1], bg: "#ECECEE", fg: "#0A0A0B", gl: "#0A0A0B", rot: 3, ml: 36 },
+                { s: STEPS[2], bg: "#A8FF5C", fg: "#0A0A0B", gl: "#0A0A0B", rot: -3, ml: 12 },
+              ].map(({ s, bg, fg, gl, rot, ml }) => (
+                <a key={s.id} href={`#${s.id}`} className="cut" style={{ marginLeft: ml, transform: `rotate(${rot}deg)`, background: bg, color: fg, padding: "22px 26px", display: "flex", alignItems: "center", gap: 18 }}>
+                  <div style={{ flex: "0 0 64px", width: 64, height: 64, borderRadius: 14, border: `2px solid ${gl}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <Glyph kind={s.kind} fg={gl} size={38} />
+                  </div>
+                  <div style={{ minWidth: 0 }}>
+                    <div style={{ fontSize: 14, fontWeight: 800, opacity: 0.8 }}>Step {s.n}</div>
+                    <div style={{ marginTop: 4, fontFamily: "'Archivo',sans-serif", fontWeight: 800, fontSize: 23, letterSpacing: "-0.03em", lineHeight: 1.1 }}>{s.title}</div>
+                  </div>
+                </a>
+              ))}
             </div>
           </div>
         </div>
+
+        {/* Marquee band */}
+        <div aria-hidden="true" style={{ position: "relative", height: 150, overflow: "hidden" }}>
+          {[{ bg: "#0A0A0B", fg: "#A8FF5C", rot: 2, top: 34 }, { bg: "#A8FF5C", fg: "#0A0A0B", rot: -2, top: 44 }].map((b, i) => (
+            <div key={i} style={{ position: "absolute", left: -40, right: -40, top: b.top, transform: `rotate(${b.rot}deg)`, background: b.bg, color: b.fg, padding: "14px 0", whiteSpace: "nowrap", overflow: "hidden", fontFamily: "'Archivo',sans-serif", fontWeight: 800, fontSize: 34, letterSpacing: "-0.02em", textTransform: "uppercase" }}>
+              {Array.from({ length: 3 }).map(() => WORDS.map((t) => `${t} ◆ `).join("")).join("")}
+            </div>
+          ))}
+        </div>
+
+        {/* Staircase index */}
+        <section style={{ padding: "64px 0 96px" }}>
+          <div className="wrap">
+            <h2 style={{ fontWeight: 800, fontSize: "clamp(34px,4.4vw,56px)", letterSpacing: "-0.04em", color: "#0A0A0B" }}>Nine services, three steps</h2>
+          </div>
+          <div style={{ marginTop: 40 }}>
+            {STEPS.map((s, i) => {
+              const [bg, tx, gl, ind] = ROWS[i];
+              return (
+                <a key={s.id} href={`#${s.id}`} style={{ display: "flex", alignItems: "center", gap: 24, background: bg, color: tx, padding: "18px 40px", marginLeft: `${ind}%`, flexWrap: "wrap" }}>
+                  <span style={{ fontSize: 14, fontWeight: 800, width: 28 }}>{s.n}</span>
+                  <span style={{ flex: "1 1 280px", fontFamily: "'Archivo',sans-serif", fontWeight: 800, fontSize: "clamp(26px,3vw,44px)", letterSpacing: "-0.04em" }}>{s.title}</span>
+                  <span style={{ fontSize: 15, fontWeight: 700 }}>3 services</span>
+                  <Glyph kind={s.kind} fg={gl} size={34} />
+                  <span style={{ width: 44, height: 44, borderRadius: "50%", border: `2px solid ${tx}`, display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, fontSize: 20 }}>↓</span>
+                </a>
+              );
+            })}
+          </div>
+        </section>
       </div>
 
-      {/* Three steps */}
+      {/* Steps */}
       {STEPS.map((s, i) => (
-        <section key={s.n} style={{ background: i % 2 ? "#131416" : "#0A0A0B", color: "#ECECEE", padding: "110px 0" }}>
+        <section key={s.id} id={s.id} style={{ background: i % 2 ? "#0A0A0B" : "#131416", color: "#ECECEE", padding: "110px 0", position: "relative" }}>
           <div className="wrap">
             <div style={{ display: "flex", alignItems: "flex-end", gap: 28, flexWrap: "wrap" }}>
               <span style={{ fontFamily: "'Archivo',sans-serif", fontWeight: 800, fontSize: 120, lineHeight: 0.8, letterSpacing: "-0.05em", color: "#A8FF5C" }}>{s.n}</span>
@@ -145,61 +170,69 @@ export default function Services() {
             </div>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 24, marginTop: 56 }}>
               {s.svcs.map((v) => (
-                <article
-                  key={v.title}
-                  className="cut"
-                  style={{ flex: "1 1 320px", background: v.hot ? "#A8FF5C" : "#1C1D20", color: v.hot ? "#0A0A0B" : "#ECECEE", padding: "30px 30px 40px", display: "flex", flexDirection: "column" }}
-                >
+                <article key={v.title} className="cut" style={{ flex: "1 1 320px", background: v.hot ? "#A8FF5C" : "#1C1D20", color: v.hot ? "#0A0A0B" : "#ECECEE", padding: "30px 30px 40px", display: "flex", flexDirection: "column" }}>
                   <span style={{ alignSelf: "flex-start", fontSize: 13, fontWeight: 800, padding: "5px 12px", borderRadius: 999, background: v.hot ? "#0A0A0B" : "#2A2B2F", color: v.hot ? "#A8FF5C" : "#B9BABD" }}>{v.tag}</span>
-                  <h3 style={{ margin: "20px 0 0", fontWeight: 800, fontSize: 26, letterSpacing: "-0.03em", lineHeight: 1.1 }}>{v.title}</h3>
-                  <p style={{ margin: "14px 0 0", fontSize: 16, lineHeight: 1.5, color: v.hot ? "#0A0A0B" : "#B9BABD" }}>{v.text}</p>
-                  <ul style={{ listStyle: "none", margin: "24px 0 0", padding: "20px 0 0", borderTop: `1px solid ${v.hot ? "#0A0A0B" : "#3A3B40"}`, display: "grid", gap: 12 }}>
+                  <h3 style={{ margin: "20px 0 0", minHeight: 58, fontWeight: 800, fontSize: 24, letterSpacing: "-0.03em", lineHeight: 1.2 }}>{v.title}</h3>
+                  <p style={{ margin: "12px 0 0", minHeight: 78, fontSize: 16, lineHeight: 1.5, color: v.hot ? "#0A0A0B" : "#B9BABD" }}>{v.text}</p>
+                  <ul style={{ listStyle: "none", margin: "22px 0 0", padding: "20px 0 0", borderTop: `1px solid ${v.hot ? "#0A0A0B" : "#3A3B40"}`, display: "grid", gap: 12 }}>
                     {v.items.map((it) => (
-                      <li key={it} style={{ display: "flex", alignItems: "center", gap: 12, fontSize: 16, fontWeight: 600 }}>
-                        <Glyph kind="diamond" size={14} fg={v.hot ? "#0A0A0B" : "#A8FF5C"} />
+                      <li key={it} style={{ display: "flex", alignItems: "center", gap: 12, fontSize: 15, fontWeight: 600 }}>
+                        <span style={{ flex: "0 0 14px" }}><Glyph kind="diamond" size={14} fg={v.hot ? "#0A0A0B" : "#A8FF5C"} /></span>
                         {it}
                       </li>
                     ))}
                   </ul>
-                  {v.hot && (
-                    <Link href="/directory" style={{ marginTop: 26, alignSelf: "flex-start", background: "#0A0A0B", color: "#A8FF5C", fontWeight: 800, padding: "12px 20px", borderRadius: 10, fontSize: 15 }}>
-                      See real partner programs
-                    </Link>
-                  )}
                 </article>
               ))}
             </div>
+            {i === 0 && (
+              <Link href="/directory" style={{ display: "inline-block", marginTop: 32, background: "#A8FF5C", color: "#0A0A0B", fontWeight: 800, padding: "14px 26px", borderRadius: 12, fontSize: 15 }}>
+                See how real partner programs are built
+              </Link>
+            )}
           </div>
         </section>
       ))}
 
       {/* Why us */}
-      <section style={{ background: "#0A0A0B", color: "#ECECEE", padding: "110px 0" }}>
+      <section style={{ background: "#131416", color: "#ECECEE", padding: "110px 0 130px" }}>
         <div className="wrap">
-          <h2 style={{ fontWeight: 800, fontSize: "clamp(32px,4.2vw,56px)", letterSpacing: "-0.04em", lineHeight: 1.05 }}>
-            <span style={{ color: "#A8FF5C" }}>Why tech companies</span> work with us
+          <h2 style={{ fontWeight: 800, fontSize: "clamp(34px,4.4vw,56px)", letterSpacing: "-0.04em", lineHeight: 1.05 }}>
+            Why B2B tech companies <span style={{ color: "#A8FF5C" }}>work with us</span>
           </h2>
-          <p style={{ margin: "16px 0 0", maxWidth: 620, fontSize: 19, lineHeight: 1.5, color: "#B9BABD" }}>
-            One senior team bridging commercial demand and operational delivery without the typical agency handoffs.
-          </p>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 24, marginTop: 48 }}>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 36, marginTop: 64, justifyContent: "center" }}>
             {WHY.map((w) => (
-              <div key={w.t} style={{ flex: "1 1 300px", background: "#131416", border: "1px solid #2A2B2F", borderRadius: 24, padding: "32px 32px 38px" }}>
-                <h3 style={{ fontWeight: 800, fontSize: 24, letterSpacing: "-0.03em" }}>{w.t}</h3>
-                <p style={{ margin: "14px 0 0", fontSize: 16, lineHeight: 1.55, color: "#B9BABD" }}>{w.p}</p>
+              <div key={w.t} className="cut" style={{ flex: "1 1 300px", maxWidth: 400, transform: `rotate(${w.rot}deg)`, background: w.bg, color: w.fg, padding: "28px 28px 40px" }}>
+                <div style={{ width: 64, height: 64, borderRadius: 14, border: `2px solid ${w.fg}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <Glyph kind={w.kind} fg={w.fg} size={38} />
+                </div>
+                <h3 style={{ margin: "22px 0 0", fontWeight: 800, fontSize: 28, letterSpacing: "-0.03em", lineHeight: 1.1 }}>{w.t}</h3>
+                <p style={{ margin: "10px 0 0", fontSize: 17, lineHeight: 1.45, fontWeight: 500, opacity: 0.85 }}>{w.p}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section style={{ background: "#A8FF5C", color: "#0A0A0B", padding: "100px 0" }}>
-        <div className="wrap" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 40, flexWrap: "wrap" }}>
-          <h2 style={{ flex: "1 1 460px", fontWeight: 800, fontSize: "clamp(36px,5vw,64px)", letterSpacing: "-0.04em", lineHeight: 1.02 }}>
-            Ready to grow through partners?
-          </h2>
-          <a href={MAIL} style={{ background: "#0A0A0B", color: "#A8FF5C", fontWeight: 800, padding: "18px 34px", borderRadius: 14, fontSize: 18 }}>Talk to us</a>
+      {/* CTA band */}
+      <section style={{ padding: "120px 0 140px", color: "#ECECEE" }}>
+        <div className="wrap" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 48, flexWrap: "wrap" }}>
+          <div style={{ flex: "1 1 460px" }}>
+            <h2 style={{ fontWeight: 800, fontSize: "clamp(36px,4.6vw,56px)", letterSpacing: "-0.04em", lineHeight: 1.05 }}>
+              <span style={{ display: "block" }}>Ready to grow</span>
+              <span style={{ display: "block", color: "#A8FF5C" }}>through partners?</span>
+            </h2>
+            <p style={{ margin: "22px 0 0", maxWidth: 440, fontSize: 19, lineHeight: 1.5, color: "#B9BABD" }}>Tell us where your B2B growth is stuck. We will tell you which step to start with.</p>
+          </div>
+          <a href={MAIL} className="cut" style={{ flex: "0 0 400px", maxWidth: "100%", transform: "rotate(3deg)", background: "#A8FF5C", color: "#0A0A0B", padding: "28px 30px 32px", display: "block" }}>
+            {["Company name", "Work email", "Where growth is stuck"].map((k) => (
+              <div key={k} style={{ marginBottom: 14 }}>
+                <div style={{ fontSize: 13, fontWeight: 800 }}>{k}</div>
+                <div style={{ marginTop: 6, background: "#0A0A0B", borderRadius: 8, height: 42 }} />
+              </div>
+            ))}
+            <div style={{ marginTop: 20, background: "#0A0A0B", color: "#A8FF5C", fontWeight: 800, textAlign: "center", padding: "14px", borderRadius: 10 }}>Talk to us</div>
+          </a>
         </div>
       </section>
       <Footer />
