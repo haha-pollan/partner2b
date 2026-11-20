@@ -16,6 +16,9 @@ export type Program = {
   benefits: string[];
   verification_status: string;
   verified_at: string | null;
+  company_description: string | null;
+  requirements: string | null;
+  how_it_works: string[] | null;
 };
 
 // The publishable key is designed to be public. Row level security in Supabase
@@ -24,7 +27,7 @@ export const URL = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "https://lfqtbjlanbro
 export const KEY = process.env.NEXT_PUBLIC_SUPABASE_KEY ?? "sb_publishable_jKho5opr89qNGDzkBUhy_w_gAPZmmQO";
 
 const COLS =
-  "id,slug,company,product_note,product_category,program_types,primary_type,commission_models,feature_tags,region,program_url,domain,description,tiers,benefits,verification_status,verified_at";
+  "id,slug,company,product_note,product_category,program_types,primary_type,commission_models,feature_tags,region,program_url,domain,description,tiers,benefits,verification_status,verified_at,company_description,requirements,how_it_works";
 
 export async function getPrograms(): Promise<Program[]> {
   const res = await fetch(`${URL}/rest/v1/programs?select=${COLS}&published=eq.true&order=company.asc&limit=1000`, {

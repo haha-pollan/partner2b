@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!p) return {};
   return {
     title: `${p.company} partner program | Partner2B Directory`,
-    description: p.description ?? `${p.company} partner program details.`,
+    description: p.company_description ?? p.description ?? `${p.company} partner program details.`,
     alternates: { canonical: `/directory/${p.slug}` },
   };
 }
@@ -74,6 +74,12 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
       <div style={{ position: "relative", color: "#0A0A0B", padding: "80px 0 96px" }}>
         <div className="wrap" style={{ display: "flex", gap: 40, alignItems: "flex-start", flexWrap: "wrap" }}>
           <div style={{ flex: "1 1 620px", minWidth: 0 }}>
+            {p.company_description && (
+              <section style={{ marginBottom: 64 }}>
+                <h2 style={{ fontWeight: 800, fontSize: 44, letterSpacing: "-0.04em" }}>About {p.company}</h2>
+                <p style={{ margin: "20px 0 0", maxWidth: 760, fontSize: 20, lineHeight: 1.6, fontWeight: 500 }}>{p.company_description}</p>
+              </section>
+            )}
             {p.tiers.length > 0 && (
               <section>
                 <h2 style={{ fontWeight: 800, fontSize: 44, letterSpacing: "-0.04em" }}>Partner tiers</h2>
@@ -97,6 +103,28 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
                 </div>
               </section>
             )}
+            {p.how_it_works && p.how_it_works.length > 0 && (
+              <section style={{ marginTop: 64 }}>
+                <h2 style={{ fontWeight: 800, fontSize: 44, letterSpacing: "-0.04em" }}>How the program works</h2>
+                <div style={{ marginTop: 20, display: "flex", flexDirection: "column", gap: 14 }}>
+                  {p.how_it_works.map((step, i) => (
+                    <div key={i} className="card cut" style={{ display: "flex", gap: 22, alignItems: "flex-start" }}>
+                      <div style={{ fontFamily: "'Archivo',sans-serif", fontWeight: 800, fontSize: 40, letterSpacing: "-0.04em", lineHeight: 1 }}>{String(i + 1).padStart(2, "0")}</div>
+                      <div style={{ fontSize: 18, fontWeight: 600, lineHeight: 1.45, paddingTop: 4 }}>{step}</div>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
+            <section style={{ marginTop: 64 }}>
+              <h2 style={{ fontWeight: 800, fontSize: 44, letterSpacing: "-0.04em" }}>Sources</h2>
+              <div className="card cut" style={{ marginTop: 20 }}>
+                <div style={{ fontSize: 15, fontWeight: 700, color: "#55565B" }}>Official program page</div>
+                <a href={p.program_url} target="_blank" rel="noopener noreferrer" style={{ display: "block", marginTop: 6, fontSize: 18, fontWeight: 800, textDecoration: "underline", wordBreak: "break-all" }}>{p.program_url}</a>
+                <p style={{ margin: "18px 0 0", fontSize: 16, color: "#3A3B40" }}>Information on this page comes from the public page above</p>
+                <Link href={`/report?listing=${p.slug}`} style={{ display: "inline-block", marginTop: 14, fontSize: 16, fontWeight: 800, textDecoration: "underline" }}>Report a correction</Link>
+              </div>
+            </section>
           </div>
 
           <aside className="facts cut" style={{ flex: "0 0 380px", maxWidth: "100%" }}>
@@ -107,6 +135,7 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
               <dt>Commission</dt><dd>{commissionLabel(p)}</dd>
               <dt>Region</dt><dd>{p.region}</dd>
               <dt>Partner tiers</dt><dd>{p.tiers.length ? p.tiers.join(", ") : "Not published"}</dd>
+              {p.requirements && (<><dt>Requirements</dt><dd>{p.requirements}</dd></>)}
               <dt>Source</dt><dd><a href={p.program_url} target="_blank" rel="noopener noreferrer" style={{ color: "#A8FF5C", textDecoration: "underline" }}>{source}</a></dd>
               <dt>Last verified</dt><dd>{verifiedLabel(p)}</dd>
             </dl>
@@ -130,6 +159,27 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
           </div>
         </div>
       )}
+      <div style={{ background: "#131416", color: "#ECECEE", padding: "90px 0 100px" }}>
+        <div className="wrap" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 32, flexWrap: "wrap" }}>
+          <div>
+            <h2 style={{ fontWeight: 800, fontSize: 52, letterSpacing: "-0.04em", lineHeight: 1.05 }}>Is this your program? <span style={{ color: "#A8FF5C" }}>Claim it for free</span></h2>
+            <p style={{ margin: "16px 0 0", fontSize: 20, color: "#B9BABD" }}>Correct your terms and keep them current</p>
+          </div>
+          <Link href={`/claim?listing=${p.slug}`} style={{ background: "#A8FF5C", color: "#0A0A0B", fontWeight: 800, padding: "16px 30px", borderRadius: 12, fontSize: 17 }}>Claim this listing</Link>
+        </div>
+      </div>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            name: p.company,
+            ...(p.domain ? { url: `https://${p.domain}` } : {}),
+            ...((p.company_description ?? p.description) ? { description: p.company_description ?? p.description } : {}),
+          }).replace(/</g, "\\u003c"),
+        }}
+      />
       <Footer />
     </div>
   );

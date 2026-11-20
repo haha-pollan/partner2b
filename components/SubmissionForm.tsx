@@ -63,6 +63,8 @@ export function SubmissionForm({ kind, listings, defaultListing }: { kind: Kind;
           </select>
           <Lbl t="What the program offers" />
           <textarea name="details" maxLength={4000} rows={4} placeholder="A sentence or two is enough" style={{ ...inputS, resize: "vertical" }} />
+          <Lbl t="Company description" />
+          <textarea name="company_description" maxLength={2000} rows={4} placeholder="Two or three sentences on what the company does" style={{ ...inputS, resize: "vertical" }} />
           <Lbl t="Your email" req />
           <input name="email" type="email" required maxLength={320} placeholder="name@company.com" style={inputS} />
           <Hint t="Only used if we need to check a detail" />
@@ -81,6 +83,12 @@ export function SubmissionForm({ kind, listings, defaultListing }: { kind: Kind;
           <input name="role" maxLength={200} style={inputS} />
           <Lbl t="What should change on the listing" />
           <textarea name="details" maxLength={4000} rows={4} style={{ ...inputS, resize: "vertical" }} />
+          <Lbl t="Company description" />
+          <textarea name="company_description" maxLength={2000} rows={4} placeholder="Two or three sentences on what the company does" style={{ ...inputS, resize: "vertical" }} />
+          <Lbl t="How the program works" />
+          <textarea name="how_it_works" maxLength={2000} rows={4} placeholder="The main steps, one per line" style={{ ...inputS, resize: "vertical" }} />
+          <Lbl t="Requirements" />
+          <textarea name="requirements" maxLength={2000} rows={3} placeholder="What a partner needs to join" style={{ ...inputS, resize: "vertical" }} />
         </>
       )}
 

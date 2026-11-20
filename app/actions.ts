@@ -24,12 +24,12 @@ export async function sendSubmission(_prev: FormState, f: FormData): Promise<For
     const types = f.getAll("program_types").map(String).filter((t) => TYPES.includes(t));
     if (!need(!!company && isUrl(url) && CATEGORIES.includes(cat) && isEmail(email) && f.get("confirmed") === "on"))
       return { ok: false, error: "Please fill in the required fields with a valid link and email, and tick the confirmation." };
-    Object.assign(row, { company, program_url: url, product_category: cat, program_types: types, details, email, confirmed: true });
+    Object.assign(row, { company, program_url: url, product_category: cat, program_types: types, details, company_description: s(f, "company_description"), email, confirmed: true });
   } else if (kind === "claim") {
     const listing = s(f, "listing"), name = s(f, "name");
     if (!need(!!listing && !!name && isEmail(email) && f.get("confirmed") === "on"))
       return { ok: false, error: "Please fill in the required fields with a valid email, and tick the confirmation." };
-    Object.assign(row, { listing, name, email, role: s(f, "role"), details, confirmed: true });
+    Object.assign(row, { listing, name, email, role: s(f, "role"), details, company_description: s(f, "company_description"), how_it_works: s(f, "how_it_works"), requirements: s(f, "requirements"), confirmed: true });
   } else {
     const listing = s(f, "listing"), issue = s(f, "issue"), src = s(f, "source_url");
     if (!need(!!listing && ISSUES.includes(issue) && !!details && (!src || isUrl(src)) && (!email || isEmail(email))))
