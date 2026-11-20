@@ -35,11 +35,11 @@ export function FormPage({ kind, listings, defaultListing }: { kind: Kind; listi
     <div style={{ background: "#0A0A0B", overflow: "hidden" }}>
       <div style={{ background: "#fff url(/mesh-program.svg) top / 100% 100% no-repeat" }}>
         <div style={{ position: "relative", overflow: "hidden", color: "#0A0A0B" }}>
-          <div className="limepanel" style={{ width: 880 }} />
+          <div className="limepanel" style={{ width: 1040 }} />
           <Nav />
           <div className="wrap" style={{ padding: "24px 40px 90px", display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 40, flexWrap: "wrap" }}>
             <div style={{ maxWidth: "100%" }}>
-              <h1 className="h1big" style={{ fontSize: 69 }}>{c.title}</h1>
+              <h1 className="h1big" style={{ fontSize: kind === "report" ? "clamp(26px,3.6vw,56px)" : "clamp(28px,4vw,64px)" }}>{c.title}</h1>
               <p style={{ margin: "22px 0 0", maxWidth: 560, fontSize: 21, lineHeight: 1.5, fontWeight: 300 }}>{c.intro}</p>
             </div>
             <div className="cut" style={{ flex: "0 0 320px", margin: "20px 40px 0 0", transform: "rotate(-4deg)", background: "#0A0A0B", color: "#ECECEE", padding: "28px 32px" }}>
