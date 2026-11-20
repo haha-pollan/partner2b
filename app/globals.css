@@ -109,8 +109,10 @@ p{text-wrap:pretty}
   .sidewrap .filtbtn{display:block;width:100%;background:#0A0A0B;color:#A8FF5C;border:0;border-radius:12px;font-family:'Michroma',sans-serif;font-size:13px;padding:16px 20px;text-align:left;cursor:pointer}
   .sidewrap .sidebody{display:none}
   .sidewrap.open .sidebody{display:block}
-  .side{flex:1 1 100%;width:100%;padding:22px 20px 28px}
-  aside.sidewrap{flex:1 1 100%}
+  .side{flex:1 1 100%;width:100%;padding:0}
+  .sidewrap .filtbtn{padding:20px 22px}
+  .sidewrap .sidebody{padding:6px 20px 28px}
+  .sidewrap.open .filtbtn{border-bottom:1px solid #2A2B2F;margin-bottom:12px}
   .row{padding:18px 18px 22px 18px;gap:14px}
   .row .arrow{display:none}
   .desc{-webkit-line-clamp:3}
