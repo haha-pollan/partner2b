@@ -93,7 +93,7 @@ export default function Services() {
           <div className="wrap" style={{ padding: "24px 40px 110px", display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 40, flexWrap: "wrap" }}>
             <div style={{ flex: "0 0 auto", maxWidth: "min(100%, 800px)" }}>
               <span className="pill">For B2B companies</span>
-              <h1 style={{ margin: "20px 0 0", fontWeight: 800, fontSize: "clamp(38px,5.2vw,72px)", lineHeight: 1, letterSpacing: "-0.05em" }}>
+              <h1 style={{ margin: "20px 0 0", fontWeight: 800, fontSize: "clamp(34px,4.4vw,60px)", lineHeight: 1, letterSpacing: "-0.05em" }}>
                 <span style={{ display: "block" }}>Want to grow</span>
                 <span style={{ display: "block" }}>through partners?</span>
                 <span style={{ display: "block" }}>Start with your GTM</span>
