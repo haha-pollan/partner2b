@@ -156,19 +156,20 @@ export default async function DirectoryPage({ searchParams }: { searchParams: Pr
                 <Link key={p.id} href={`/directory/${p.slug}`} className="row cut">
                   <Tile type={p.primary_type} domain={p.domain} />
                   <div style={{ flex: "1 1 0", minWidth: 0 }}>
-                    <div style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 23, letterSpacing: 0, lineHeight: 1.1, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
-                      {p.company}{p.product_note ? <span style={{ fontSize: 16, fontWeight: 400, color: "#55565B", letterSpacing: 0, marginLeft: 10 }}>{p.product_note}</span> : null}
+                    <div style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 19, letterSpacing: 0, lineHeight: 1.2, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                      {p.company}{p.product_note ? <span style={{ fontSize: 13, fontWeight: 300, color: "#55565B", letterSpacing: 0, marginLeft: 10 }}>{p.product_note}</span> : null}
                     </div>
                     <div style={{ marginTop: 8, display: "flex", gap: 8, alignItems: "center" }}>
                       <span className="pill">{p.primary_type}</span>
                       <span style={{ color: "#55565B", fontSize: 14, fontWeight: 400, whiteSpace: "nowrap" }}>{p.region}</span>
                     </div>
-                    <div style={{ marginTop: 10, fontSize: 16, color: "#3A3B40", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{p.description}</div>
-                    <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "nowrap", overflow: "hidden" }}>
+                    <div className="desc">{p.description}</div>
+                    <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
                       <span className="tag">{p.product_category}</span>
                       {p.commission_models.some((c) => c !== "Not published") && <span className="tag">{commissionLabel(p)}</span>}
                       {p.feature_tags.find((x) => FEATURES.includes(x)) && <span className="tag">{p.feature_tags.find((x) => FEATURES.includes(x))}</span>}
                     </div>
+                    <div className="more">Read full details <span aria-hidden="true">→</span></div>
                   </div>
                   <div className="rowmeta" style={{ flex: "0 0 170px", fontSize: 14, color: "#55565B", fontWeight: 300, lineHeight: 1.5 }}>Program types<div style={{ fontSize: 17, color: "#0A0A0B", fontWeight: 400 }}>{p.program_types.slice(0, 2).join(", ")}{p.program_types.length > 2 ? ` +${p.program_types.length - 2}` : ""}</div></div>
                   <div className="rowmeta" style={{ flex: "0 0 110px", fontSize: 14, color: "#55565B", fontWeight: 300, lineHeight: 1.5 }}>Partner tiers<div style={{ fontSize: 17, color: "#0A0A0B", fontWeight: 400 }}>{p.tiers.length > 0 ? `${p.tiers.length} ${p.tiers.length === 1 ? "tier" : "tiers"}` : "Not listed"}</div></div>
