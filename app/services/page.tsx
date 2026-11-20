@@ -140,25 +140,36 @@ export default function Services() {
       </div>
 
       {/* Segments */}
-      <section style={{ background: "#0A0A0B", color: "#ECECEE", padding: "72px 0 80px" }}>
-        <div className="wrap">
-          <h2 style={{ fontWeight: 400, fontSize: "clamp(20px,2.6vw,34px)", letterSpacing: 0, lineHeight: 1.15 }}>
-            <span style={{ display: "block" }}>We Know Your</span>
-            <span style={{ display: "block", color: "#A8FF5C" }}>Category</span>
+      <section style={{ background: "#0A0A0B", backgroundImage: "radial-gradient(#2A2B2F 1.3px, transparent 1.6px)", backgroundSize: "26px 26px", color: "#ECECEE", padding: "72px 0 96px", position: "relative", overflow: "hidden" }}>
+        <div className="wrap" style={{ position: "relative" }}>
+          <span className="pill" style={{ background: "#A8FF5C", color: "#0A0A0B" }}>Your vertical</span>
+          <h2 style={{ margin: "18px 0 0", fontWeight: 400, fontSize: "clamp(20px,2.6vw,34px)", letterSpacing: 0, lineHeight: 1.15 }}>
+            We Know Your <span style={{ color: "#A8FF5C" }}>Category</span>
           </h2>
           <p style={{ margin: "18px 0 0", maxWidth: 620, fontSize: 18, lineHeight: 1.5, color: "#B9BABD" }}>
             From strategy and recruitment to enablement and co-marketing. One AI-first team runs your full partner marketing program.
           </p>
-          <div style={{ marginTop: 40, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))", gap: 20 }}>
-            {SEGMENTS.map((g) => (
-              <div key={g.t} className="cut" style={{ background: "#131416", border: "1px solid #2A2B2F", borderTop: "3px solid #A8FF5C", padding: "26px 28px 30px" }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 14, minHeight: 44 }}>
-                  <Glyph kind={g.kind} fg="#A8FF5C" size={30} />
-                  <h3 style={{ fontWeight: 400, fontSize: 14, letterSpacing: 0, lineHeight: 1.3 }}>{g.t}</h3>
+          <div style={{ marginTop: 52, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))", gap: 28 }}>
+            {SEGMENTS.map((g, i) => {
+              const T = [
+                { bg: "#ECECEE", fg: "#0A0A0B", sub: "#3A3B40", gl: "#0A0A0B", num: "#85868B" },
+                { bg: "#A8FF5C", fg: "#0A0A0B", sub: "#1C1D20", gl: "#0A0A0B", num: "#3F7A12" },
+                { bg: "#1C1D20", fg: "#ECECEE", sub: "#B9BABD", gl: "#A8FF5C", num: "#55565B" },
+              ][(i + Math.floor(i / 3)) % 3];
+              const rot = [-1.6, 1.2, -0.8, 1.4, -1.2, 1.6][i];
+              return (
+                <div key={g.t} className="cut" style={{ background: T.bg, color: T.fg, transform: `rotate(${rot}deg)`, padding: "26px 28px 30px", position: "relative" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+                    <div style={{ flex: "0 0 56px", width: 56, height: 56, borderRadius: 14, border: `2px solid ${T.gl}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      <Glyph kind={g.kind} fg={T.gl} size={32} />
+                    </div>
+                    <h3 style={{ fontWeight: 400, fontSize: 14, letterSpacing: 0, lineHeight: 1.3, flex: 1 }}>{g.t}</h3>
+                    <span style={{ fontFamily: "'Michroma',sans-serif", fontSize: 22, color: T.num }}>{String(i + 1).padStart(2, "0")}</span>
+                  </div>
+                  <p style={{ margin: "20px 0 0", minHeight: 96, fontSize: 16, lineHeight: 1.55, color: T.sub }}>{g.p}</p>
                 </div>
-                <p style={{ margin: "16px 0 0", minHeight: 96, fontSize: 16, lineHeight: 1.55, color: "#B9BABD" }}>{g.p}</p>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
