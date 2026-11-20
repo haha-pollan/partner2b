@@ -32,6 +32,7 @@ export type Result = {
 };
 
 const has = (list: string[], v: string) => list.includes(v);
+const joinList = (a: string[]) => (a.length > 1 ? `${a.slice(0, -1).join(", ")} and ${a[a.length - 1]}` : a[0] ?? "");
 
 export function parseInput(raw: Record<string, unknown>): { ok: true; input: BuilderInput } | { ok: false; error: string } {
   const s = (k: string) => String(raw[k] ?? "").trim();
@@ -111,8 +112,9 @@ export function generate(input: BuilderInput, site: Site, all: Program[]): Resul
 
   const picked: typeof scored = [];
   const perType: Record<string, number> = {};
+  let sameCatCount = 0;
   const perCompany: Record<string, number> = {};
-  const take = (x: (typeof scored)[number]) => { picked.push(x); perType[x.p.primary_type] = (perType[x.p.primary_type] ?? 0) + 1; perCompany[x.p.company] = 1; };
+  const take = (x: (typeof scored)[number]) => { if (x.sameCat) sameCatCount += 1; picked.push(x); perType[x.p.primary_type] = (perType[x.p.primary_type] ?? 0) + 1; perCompany[x.p.company] = 1; };
   // Make sure each of the top two recommended types is represented when the database has it.
   for (const t of recTypes.slice(0, 2)) {
     const x = scored.find((s) => s.matched.includes(t) && !perCompany[s.p.company]);
@@ -122,6 +124,7 @@ export function generate(input: BuilderInput, site: Site, all: Program[]): Resul
     if (picked.length >= 10) break;
     if (perCompany[x.p.company]) continue;
     if ((perType[x.p.primary_type] ?? 0) >= 5) continue;
+    if (x.sameCat && sameCatCount >= 7) continue;
     take(x);
   }
   for (const x of scored) { if (picked.length >= 10) break; if (!perCompany[x.p.company]) take(x); }
@@ -132,10 +135,10 @@ export function generate(input: BuilderInput, site: Site, all: Program[]): Resul
     const comm = p.commission_models.filter((c) => c !== "Not published");
     const parts = [
       x.sameCat ? `Same category: ${p.product_category}.` : x.sameGroup ? `Adjacent category: ${p.product_category}.` : `Category: ${p.product_category}.`,
-      `Runs ${x.matched.join(" and ")} partnerships, which match your ideal partner profile.`,
+      `Runs ${joinList(x.matched)} partnerships, which match your ideal partner profile.`,
     ];
     if (x.feats.length) parts.push(`Offers ${x.feats.slice(0, 2).join(" and ").toLowerCase()}.`);
-    if (comm.length) parts.push(`Partners earn through ${comm.join(" and ").toLowerCase()}.`);
+    if (comm.length) parts.push(`Commercial model: ${comm.join(", ").toLowerCase()}.`);
     return { slug: p.slug, company: p.company, note: p.product_note ?? "", category: p.product_category, types: p.program_types, commission: comm.join(", ") || "Not published", tags: p.feature_tags, url: p.program_url, why: parts.join(" ") };
   });
 
@@ -144,8 +147,8 @@ export function generate(input: BuilderInput, site: Site, all: Program[]): Resul
   if (AUDIENCE_ARCHETYPE[input.audience]) archetypes.push(AUDIENCE_ARCHETYPE[input.audience]);
 
   const name = site.name || site.domain;
-  const typeTitles = partnerTypes.map((p) => p.title.toLowerCase());
-  const summary = `${name} sells ${input.category === OTHER ? "software" : input.category.toLowerCase()} to ${input.audience.toLowerCase()}. To ${goal.label.charAt(0).toLowerCase() + goal.label.slice(1)}${goal2 ? ` and ${goal2.label.charAt(0).toLowerCase() + goal2.label.slice(1)}` : ""}, the partners that fit best are ${typeTitles.slice(0, -1).join(", ")}${typeTitles.length > 1 ? " and " : ""}${typeTitles[typeTitles.length - 1]}.`;
+  const typeTitles = rec.map(([t]) => TYPE_ROLES[t].short);
+  const summary = `${name} sells ${input.category === OTHER ? "software" : `in the ${input.category} category`} to ${input.audience.toLowerCase()}. To ${goal.label.charAt(0).toLowerCase() + goal.label.slice(1)}${goal2 ? ` and ${goal2.label.charAt(0).toLowerCase() + goal2.label.slice(1)}` : ""}, the partners that fit best are ${joinList(typeTitles)}.`;
 
   // Program structure
   const threeTiers = input.stage !== "No partner program yet" || input.size === "201 to 1,000 employees" || input.size === "More than 1,000 employees";
@@ -159,8 +162,7 @@ export function generate(input: BuilderInput, site: Site, all: Program[]): Resul
       benefits: ["Everything in the tier below", "A joint business plan and quarterly reviews", "Best commission or discount rate", "Early access to product news and roadmap", "Joint events and case studies"] },
   ];
   const economics = recTypes.map((t) => ({ title: TYPE_ROLES[t].title, guidance: TYPE_ROLES[t].economics }));
-  const modelLabel = recTypes.map((t) => (t === "OEM or white label" ? "OEM" : t.toLowerCase())).join(", ");
-  const model = `A ${tiers.length}-tier program built around ${modelLabel} partners, starting with a small pilot cohort before opening to everyone.`;
+  const model = `A ${tiers.length}-tier program built around ${joinList(typeTitles)}, starting with a small pilot cohort before opening to everyone.`;
 
   const n = benchmarks.length;
   const commCounts = topCount(picked.map((x) => x.p.commission_models.filter((c) => c !== "Not published")), 3);
@@ -168,7 +170,8 @@ export function generate(input: BuilderInput, site: Site, all: Program[]): Resul
   const tierCounts = picked.map((x) => x.p.tiers.length).filter((c) => c > 0);
   const insight: string[] = [];
   if (n) {
-    commCounts.forEach(([m, c]) => insight.push(`${c} of the ${n} benchmark programs pay partners through ${m.toLowerCase()}.`));
+    const phrase: Record<string, string> = { "Discount on resale": "give partners a discount on resale", "Referral fee": "pay partners a referral fee", "Revenue share": "share revenue with partners" };
+    commCounts.forEach(([m, c]) => insight.push(`${c} of the ${n} benchmark programs ${phrase[m] ?? "use " + m.toLowerCase()}.`));
     if (tagCounts.length) insight.push(`The most common program features among them are ${tagCounts.map(([t]) => t.toLowerCase()).join(", ")}.`);
     if (tierCounts.length) {
       const avg = tierCounts.reduce((a, b) => a + b, 0) / tierCounts.length;

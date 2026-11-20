@@ -34,7 +34,7 @@ export async function buildPdf(r: Result): Promise<Uint8Array> {
     y -= o.gap ?? 6;
   };
   const h1 = (t: string) => {
-    need(60); y -= 14;
+    need(150); y -= 14;
     page.drawRectangle({ x: M, y: y - 4, width: 36, height: 3, color: LIME });
     y -= 12;
     for (const l of wrap(t, bold, 17, W - 2 * M)) { need(24); page.drawText(l, { x: M, y: y - 17, size: 17, font: bold, color: INK }); y -= 24; }

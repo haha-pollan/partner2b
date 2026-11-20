@@ -36,24 +36,24 @@ export const SIZES = ["1 to 50 employees", "51 to 200 employees", "201 to 1,000 
 export const STAGES = ["No partner program yet", "A few informal partners", "A program with fewer than 20 partners"];
 export const REGIONS = ["North America", "Europe", "Asia Pacific", "Latin America", "Middle East and Africa", "Global"];
 
-export type TypeRole = { title: string; who: string; earns: string; need: string; economics: string; kit: string[] };
+export type TypeRole = { title: string; short: string; who: string; earns: string; need: string; economics: string; kit: string[] };
 export const TYPE_ROLES: Record<string, TypeRole> = {
-  Referral: { title: "Referral partners", who: "Consultants, advisors and agencies that already advise your buyers and want to introduce you without selling or supporting the product.",
+  Referral: { title: "Referral partners", short: "referral partners", who: "Consultants, advisors and agencies that already advise your buyers and want to introduce you without selling or supporting the product.",
     earns: "A fee on closed deals", need: "A simple introduction form, clear terms and fast follow up",
     economics: "A one-time fee or a share of first-year contract value is the usual model. Typical range in B2B software is 10 to 20 percent.", kit: ["Referral terms in one page", "Introduction form and tracking link"] },
-  Reseller: { title: "Resellers and VARs", who: "Firms that sell your product to their customers, invoice them and often provide first-line support.",
+  Reseller: { title: "Resellers and VARs", short: "resellers", who: "Firms that sell your product to their customers, invoice them and often provide first-line support.",
     earns: "A discount on list price or a margin on each sale", need: "Pricing they can quote, deal protection and sales training",
     economics: "A resale discount off list price is the usual model. Typical range in B2B software is 15 to 30 percent, higher for committed partners.", kit: ["Partner price list and quoting guide", "Deal registration rules"] },
-  Technology: { title: "Technology partners", who: "Software companies whose product sits next to yours in the buyer's stack and who build or list an integration with you.",
+  Technology: { title: "Technology partners", short: "technology partners", who: "Software companies whose product sits next to yours in the buyer's stack and who build or list an integration with you.",
     earns: "Shared customers, joint marketing and marketplace visibility", need: "Documentation, a sandbox and a clear co-marketing path",
     economics: "Technology partnerships usually carry no commission. The value is mutual leads, a listing in each other's marketplace and joint campaigns.", kit: ["Integration documentation and sandbox access", "Joint listing and co-marketing template"] },
-  Services: { title: "Services and implementation partners", who: "Systems integrators, consultancies and specialist firms that deploy, customize and train customers on your product.",
+  Services: { title: "Services and implementation partners", short: "services partners", who: "Systems integrators, consultancies and specialist firms that deploy, customize and train customers on your product.",
     earns: "Project and retainer revenue, plus a referral fee in many programs", need: "Certification, implementation guides and a route to your technical team",
     economics: "Partners earn mainly from their own services. Many programs add a referral fee of 10 to 15 percent on the software they bring in.", kit: ["Certification path and implementation guide", "Escalation route to your technical team"] },
-  MSP: { title: "Managed service providers", who: "Providers that run IT or operations for many clients and bundle your product into a monthly service.",
+  MSP: { title: "Managed service providers", short: "managed service providers", who: "Providers that run IT or operations for many clients and bundle your product into a monthly service.",
     earns: "Margin on recurring revenue", need: "Multi-client management, flexible billing and support runbooks",
     economics: "A margin on recurring revenue is the usual model. Typical range in B2B software is 20 to 30 percent.", kit: ["Billing and support runbook", "Multi-client management guide"] },
-  "OEM or white label": { title: "OEM and white label partners", who: "Companies that embed your product in their own offering under their own brand.",
+  "OEM or white label": { title: "OEM and white label partners", short: "OEM and white label partners", who: "Companies that embed your product in their own offering under their own brand.",
     earns: "Their own product revenue built on yours", need: "Branding rights, licensing terms and usage measurement",
     economics: "Terms are negotiated, usually per seat, per usage or as a revenue share. Start with two or three design partners before setting a standard model.", kit: ["Branding and licensing pack", "Usage reporting setup"] },
 };
