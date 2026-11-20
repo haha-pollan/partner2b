@@ -4,6 +4,8 @@ import { notFound } from "next/navigation";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { Tile } from "@/components/Tile";
+import { companyDescription } from "@/lib/describe";
+import { Glyph } from "@/components/Tile";
 import { getPrograms, getProgram, commissionLabel, verifiedLabel } from "@/lib/programs";
 
 export const revalidate = 600;
@@ -19,7 +21,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!p) return {};
   return {
     title: `${p.company} partner program | Partner2B Directory`,
-    description: p.company_description ?? p.description ?? `${p.company} partner program details.`,
+    description: companyDescription(p),
     alternates: { canonical: `/directory/${p.slug}` },
   };
 }
@@ -33,7 +35,6 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
   const related = all
     .filter((x) => x.id !== p.id && x.product_category === p.product_category)
     .slice(0, 3);
-  const source = p.domain ?? new URL(p.program_url).hostname;
 
   return (
     <div style={{ background: "#fff url(/mesh-program.svg) top / 100% 100% no-repeat", overflow: "hidden" }}>
@@ -57,14 +58,14 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
             <span className="tag" style={{ background: "#ECECEE" }}>{p.product_category}</span>
             <span className="tag" style={{ background: "#ECECEE" }}>{commissionLabel(p)}</span>
           </div>
-          <div style={{ marginTop: 36 }}>
-            <a href={p.program_url} target="_blank" rel="noopener noreferrer" style={{ display: "inline-block", background: "#0A0A0B", color: "#A8FF5C", fontWeight: 800, fontSize: 18, padding: "20px 36px", borderRadius: 12 }}>
+          <div style={{ marginTop: 36, display: "flex", gap: 10, flexWrap: "wrap", maxWidth: 800 }}>
+            <a href={p.program_url} target="_blank" rel="noopener noreferrer" style={{ display: "inline-block", background: "#0A0A0B", color: "#A8FF5C", fontWeight: 800, fontSize: 15, padding: "14px 24px", borderRadius: 10 }}>
               Visit the official program page
             </a>
-            <Link href={`/claim?listing=${p.slug}`} style={{ display: "inline-block", marginLeft: 12, border: "2px solid #0A0A0B", color: "#0A0A0B", fontWeight: 800, fontSize: 18, padding: "18px 30px", borderRadius: 12 }}>
+            <Link href={`/claim?listing=${p.slug}`} style={{ display: "inline-block", border: "2px solid #0A0A0B", color: "#0A0A0B", fontWeight: 800, fontSize: 15, padding: "12px 22px", borderRadius: 10 }}>
               Claim this listing
             </Link>
-            <Link href={`/report?listing=${p.slug}`} style={{ display: "inline-block", marginLeft: 12, border: "2px solid #0A0A0B", color: "#0A0A0B", fontWeight: 800, fontSize: 18, padding: "18px 30px", borderRadius: 12 }}>
+            <Link href={`/report?listing=${p.slug}`} style={{ display: "inline-block", border: "2px solid #0A0A0B", color: "#0A0A0B", fontWeight: 800, fontSize: 15, padding: "12px 22px", borderRadius: 10 }}>
               Report a correction
             </Link>
           </div>
@@ -74,12 +75,10 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
       <div style={{ position: "relative", color: "#0A0A0B", padding: "80px 0 96px" }}>
         <div className="wrap" style={{ display: "flex", gap: 40, alignItems: "flex-start", flexWrap: "wrap" }}>
           <div style={{ flex: "1 1 620px", minWidth: 0 }}>
-            {p.company_description && (
-              <section style={{ marginBottom: 64 }}>
-                <h2 style={{ fontWeight: 800, fontSize: 44, letterSpacing: "-0.04em" }}>About {p.company}</h2>
-                <p style={{ margin: "20px 0 0", maxWidth: 760, fontSize: 20, lineHeight: 1.6, fontWeight: 500 }}>{p.company_description}</p>
-              </section>
-            )}
+            <section style={{ marginBottom: 64 }}>
+              <h2 style={{ fontWeight: 800, fontSize: 44, letterSpacing: "-0.04em" }}>About {p.company}</h2>
+              <p style={{ margin: "20px 0 0", maxWidth: 760, fontSize: 20, lineHeight: 1.6, fontWeight: 500 }}>{companyDescription(p)}</p>
+            </section>
             {p.tiers.length > 0 && (
               <section>
                 <h2 style={{ fontWeight: 800, fontSize: 44, letterSpacing: "-0.04em" }}>Partner tiers</h2>
@@ -96,9 +95,14 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
             {p.benefits.length > 0 && (
               <section style={{ marginTop: 64 }}>
                 <h2 style={{ fontWeight: 800, fontSize: 44, letterSpacing: "-0.04em" }}>What partners get</h2>
-                <div style={{ marginTop: 20, display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))", gap: 14 }}>
+                <div style={{ marginTop: 20, display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(300px,1fr))", gap: 14 }}>
                   {p.benefits.map((b) => (
-                    <div key={b} className="card cut" style={{ fontSize: 18, fontWeight: 600, lineHeight: 1.4, minHeight: 120 }}>{b}</div>
+                    <div key={b} className="card cut" style={{ display: "flex", gap: 18, alignItems: "flex-start", minHeight: 110 }}>
+                      <span style={{ flex: "0 0 40px", height: 40, background: "#0A0A0B", borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                        <Glyph kind="diamond" fg="#A8FF5C" size={20} />
+                      </span>
+                      <span style={{ fontFamily: "'Archivo',sans-serif", fontWeight: 800, fontSize: 21, letterSpacing: "-0.02em", lineHeight: 1.25 }}>{b}</span>
+                    </div>
                   ))}
                 </div>
               </section>
@@ -106,25 +110,17 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
             {p.how_it_works && p.how_it_works.length > 0 && (
               <section style={{ marginTop: 64 }}>
                 <h2 style={{ fontWeight: 800, fontSize: 44, letterSpacing: "-0.04em" }}>How the program works</h2>
-                <div style={{ marginTop: 20, display: "flex", flexDirection: "column", gap: 14 }}>
+                <div style={{ marginTop: 16 }}>
                   {p.how_it_works.map((step, i) => (
-                    <div key={i} className="card cut" style={{ display: "flex", gap: 22, alignItems: "flex-start" }}>
-                      <div style={{ fontFamily: "'Archivo',sans-serif", fontWeight: 800, fontSize: 40, letterSpacing: "-0.04em", lineHeight: 1 }}>{String(i + 1).padStart(2, "0")}</div>
-                      <div style={{ fontSize: 18, fontWeight: 600, lineHeight: 1.45, paddingTop: 4 }}>{step}</div>
+                    <div key={i} style={{ display: "flex", gap: 28, alignItems: "center", padding: "18px 0", borderTop: i === 0 ? 0 : "2px solid #0A0A0B" }}>
+                      <div style={{ fontFamily: "'Archivo',sans-serif", fontWeight: 800, fontSize: 52, letterSpacing: "-0.04em", lineHeight: 1, flex: "0 0 80px" }}>{String(i + 1).padStart(2, "0")}</div>
+                      <div style={{ fontSize: 20, fontWeight: 700, lineHeight: 1.35 }}>{step}</div>
                     </div>
                   ))}
                 </div>
               </section>
             )}
-            <section style={{ marginTop: 64 }}>
-              <h2 style={{ fontWeight: 800, fontSize: 44, letterSpacing: "-0.04em" }}>Sources</h2>
-              <div className="card cut" style={{ marginTop: 20 }}>
-                <div style={{ fontSize: 15, fontWeight: 700, color: "#55565B" }}>Official program page</div>
-                <a href={p.program_url} target="_blank" rel="noopener noreferrer" style={{ display: "block", marginTop: 6, fontSize: 18, fontWeight: 800, textDecoration: "underline", wordBreak: "break-all" }}>{p.program_url}</a>
-                <p style={{ margin: "18px 0 0", fontSize: 16, color: "#3A3B40" }}>Information on this page comes from the public page above</p>
-                <Link href={`/report?listing=${p.slug}`} style={{ display: "inline-block", marginTop: 14, fontSize: 16, fontWeight: 800, textDecoration: "underline" }}>Report a correction</Link>
-              </div>
-            </section>
+
           </div>
 
           <aside className="facts cut" style={{ flex: "0 0 380px", maxWidth: "100%" }}>
@@ -136,9 +132,15 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
               <dt>Region</dt><dd>{p.region}</dd>
               <dt>Partner tiers</dt><dd>{p.tiers.length ? p.tiers.join(", ") : "Not published"}</dd>
               {p.requirements && (<><dt>Requirements</dt><dd>{p.requirements}</dd></>)}
-              <dt>Source</dt><dd><a href={p.program_url} target="_blank" rel="noopener noreferrer" style={{ color: "#A8FF5C", textDecoration: "underline" }}>{source}</a></dd>
+              
               <dt>Last verified</dt><dd>{verifiedLabel(p)}</dd>
             </dl>
+            <div style={{ marginTop: 28, paddingTop: 22, borderTop: "1px solid #3A3B40" }}>
+              <div style={{ fontSize: 14, color: "#85868B", fontWeight: 600 }}>Source</div>
+              <a href={p.program_url} target="_blank" rel="noopener noreferrer" style={{ display: "inline-block", marginTop: 4, fontSize: 18, fontWeight: 700, color: "#A8FF5C", textDecoration: "underline" }}>Official {p.company} partner program page</a>
+              <p style={{ margin: "18px 0 0", fontSize: 15, lineHeight: 1.5, color: "#B9BABD" }}>Information on this page comes from the public page above</p>
+              <Link href={`/report?listing=${p.slug}`} style={{ display: "block", marginTop: 16, background: "#A8FF5C", color: "#0A0A0B", fontWeight: 800, fontSize: 15, textAlign: "center", padding: "14px", borderRadius: 10 }}>Report a correction</Link>
+            </div>
           </aside>
         </div>
       </div>
@@ -176,7 +178,7 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
             "@type": "Organization",
             name: p.company,
             ...(p.domain ? { url: `https://${p.domain}` } : {}),
-            ...((p.company_description ?? p.description) ? { description: p.company_description ?? p.description } : {}),
+            description: companyDescription(p),
           }).replace(/</g, "\\u003c"),
         }}
       />
