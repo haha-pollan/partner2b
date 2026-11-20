@@ -154,7 +154,7 @@ export default async function DirectoryPage({ searchParams }: { searchParams: Pr
             <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
               {shown.map((p) => (
                 <Link key={p.id} href={`/directory/${p.slug}`} className="row cut">
-                  <Tile type={p.primary_type} />
+                  <Tile type={p.primary_type} domain={p.domain} />
                   <div style={{ flex: "1 1 0", minWidth: 0 }}>
                     <div style={{ fontFamily: "'Archivo',sans-serif", fontWeight: 800, fontSize: 30, letterSpacing: "-0.03em", lineHeight: 1.1, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
                       {p.company}{p.product_note ? <span style={{ fontSize: 16, fontWeight: 600, color: "#55565B", letterSpacing: 0, marginLeft: 10 }}>{p.product_note}</span> : null}

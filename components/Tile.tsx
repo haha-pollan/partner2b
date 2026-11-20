@@ -1,3 +1,5 @@
+import { LogoTile } from "./LogoTile";
+
 const TYPES: Record<string, { kind: string; bg: string; fg: string }> = {
   Reseller: { kind: "bars", bg: "#0A0A0B", fg: "#A8FF5C" },
   Referral: { kind: "diamond", bg: "#55565B", fg: "#FFFFFF" },
@@ -25,11 +27,13 @@ function Glyph({ kind, fg, size }: { kind: string; fg: string; size: number }) {
   }
 }
 
-export function Tile({ type, size = 88 }: { type: string; size?: number }) {
+export function Tile({ type, size = 88, domain }: { type: string; size?: number; domain?: string | null }) {
   const t = TYPES[type] ?? TYPES.Technology;
-  return (
+  const glyph = (
     <div style={{ flex: `0 0 ${size}px`, width: size, height: size, background: t.bg, display: "flex", alignItems: "center", justifyContent: "center", borderRadius: 14 }}>
       <Glyph kind={t.kind} fg={t.fg} size={Math.round(size * 0.62)} />
     </div>
   );
+  if (!domain) return glyph;
+  return <LogoTile domain={domain} size={size} fallback={glyph} />;
 }

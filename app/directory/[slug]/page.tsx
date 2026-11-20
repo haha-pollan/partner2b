@@ -46,7 +46,7 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
             <span>{p.product_category}</span><span>/</span><span>{p.company}</span>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 28, marginTop: 28, flexWrap: "wrap" }}>
-            <Tile type={p.primary_type} size={120} />
+            <Tile type={p.primary_type} size={120} domain={p.domain} />
             <h1 style={{ fontWeight: 800, fontSize: 92, lineHeight: 1, letterSpacing: "-0.05em" }}>{p.company}</h1>
           </div>
           {p.product_note && <div style={{ marginTop: 12, fontSize: 20, fontWeight: 700 }}>{p.product_note}</div>}
@@ -115,7 +115,7 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
             <div style={{ marginTop: 20, display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(300px,1fr))", gap: 14 }}>
               {related.map((r) => (
                 <Link key={r.id} href={`/directory/${r.slug}`} className="card cut" style={{ display: "block" }}>
-                  <Tile type={r.primary_type} size={64} />
+                  <Tile type={r.primary_type} size={64} domain={r.domain} />
                   <div style={{ marginTop: 14, fontFamily: "'Archivo',sans-serif", fontWeight: 800, fontSize: 26, letterSpacing: "-0.03em" }}>{r.company}</div>
                   <div style={{ marginTop: 6, fontSize: 15, color: "#3A3B40", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{r.description}</div>
                 </Link>
