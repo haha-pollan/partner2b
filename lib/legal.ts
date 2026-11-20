@@ -2,7 +2,7 @@
 export const LEGAL = {
   entity: "Bonobee Inc.",
   address: ["1111B South Governors Avenue, STE 99339", "Dover, DE 19904, United States"],
-  email: "privacy@partner2b.com",
+  email: "info@partner2b.com",
   updated: "November 20, 2026",
 };
 
