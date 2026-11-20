@@ -253,14 +253,14 @@ export default function Services() {
             </h2>
             <p style={{ margin: "22px 0 0", maxWidth: 440, fontSize: 19, lineHeight: 1.5, color: "#B9BABD" }}>Tell us where your B2B growth is stuck. We will tell you which step to start with.</p>
           </div>
-          <a href={MAIL} className="cut" style={{ flex: "0 0 400px", maxWidth: "100%", transform: "rotate(3deg)", background: "#A8FF5C", color: "#0A0A0B", padding: "28px 30px 32px", display: "block" }}>
+          <a href={MAIL} className="cut" style={{ flex: "0 0 400px", maxWidth: "100%", transform: "rotate(3deg)", background: "#17181B", color: "#ECECEE", padding: "28px 30px 32px", display: "block" }}>
             {["Company name", "Work email", "Where growth is stuck"].map((k) => (
               <div key={k} style={{ marginBottom: 14 }}>
-                <div style={{ fontSize: 13, fontWeight: 500 }}>{k}</div>
-                <div style={{ marginTop: 6, background: "#fff", border: "1.5px solid #0A0A0B", borderRadius: 8, height: 42 }} />
+                <div style={{ fontSize: 14, fontWeight: 400 }}>{k}</div>
+                <div style={{ marginTop: 6, background: "#1C1D20", border: "1px solid #2A2B2F", borderRadius: 10, height: 46 }} />
               </div>
             ))}
-            <div style={{ marginTop: 22, background: "#FF7A3D", color: "#0A0A0B", border: "1.5px solid #0A0A0B", boxShadow: "4px 4px 0 #0A0A0B", fontWeight: 400, fontFamily: "'Michroma',sans-serif", textAlign: "center", padding: "14px", borderRadius: 10 }}>Talk to us</div>
+            <div style={{ marginTop: 22, background: "#A8FF5C", color: "#0A0A0B", fontWeight: 400, fontFamily: "'Michroma',sans-serif", fontSize: 14, textAlign: "center", padding: "16px 30px", borderRadius: 12 }}>Talk to us</div>
           </a>
         </div>
       </section>
