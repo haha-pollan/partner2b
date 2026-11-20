@@ -18,7 +18,7 @@ h1,h2,h3{font-family:'Michroma',sans-serif;font-weight:400;margin:0}
 .side summary{cursor:pointer;font-family:'Michroma',sans-serif;font-weight:400;font-size:15px;letter-spacing:0;margin-bottom:8px}
 .side label{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:16px;font-weight:300;padding:6px 0;cursor:pointer}
 .side label span.l{display:flex;align-items:center;gap:12px}
-.side input[type=checkbox]{width:20px;height:20px;accent-color:#A8FF5C;margin:0}
+.side input[type=checkbox]{flex:0 0 20px;width:20px;height:20px;accent-color:#A8FF5C;margin:0}
 .side select{width:100%;background:#1C1D20;color:#ECECEE;border:0;border-radius:10px;padding:12px 14px;font:inherit;font-size:15px}
 .cnt{color:#85868B;font-weight:300}
 .chip{display:inline-flex;align-items:center;gap:8px;background:#0A0A0B;color:#A8FF5C;font-size:15px;font-weight:400;padding:9px 14px;border-radius:999px;white-space:nowrap}
