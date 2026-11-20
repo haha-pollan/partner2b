@@ -37,7 +37,7 @@ export default async function Home() {
 
   return (
     <div style={{ background: "#0A0A0B", overflow: "hidden" }}>
-      <div style={{ background: "#fff url(/mesh-program.svg) top / 100% 130% no-repeat" }}>
+      <div style={{ background: "#fff url(/mesh-program.svg) top / 100% 100% no-repeat" }}>
       {/* Hero */}
       <div style={{ position: "relative", overflow: "hidden", color: "#0A0A0B" }}>
         <div className="limepanel" />
@@ -104,7 +104,7 @@ export default async function Home() {
       </section>
 
       </div>
-      <div style={{ background: "#131416" }}>
+      <div>
       {/* What every listing shows */}
       <section style={{ padding: "40px 0 120px", color: "#ECECEE" }}>
         <div className="wrap">
