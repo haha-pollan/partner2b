@@ -26,7 +26,7 @@ export const GOALS: Goal[] = [
   { id: "embed", label: "Embed our product in partners' offerings", types: { "OEM or white label": 3, Technology: 2, Reseller: 1 }, features: ["Tiered benefits", "Partner portal", "Training"],
     kpis: ["Partners with a live embedded product", "End customers reached through partners", "Revenue per embedded partner"],
     action: "Write down what partners may rebrand, what stays yours and how usage is measured." },
-  { id: "retention", label: "Improve retention and expand accounts", types: { Services: 2, Technology: 2, MSP: 2 }, features: ["Training", "Tiered benefits", "Co-marketing funds"],
+  { id: "retention", label: "Improve retention and expand accounts", types: { Services: 2, Technology: 2, Referral: 1 }, features: ["Training", "Tiered benefits", "Co-marketing funds"],
     kpis: ["Retention of customers with a partner attached", "Expansion revenue from partner-managed accounts", "Number of accounts served by an active partner"],
     action: "Identify the customer segments where a partner already helps accounts stay and grow, and recruit more of that kind." },
 ];

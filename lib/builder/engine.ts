@@ -55,6 +55,7 @@ export function parseInput(raw: Record<string, unknown>): { ok: true; input: Bui
 }
 
 function recommendedTypes(i: BuilderInput) {
+  const group = groupOf(i.category);
   const w: Record<string, number> = {};
   const add = (t: string, n: number) => { w[t] = (w[t] ?? 0) + n; };
   const g1 = GOALS.find((g) => g.id === i.goal)!;
@@ -63,7 +64,7 @@ function recommendedTypes(i: BuilderInput) {
   if (g2) Object.entries(g2.types).forEach(([t, n]) => add(t, n * 0.5));
   Object.entries(CATEGORY_TYPE_BIAS[i.category] ?? {}).forEach(([t, n]) => add(t, n));
   if (i.audience === "Large enterprises") add("Services", 1);
-  if (i.audience === "Small businesses") { add("MSP", 1); add("Referral", 1); }
+  if (i.audience === "Small businesses") { add("Referral", 1); if (group === "infra") add("MSP", 1); }
   if (i.stage === "No partner program yet") add("Referral", 1);
   return Object.entries(w).filter(([t]) => TYPES.includes(t)).sort((a, b) => b[1] - a[1]).slice(0, 3);
 }
