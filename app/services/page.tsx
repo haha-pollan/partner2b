@@ -257,10 +257,10 @@ export default function Services() {
             {["Company name", "Work email", "Where growth is stuck"].map((k) => (
               <div key={k} style={{ marginBottom: 14 }}>
                 <div style={{ fontSize: 13, fontWeight: 500 }}>{k}</div>
-                <div style={{ marginTop: 6, background: "#0A0A0B", borderRadius: 8, height: 42 }} />
+                <div style={{ marginTop: 6, background: "#fff", border: "1.5px solid #0A0A0B", borderRadius: 8, height: 42 }} />
               </div>
             ))}
-            <div style={{ marginTop: 20, background: "#0A0A0B", color: "#A8FF5C", fontWeight: 400, fontFamily: "'Michroma',sans-serif", textAlign: "center", padding: "14px", borderRadius: 10 }}>Talk to us</div>
+            <div style={{ marginTop: 22, background: "#FF7A3D", color: "#0A0A0B", border: "1.5px solid #0A0A0B", boxShadow: "4px 4px 0 #0A0A0B", fontWeight: 400, fontFamily: "'Michroma',sans-serif", textAlign: "center", padding: "14px", borderRadius: 10 }}>Talk to us</div>
           </a>
         </div>
       </section>
