@@ -149,7 +149,7 @@ export default function Services() {
           <p style={{ margin: "18px 0 0", maxWidth: 620, fontSize: 18, lineHeight: 1.5, color: "#B9BABD" }}>
             From strategy and recruitment to enablement and co-marketing. One AI-first team runs your full partner marketing program.
           </p>
-          <div style={{ marginTop: 40, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 20 }}>
+          <div style={{ marginTop: 40, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))", gap: 20 }}>
             {SEGMENTS.map((g) => (
               <div key={g.t} className="cut" style={{ background: "#131416", border: "1px solid #2A2B2F", borderTop: "3px solid #A8FF5C", padding: "26px 28px 30px" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 14, minHeight: 44 }}>
