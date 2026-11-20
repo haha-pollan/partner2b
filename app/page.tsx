@@ -49,8 +49,9 @@ export default async function Home() {
               <span style={{ display: "block" }}>partner program</span>
               <span style={{ display: "block" }}>that fits</span>
             </h1>
-            <p style={{ margin: "24px 0 0", maxWidth: 560, fontSize: 21, lineHeight: 1.5, fontWeight: 300 }}>
-              A free directory of public partner programs. Every listing is built from public information and links to its source
+            <p style={{ margin: "24px 0 0", maxWidth: "100%", fontSize: 21, lineHeight: 1.5, fontWeight: 300 }}>
+              <span style={{ display: "block" }}>A free directory of public partner programs.</span>
+              <span style={{ display: "block" }}>Every listing is built from public information and links to its source</span>
             </p>
             <form method="get" action="/directory" className="search" role="search">
               <label htmlFor="q" style={{ position: "absolute", left: -9999 }}>Search programs or companies</label>
