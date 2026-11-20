@@ -6,9 +6,10 @@ export function Footer() {
     <footer style={{ background: "#0A0A0B", color: "#ECECEE", position: "relative", overflow: "hidden", minHeight: 380 }}>
       <div className="bigword" aria-hidden="true">Partner2B</div>
       <div style={{ position: "relative", maxWidth: 1360, margin: "0 auto", padding: "48px 40px 0", display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 32, flexWrap: "wrap" }}>
-        <Logo variant="light" />
+        <Link href="/" aria-label="Partner2B home"><Logo variant="light" /></Link>
         <div style={{ display: "flex", gap: 28, flexWrap: "wrap", fontSize: 16, fontWeight: 600 }}>
           <Link href="/directory">Directory</Link>
+          <Link href="/blog">Blog</Link>
           <Link href="/privacy">Privacy</Link>
           <Link href="/terms">Terms</Link>
         </div>

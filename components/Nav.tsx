@@ -9,6 +9,7 @@ export function Nav() {
       </Link>
       <nav className="navlinks">
         <Link href="/directory">Directory</Link>
+        <Link href="/blog">Blog</Link>
         <Link href="/directory" className="navcta">Browse directory</Link>
       </nav>
     </div>

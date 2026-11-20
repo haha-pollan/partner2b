@@ -9,7 +9,7 @@ const TYPES: Record<string, { kind: string; bg: string; fg: string }> = {
   "OEM or white label": { kind: "stairs", bg: "#3A3B40", fg: "#A8FF5C" },
 };
 
-function Glyph({ kind, fg, size }: { kind: string; fg: string; size: number }) {
+export function Glyph({ kind, fg, size }: { kind: string; fg: string; size: number }) {
   const common = { width: size, height: size, viewBox: "0 0 120 120", "aria-hidden": true } as const;
   switch (kind) {
     case "bars":

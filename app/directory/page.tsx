@@ -4,7 +4,7 @@ import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { Tile } from "@/components/Tile";
 import { AutoForm } from "./AutoForm";
-import { getPrograms, commissionLabel, verifiedLabel, type Program } from "@/lib/programs";
+import { getPrograms, commissionLabel, type Program } from "@/lib/programs";
 
 export const revalidate = 600;
 export const metadata: Metadata = {
@@ -166,12 +166,12 @@ export default async function DirectoryPage({ searchParams }: { searchParams: Pr
                     <div style={{ marginTop: 10, fontSize: 16, color: "#3A3B40", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{p.description}</div>
                     <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "nowrap", overflow: "hidden" }}>
                       <span className="tag">{p.product_category}</span>
-                      <span className="tag">{commissionLabel(p)}</span>
+                      {p.commission_models.some((c) => c !== "Not published") && <span className="tag">{commissionLabel(p)}</span>}
                       {p.feature_tags.find((x) => FEATURES.includes(x)) && <span className="tag">{p.feature_tags.find((x) => FEATURES.includes(x))}</span>}
                     </div>
                   </div>
-                  <div className="rowmeta" style={{ flex: "0 0 150px", fontSize: 14, color: "#55565B", fontWeight: 600, lineHeight: 1.5 }}>Commission<div style={{ fontSize: 17, color: "#0A0A0B", fontWeight: 800 }}>{commissionLabel(p)}</div></div>
-                  <div className="rowmeta" style={{ flex: "0 0 90px", fontSize: 14, color: "#55565B", fontWeight: 600, lineHeight: 1.5 }}>Verified<div style={{ fontSize: 17, color: "#0A0A0B", fontWeight: 800 }}>{verifiedLabel(p)}</div></div>
+                  <div className="rowmeta" style={{ flex: "0 0 170px", fontSize: 14, color: "#55565B", fontWeight: 600, lineHeight: 1.5 }}>Program types<div style={{ fontSize: 17, color: "#0A0A0B", fontWeight: 800 }}>{p.program_types.slice(0, 2).join(", ")}{p.program_types.length > 2 ? ` +${p.program_types.length - 2}` : ""}</div></div>
+                  <div className="rowmeta" style={{ flex: "0 0 110px", fontSize: 14, color: "#55565B", fontWeight: 600, lineHeight: 1.5 }}>Partner tiers<div style={{ fontSize: 17, color: "#0A0A0B", fontWeight: 800 }}>{p.tiers.length > 0 ? `${p.tiers.length} ${p.tiers.length === 1 ? "tier" : "tiers"}` : "Not listed"}</div></div>
                   <div className="arrow">→</div>
                 </Link>
               ))}
