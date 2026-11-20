@@ -113,7 +113,8 @@ p{text-wrap:pretty}
   .sidewrap .filtbtn{padding:20px 22px}
   .sidewrap .sidebody{padding:6px 20px 28px}
   .sidewrap.open .filtbtn{border-bottom:1px solid #2A2B2F;margin-bottom:12px}
-  .row{padding:18px 18px 22px 18px;gap:14px}
+  .row{padding:18px 18px 24px 18px;gap:14px;flex-direction:column;align-items:flex-start}
+  .row>div{width:100%}
   .row .arrow{display:none}
   .desc{-webkit-line-clamp:3}
   .facts{padding:26px 22px 32px}
