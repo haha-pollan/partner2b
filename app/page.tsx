@@ -103,6 +103,7 @@ export default async function Home() {
         </div>
       </section>
 
+      <div style={{ background: "rgba(10,10,11,0.5)" }}>
       {/* What every listing shows */}
       <section style={{ padding: "40px 0 120px", color: "#ECECEE" }}>
         <div className="wrap">
@@ -172,6 +173,7 @@ export default async function Home() {
         </div>
       </section>
 
+      </div>
       </div>
       <Footer />
     </div>
