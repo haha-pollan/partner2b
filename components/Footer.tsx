@@ -9,6 +9,7 @@ export function Footer() {
         <Link href="/" aria-label="Partner2B home"><Logo variant="light" /></Link>
         <div style={{ display: "flex", gap: 28, flexWrap: "wrap", fontSize: 16, fontWeight: 600 }}>
           <Link href="/directory">Directory</Link>
+          <Link href="/services">Services</Link>
           <Link href="/blog">Blog</Link>
           <Link href="/submit">Submit a program</Link>
           <Link href="/privacy">Privacy</Link>

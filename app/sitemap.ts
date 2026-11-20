@@ -5,6 +5,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const all = await getPrograms();
   return [
     { url: "https://partner2b.com/directory" },
+    { url: "https://partner2b.com/services" },
     { url: "https://partner2b.com/privacy" },
     { url: "https://partner2b.com/submit" },
     { url: "https://partner2b.com/claim" },
