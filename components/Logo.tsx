@@ -4,13 +4,13 @@ export function Logo({ variant = "dark", size = 28 }: { variant?: "dark" | "ligh
   const cube = Math.round(size * 1.55);
   const onLime = variant === "dark";
   return (
-    <span style={{ display: "inline-flex", alignItems: "center", gap: 12 }}>
-      <svg width={cube} height={cube} viewBox="0 0 60 60" aria-hidden="true" style={{ display: "block", flex: "0 0 auto" }}>
+    <span className="logo" style={{ display: "inline-flex", alignItems: "center", gap: 12 }}>
+      <svg className="logo-cube" width={cube} height={cube} viewBox="0 0 60 60" aria-hidden="true" style={{ display: "block", flex: "0 0 auto" }}>
         {CUBE[variant].map(([pts, fill], i) => (
           <polygon key={i} points={pts} fill={fill} stroke={fill} strokeWidth="0.6" />
         ))}
       </svg>
-      <span style={{ fontFamily: "'Zen Dots', sans-serif", fontWeight: 300, fontSize: size, letterSpacing: "-0.03em", lineHeight: 1, color: onLime ? "#0A0A0B" : "#ECECEE" }}>
+      <span className="logo-text" style={{ fontFamily: "'Zen Dots', sans-serif", fontWeight: 300, fontSize: size, letterSpacing: "-0.03em", lineHeight: 1, color: onLime ? "#0A0A0B" : "#ECECEE" }}>
         Partner
         <span style={onLime ? { color: "#A8FF5C", background: "#0A0A0B", padding: "3px 9px 4px", marginLeft: 5 } : { color: "#A8FF5C" }}>2B</span>
       </span>
