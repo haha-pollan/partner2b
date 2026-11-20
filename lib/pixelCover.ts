@@ -46,99 +46,118 @@ function rng(seed: number) {
 }
 type Layer = [string, Cell[]];
 
-type Tpl = { tag: string; accent: string; layers: (r: () => number) => Layer[] };
+type Tpl = { tag: string; layers: (r: () => number, a: string) => Layer[] };
+const ACCENTS = ["#4FD6E8", "#FF7A3D", "#8B7BFF", "#FF4FA3", "#FFD23F", "#5B8CFF", "#3DDBB0", "#FF5C5C"];
+const ri = (r: () => number, lo: number, hi: number) => lo + Math.floor(r() * (hi - lo + 1));
+const keyOf = (c: Cell) => c[0] + "," + c[1];
 
 const TEMPLATES: Tpl[] = [
-  {
-    tag: "Partner ecosystems", accent: "#4FD6E8",
-    layers: () => {
-      const cx = 16, cy = 8, a = "#4FD6E8";
-      const sats: Cell[] = [[22, 3], [23, 10], [20, 13], [10, 12], [9, 5], [15, 3], [5, 8]];
+  { // network: hub with satellites
+    tag: "Partner ecosystems",
+    layers: (r, a) => {
+      const cx = ri(r, 11, 17), cy = ri(r, 6, 9), n = ri(r, 5, 9);
+      const sats: Cell[] = [];
+      for (let k = 0; k < n; k++) {
+        const ang = (k / n) * Math.PI * 2 + r() * 0.6, d = 4 + r() * 6;
+        sats.push([Math.max(2, Math.min(W - 3, Math.round(cx + Math.cos(ang) * d * 1.5))), Math.max(3, Math.min(H - 3, Math.round(cy + Math.sin(ang) * d * 0.8)))]);
+      }
       const L: Cell[] = [], N: Cell[] = [];
       sats.forEach(([x, y]) => L.push(...line(cx, cy, x, y)));
-      [[[22, 3], [23, 10]], [[9, 5], [15, 3]], [[10, 12], [5, 8]]].forEach(([p, q]) => L.push(...line(p[0], p[1], q[0], q[1])));
-      sats.forEach(([x, y]) => N.push(...blk(x - 1, y - 1)));
-      return [[mix(BG, a, 0.45), L], [a, N], [mix(BG, LIME, 0.7), ring(cx, cy, 3.6, 0.55)], [LIME, ring(cx, cy, 2.0, 0.9, true)]];
+      for (let k = 0; k < n - 1; k += ri(r, 1, 2)) L.push(...line(sats[k][0], sats[k][1], sats[k + 1][0], sats[k + 1][1]));
+      sats.forEach(([x, y]) => N.push(...blk(x - 1, y - 1, r() < 0.4 ? 3 : 2, r() < 0.4 ? 3 : 2)));
+      return [[mix(BG, a, 0.45), L], [a, N], [mix(BG, LIME, 0.7), ring(cx, cy, 3.6, 0.55)], [LIME, ring(cx, cy, ri(r, 15, 22) / 10, 0.9, true)]];
     },
   },
-  {
-    tag: "Co-selling", accent: "#FF7A3D",
-    layers: () => {
-      const a = ring(11, 8, 4.6, 0.8), b = ring(16, 7, 4.6, 0.8), O = "#FF7A3D";
-      const key = (c: Cell) => c[0] + "," + c[1];
-      const ka = new Set(a.map(key)), kb = new Set(b.map(key));
-      const ov = a.filter((c) => kb.has(key(c)));
-      return [[LIME, a.filter((c) => !kb.has(key(c)))], [O, b.filter((c) => !ka.has(key(c)))], ["#ECECEE", ov], [mix(BG, LIME, 0.5), ring(11, 8, 2.2, 0.7)], [mix(BG, O, 0.5), ring(16, 7, 2.2, 0.7)]];
+  { // overlapping rings
+    tag: "Co-selling",
+    layers: (r, a) => {
+      const n = ri(r, 2, 3), cs: [number, number, number][] = [];
+      for (let k = 0; k < n; k++) cs.push([ri(r, 8, 18) + k * 2, ri(r, 5, 9), ri(r, 33, 55) / 10]);
+      const sets = cs.map((c) => ring(c[0], c[1], c[2], 0.8));
+      const cnt = new Map<string, number>();
+      sets.forEach((s) => s.forEach((c) => cnt.set(keyOf(c), (cnt.get(keyOf(c)) ?? 0) + 1)));
+      const cols = [LIME, a, LIME];
+      const layers: Layer[] = sets.map((s, k) => [cols[k], s.filter((c) => cnt.get(keyOf(c)) === 1)] as Layer);
+      layers.push(["#ECECEE", [...cnt.entries()].filter(([, v]) => v > 1).map(([k]) => k.split(",").map(Number) as Cell)]);
+      cs.forEach((c, k) => layers.push([mix(BG, k % 2 ? a : LIME, 0.5), ring(c[0], c[1], 1.8, 0.7)]));
+      return layers;
     },
   },
-  {
-    tag: "Marketplace", accent: "#8B7BFF",
-    layers: () => {
-      const V = "#8B7BFF", dim: Cell[] = [], vi: Cell[] = [], li: Cell[] = [];
-      const pos: Cell[] = [[3, 4], [7, 4], [11, 4], [15, 4], [19, 4], [3, 8], [7, 8], [11, 8], [15, 8], [19, 8], [7, 12], [11, 12], [15, 12], [19, 12], [3, 12]];
-      pos.forEach(([x, y], i) => {
-        const k = i % 5, t = blk(x, y, 3, y === 12 ? 2 : 3);
-        if (k === 0 || k === 3) li.push(...t); else if (k === 1 || k === 4) vi.push(...t); else dim.push(...t);
-      });
-      const path: Cell[] = [];
-      [[[4, 5], [8, 9]], [[8, 9], [12, 13]], [[12, 13], [16, 9]], [[16, 9], [20, 5]]].forEach(([p, q]) => path.push(...line(p[0], p[1], q[0], q[1])));
-      return [[mix(BG, "#3A3B40", 0.7), dim], [mix(BG, V, 0.55), vi], [mix(BG, LIME, 0.55), li], ["#ECECEE", path]];
-    },
-  },
-  {
-    tag: "Pipeline", accent: "#FF4FA3",
-    layers: (r) => {
-      const P = "#FF4FA3", dots: Cell[] = [], fun: Cell[] = [];
-      for (let i = 0; i < 22; i++) dots.push([1 + Math.floor(r() * 8), 4 + Math.floor(r() * 10)]);
-      for (let x = 9; x < 17; x++) {
-        const t = (x - 9) / 7, half = Math.round(6 * (1 - t) + 1 * t);
-        fun.push([x, 7 - half], [x, 7 + half]);
+  { // marketplace tiles
+    tag: "Marketplace",
+    layers: (r, a) => {
+      const dim: Cell[] = [], vi: Cell[] = [], li: Cell[] = [], path: Cell[] = [];
+      const cols = ri(r, 4, 6), rows = ri(r, 2, 3), tw = ri(r, 2, 3), gap = tw + 1;
+      const x0 = ri(r, 2, 4), y0 = ri(r, 3, 4);
+      const picks: Cell[] = [];
+      for (let i = 0; i < cols; i++) for (let j = 0; j < rows; j++) {
+        const x = x0 + i * gap, y = y0 + j * (tw + 1);
+        if (x + tw > W - 1 || y + tw > H - 1 || r() < 0.12) continue;
+        const t = blk(x, y, tw, tw), q = r();
+        if (q < 0.34) li.push(...t); else if (q < 0.68) vi.push(...t); else dim.push(...t);
+        picks.push([x + 1, y + 1]);
       }
-      fun.push(...line(17, 7, 22, 7));
-      return [[mix(BG, "#85868B", 0.8), dots], [mix(BG, P, 0.5), fun], [LIME, line(9, 7, 17, 7)], [P, blk(21, 5, 4, 4)], [LIME, blk(23, 6, 2, 2)]];
+      for (let k = 0; k < picks.length - 1; k += 2) path.push(...line(picks[k][0], picks[k][1], picks[k + 1][0], picks[k + 1][1]));
+      return [[mix(BG, "#3A3B40", 0.7), dim], [mix(BG, a, 0.55), vi], [mix(BG, LIME, 0.55), li], ["#ECECEE", path]];
     },
   },
-  {
-    tag: "Partner tiers", accent: "#FFD23F",
-    layers: () => {
-      const Y = "#FFD23F", st: Cell[] = [], sd: Cell[] = [];
-      for (let i = 0; i < 6; i++) for (let x = 2 + 3 * i; x < 5 + 3 * i; x++) {
-        for (let j = 0; j < 2; j++) st.push([x, 12 - 2 * i - j]);
-        for (let y = 13 - 2 * i; y < 15; y++) sd.push([x, y]);
+  { // pipeline funnel
+    tag: "Pipeline",
+    layers: (r, a) => {
+      const dots: Cell[] = [], fun: Cell[] = [];
+      const n = ri(r, 14, 30), fx = ri(r, 7, 10), fl = ri(r, 7, 10), cy = ri(r, 6, 8), h0 = ri(r, 4, 6);
+      for (let i = 0; i < n; i++) dots.push([ri(r, 1, fx - 1), ri(r, 3, H - 2)]);
+      for (let x = fx; x < fx + fl; x++) {
+        const t = (x - fx) / (fl - 1), half = Math.round(h0 * (1 - t) + 1 * t);
+        fun.push([x, cy - half], [x, cy + half]);
       }
-      return [[mix(BG, LIME, 0.45), sd], [LIME, st.filter((c) => c[0] < 17)], [Y, st.filter((c) => c[0] >= 17)], [Y, [[21, 0], [22, 0]]]];
+      const ex = fx + fl;
+      fun.push(...line(ex, cy, W - 4, cy));
+      return [[mix(BG, "#85868B", 0.8), dots], [mix(BG, a, 0.5), fun], [LIME, line(fx, cy, ex, cy)], [a, blk(W - 5, cy - 2, 4, 4)], [LIME, blk(W - 3, cy - 1, 2, 2)]];
     },
   },
-  {
-    tag: "Ecosystem", accent: "#5B8CFF",
-    layers: () => {
-      const B = "#5B8CFF";
-      const sat = [...blk(19, 3), ...blk(8, 10), ...blk(13, 12, 1, 1), ...blk(11, 2)];
-      return [[mix(BG, B, 0.4), ring(14, 8, 6, 0.7)], [mix(BG, LIME, 0.4), ring(14, 8, 3.4, 0.7)], [LIME, blk(13, 7)], [B, sat], ["#ECECEE", [...blk(19, 3, 1, 1), ...blk(8, 10, 1, 1)]]];
+  { // tier stairs
+    tag: "Partner tiers",
+    layers: (r, a) => {
+      const steps = ri(r, 4, 7), sw = ri(r, 2, 4), sh = ri(r, 1, 2), x0 = ri(r, 1, 4);
+      const st: Cell[] = [], sd: Cell[] = [];
+      for (let i = 0; i < steps; i++) for (let x = x0 + sw * i; x < x0 + sw * (i + 1); x++) {
+        if (x >= W) continue;
+        const top = H - 3 - sh * (i + 1);
+        for (let y = top; y < top + sh; y++) st.push([x, y]);
+        for (let y = top + sh; y < H; y++) sd.push([x, y]);
+      }
+      const cut = x0 + sw * Math.max(1, steps - ri(r, 1, 2));
+      return [[mix(BG, LIME, 0.45), sd], [LIME, st.filter((c) => c[0] < cut)], [a, st.filter((c) => c[0] >= cut)], [a, [[W - 5, 1], [W - 4, 1], [W - 5, 2], [W - 4, 2]]]];
+    },
+  },
+  { // orbits
+    tag: "Ecosystem",
+    layers: (r, a) => {
+      const cx = ri(r, 11, 17), cy = ri(r, 6, 9), r1 = ri(r, 55, 70) / 10, r2 = ri(r, 28, 40) / 10;
+      const sat: Cell[] = [], dots: Cell[] = [];
+      const on = (rad: number): Cell => {
+        const ang = r() * Math.PI * 2;
+        return [Math.round(cx + Math.cos(ang) * rad * 1.5), Math.round(cy + Math.sin(ang) * rad * 0.9)];
+      };
+      const ns = ri(r, 2, 4), nd = ri(r, 1, 3);
+      for (let k = 0; k < ns; k++) { const p = on(r1); sat.push(...blk(p[0], p[1], 2, 2)); }
+      for (let k = 0; k < nd; k++) { const p = on(r2); dots.push(...blk(p[0], p[1], 1, 1)); }
+      return [[mix(BG, a, 0.4), ring(cx, cy, r1, 0.7)], [mix(BG, LIME, 0.4), ring(cx, cy, r2, 0.7)], [LIME, blk(cx - 1, cy - 1)], [a, sat], ["#ECECEE", dots]];
     },
   },
 ];
-
-// pick a template by topic words in the title, otherwise rotate by position
-export function templateIndex(title: string, i: number) {
-  const t = title.toLowerCase();
-  if (/marketplace/.test(t)) return 2;
-  if (/co-market|co-sell|mdf|market development/.test(t)) return 1;
-  if (/pipeline|lead|kpi|metric|funnel|sales growth|revops/.test(t)) return 3;
-  if (/program|tier|value proposition|strategy|playbook|skills/.test(t)) return 4;
-  if (/network|ecosystem/.test(t)) return 0;
-  return i % TEMPLATES.length;
-}
 
 export function buildCover(slug: string, title: string, i: number) {
   let h = 0;
   for (const c of slug) h = (h * 31 + c.charCodeAt(0)) >>> 0;
   const r = rng(h);
-  const tpl = TEMPLATES[templateIndex(title, i)];
+  const tpl = TEMPLATES[i % TEMPLATES.length];
+  const accent = ACCENTS[(i + Math.floor(i / TEMPLATES.length)) % ACCENTS.length];
   const bg = new Map<string, string>();
   for (let x = 0; x < W; x++) for (let y = 0; y < H; y++) if (r() < 0.3) bg.set(x + "," + y, mix(BG, "#3A3B40", 0.18 + r() * 0.3));
   const fg = new Map<string, string>();
-  tpl.layers(r).forEach(([col, cells]) => cells.forEach(([x, y]) => { if (x >= 0 && x < W && y >= 0 && y < H) fg.set(x + "," + y, col); }));
+  tpl.layers(r, accent).forEach(([col, cells]) => cells.forEach(([x, y]) => { if (x >= 0 && x < W && y >= 0 && y < H) fg.set(x + "," + y, col); }));
   const groups = new Map<string, string>();
   const add = (k: string, col: string) => {
     const [x, y] = k.split(",").map(Number);
@@ -146,5 +165,5 @@ export function buildCover(slug: string, title: string, i: number) {
   };
   bg.forEach((col, k) => { if (!fg.has(k)) add(k, col); });
   fg.forEach((col, k) => add(k, col));
-  return { paths: [...groups.entries()].map(([fill, d]) => ({ fill, d })), tag: tpl.tag, accent: tpl.accent };
+  return { paths: [...groups.entries()].map(([fill, d]) => ({ fill, d })), tag: tpl.tag, accent };
 }
