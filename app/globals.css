@@ -15,12 +15,12 @@ h1,h2,h3{font-family:'Michroma',sans-serif;font-weight:400;margin:0}
 .search button{background:#A8FF5C;color:#0A0A0B;font-family:'Michroma',sans-serif;font-weight:400;font-size:14px;padding:16px 30px;border:0;border-radius:10px;cursor:pointer}
 .side{flex:0 0 300px;align-self:flex-start;background:#0A0A0B;color:#ECECEE;padding:30px 28px 40px}
 .side details{border-top:1px solid #3A3B40;padding:16px 0 14px}
-.side summary{cursor:pointer;font-family:'Michroma',sans-serif;font-weight:400;font-size:13px;letter-spacing:0;margin-bottom:8px}
-.side label{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:14px;font-weight:300;padding:5px 0;cursor:pointer}
+.side summary{cursor:pointer;font-family:'Michroma',sans-serif;font-weight:400;font-size:12px;letter-spacing:0;margin-bottom:6px}
+.side label{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:13px;font-weight:300;padding:4px 0;cursor:pointer}
 .side label span.l{display:flex;align-items:center;gap:12px}
-.side input[type=checkbox]{flex:0 0 18px;width:18px;height:18px;accent-color:#A8FF5C;margin:0}
-.side select{width:100%;background:#1C1D20;color:#ECECEE;border:0;border-radius:10px;padding:12px 14px;font:inherit;font-size:14px}
-.cnt{color:#85868B;font-weight:300}
+.side input[type=checkbox]{flex:0 0 16px;width:16px;height:16px;accent-color:#A8FF5C;margin:0}
+.side select{width:100%;background:#1C1D20;color:#ECECEE;border:0;border-radius:10px;padding:11px 14px;font:inherit;font-size:13px}
+.cnt{color:#85868B;font-weight:300;font-size:12px}
 .chip{display:inline-flex;align-items:center;gap:8px;background:#0A0A0B;color:#A8FF5C;font-size:15px;font-weight:400;padding:9px 14px;border-radius:999px;white-space:nowrap}
 .row{display:flex;align-items:center;gap:24px;background:#ECECEE;color:#0A0A0B;padding:22px 40px 22px 22px}
 .row:hover{background:#fff}
