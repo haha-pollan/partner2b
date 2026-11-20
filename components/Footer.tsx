@@ -9,7 +9,7 @@ export function Footer() {
         <div style={{ maxWidth: 340 }}>
           <Link href="/" aria-label="Partner2B home"><Logo variant="light" /></Link>
           <p style={{ margin: "18px 0 0", fontSize: 14, lineHeight: 1.6, fontWeight: 300, color: "#B9BABD" }}>
-            Free directory of public B2B partner programs. Every listing is built from public information and links to its official source.
+            Free directory of B2B partner programs. Every listing links to its official source.
           </p>
         </div>
         <div style={{ display: "flex", gap: 28, flexWrap: "wrap", fontSize: 16, fontWeight: 400 }}>
