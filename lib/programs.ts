@@ -20,8 +20,8 @@ export type Program = {
 
 // The publishable key is designed to be public. Row level security in Supabase
 // lets it read published programs only.
-const URL = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "https://lfqtbjlanbrodvvcodjq.supabase.co";
-const KEY = process.env.NEXT_PUBLIC_SUPABASE_KEY ?? "sb_publishable_jKho5opr89qNGDzkBUhy_w_gAPZmmQO";
+export const URL = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "https://lfqtbjlanbrodvvcodjq.supabase.co";
+export const KEY = process.env.NEXT_PUBLIC_SUPABASE_KEY ?? "sb_publishable_jKho5opr89qNGDzkBUhy_w_gAPZmmQO";
 
 const COLS =
   "id,slug,company,product_note,product_category,program_types,primary_type,commission_models,feature_tags,region,program_url,domain,description,tiers,benefits,verification_status,verified_at";

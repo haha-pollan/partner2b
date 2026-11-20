@@ -61,6 +61,12 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
             <a href={p.program_url} target="_blank" rel="noopener noreferrer" style={{ display: "inline-block", background: "#0A0A0B", color: "#A8FF5C", fontWeight: 800, fontSize: 18, padding: "20px 36px", borderRadius: 12 }}>
               Visit the official program page
             </a>
+            <Link href={`/claim?listing=${p.slug}`} style={{ display: "inline-block", marginLeft: 12, border: "2px solid #0A0A0B", color: "#0A0A0B", fontWeight: 800, fontSize: 18, padding: "18px 30px", borderRadius: 12 }}>
+              Claim this listing
+            </Link>
+            <Link href={`/report?listing=${p.slug}`} style={{ display: "inline-block", marginLeft: 12, border: "2px solid #0A0A0B", color: "#0A0A0B", fontWeight: 800, fontSize: 18, padding: "18px 30px", borderRadius: 12 }}>
+              Report a correction
+            </Link>
           </div>
         </div>
       </div>

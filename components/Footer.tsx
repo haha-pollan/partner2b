@@ -10,6 +10,7 @@ export function Footer() {
         <div style={{ display: "flex", gap: 28, flexWrap: "wrap", fontSize: 16, fontWeight: 600 }}>
           <Link href="/directory">Directory</Link>
           <Link href="/blog">Blog</Link>
+          <Link href="/submit">Submit a program</Link>
           <Link href="/privacy">Privacy</Link>
           <Link href="/terms">Terms</Link>
         </div>
