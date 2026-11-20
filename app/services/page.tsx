@@ -8,7 +8,7 @@ import { Glyph } from "@/components/Tile";
 export const metadata: Metadata = {
   title: "Partner2B Services: B2B go-to-market and partner ecosystems",
   description:
-    "Get your go-to-market ready, fill the pipeline and run partner operations. Partner ecosystem services for B2B vendors in AI, SaaS, fintech and cybersecurity.",
+    "GTM, partner recruitment, enablement, co-marketing and partner operations for B2B vendors in AI, SaaS, fintech and cybersecurity. Grow through partner ecosystems.",
   alternates: { canonical: "/services" },
 };
 

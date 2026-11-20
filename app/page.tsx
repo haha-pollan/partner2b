@@ -8,7 +8,7 @@ import { getPrograms } from "@/lib/programs";
 export const revalidate = 600;
 export const metadata: Metadata = {
   title: "Partner2B Directory: find the B2B partner program that fits",
-  description: "Free directory of B2B partner programs. Compare reseller, referral, technology, services and MSP programs, each linked to its official source.",
+  description: "Free B2B partner program directory. Compare reseller, referral, technology, MSP and white label programs, partner tiers, commissions and requirements.",
   alternates: { canonical: "/" },
 };
 

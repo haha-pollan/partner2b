@@ -4,7 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL("https://partner2b.com"),
   title: "Partner2B Directory: B2B partner programs",
-  description: "Free directory of B2B partner programs. Every listing links to its official source.",
+  description: "Free directory of B2B partner programs and channel partner programs. Compare reseller, referral and technology programs, tiers and commissions.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
