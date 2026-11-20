@@ -99,8 +99,8 @@ export const TERMS: Section[] = [
   {
     h: "Where the information comes from",
     p: [
-      "Listings are compiled from information that companies make public, mainly the official pages of their partner programs. We link to the source on each listing.",
-      "Programs change often. Commission rates, tiers, requirements and availability may be out of date. Always confirm details with the company before you decide anything. A listing marked as not yet verified has not been confirmed by the company.",
+      "Listings are compiled from information that companies make public, mainly the official pages of their partner programs. We link to the source on each listing. All information in the directory comes from public sources. Partner2B does not independently verify it.",
+      "Programs change often. Commission rates, tiers, requirements and availability may be out of date. Always confirm details with the company before you decide anything.",
     ],
   },
   {

@@ -6,7 +6,7 @@ import { Footer } from "@/components/Footer";
 import { Tile } from "@/components/Tile";
 import { companyDescription } from "@/lib/describe";
 import { Glyph } from "@/components/Tile";
-import { getPrograms, getProgram, commissionLabel, verifiedLabel } from "@/lib/programs";
+import { getPrograms, getProgram, commissionLabel } from "@/lib/programs";
 
 export const revalidate = 600;
 
@@ -133,7 +133,6 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
               <dt>Partner tiers</dt><dd>{p.tiers.length ? p.tiers.join(", ") : "Not published"}</dd>
               {p.requirements && (<><dt>Requirements</dt><dd>{p.requirements}</dd></>)}
               
-              <dt>Last verified</dt><dd>{verifiedLabel(p)}</dd>
             </dl>
             <div style={{ marginTop: 28, paddingTop: 22, borderTop: "1px solid #3A3B40" }}>
               <div style={{ fontSize: 14, color: "#85868B", fontWeight: 600 }}>Source</div>

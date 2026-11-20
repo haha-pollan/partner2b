@@ -50,7 +50,7 @@ export default async function Home() {
               <span style={{ display: "block" }}>that fits</span>
             </h1>
             <p style={{ margin: "24px 0 0", maxWidth: 560, fontSize: 21, lineHeight: 1.5, fontWeight: 500 }}>
-              A free directory of public partner programs. Every listing links to its source and shows when it was last verified
+              A free directory of public partner programs. Every listing is built from public information and links to its source
             </p>
             <form method="get" action="/directory" className="search" role="search">
               <label htmlFor="q" style={{ position: "absolute", left: -9999 }}>Search programs or companies</label>
@@ -120,7 +120,7 @@ export default async function Home() {
                 <span style={{ fontFamily: "'Archivo',sans-serif", fontWeight: 800, fontSize: 28, letterSpacing: "-0.03em" }}>[Company name]</span>
                 <span className="pill" style={{ background: "#A8FF5C", color: "#0A0A0B" }}>Reseller program</span>
               </div>
-              {[["Commission", "[Published rate]"], ["Region", "[Region]"], ["Source", "[Official program page]"], ["Verified", "[Date]"]].map(([k, v]) => (
+              {[["Commission", "[Published rate]"], ["Region", "[Region]"], ["Source", "[Official program page]"]].map(([k, v]) => (
                 <div key={k} style={{ display: "flex", justifyContent: "space-between", borderTop: "1px solid #3A3B40", padding: "14px 0", fontSize: 16 }}>
                   <span style={{ color: "#85868B" }}>{k}</span><span style={{ fontWeight: 700 }}>{v}</span>
                 </div>
@@ -132,7 +132,6 @@ export default async function Home() {
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 56, alignItems: "flex-start" }}>
               <span style={label}>Link to the source</span>
-              <span style={label}>Date last verified</span>
               <span style={label}>Apply on the official page</span>
             </div>
           </div>

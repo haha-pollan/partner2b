@@ -15,6 +15,9 @@ const CAT: Record<string, string> = {
   "Customer service and contact center": "customer service and contact center software",
   "Conversational and voice AI": "conversational and voice AI",
   "Sales and CRM": "sales and CRM software",
+  "Cloud and infrastructure": "cloud and infrastructure",
+  "Cybersecurity": "cybersecurity",
+  "Data and analytics": "data and analytics",
 };
 
 const list = (xs: string[]) => (xs.length <= 1 ? xs.join("") : `${xs.slice(0, -1).join(", ")} and ${xs[xs.length - 1]}`);

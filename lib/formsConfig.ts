@@ -4,6 +4,7 @@ export const CATEGORIES = [
   "Banking as a service and card issuing", "Core and digital banking", "Open banking and financial data",
   "Spend management and AP", "Finance and accounting software", "Payroll and HR",
   "Customer service and contact center", "Conversational and voice AI", "Sales and CRM",
+  "Cloud and infrastructure", "Cybersecurity", "Data and analytics",
 ];
 export const ISSUES = [
   "The link is broken or wrong", "The terms are out of date", "The category or type is wrong",
