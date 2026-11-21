@@ -3,6 +3,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { Logo } from "./Logo";
 import { aiIsNew } from "@/lib/ai";
+import { builderIsNew } from "@/lib/launch";
 
 export function Nav() {
   const [open, setOpen] = useState(false);
@@ -19,6 +20,7 @@ export function Nav() {
       <nav id="navlinks" className={open ? "navlinks open" : "navlinks"}>
         <Link href="/directory" onClick={close}>Directory</Link>
         <Link href="/ai" className="ainav" onClick={close}>AI programs{aiIsNew() ? <span className="newbadge" suppressHydrationWarning>New</span> : null}</Link>
+        <Link href="/program-builder" className="ainav" onClick={close}>Program builder{builderIsNew() ? <span className="newbadge" suppressHydrationWarning>New</span> : null}</Link>
         <Link href="/services" onClick={close}>Services</Link>
         <div className={dd ? "navdd open" : "navdd"}>
           <button type="button" className="navddbtn" aria-expanded={dd} onClick={() => setDd((o) => !o)}>Resources<span aria-hidden="true" className="navchev">▾</span></button>

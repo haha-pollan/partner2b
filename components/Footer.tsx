@@ -35,6 +35,7 @@ export function Footer() {
           <div>
             <div style={head}>Partner2B</div>
             <div className="footcol" style={col}>
+              <Link href="/program-builder">Program builder</Link>
               <Link href="/services">Services</Link>
               <Link href="/post">Blog</Link>
               <Link href="/glossary">Glossary</Link>

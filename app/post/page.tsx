@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
+import { BuilderCta } from "@/components/BuilderCta";
 import { Cover } from "@/components/Cover";
 import { getArticles, dateLabel } from "@/lib/articles";
 
@@ -39,6 +40,7 @@ export default async function PostIndex() {
           ))}
         </div>
       </section>
+      <BuilderCta />
       <Footer />
     </div>
   );

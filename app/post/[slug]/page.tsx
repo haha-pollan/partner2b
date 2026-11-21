@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
+import { BuilderCta } from "@/components/BuilderCta";
 import { Cover } from "@/components/Cover";
 import { getArticle, getArticles, dateLabel } from "@/lib/articles";
 import { enhance } from "@/lib/enhance";
@@ -84,6 +85,7 @@ export default async function Article({ params }: { params: Promise<{ slug: stri
           <Link href="/services" style={{ background: "#0A0A0B", color: "#A8FF5C", fontWeight: 400, fontFamily: "'Michroma',sans-serif", padding: "16px 30px", borderRadius: 12, fontSize: 14 }}>See our services</Link>
         </div>
       </section>
+      <BuilderCta images={false} />
       <Footer />
     </div>
   );

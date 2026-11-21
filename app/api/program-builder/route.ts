@@ -64,7 +64,9 @@ export async function POST(req: Request) {
     if (!blocks.length) return fail("The strategy did not come out complete. Please try again.", 502);
     const { renderPlan } = await import("@/lib/builder2/PlanPdf");
     const pdf = await renderPlan({ title: `${intake.companyName} partner program strategy`, company: intake.companyName, accent: brand.color || "#5B3FE0", logo: brand.logo, blocks, econ: buildEconomics(intake, vertical, acvAverage).chart, sharePercent: intake.partnerRevenueSharePercent, contactName: intake.contactName, website: intake.website, goals: intake.programGoals, category: intake.category, region: intake.region, audience: intake.audience });
-    return NextResponse.json({ ok: true, company: intake.companyName, pdf: pdf.toString("base64") });
+    const kinds: Record<string, number> = {}; for (const b of blocks) kinds[b.kind] = (kinds[b.kind] ?? 0) + 1;
+    const eco = blocks.find((b) => b.kind === "ecosystem");
+    return NextResponse.json({ ok: true, company: intake.companyName, pdf: pdf.toString("base64"), info: { blocks: kinds, ecosystemNodes: eco && eco.kind === "ecosystem" ? eco.nodes.map((n) => `${n.type} | ${n.stage}`) : [] } });
   } catch (e) {
     const msg = e instanceof Error ? e.message : "";
     if (msg === "not_configured") return fail("The builder is not switched on yet.", 503);

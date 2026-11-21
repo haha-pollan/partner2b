@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
+import { BuilderCta } from "@/components/BuilderCta";
 import { AiRow } from "@/components/AiRow";
 import { getPrograms } from "@/lib/programs";
 import { AI_CATEGORIES, catBySlug, inCat, facts, faqs } from "@/lib/ai";
@@ -83,6 +84,7 @@ export default async function AiCategory({ params }: { params: Promise<{ categor
           </section>
         </div>
       </div>
+      <BuilderCta images={false} />
       <Footer />
     </div>
   );

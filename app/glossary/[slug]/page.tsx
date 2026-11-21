@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
+import { BuilderCta } from "@/components/BuilderCta";
 import { TERMS, termBySlug, termHref } from "@/lib/glossary";
 
 export const dynamicParams = false;
@@ -98,6 +99,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
           )}
         </div>
       </main>
+      <BuilderCta images={false} />
       <Footer />
     </div>
   );

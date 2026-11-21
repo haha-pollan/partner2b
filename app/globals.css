@@ -172,3 +172,23 @@ p{text-wrap:pretty}
 /* Toby in the home hero: stands in the gap between the text and the cards on wide screens, under everything on narrower ones */
 .tobymid{flex:0 0 100%;display:flex;justify-content:center;order:4;margin-top:6px}
 @media (min-width:1320px){.tobymid{position:absolute;right:450px;bottom:40px;z-index:2;flex:none;display:block;margin:0}}
+
+/* Program builder promo band */
+.bcta{background:#7C5CFF;color:#fff;padding:clamp(36px,9vw,80px) 0;overflow:hidden}
+.bctain{display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap}
+.bctatext{flex:1 1 440px;max-width:640px}
+.bctatext h2{margin:16px 0 0;font-weight:400;font-size:clamp(23px,3.1vw,38px);letter-spacing:0;line-height:1.05;color:#fff}
+.bctatext p{margin:18px 0 0;font-size:19px;line-height:1.5;font-weight:300;color:#F3F0FF}
+.bctanew{display:inline-block;background:#fff;color:#5B3FE0;font-family:'Michroma',sans-serif;font-size:11px;padding:4px 10px;border-radius:999px}
+.bctabtn{display:inline-block;margin-top:28px;background:#A8FF5C;color:#0A0A0B;font-weight:400;font-family:'Michroma',sans-serif;padding:16px 30px;border-radius:12px;font-size:14px}
+.bctachips{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.bctachips span{background:#A8FF5C;color:#0A0A0B;font-weight:500;font-size:14px;padding:7px 14px;border-radius:12px;white-space:nowrap}
+.bctapages{position:relative;flex:0 0 400px;height:320px}
+.bctapg{position:absolute;top:0;width:220px;height:auto;border-radius:6px;background:#fff;box-shadow:0 14px 34px rgba(10,10,11,.35)}
+.bctapg0{left:0;transform:rotate(-5deg)}
+.bctapg1{left:150px;top:26px;transform:rotate(4deg)}
+.bctapages3{flex:0 0 520px;height:360px}
+.bctapages3 .bctapg{width:230px}
+.bctapages3 .bctapg1{left:130px;top:22px;transform:rotate(1deg)}
+.bctapages3 .bctapg2{left:262px;top:6px;transform:rotate(6deg)}
+@media (max-width:1000px){.bctapages,.bctapages3{display:none}}

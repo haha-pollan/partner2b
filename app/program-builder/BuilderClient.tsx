@@ -1,4 +1,5 @@
 "use client";
+import { Toby } from "@/components/Toby";
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { BUILDER_CATEGORIES, DELIVERY, AUDIENCES, REGIONS, STAGES, CURRENCIES, GOALS } from "@/lib/builder2/intake";
@@ -142,6 +143,7 @@ export function BuilderClient() {
         <p style={{ marginTop: 14, fontSize: 17, lineHeight: 1.6, color: "#C9CACE" }}>This takes two to three minutes. Please keep this tab open, your PDF appears here when it is ready.</p>
         <div style={{ marginTop: 22, height: 8, borderRadius: 999, background: "#1C1D20", overflow: "hidden" }}><div style={{ width: `${Math.min(95, secs / 1.8)}%`, height: "100%", background: "#A8FF5C", transition: "width 1s linear" }} /></div>
         <div style={{ marginTop: 10, fontSize: 14, color: "#85868B" }}>{Math.floor(secs / 60)}:{String(secs % 60).padStart(2, "0")}</div>
+        <div aria-hidden="true" style={{ marginTop: 26 }}><Toby height={190} /></div>
       </div>
     );
   }

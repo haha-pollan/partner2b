@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { Toby } from "@/components/Toby";
+import { BuilderCta } from "@/components/BuilderCta";
+import { builderIsNew } from "@/lib/launch";
 import { Glyph, Tile } from "@/components/Tile";
 import { getPrograms } from "@/lib/programs";
 import { AI_CATEGORIES, inCat, aiOnly, aiIsNew } from "@/lib/ai";
@@ -65,6 +67,12 @@ export default async function Home() {
               {aiIsNew() && <span style={{ fontFamily: "'Michroma',sans-serif", fontSize: 11, background: "#fff", color: "#5B3FE0", padding: "3px 8px", borderRadius: 999 }}>Just added</span>}
               <span>{aiCount} AI partner programs</span><span aria-hidden="true">→</span>
             </Link>
+            <div>
+              <Link href="/program-builder" className="cut" style={{ marginTop: 12, display: "inline-flex", alignItems: "center", gap: 12, background: "#0A0A0B", color: "#A8FF5C", padding: "16px 68px 16px 22px", fontSize: 15, fontWeight: 400 }}>
+                {builderIsNew() && <span suppressHydrationWarning style={{ fontFamily: "'Michroma',sans-serif", fontSize: 11, background: "#A8FF5C", color: "#0A0A0B", padding: "3px 8px", borderRadius: 999 }}>New</span>}
+                <span>Partner program builder</span><span aria-hidden="true">→</span>
+              </Link>
+            </div>
           </div>
           <div style={{ flex: "0 0 380px", maxWidth: "100%", display: "flex", flexDirection: "column", gap: 22, marginTop: 20 }}>
             {cards.map(({ p, bg, fg, rot, ml }) => (
@@ -128,6 +136,8 @@ export default async function Home() {
           <Link href="/ai" style={{ display: "inline-block", marginTop: 28, background: "#7C5CFF", color: "#fff", fontWeight: 400, fontFamily: "'Michroma',sans-serif", padding: "14px 26px", borderRadius: 12, fontSize: 14 }}>Browse AI programs</Link>
         </div>
       </section>
+
+      <BuilderCta variant="home" />
 
       <div style={{ background: "rgba(10,10,11,0.5)" }}>
       {/* What every listing shows */}

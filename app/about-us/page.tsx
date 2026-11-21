@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
+import { BuilderCta } from "@/components/BuilderCta";
 
 export const metadata: Metadata = {
   title: "About Partner2B | B2B partner program directory",
@@ -34,6 +35,7 @@ export default function Page() {
           </p>
         </div>
       </main>
+      <BuilderCta />
       <Footer />
     </div>
   );

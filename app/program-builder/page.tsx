@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
+import Image from "next/image";
 import { BuilderClient } from "./BuilderClient";
 
 export const metadata: Metadata = {
@@ -42,6 +43,15 @@ export default function Page() {
                 <span style={{ fontSize: 16, fontWeight: 400, lineHeight: 1.4, paddingTop: 4 }}>{t}</span>
               </div>
             ))}
+            <div style={{ marginTop: 26, paddingTop: 18, borderTop: "2px solid #0A0A0B" }}>
+              <div style={{ fontSize: 14, fontWeight: 500 }}>Example pages from a strategy</div>
+              <div style={{ display: "flex", gap: 10, marginTop: 12 }}>
+                {[["/builder/sample-cover.jpg", "Cover page"], ["/builder/sample-ecosystem.jpg", "Partner ecosystem map"], ["/builder/sample-glance.jpg", "Program at a glance"]].map(([src, alt]) => (
+                  <Image key={src} src={src} alt={`Example: ${alt}`} width={728} height={1029} sizes="100px" style={{ width: "calc(33.3% - 7px)", height: "auto", borderRadius: 4, border: "1px solid #B9BABD", background: "#fff" }} />
+                ))}
+              </div>
+              <div style={{ marginTop: 10, fontSize: 13, color: "#3A3B40" }}>An example for a fictional company</div>
+            </div>
           </div>
         </div>
       </div>

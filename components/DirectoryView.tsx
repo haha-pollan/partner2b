@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
+import { BuilderCta } from "@/components/BuilderCta";
 import { Tile } from "@/components/Tile";
 import { AutoForm } from "@/app/directory/AutoForm";
 import { FiltersToggle } from "@/app/directory/FiltersToggle";
@@ -205,6 +206,7 @@ export async function DirectoryView({ sp, pool, base, ai = false, h1, sub, befor
       </div>
 
       {after}
+      <BuilderCta />
       <Footer />
     </div>
   );
