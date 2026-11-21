@@ -46,8 +46,8 @@ export default async function AiHub({ searchParams }: { searchParams: Promise<SP
     <div style={{ position: "relative", color: "#ECECEE", padding: "clamp(36px,9vw,96px) 0" }}>
       <div className="wrap">
         <section style={{ maxWidth: 820 }}>
-          <h2 style={{ fontWeight: 400, fontSize: 34, letterSpacing: 0 }}>How AI partner programs work</h2>
-          <p style={{ margin: "20px 0 0", fontSize: 20, lineHeight: 1.6, fontWeight: 300 }}>
+          <h2 style={{ fontWeight: 400, fontSize: 34, letterSpacing: 0, color: "#ECECEE" }}>How AI partner programs work</h2>
+          <p style={{ margin: "20px 0 0", fontSize: 20, lineHeight: 1.6, fontWeight: 300, color: "#ECECEE" }}>
             AI vendors grow through partners who implement, integrate or resell their products. Agent platforms often reward agencies with referral revenue and certification, model providers build networks of integrators, and security vendors work through resellers and managed service providers. Integrators are listed only when they publish an official partner or alliance page.
           </p>
         </section>
