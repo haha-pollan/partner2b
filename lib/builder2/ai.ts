@@ -23,7 +23,11 @@ export async function generateStrategy(intake: Intake, vertical: string, acvAver
       ],
     }),
   });
-  if (!res.ok || !res.body) throw new Error(`openai_${res.status}`);
+  if (!res.ok || !res.body) {
+    let code = "";
+    try { const j = await res.json(); code = String(j?.error?.code || j?.error?.type || ""); } catch { /* no body */ }
+    throw new Error(`openai_${res.status}${code ? "_" + code : ""}`);
+  }
   const reader = res.body.getReader(); const dec = new TextDecoder();
   let buf = "", out = "";
   for (;;) {

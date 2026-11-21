@@ -68,6 +68,7 @@ export async function POST(req: Request) {
     const msg = e instanceof Error ? e.message : "";
     if (msg === "not_configured") return fail("The builder is not switched on yet.", 503);
     if (ctl.signal.aborted) return fail("This took longer than expected. Please try again.", 504);
-    return fail("Something went wrong while writing your strategy. Please try again.", 502);
+    console.error("program-builder failed:", msg);
+    return NextResponse.json({ ok: false, error: "Something went wrong while writing your strategy. Please try again.", detail: msg.slice(0, 80) }, { status: 502 });
   } finally { clearTimeout(timer); }
 }
