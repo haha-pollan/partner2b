@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Logo } from "./Logo";
+import { aiIsNew } from "@/lib/ai";
 
 export function Nav() {
   const [open, setOpen] = useState(false);
@@ -16,6 +17,7 @@ export function Nav() {
       </button>
       <nav id="navlinks" className={open ? "navlinks open" : "navlinks"}>
         <Link href="/directory" onClick={close}>Directory</Link>
+        <Link href="/ai" onClick={close}>AI programs{aiIsNew() ? <span className="newbadge" suppressHydrationWarning>New</span> : null}</Link>
         <Link href="/services" onClick={close}>Services</Link>
         <Link href="/post" onClick={close}>Blog</Link>
         <Link href="/submit" onClick={close}>Submit a program</Link>

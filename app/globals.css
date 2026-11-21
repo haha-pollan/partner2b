@@ -131,3 +131,15 @@ p{text-wrap:pretty}
   .callout{padding:20px}
   .pg{min-width:42px;height:42px}
 }
+
+/* AI accent: violet */
+.aibadge{display:inline-block;background:#7C5CFF;color:#fff;font-size:11px;font-weight:500;letter-spacing:.04em;padding:3px 9px;border-radius:999px;white-space:nowrap}
+.newbadge{display:inline-block;margin-left:8px;background:#7C5CFF;color:#fff;font-family:'Michroma',sans-serif;font-size:10px;padding:3px 8px;border-radius:999px;vertical-align:middle}
+.aiscope .chip{color:#C9BDFF}
+.aiscope .pill{background:#5B3FE0;color:#fff}
+.aiscope .pg.on{color:#C9BDFF}
+.aiscope .more{border-bottom-color:#7C5CFF}
+.aiscope .side input[type=checkbox]{accent-color:#7C5CFF}
+.aiscope .side .clearall{color:#C9BDFF}
+.aicard{background:#F1EEFF;color:#0A0A0B;padding:26px 28px 30px;border-left:6px solid #7C5CFF;display:block}
+.aicard:hover{background:#E6E0FF}

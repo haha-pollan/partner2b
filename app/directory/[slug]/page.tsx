@@ -7,6 +7,7 @@ import { Tile } from "@/components/Tile";
 import { companyDescription } from "@/lib/describe";
 import { Glyph } from "@/components/Tile";
 import { getPrograms, getProgram, commissionLabel } from "@/lib/programs";
+import { isAi } from "@/lib/ai";
 
 export const revalidate = 600;
 
@@ -44,6 +45,7 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
         <div className="wrap" style={{ padding: "8px 40px clamp(36px,9vw,80px)" }}>
           <div style={{ fontSize: 15, fontWeight: 400, display: "flex", gap: 8, flexWrap: "wrap" }}>
             <Link href="/directory" style={{ textDecoration: "underline" }}>Directory</Link><span>/</span>
+            {isAi(p) && (<><Link href="/ai" style={{ textDecoration: "underline" }}>AI programs</Link><span>/</span></>)}
             <span>{p.product_category}</span><span>/</span><span>{p.company}</span>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 28, marginTop: 28, flexWrap: "wrap" }}>
@@ -53,6 +55,7 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
           {p.product_note && <div style={{ marginTop: 12, fontSize: 20, fontWeight: 400 }}>{p.product_note}</div>}
           <p style={{ margin: "24px 0 0", maxWidth: 760, fontSize: 22, lineHeight: 1.5, fontWeight: 300 }}>{p.description}</p>
           <div style={{ marginTop: 28, display: "flex", gap: 10, flexWrap: "wrap" }}>
+            {isAi(p) && <span className="aibadge" style={{ alignSelf: "center" }}>AI</span>}
             {p.program_types.map((t) => (<span key={t} className="pill">{t}</span>))}
             <span className="tag" style={{ background: "#ECECEE" }}>{p.region}</span>
             <span className="tag" style={{ background: "#ECECEE" }}>{p.product_category}</span>

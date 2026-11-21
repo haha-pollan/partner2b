@@ -4,6 +4,7 @@ import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { Glyph, Tile } from "@/components/Tile";
 import { getPrograms } from "@/lib/programs";
+import { AI_CATEGORIES, inCat, aiOnly, aiIsNew } from "@/lib/ai";
 
 export const revalidate = 600;
 export const metadata: Metadata = {
@@ -28,6 +29,7 @@ const label: React.CSSProperties = { background: "#A8FF5C", color: "#0A0A0B", fo
 
 export default async function Home() {
   const all = await getPrograms();
+  const aiCount = aiOnly(all).length;
   const pick = (t: string) => all.find((p) => p.primary_type === t && p.domain);
   const cards = [
     { p: pick("Reseller"), bg: "#0A0A0B", fg: "#ECECEE", rot: -5, ml: 0 },
@@ -58,6 +60,10 @@ export default async function Home() {
               <input id="q" name="q" type="search" placeholder="Search programs or companies" />
               <button type="submit">Search</button>
             </form>
+            <Link href="/ai" className="cut" style={{ marginTop: 22, display: "inline-flex", alignItems: "center", gap: 12, background: "#7C5CFF", color: "#fff", padding: "12px 20px", fontSize: 15, fontWeight: 400 }}>
+              {aiIsNew() && <span style={{ fontFamily: "'Michroma',sans-serif", fontSize: 11, background: "#fff", color: "#5B3FE0", padding: "3px 8px", borderRadius: 999 }}>Just added</span>}
+              <span>{aiCount} AI partner programs</span><span aria-hidden="true">→</span>
+            </Link>
           </div>
           <div style={{ flex: "0 0 380px", maxWidth: "100%", display: "flex", flexDirection: "column", gap: 22, marginTop: 20 }}>
             {cards.map(({ p, bg, fg, rot, ml }) => (
@@ -101,6 +107,23 @@ export default async function Home() {
               </Link>
             );
           })}
+        </div>
+      </section>
+
+      {/* AI programs */}
+      <section style={{ padding: "0 0 clamp(36px,9vw,96px)" }}>
+        <div className="wrap">
+          <h2 style={{ fontWeight: 400, fontSize: 44, letterSpacing: 0, color: "#0A0A0B" }}>AI partner programs{aiIsNew() && <span className="newbadge" style={{ fontSize: 12, padding: "5px 11px" }}>New</span>}</h2>
+          <p style={{ margin: "16px 0 0", maxWidth: 680, fontSize: 20, lineHeight: 1.5, fontWeight: 300, color: "#0A0A0B" }}>Official programs from AI vendors, agent platforms and AI integrators, with their own categories and filters.</p>
+          <div style={{ marginTop: 32, display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))", gap: 14 }}>
+            {AI_CATEGORIES.map((c) => (
+              <Link key={c.slug} href={`/ai/${c.slug}`} className="aicard cut" style={{ padding: "22px 24px 24px" }}>
+                <div style={{ fontFamily: "'Michroma',sans-serif", fontSize: 16, lineHeight: 1.25 }}>{c.name}</div>
+                <div style={{ marginTop: 12, fontSize: 15, fontWeight: 500 }}>{inCat(all, c).length} programs <span aria-hidden="true">→</span></div>
+              </Link>
+            ))}
+          </div>
+          <Link href="/ai" style={{ display: "inline-block", marginTop: 28, background: "#7C5CFF", color: "#fff", fontWeight: 400, fontFamily: "'Michroma',sans-serif", padding: "14px 26px", borderRadius: 12, fontSize: 14 }}>Browse AI programs</Link>
         </div>
       </section>
 

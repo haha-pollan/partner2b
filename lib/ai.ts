@@ -58,6 +58,17 @@ export const catBySlug = (s: string) => AI_CATEGORIES.find((c) => c.slug === s);
 export const aiNames = AI_CATEGORIES.map((c) => c.name);
 export const inCat = (all: Program[], c: AiCat) => all.filter((p) => p.product_category === c.name);
 
+// AI-native vendors that sit in a non-AI product category (HR, sales, security and so on)
+export const AI_EXTRA_SLUGS = new Set([
+  "eightfold-ai", "seekout", "findem", "hrflow-ai", "humanly", "hireez", "hirevue", "phenom", "leena-ai", "juicebox", "metaview",
+  "nooks", "zowie", "pactum", "landbase", "shift-technology", "workfusion", "dropzone-ai", "skan-ai", "atomicwork", "testmu-ai",
+]);
+export const isAi = (p: Program) => aiNames.includes(p.product_category) || AI_EXTRA_SLUGS.has(p.slug);
+export const aiOnly = (all: Program[]) => all.filter(isAi);
+
+export const AI_LAUNCH = Date.UTC(2026, 10, 21);
+export const aiIsNew = () => Date.now() - AI_LAUNCH < 60 * 86400000;
+
 const hasPaid = (p: Program) => p.commission_models.some((m) => m !== "Not published");
 
 export function facts(list: Program[], c: AiCat) {
