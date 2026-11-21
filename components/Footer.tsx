@@ -3,8 +3,8 @@ import { Logo } from "./Logo";
 import { AI_CATEGORIES } from "@/lib/ai";
 
 const TYPES = ["Reseller", "Referral", "Technology", "Services", "MSP", "OEM or white label"];
-const head: React.CSSProperties = { fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 12, color: "#85868B", marginBottom: 14 };
-const col: React.CSSProperties = { display: "flex", flexDirection: "column", gap: 10, fontSize: 15, fontWeight: 300 };
+const head: React.CSSProperties = { fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 13, color: "#ECECEE", marginBottom: 16 };
+const col: React.CSSProperties = { display: "flex", flexDirection: "column", gap: 10 };
 
 export function Footer() {
   return (
@@ -20,21 +20,21 @@ export function Footer() {
         <div className="footlinks" style={{ display: "flex", gap: 56, flexWrap: "wrap" }}>
           <div>
             <div style={head}>Directory</div>
-            <div style={col}>
+            <div className="footcol" style={col}>
               <Link href="/directory">All programs</Link>
               {TYPES.map((t) => (<Link key={t} href={`/directory?type=${encodeURIComponent(t)}`}>{t}</Link>))}
             </div>
           </div>
           <div>
             <div style={{ ...head, color: "#B9A9FF" }}>AI programs</div>
-            <div style={col}>
+            <div className="footcol" style={col}>
               <Link href="/ai">All AI programs</Link>
               {AI_CATEGORIES.map((c) => (<Link key={c.slug} href={`/ai/${c.slug}`}>{c.name}</Link>))}
             </div>
           </div>
           <div>
             <div style={head}>Partner2B</div>
-            <div style={col}>
+            <div className="footcol" style={col}>
               <Link href="/services">Services</Link>
               <Link href="/post">Blog</Link>
               <Link href="/submit">Submit a program</Link>

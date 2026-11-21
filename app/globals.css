@@ -146,3 +146,6 @@ p{text-wrap:pretty}
 .aiscope .side .clearall{color:#C9BDFF}
 .aicard{background:#F1EEFF;color:#0A0A0B;padding:26px 28px 30px;display:block}
 .aicard:hover{background:#E6E0FF}
+
+.footcol a{font-size:14px;font-weight:300;color:#B9BABD;line-height:1.3}
+.footcol a:hover{color:#fff}
