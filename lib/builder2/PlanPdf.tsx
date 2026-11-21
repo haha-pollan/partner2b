@@ -25,15 +25,36 @@ function Rich({ text, style }: { text: string; style?: TS }) {
   );
 }
 
+const STAGES = ["Before", "During", "After"];
+// Shows where in the customer's journey a partner meets them: three steps, the matching ones filled.
+function Stepper({ value, accent }: { value: string; accent: string }) {
+  const v = value.toLowerCase();
+  const on = STAGES.map((st) => v.includes(st.toLowerCase()));
+  if (!on.some(Boolean)) return <Rich text={value} style={{ fontSize: 9, lineHeight: 1.35 }} />;
+  return (
+    <View style={{ flexDirection: "row", alignItems: "center", flexWrap: "wrap" }}>
+      {STAGES.map((st, k) => (
+        <View key={st} style={{ flexDirection: "row", alignItems: "center", marginRight: 7, marginBottom: 2 }}>
+          <View style={{ width: 7, height: 7, borderRadius: 3.5, marginRight: 3, marginBottom: 5, backgroundColor: on[k] ? accent : "#FFFFFF", borderWidth: 0.9, borderColor: on[k] ? accent : "#B9BABD", borderStyle: "solid" }} />
+          <Text style={{ fontSize: 7.5, color: on[k] ? INK : "#8A8C93", fontFamily: on[k] ? "Helvetica-Bold" : "Helvetica" }}>{st}</Text>
+        </View>
+      ))}
+    </View>
+  );
+}
+
 function Table({ rows, accent }: { rows: string[][]; accent: string }) {
   const cols = Math.max(...rows.map((r) => r.length));
+  const stageCol = rows[0].findIndex((h) => /^(stage|when they meet)/i.test(h.trim()));
   return (
     <View style={{ marginVertical: 8, borderWidth: 1, borderColor: LINE, borderRadius: 4 }}>
       {rows.map((r, i) => (
         <View key={i} wrap={false} style={{ flexDirection: "row", backgroundColor: i === 0 ? mix(accent, 0.88) : "#fff", borderTopWidth: i ? 1 : 0, borderTopColor: LINE }}>
           {Array.from({ length: cols }).map((_, c) => (
-            <View key={c} style={{ flex: c === 0 ? 1.15 : 1, padding: 5 }}>
-              <Rich text={r[c] ?? ""} style={{ fontSize: 9, lineHeight: 1.35, fontFamily: i === 0 || c === 0 ? "Helvetica-Bold" : "Helvetica" }} />
+            <View key={c} style={{ flex: c === 0 ? 1.15 : c === stageCol ? 1.2 : 1, padding: 5 }}>
+              {i > 0 && c === stageCol
+                ? <Stepper value={r[c] ?? ""} accent={accent} />
+                : <Rich text={r[c] ?? ""} style={{ fontSize: 9, lineHeight: 1.35, fontFamily: i === 0 || c === 0 ? "Helvetica-Bold" : "Helvetica" }} />}
             </View>
           ))}
         </View>
