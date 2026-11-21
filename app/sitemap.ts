@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { getPrograms } from "@/lib/programs";
 import { getArticles } from "@/lib/articles";
+import { AI_CATEGORIES } from "@/lib/ai";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const all = await getPrograms();
@@ -8,6 +9,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [
     { url: "https://partner2b.com/directory" },
     { url: "https://partner2b.com/program-builder" },
+    { url: "https://partner2b.com/ai" },
+    ...AI_CATEGORIES.map((c) => ({ url: `https://partner2b.com/ai/${c.slug}` })),
     { url: "https://partner2b.com/services" },
     { url: "https://partner2b.com/post" },
     { url: "https://partner2b.com/privacy" },

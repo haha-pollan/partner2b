@@ -62,6 +62,7 @@ export const GROUPS: Record<string, string[]> = {
   finance: ["Payments", "Billing and subscriptions", "Buy now, pay later", "Fraud, risk and compliance", "Identity and KYC", "Banking as a service and card issuing", "Core and digital banking", "Open banking and financial data", "Spend management and AP", "Finance and accounting software", "Payroll and HR"],
   customer: ["Customer service and contact center", "Conversational and voice AI", "Sales and CRM", "Ecommerce and marketing tech", "Content and digital experience"],
   infra: ["Cloud and infrastructure", "Cybersecurity", "Data and analytics", "IT management and DevOps", "Low-code and collaboration"],
+  ai: ["Foundation models and APIs", "AI agents and automation", "AI infrastructure and MLOps", "Vector databases and data for AI", "AI security and governance", "AI integrators and consultancies"],
   vertical: ["Construction, real estate and field operations", "Life sciences and healthcare"],
 };
 export const groupOf = (c: string) => Object.keys(GROUPS).find((g) => GROUPS[g].includes(c)) ?? "";
@@ -90,6 +91,12 @@ export const ARCHETYPES: Record<string, string[]> = {
   "Ecommerce and marketing tech": ["Ecommerce and growth agencies", "Platform integrators and developers", "Marketing and CRM consultancies"],
   "Construction, real estate and field operations": ["Industry software resellers and integrators", "Industry consultancies and advisors", "Adjacent software vendors such as accounting and project controls"],
   "Life sciences and healthcare": ["Life sciences consultancies and research organizations", "Healthcare IT integrators", "Regulated-industry software vendors"],
+  "Foundation models and APIs": ["AI consultancies and systems integrators", "Software vendors that embed models in their products", "Automation agencies and developer studios"],
+  "AI agents and automation": ["AI and automation agencies", "CRM and workflow implementation partners", "Systems integrators and digital consultancies"],
+  "AI infrastructure and MLOps": ["Data and AI consultancies", "Cloud consultancies and managed service providers", "Systems integrators"],
+  "Vector databases and data for AI": ["Data engineering consultancies", "AI application studios and developer agencies", "Technology vendors that integrate retrieval"],
+  "AI security and governance": ["Managed security service providers", "GRC, audit and compliance consultancies", "Security resellers and VARs"],
+  "AI integrators and consultancies": ["Data and AI consultancies", "Systems integrators with AI practices", "Cloud and technology alliance teams"],
   [OTHER]: ["Consultancies and agencies that serve your buyers", "Software vendors adjacent to your product", "Resellers and integrators in your target market"],
 };
 export const AUDIENCE_ARCHETYPE: Record<string, string> = {

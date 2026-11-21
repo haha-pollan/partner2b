@@ -7,6 +7,8 @@ export const CATEGORIES = [
   "Cloud and infrastructure", "Cybersecurity", "Data and analytics",
   "IT management and DevOps", "Low-code and collaboration", "Content and digital experience",
   "Ecommerce and marketing tech", "Construction, real estate and field operations", "Life sciences and healthcare",
+  "Foundation models and APIs", "AI agents and automation", "AI infrastructure and MLOps",
+  "Vector databases and data for AI", "AI security and governance", "AI integrators and consultancies",
 ];
 export const ISSUES = [
   "The link is broken or wrong", "The terms are out of date", "The category or type is wrong",
