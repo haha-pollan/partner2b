@@ -60,7 +60,7 @@ export default async function Home() {
               <input id="q" name="q" type="search" placeholder="Search programs or companies" />
               <button type="submit">Search</button>
             </form>
-            <Link href="/ai" className="cut" style={{ marginTop: 22, display: "inline-flex", alignItems: "center", gap: 12, background: "#7C5CFF", color: "#fff", padding: "12px 20px", fontSize: 15, fontWeight: 400 }}>
+            <Link href="/ai" className="cut" style={{ marginTop: 22, display: "inline-flex", alignItems: "center", gap: 12, background: "#7C5CFF", color: "#fff", padding: "16px 68px 16px 22px", fontSize: 15, fontWeight: 400 }}>
               {aiIsNew() && <span style={{ fontFamily: "'Michroma',sans-serif", fontSize: 11, background: "#fff", color: "#5B3FE0", padding: "3px 8px", borderRadius: 999 }}>Just added</span>}
               <span>{aiCount} AI partner programs</span><span aria-hidden="true">→</span>
             </Link>
