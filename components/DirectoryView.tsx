@@ -104,7 +104,7 @@ export async function DirectoryView({ sp, pool, base, ai = false, h1, sub, befor
         <div className="wrap" style={{ padding: "24px 40px clamp(36px,9vw,96px)", display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 40, flexWrap: "wrap" }}>
           <div style={{ flex: "0 0 auto", maxWidth: "100%" }}>
             <h1 className="h1big"><span style={{ display: "block" }}>{h1[0]}</span><span style={{ display: "block" }}>{h1[1]}</span></h1>
-            <p style={{ margin: "24px 0 0", maxWidth: 720, fontSize: 21, lineHeight: 1.5, fontWeight: 300 }}>
+            <p style={{ margin: "24px 0 0", maxWidth: ai ? 560 : 720, fontSize: 21, lineHeight: 1.5, fontWeight: 300 }}>
               {sub}
             </p>
             <form method="get" action={base} className="search" role="search">
@@ -113,7 +113,7 @@ export async function DirectoryView({ sp, pool, base, ai = false, h1, sub, befor
               <button type="submit">Search</button>
             </form>
           </div>
-          {heroRight ? <div style={{ flex: "0 1 560px", maxWidth: "100%", marginTop: 8 }}>{heroRight}</div> : <div className="cut statcard" style={{ flex: "0 0 360px", margin: "40px 40px 0 0", transform: "rotate(-4deg)", background: "#0A0A0B", color: "#ECECEE", padding: "32px 34px" }}>
+          {heroRight ? <div style={{ flex: "1 1 440px", maxWidth: 520, marginTop: 8 }}>{heroRight}</div> : <div className="cut statcard" style={{ flex: "0 0 360px", margin: "40px 40px 0 0", transform: "rotate(-4deg)", background: "#0A0A0B", color: "#ECECEE", padding: "32px 34px" }}>
             <div style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 56, letterSpacing: 0, lineHeight: 1, color: ai ? "#B9A9FF" : "#A8FF5C" }}><CountUp to={all.length} /></div>
             <div style={{ marginTop: 10, fontSize: 19, lineHeight: 1.4 }}>{ai ? "AI programs, free to browse" : "programs, free to browse"}</div>
           </div>}
