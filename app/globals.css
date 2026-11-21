@@ -168,3 +168,8 @@ p{text-wrap:pretty}
   .navmenu{display:block;position:static;padding:0;min-width:0}
   .navmenu a{background:transparent;border-radius:0!important;padding:15px 0;border-bottom:1px solid #2A2B2F}
 }
+
+/* Toby in the home hero */
+.tobyslot{min-height:560px}
+.tobyfig{position:absolute;right:46px;bottom:-64px;z-index:2;pointer-events:auto}
+@media (max-width:1100px){.tobyslot{min-height:0}.tobyfig{position:static;align-self:center;margin-top:6px}}

@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
+import { Toby } from "@/components/Toby";
 import { Glyph, Tile } from "@/components/Tile";
 import { getPrograms } from "@/lib/programs";
 import { AI_CATEGORIES, inCat, aiOnly, aiIsNew } from "@/lib/ai";
@@ -65,7 +66,7 @@ export default async function Home() {
               <span>{aiCount} AI partner programs</span><span aria-hidden="true">→</span>
             </Link>
           </div>
-          <div style={{ flex: "0 0 380px", maxWidth: "100%", display: "flex", flexDirection: "column", gap: 22, marginTop: 20 }}>
+          <div className="tobyslot" style={{ flex: "0 0 380px", maxWidth: "100%", display: "flex", flexDirection: "column", gap: 22, marginTop: 20, position: "relative" }}>
             {cards.map(({ p, bg, fg, rot, ml }) => (
               <Link key={p!.id} href={`/directory/${p!.slug}`} className="cut hcard" style={{ marginLeft: ml, transform: `rotate(${rot}deg)`, background: bg, color: fg, padding: "22px 26px", display: "flex", alignItems: "center", gap: 18 }}>
                 <Tile type={p!.primary_type} size={64} domain={p!.domain} />
@@ -75,6 +76,7 @@ export default async function Home() {
                 </div>
               </Link>
             ))}
+            <div className="tobyfig"><Toby height={290} /></div>
           </div>
         </div>
       </div>
