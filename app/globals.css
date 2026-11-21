@@ -169,7 +169,6 @@ p{text-wrap:pretty}
   .navmenu a{background:transparent;border-radius:0!important;padding:15px 0;border-bottom:1px solid #2A2B2F}
 }
 
-/* Toby in the home hero */
-.tobyslot{min-height:610px}
-.tobyfig{position:absolute;right:46px;bottom:-64px;z-index:2;pointer-events:auto}
-@media (max-width:1100px){.tobyslot{min-height:0}.tobyfig{position:static;align-self:center;margin-top:6px}}
+/* Toby in the home hero: stands in the gap between the text and the cards on wide screens, under everything on narrower ones */
+.tobymid{flex:0 0 100%;display:flex;justify-content:center;order:4;margin-top:6px}
+@media (min-width:1320px){.tobymid{position:absolute;right:450px;bottom:40px;z-index:2;flex:none;display:block;margin:0}}
