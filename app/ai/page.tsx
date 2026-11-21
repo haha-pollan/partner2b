@@ -64,7 +64,7 @@ export default async function AiHub({ searchParams }: { searchParams: Promise<SP
   );
   return (
     <DirectoryView sp={sp} pool={pool} base="/ai" ai h1={["AI partner", "programs"]}
-      sub={`${pool.length} official partner programs from AI vendors, agent platforms and AI integrators. Every listing links to the vendor's own page`}
+      sub={`Find an AI partner program for your agency or consultancy: ${pool.length} programs from AI vendors, with commission, tiers and requirements in one place`}
       before={before} after={after}
       heroRight={<AiNetwork counts={Object.fromEntries(groups.map((g) => [g.c.slug, g.list.length]))} />} />
   );

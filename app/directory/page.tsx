@@ -11,5 +11,5 @@ export const metadata: Metadata = {
 export default async function DirectoryPage({ searchParams }: { searchParams: Promise<SP> }) {
   const sp = await searchParams;
   const all = await getPrograms();
-  return <DirectoryView sp={sp} pool={all} base="/directory" h1={["Browse partner", "programs"]} sub={`${all.length} public B2B programs. Every listing links to its official page`} />;
+  return <DirectoryView sp={sp} pool={all} base="/directory" h1={["Browse partner", "programs"]} sub={`Compare ${all.length} B2B partner programs by commission, tiers and requirements, and find the reseller, referral or MSP program worth joining`} />;
 }
