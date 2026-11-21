@@ -28,7 +28,7 @@ export function verticalFor(category: string) {
 }
 
 export type Intake = {
-  website: string; companyName: string; category: string; offeringSummary: string; keyFeatures: string; differentiators: string;
+  website: string; companyName: string; contactName: string; category: string; offeringSummary: string; keyFeatures: string; differentiators: string;
   deliveryModel: string; competitors: string; endUser: string; primaryBuyer: string; audience: string; industriesServed: string;
   region: string; pricing: string; acvLow: number; acvHigh: number; currency: string; stage: string; programGoals: string[];
   year1PartnerRevenueTarget: number; partnerRevenueSharePercent: number;
@@ -58,7 +58,9 @@ export function parseIntake(raw: Record<string, unknown>): { ok: true; intake: I
     ["offeringSummary", "what your product does", 600], ["keyFeatures", "your top features", 400], ["differentiators", "why customers choose you", 500],
     ["endUser", "who uses it day to day", 160], ["primaryBuyer", "who approves the purchase", 160], ["industriesServed", "the industries you serve", 200], ["pricing", "how you price", 160],
   ];
-  const out: Record<string, unknown> = { website, category, companyName: clean(raw.companyName, 80) || new globalThis.URL(website).hostname.replace(/^www\./, "").split(".")[0], competitors: clean(raw.competitors, 200) };
+  const contactName = clean(raw.contactName, 80);
+  if (!contactName) return { ok: false, error: "Please enter your name." };
+  const out: Record<string, unknown> = { website, category, contactName, companyName: clean(raw.companyName, 80) || new globalThis.URL(website).hostname.replace(/^www\./, "").split(".")[0], competitors: clean(raw.competitors, 200) };
   for (const [k, label, max] of fields) { const v = clean(raw[k], max); if (!v) return { ok: false, error: `Please fill in ${label}.` }; out[k] = v; }
   const pick = (k: string, list: string[], label: string) => { const v = clean(raw[k], 80); if (!oneOf(v, list)) return `Please choose ${label}.`; out[k] = v; return ""; };
   for (const e of [pick("deliveryModel", DELIVERY, "how your product is delivered"), pick("audience", AUDIENCES, "the company size you sell to"), pick("region", REGIONS, "your main region"), pick("currency", CURRENCIES, "a currency"), pick("stage", STAGES, "where your partner program is today")]) if (e) return { ok: false, error: e };

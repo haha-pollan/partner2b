@@ -157,9 +157,12 @@ function Render({ block, accent, onAcc, prevWasSection }: { block: Block; accent
   }
 }
 
-export function PlanDocument({ title, company, accent, logo, blocks }: { title: string; company: string; accent: string; logo: string; blocks: Block[] }) {
+export function PlanDocument({ title, company, accent, logo, blocks, contactName = "", website = "", goals = [], category = "", region = "", audience = "" }: { title: string; company: string; accent: string; logo: string; blocks: Block[]; contactName?: string; website?: string; goals?: string[]; category?: string; region?: string; audience?: string }) {
   const onAcc = lum(accent) > 0.4 ? INK : "#FFFFFF";
   const date = new Date().toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+  const host = (() => { try { return new URL(website).hostname.replace(/^www\./, ""); } catch { return ""; } })();
+  const cl = { fontSize: 8, letterSpacing: 1, color: GREY, fontFamily: "Helvetica-Bold" } as const;
+  const cv = { fontSize: 13, marginTop: 4, color: INK } as const;
   const closing = blocks.find((b) => b.kind === "closing") as Extract<Block, { kind: "closing" }> | undefined;
   // Group: each section break starts its own page, followed by that section's content pages.
   const groups: { head?: Extract<Block, { kind: "section" }>; body: Block[] }[] = [{ body: [] }];
@@ -176,19 +179,51 @@ export function PlanDocument({ title, company, accent, logo, blocks }: { title: 
   return (
     <Document title={safe(title)} author="Partner2B" creator="Partner2B">
       <Page size="A4" style={{ ...s.page, padding: 0 }}>
-        <View style={{ backgroundColor: accent, height: 400, padding: 54, justifyContent: "space-between" }}>
+        <View style={{ backgroundColor: accent, height: 380, padding: 54, justifyContent: "space-between" }}>
           {logo ? <Image src={logo} style={{ width: 54, height: 54, objectFit: "contain", backgroundColor: "#fff", borderRadius: 8, padding: 6 }} /> : <View style={{ width: 54, height: 54, borderRadius: 8, backgroundColor: "#fff", alignItems: "center", justifyContent: "center" }}><Text style={{ fontFamily: "Helvetica-Bold", fontSize: 22, color: accent }}>{safe(company).slice(0, 1).toUpperCase()}</Text></View>}
           <View>
             <Text style={{ color: onAcc, fontSize: 11, letterSpacing: 1.5, fontFamily: "Helvetica-Bold" }}>PARTNER PROGRAM STRATEGY</Text>
             <Text style={{ color: onAcc, fontSize: 40, fontFamily: "Helvetica-Bold", marginTop: 10, lineHeight: 1.1 }}>{safe(company)}</Text>
+            {host ? <Text style={{ color: onAcc, fontSize: 13, marginTop: 8, opacity: 0.85 }}>{safe(host)}</Text> : null}
           </View>
         </View>
-        <View style={{ padding: 54 }}>
-          <Text style={{ fontSize: 12, color: GREY }}>A strategy for building an inbound partner channel</Text>
-          <Text style={{ fontSize: 10, color: GREY, marginTop: 4 }}>{date}</Text>
+        <View style={{ paddingHorizontal: 54, paddingTop: 34 }}>
+          <View style={{ flexDirection: "row" }}>
+            {contactName ? <View style={{ flex: 1 }}><Text style={cl}>PREPARED FOR</Text><Text style={cv}>{safe(contactName)}</Text></View> : null}
+            <View style={{ flex: 1 }}><Text style={cl}>DATE</Text><Text style={cv}>{date}</Text></View>
+          </View>
+          {(category || audience) ? (
+            <View style={{ flexDirection: "row", marginTop: 18 }}>
+              {category ? <View style={{ flex: 1 }}><Text style={cl}>CATEGORY</Text><Text style={cv}>{safe(category)}</Text></View> : null}
+              {audience ? <View style={{ flex: 1 }}><Text style={cl}>SELLING TO</Text><Text style={cv}>{safe([audience, region].filter(Boolean).join(", "))}</Text></View> : null}
+            </View>
+          ) : null}
+          {goals.length > 0 ? (
+            <View style={{ marginTop: 22 }}>
+              <Text style={cl}>GOALS</Text>
+              <View style={{ flexDirection: "row", flexWrap: "wrap", marginTop: 6 }}>
+                {goals.map((g, i) => <Text key={i} style={{ fontSize: 10, color: onAcc, backgroundColor: accent, paddingVertical: 5, paddingHorizontal: 10, borderRadius: 12, marginRight: 6, marginBottom: 6 }}>{safe(g)}</Text>)}
+              </View>
+            </View>
+          ) : null}
         </View>
+        <Text style={{ fontSize: 8, color: GREY, position: "absolute", left: 54, right: 54, bottom: 52, lineHeight: 1.4 }}>Figures in this document are modelled estimates based on the information provided. They are not a promise of results.</Text>
         <Text style={{ fontSize: 9, color: GREY, position: "absolute", left: 54, bottom: 36 }}>Prepared with Partner2B</Text>
       </Page>
+      {groups.filter((g) => g.head).length >= 3 && (
+        <Page size="A4" style={s.page}>
+          <Text style={{ fontFamily: "Helvetica-Bold", fontSize: 26, lineHeight: 1.15 }}>Contents</Text>
+          <View style={{ marginTop: 26 }}>
+            {groups.filter((g) => g.head).map((g, i) => (
+              <View key={i} wrap={false} style={{ flexDirection: "row", paddingVertical: 9, borderBottomWidth: 0.6, borderBottomColor: LINE, borderBottomStyle: "solid" }}>
+                <Text style={{ width: 44, fontFamily: "Helvetica-Bold", fontSize: 12, color: GREY }}>{safe(g.head!.number)}</Text>
+                <Text style={{ flex: 1, fontSize: 12.5 }}>{safe(g.head!.title)}</Text>
+              </View>
+            ))}
+          </View>
+          <Foot />
+        </Page>
+      )}
       {groups.map((g, gi) => (
         <React.Fragment key={gi}>
           {g.head && (

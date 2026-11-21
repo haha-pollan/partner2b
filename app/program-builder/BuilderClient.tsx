@@ -51,6 +51,7 @@ export function BuilderClient() {
   const [v, setV] = useState<Vals>(empty);
   const [goals, setGoals] = useState<string[]>([]);
   const [brand, setBrand] = useState({ color: "", logo: "" });
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [consent, setConsent] = useState(false);
   const [trap, setTrap] = useState("");
@@ -96,10 +97,11 @@ export function BuilderClient() {
   }
   async function generate(e: React.FormEvent) {
     e.preventDefault();
+    if (!name.trim()) { setErr("Please enter your name."); return; }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || !consent) { setErr("Please enter a valid email and tick the box to receive your report."); return; }
     setErr(""); setBusy(true);
     try {
-      const res = await fetch("/api/program-builder", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ action: "generate", input: { ...v, programGoals: goals }, brand, email, consent, website_confirm: trap }) });
+      const res = await fetch("/api/program-builder", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ action: "generate", input: { ...v, programGoals: goals, contactName: name.trim() }, brand, email, consent, website_confirm: trap }) });
       const j = await res.json().catch(() => null);
       if (!j || !j.ok) setErr(j?.error ?? "This took longer than expected. Please try again.");
       else { setDone({ pdf: j.pdf, company: j.company }); scroll(); }
@@ -202,7 +204,8 @@ export function BuilderClient() {
         <input value={v.companyName} onChange={(e) => set("companyName", e.target.value)} maxLength={80} style={inputS} />
         <div style={{ marginTop: 30, background: "#A8FF5C", color: "#0A0A0B", borderRadius: 16, padding: "24px 26px" }}>
           <div style={{ fontFamily: "'Michroma',sans-serif", fontSize: 17 }}>Where should we send your strategy?</div>
-          <input type="email" required maxLength={320} value={email} onChange={(e) => setEmail(e.target.value)} placeholder="name@company.com" style={{ ...inputS, marginTop: 14, background: "#fff", color: "#0A0A0B", border: "1px solid #0A0A0B" }} />
+          <input required maxLength={80} value={name} onChange={(e) => setName(e.target.value)} placeholder="Your name" autoComplete="name" style={{ ...inputS, marginTop: 14, background: "#fff", color: "#0A0A0B", border: "1px solid #0A0A0B" }} />
+          <input type="email" required maxLength={320} value={email} onChange={(e) => setEmail(e.target.value)} placeholder="name@company.com" autoComplete="email" style={{ ...inputS, marginTop: 12, background: "#fff", color: "#0A0A0B", border: "1px solid #0A0A0B" }} />
           <label style={{ display: "flex", gap: 10, alignItems: "flex-start", marginTop: 14, fontSize: 14, lineHeight: 1.45, cursor: "pointer" }}>
             <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} style={{ width: 18, height: 18, marginTop: 1, accentColor: "#0A0A0B", flex: "0 0 18px" }} />
             <span>I agree to the <Link href="/privacy" style={{ textDecoration: "underline" }}>privacy policy</Link> and to receive occasional partner marketing news</span>
