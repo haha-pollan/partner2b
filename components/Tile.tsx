@@ -30,7 +30,7 @@ export function Glyph({ kind, fg, size }: { kind: string; fg: string; size: numb
 export function Tile({ type, size = 88, domain }: { type: string; size?: number; domain?: string | null }) {
   const t = TYPES[type] ?? TYPES.Technology;
   const glyph = (
-    <div style={{ flex: `0 0 ${size}px`, width: size, height: size, background: t.bg, display: "flex", alignItems: "center", justifyContent: "center", borderRadius: 14 }}>
+    <div style={{ flex: `0 0 ${size}px`, width: size, height: size, background: t.bg, display: "flex", alignItems: "center", justifyContent: "center", borderRadius: 16 }}>
       <Glyph kind={t.kind} fg={t.fg} size={Math.round(size * 0.62)} />
     </div>
   );

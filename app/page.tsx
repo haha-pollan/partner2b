@@ -25,7 +25,7 @@ const ROWS: [string, string, string, number][] = [
   ["#0A0A0B", "#A8FF5C", "#A8FF5C", 20],
 ];
 
-const label: React.CSSProperties = { background: "#A8FF5C", color: "#0A0A0B", fontWeight: 500, fontSize: 14, padding: "7px 14px", borderRadius: 8, whiteSpace: "nowrap" };
+const label: React.CSSProperties = { background: "#A8FF5C", color: "#0A0A0B", fontWeight: 500, fontSize: 14, padding: "7px 14px", borderRadius: 12, whiteSpace: "nowrap" };
 
 export default async function Home() {
   const all = await getPrograms();
@@ -149,8 +149,8 @@ export default async function Home() {
                 </div>
               ))}
               <div style={{ display: "flex", gap: 12, marginTop: 14, flexWrap: "wrap" }}>
-                <span style={{ background: "#A8FF5C", color: "#0A0A0B", fontWeight: 400, fontFamily: "'Michroma',sans-serif", padding: "12px 20px", borderRadius: 10, fontSize: 14 }}>Go to program</span>
-                <span style={{ border: "1.5px solid #55565B", fontWeight: 400, fontFamily: "'Michroma',sans-serif", padding: "12px 20px", borderRadius: 10, fontSize: 14 }}>Report a correction</span>
+                <span style={{ background: "#A8FF5C", color: "#0A0A0B", fontWeight: 400, fontFamily: "'Michroma',sans-serif", padding: "12px 20px", borderRadius: 12, fontSize: 14 }}>Go to program</span>
+                <span style={{ border: "1.5px solid #55565B", fontWeight: 400, fontFamily: "'Michroma',sans-serif", padding: "12px 20px", borderRadius: 12, fontSize: 14 }}>Report a correction</span>
               </div>
             </div>
             <div className="lblcol" style={{ display: "flex", flexDirection: "column", gap: 56, alignItems: "flex-start" }}>
@@ -189,7 +189,7 @@ export default async function Home() {
             {["Company name", "Program page URL", "Work email"].map((k) => (
               <div key={k} style={{ marginBottom: 14 }}>
                 <div style={{ fontSize: 14, fontWeight: 400 }}>{k}</div>
-                <div style={{ marginTop: 6, background: "#1C1D20", border: "1px solid #2A2B2F", borderRadius: 10, height: 46 }} />
+                <div style={{ marginTop: 6, background: "#1C1D20", border: "1px solid #2A2B2F", borderRadius: 12, height: 46 }} />
               </div>
             ))}
             <div style={{ marginTop: 20, background: "#A8FF5C", color: "#0A0A0B", fontWeight: 400, fontFamily: "'Michroma',sans-serif", fontSize: 14, textAlign: "center", padding: "16px 30px", borderRadius: 12 }}>Claim a listing</div>

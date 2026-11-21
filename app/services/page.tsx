@@ -124,7 +124,7 @@ export default function Services() {
                 { s: STEPS[2], bg: "#A8FF5C", fg: "#0A0A0B", gl: "#0A0A0B", rot: -3, ml: 12 },
               ].map(({ s, bg, fg, gl, rot, ml }) => (
                 <a key={s.id} href={`#${s.id}`} className="cut hcard" style={{ marginLeft: ml, transform: `rotate(${rot}deg)`, background: bg, color: fg, padding: "22px 26px", display: "flex", alignItems: "center", gap: 18 }}>
-                  <div style={{ flex: "0 0 64px", width: 64, height: 64, borderRadius: 14, border: `2px solid ${gl}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <div style={{ flex: "0 0 64px", width: 64, height: 64, borderRadius: 16, border: `2px solid ${gl}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
                     <Glyph kind={s.kind} fg={gl} size={38} />
                   </div>
                   <div style={{ minWidth: 0 }}>
@@ -160,7 +160,7 @@ export default function Services() {
               return (
                 <div key={g.t} className="cut" style={{ background: T.bg, color: T.fg, transform: `rotate(${rot}deg)`, padding: "26px 28px 30px", position: "relative" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-                    <div style={{ flex: "0 0 56px", width: 56, height: 56, borderRadius: 14, border: `2px solid ${T.gl}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <div style={{ flex: "0 0 56px", width: 56, height: 56, borderRadius: 16, border: `2px solid ${T.gl}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
                       <Glyph kind={g.kind} fg={T.gl} size={32} />
                     </div>
                     <h3 style={{ fontWeight: 400, fontSize: 18, letterSpacing: 0, lineHeight: 1.3, flex: 1 }}>{g.t}</h3>
@@ -232,7 +232,7 @@ export default function Services() {
           <div style={{ display: "flex", flexWrap: "wrap", gap: 36, marginTop: 64, justifyContent: "center" }}>
             {WHY.map((w) => (
               <div key={w.t} className="cut" style={{ flex: "1 1 300px", maxWidth: 400, transform: `rotate(${w.rot}deg)`, background: w.bg, color: w.fg, padding: "28px 28px 40px" }}>
-                <div style={{ width: 64, height: 64, borderRadius: 14, border: `2px solid ${w.fg}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <div style={{ width: 64, height: 64, borderRadius: 16, border: `2px solid ${w.fg}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
                   <Glyph kind={w.kind} fg={w.fg} size={38} />
                 </div>
                 <h3 style={{ margin: "22px 0 0", fontWeight: 400, fontSize: 22, letterSpacing: 0, lineHeight: 1.1 }}>{w.t}</h3>
@@ -257,7 +257,7 @@ export default function Services() {
             {["Company name", "Work email", "Where growth is stuck"].map((k) => (
               <div key={k} style={{ marginBottom: 14 }}>
                 <div style={{ fontSize: 14, fontWeight: 400 }}>{k}</div>
-                <div style={{ marginTop: 6, background: "#1C1D20", border: "1px solid #2A2B2F", borderRadius: 10, height: 46 }} />
+                <div style={{ marginTop: 6, background: "#1C1D20", border: "1px solid #2A2B2F", borderRadius: 12, height: 46 }} />
               </div>
             ))}
             <div style={{ marginTop: 22, background: "#A8FF5C", color: "#0A0A0B", fontWeight: 400, fontFamily: "'Michroma',sans-serif", fontSize: 14, textAlign: "center", padding: "16px 30px", borderRadius: 12 }}>Talk to us</div>

@@ -62,13 +62,13 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
             {p.commission_models.some((c) => c !== "Not published") && <span className="tag" style={{ background: "#ECECEE" }}>{commissionLabel(p)}</span>}
           </div>
           <div style={{ marginTop: 36, display: "flex", gap: 10, flexWrap: "wrap", maxWidth: 800 }}>
-            <a href={p.program_url} target="_blank" rel="noopener noreferrer" style={{ display: "inline-block", background: "#0A0A0B", color: "#A8FF5C", fontWeight: 400, fontFamily: "'Michroma',sans-serif", fontSize: 14, padding: "14px 24px", borderRadius: 10 }}>
+            <a href={p.program_url} target="_blank" rel="noopener noreferrer" style={{ display: "inline-block", background: "#0A0A0B", color: "#A8FF5C", fontWeight: 400, fontFamily: "'Michroma',sans-serif", fontSize: 14, padding: "14px 26px", borderRadius: 12 }}>
               Visit the official program page
             </a>
-            <Link href={`/claim?listing=${p.slug}`} style={{ display: "inline-block", border: "2px solid #0A0A0B", color: "#0A0A0B", fontWeight: 400, fontFamily: "'Michroma',sans-serif", fontSize: 14, padding: "12px 22px", borderRadius: 10 }}>
+            <Link href={`/claim?listing=${p.slug}`} style={{ display: "inline-block", border: "2px solid #0A0A0B", color: "#0A0A0B", fontWeight: 400, fontFamily: "'Michroma',sans-serif", fontSize: 14, padding: "12px 20px", borderRadius: 12 }}>
               Claim this listing
             </Link>
-            <Link href={`/report?listing=${p.slug}`} style={{ display: "inline-block", border: "2px solid #0A0A0B", color: "#0A0A0B", fontWeight: 400, fontFamily: "'Michroma',sans-serif", fontSize: 14, padding: "12px 22px", borderRadius: 10 }}>
+            <Link href={`/report?listing=${p.slug}`} style={{ display: "inline-block", border: "2px solid #0A0A0B", color: "#0A0A0B", fontWeight: 400, fontFamily: "'Michroma',sans-serif", fontSize: 14, padding: "12px 20px", borderRadius: 12 }}>
               Report a correction
             </Link>
           </div>
@@ -101,7 +101,7 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
                 <div style={{ marginTop: 20, display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(300px,1fr))", gap: 14 }}>
                   {p.benefits.map((b) => (
                     <div key={b} className="card cut" style={{ display: "flex", gap: 18, alignItems: "flex-start", minHeight: 110 }}>
-                      <span style={{ flex: "0 0 40px", height: 40, background: "#0A0A0B", borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      <span style={{ flex: "0 0 40px", height: 40, background: "#0A0A0B", borderRadius: 12, display: "flex", alignItems: "center", justifyContent: "center" }}>
                         <Glyph kind="diamond" fg="#A8FF5C" size={20} />
                       </span>
                       <span style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 17, letterSpacing: 0, lineHeight: 1.25 }}>{b}</span>
@@ -141,7 +141,7 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
               <div style={{ fontSize: 14, color: "#85868B", fontWeight: 400 }}>Source</div>
               <a href={p.program_url} target="_blank" rel="noopener noreferrer" style={{ display: "inline-block", marginTop: 4, fontSize: 18, fontWeight: 400, color: "#A8FF5C", textDecoration: "underline" }}>Official {p.company} partner program page</a>
               <p style={{ margin: "18px 0 0", fontSize: 15, lineHeight: 1.5, color: "#B9BABD" }}>Information on this page comes from the public page above</p>
-              <Link href={`/report?listing=${p.slug}`} style={{ display: "block", marginTop: 16, background: "#A8FF5C", color: "#0A0A0B", fontWeight: 400, fontFamily: "'Michroma',sans-serif", fontSize: 14, textAlign: "center", padding: "14px", borderRadius: 10 }}>Report a correction</Link>
+              <Link href={`/report?listing=${p.slug}`} style={{ display: "block", marginTop: 16, background: "#A8FF5C", color: "#0A0A0B", fontWeight: 400, fontFamily: "'Michroma',sans-serif", fontSize: 14, textAlign: "center", padding: "14px", borderRadius: 12 }}>Report a correction</Link>
             </div>
           </aside>
         </div>

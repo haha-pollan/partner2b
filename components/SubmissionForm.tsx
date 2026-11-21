@@ -7,7 +7,7 @@ import { TYPES, CATEGORIES, ISSUES, type Kind } from "@/lib/formsConfig";
 type Opt = { slug: string; label: string };
 const init: FormState = { ok: false };
 
-const inputS: React.CSSProperties = { width: "100%", background: "#1C1D20", color: "#ECECEE", border: "1px solid #2A2B2F", borderRadius: 10, padding: "14px 16px", font: "inherit", fontSize: 17 };
+const inputS: React.CSSProperties = { width: "100%", background: "#1C1D20", color: "#ECECEE", border: "1px solid #2A2B2F", borderRadius: 12, padding: "14px 16px", font: "inherit", fontSize: 17 };
 const Lbl = ({ t, req }: { t: string; req?: boolean }) => (
   <label style={{ display: "block", fontSize: 15, fontWeight: 500, margin: "22px 0 8px" }}>{t}{req && <span style={{ color: "#A8FF5C" }}> *</span>}</label>
 );

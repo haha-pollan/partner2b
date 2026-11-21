@@ -4,7 +4,7 @@ import Link from "next/link";
 import { GOALS, AUDIENCES, SIZES, STAGES, REGIONS, BUILDER_CATEGORIES } from "@/lib/builder/config";
 import type { Teaser, Result } from "@/lib/builder/engine";
 
-const inputS: React.CSSProperties = { width: "100%", background: "#1C1D20", color: "#ECECEE", border: "1px solid #2A2B2F", borderRadius: 10, padding: "14px 16px", font: "inherit", fontSize: 17 };
+const inputS: React.CSSProperties = { width: "100%", background: "#1C1D20", color: "#ECECEE", border: "1px solid #2A2B2F", borderRadius: 12, padding: "14px 16px", font: "inherit", fontSize: 17 };
 const Lbl = ({ t, req }: { t: string; req?: boolean }) => (
   <label style={{ display: "block", fontSize: 15, fontWeight: 500, margin: "22px 0 8px" }}>{t}{req && <span style={{ color: "#A8FF5C" }}> *</span>}</label>
 );
@@ -12,7 +12,7 @@ const Hint = ({ t }: { t: string }) => <div style={{ marginTop: 8, fontSize: 14,
 const btn: React.CSSProperties = { background: "#A8FF5C", color: "#0A0A0B", fontWeight: 400, fontFamily: "'Michroma',sans-serif", padding: "16px 30px", borderRadius: 12, fontSize: 14, border: 0, cursor: "pointer" };
 const h3s: React.CSSProperties = { fontWeight: 400, fontSize: 20, letterSpacing: 0, margin: "36px 0 14px", color: "#fff" };
 const sub: React.CSSProperties = { fontSize: 14, color: "#A8FF5C", fontWeight: 500, margin: "0 0 6px" };
-const box: React.CSSProperties = { background: "#1C1D20", borderRadius: 14, padding: "18px 20px", marginBottom: 12 };
+const box: React.CSSProperties = { background: "#1C1D20", borderRadius: 16, padding: "18px 20px", marginBottom: 12 };
 
 type Vals = Record<string, string>;
 const empty: Vals = { url: "", category: "", goal: "", goal2: "", audience: "", size: "", stage: "", region: "" };
