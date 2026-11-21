@@ -1,12 +1,13 @@
 "use client";
 import { useEffect, useRef } from "react";
-import { TOBY_W, TOBY_H, TOBY_PALETTE, TOBY_ROWS, TOBY_BLOCKS, TOBY_EYES, TOBY_SMILE } from "@/lib/toby";
+import { TOBY_W, TOBY_H, TOBY_PALETTE, TOBY_ROWS, TOBY_BLOCKS, TOBY_EYES, TOBY_MOUTH, TOBY_SMILE } from "@/lib/toby";
 
 type Item = { x: number; y: number; s: number; c: number; t: number };
 
 const SKIN = 3; // palette index of the light face colour
 const LIME = 5;
-const DARK = "#0F1012";
+const DARK = "#0A0A0B";
+const DARKI = 7; // palette index of the dark colour
 
 // Deterministic pseudo random so the build-up looks the same on server and client
 const rnd = (n: number) => {
@@ -28,6 +29,8 @@ export function Toby({ height = 300, lime = true, animate = true, className, sty
 
     // all pixels in one list, each with the time it appears in the build-up
     const items: Item[] = [];
+    // eyes and mouth are dark pixels, drawn first so the white highlights sit on top
+    [...TOBY_EYES, ...TOBY_MOUTH].forEach(([x, y], i) => items.push({ x, y, s: 1, c: DARKI, t: (y / TOBY_H) * 0.9 + rnd(i * 5 + 1) * 0.7 }));
     TOBY_ROWS.forEach((row, y) => {
       for (let x = 0; x < row.length; x++) {
         const ch = row[x];

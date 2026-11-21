@@ -170,6 +170,6 @@ p{text-wrap:pretty}
 }
 
 /* Toby in the home hero */
-.tobyslot{min-height:560px}
+.tobyslot{min-height:610px}
 .tobyfig{position:absolute;right:46px;bottom:-64px;z-index:2;pointer-events:auto}
 @media (max-width:1100px){.tobyslot{min-height:0}.tobyfig{position:static;align-self:center;margin-top:6px}}
