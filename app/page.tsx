@@ -7,6 +7,7 @@ import { HomeModules } from "@/components/HomeModules";
 import { Glyph, Tile } from "@/components/Tile";
 import { getPrograms } from "@/lib/programs";
 import { AI_CATEGORIES, inCat, aiOnly, aiIsNew } from "@/lib/ai";
+import { builderIsNew } from "@/lib/launch";
 
 export const revalidate = 600;
 export const metadata: Metadata = {
@@ -36,7 +37,6 @@ export default async function Home() {
   const cards = [
     { p: pick("Reseller"), bg: "#0A0A0B", fg: "#ECECEE", rot: -5, ml: 0 },
     { p: pick("MSP") ?? pick("Services"), bg: "#ECECEE", fg: "#0A0A0B", rot: 3, ml: 36 },
-    { p: pick("Technology"), bg: "#A8FF5C", fg: "#0A0A0B", rot: -3, ml: 12 },
   ].filter((c) => c.p);
 
   return (
@@ -44,43 +44,38 @@ export default async function Home() {
       <div style={{ background: "#fff url(/mesh-program.svg) top / 100% 100% no-repeat" }}>
       {/* Hero */}
       <div style={{ position: "relative", overflow: "hidden", color: "#0A0A0B" }}>
-        <div className="limepanel" />
+        <div className="limefull" />
         <Nav />
-        <div className="wrap" style={{ padding: "24px 40px clamp(36px,9vw,110px)", display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 40, flexWrap: "wrap" }}>
-          <div style={{ flex: "1 1 520px", maxWidth: 720 }}>
-            <h1 className="h1big">
-              <span style={{ display: "block" }}>Find the B2B</span>
-              <span style={{ display: "block" }}>partner program</span>
-              <span style={{ display: "block" }}>that fits</span>
+        <div className="wrap hc">
+          <div className="hcin">
+            <h1 className="h1big hch1">
+              <span style={{ display: "block" }}>Find a partner program</span>
+              <span style={{ display: "block" }}>or build your own</span>
             </h1>
-            <p style={{ margin: "24px 0 0", maxWidth: "100%", fontSize: 21, lineHeight: 1.5, fontWeight: 300 }}>
-              <span style={{ display: "block" }}>Grow your business through partner ecosystems.</span>
-              <span style={{ display: "block" }}>{`Compare commissions, tiers and requirements across ${all.length} programs, then join the ones that fit`}</span>
-            </p>
+            <p className="hcp">{`Compare commissions, tiers and requirements across ${all.length} programs, or answer a few questions and get a strategy for your own`}</p>
             <form method="get" action="/directory" className="search" role="search">
               <label htmlFor="q" style={{ position: "absolute", left: -9999 }}>Search programs or companies</label>
               <input id="q" name="q" type="search" placeholder="Search programs or companies" />
               <button type="submit">Search</button>
             </form>
-            <p className="heronew" style={{ margin: "22px 0 0", fontSize: 16, fontWeight: 400 }}>
-              <span style={{ fontFamily: "'Michroma',sans-serif", fontSize: 12, background: "#0A0A0B", color: "#A8FF5C", padding: "4px 10px", borderRadius: 999, marginRight: 12 }}>New</span>
-              <Link href="/ai" style={{ textDecoration: "underline", textUnderlineOffset: 4 }}>AI partner programs</Link>
-              <span aria-hidden="true" style={{ margin: "0 10px" }}>·</span>
-              <Link href="/program-builder" style={{ textDecoration: "underline", textUnderlineOffset: 4 }}>Program builder</Link>
-            </p>
+            <div className="hcor"><span>or</span></div>
+            <Link href="/program-builder" className="cut hcbuild">
+              {builderIsNew() && <span suppressHydrationWarning className="hcbnew">New</span>}
+              <span>Build your own program</span><span aria-hidden="true">→</span>
+            </Link>
           </div>
-          <div style={{ flex: "0 0 380px", maxWidth: "100%", display: "flex", flexDirection: "column", gap: 22, marginTop: 20 }}>
-            {cards.map(({ p, bg, fg, rot, ml }) => (
-              <Link key={p!.id} href={`/directory/${p!.slug}`} className="cut hcard" style={{ marginLeft: ml, transform: `rotate(${rot}deg)`, background: bg, color: fg, padding: "22px 26px", display: "flex", alignItems: "center", gap: 18 }}>
-                <Tile type={p!.primary_type} size={64} domain={p!.domain} />
+          <div className="hccards" aria-hidden="false">
+            {cards.map(({ p, bg, fg, rot }, i) => (
+              <Link key={p!.id} href={`/directory/${p!.slug}`} className={`cut hcard hccard hccard${i}`} style={{ transform: `rotate(${rot}deg)`, background: bg, color: fg }}>
+                <Tile type={p!.primary_type} size={52} domain={p!.domain} />
                 <div style={{ minWidth: 0 }}>
-                  <div style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 21, letterSpacing: 0, lineHeight: 1.1 }}>{p!.company}</div>
-                  <div style={{ marginTop: 6, fontSize: 15, fontWeight: 400, opacity: 0.8 }}>{p!.primary_type}</div>
+                  <div style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 18, lineHeight: 1.1 }}>{p!.company}</div>
+                  <div style={{ marginTop: 5, fontSize: 14, opacity: 0.8 }}>{p!.primary_type}</div>
                 </div>
               </Link>
             ))}
           </div>
-          <div className="tobymid"><Toby height={340} /></div>
+          <div className="hctoby"><Toby height={300} /></div>
         </div>
       </div>
 
