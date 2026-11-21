@@ -1,3 +1,4 @@
+import { buildEconomics } from "@/lib/builder2/economics";
 import { NextResponse } from "next/server";
 import { URL as SB_URL, KEY } from "@/lib/programs";
 import { parseIntake, normaliseUrl } from "@/lib/builder2/intake";
@@ -62,7 +63,7 @@ export async function POST(req: Request) {
     }
     if (!blocks.length) return fail("The strategy did not come out complete. Please try again.", 502);
     const { renderPlan } = await import("@/lib/builder2/PlanPdf");
-    const pdf = await renderPlan({ title: `${intake.companyName} partner program strategy`, company: intake.companyName, accent: brand.color || "#5B3FE0", logo: brand.logo, blocks, contactName: intake.contactName, website: intake.website, goals: intake.programGoals, category: intake.category, region: intake.region, audience: intake.audience });
+    const pdf = await renderPlan({ title: `${intake.companyName} partner program strategy`, company: intake.companyName, accent: brand.color || "#5B3FE0", logo: brand.logo, blocks, econ: buildEconomics(intake, vertical, acvAverage).chart, sharePercent: intake.partnerRevenueSharePercent, contactName: intake.contactName, website: intake.website, goals: intake.programGoals, category: intake.category, region: intake.region, audience: intake.audience });
     return NextResponse.json({ ok: true, company: intake.companyName, pdf: pdf.toString("base64") });
   } catch (e) {
     const msg = e instanceof Error ? e.message : "";

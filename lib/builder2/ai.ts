@@ -6,7 +6,7 @@ export const MODEL = process.env.OPENAI_MODEL || "gpt-4.1";
 
 export function buildPrompt(intake: Intake, vertical: string, acvAverage: number) {
   const data = { ...intake, vertical, acvAverage };
-  const pack = buildEconomics(intake, vertical, acvAverage);
+  const { chart: _chart, ...pack } = buildEconomics(intake, vertical, acvAverage); void _chart;
   return MASTER_PROMPT.replace("{{intakeData}}", JSON.stringify(data, null, 2)).replace("{{economicsPack}}", JSON.stringify(pack, null, 2)).replace("{{previousOutputs}}", "(none)");
 }
 

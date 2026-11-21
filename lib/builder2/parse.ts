@@ -6,6 +6,7 @@ export type Line =
   | { t: "h"; text: string };
 
 export type Block =
+  | { kind: "ecosystem"; customers: string[]; nodes: { type: string; stage: string; role: string; examples: string[] }[] }
   | { kind: "section"; number: string; title: string; intro: string }
   | { kind: "text"; lines: Line[] }
   | { kind: "highlight"; number: string; insight: string; tag: string }
@@ -62,6 +63,15 @@ export function parse(raw: string): Block[] {
     free(text.slice(last, m.index)); last = re.lastIndex;
     const [, tok, attrs, body] = m; const fs = fields(body);
     switch (tok) {
+      case "ECOSYSTEM_MAP": {
+        const customers = one(get(fs, /^CUSTOMERS/)).split(/[,;]/).map((x) => x.trim()).filter(Boolean).slice(0, 4);
+        const nodes = body.split(/^NODE \d+:\s*$/m).slice(1).map((chunk) => {
+          const f = fields(chunk);
+          return { type: one(get(f, /^TYPE/)), stage: one(get(f, /^STAGE/)), role: one(get(f, /^ROLE/)), examples: one(get(f, /^EXAMPLES/)).split(";").map((x) => x.trim()).filter(Boolean).slice(0, 3) };
+        }).filter((n) => n.type).slice(0, 6);
+        if (nodes.length >= 2) blocks.push({ kind: "ecosystem", customers, nodes });
+        break;
+      }
       case "SECTION_BREAK": blocks.push({ kind: "section", number: one(get(fs, /^NUMBER/)), title: one(get(fs, /^TITLE/)), intro: one(get(fs, /^INTRO/)) }); break;
       case "HIGHLIGHT_CARD": blocks.push({ kind: "highlight", number: (attrs.match(/number=(\d+)/)?.[1] ?? ""), insight: one(get(fs, /^INSIGHT/)), tag: one(get(fs, /^TAG/)) }); break;
       case "PARTNER_CARD": blocks.push({ kind: "partner", title: one(get(fs, /^TITLE/)), fields: fs.filter((f) => !/^TITLE/.test(f.label)).map((f) => ({ label: f.label, lines: toLines(f.text) })) }); break;

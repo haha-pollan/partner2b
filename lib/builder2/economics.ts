@@ -78,6 +78,7 @@ export function buildEconomics(i: Intake, vertical: string, acvAverage: number) 
   const cap = CAP[vertical] ?? 25;
   const out: Record<string, unknown> = {};
   const conservativeDeals: number[] = [];
+  const chartTypes: Record<string, { lo: number; hi: number; loText: string; hiText: string }> = {};
 
   for (const t of TYPES) {
     const row = rowFor(vertical, t.kind, toUsd(acvAverage));
@@ -129,12 +130,18 @@ export function buildEconomics(i: Intake, vertical: string, acvAverage: number) 
       };
     }
     out[t.name] = entry;
+    chartTypes[t.name] = { lo: dLo * comLo, hi: dHi * comHi, loText: money(dLo * comLo), hiText: money(dHi * comHi) };
     if (!["AI and Automation Partner"].includes(t.name)) conservativeDeals.push(dLo);
   }
   const avgDeals = conservativeDeals.reduce((a, c) => a + c, 0) / conservativeDeals.length;
   const projected = 8 * avgDeals * 0.5 * acvAverage;
   const target = i.year1PartnerRevenueTarget;
+  const chart = {
+    types: chartTypes, projected, target, projectedText: money(projected), targetText: money(target), diffText: money(Math.abs(projected - target)), activePartners: 8,
+    thresholds: { t1: `${money(acvAverage * 5)}`, t2: `${money(acvAverage * 20)}` },
+  };
   return {
+    chart,
     currency: i.currency,
     acvAverageFormatted: money(acvAverage),
     tierThresholds: { tier1ToTier2: `${money(acvAverage * 5)} of partner-sourced revenue since joining`, tier2ToTier3: `${money(acvAverage * 20)} of partner-sourced revenue since joining` },
