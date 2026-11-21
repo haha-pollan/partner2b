@@ -5,11 +5,11 @@ import { BuilderClient } from "./BuilderClient";
 
 export const metadata: Metadata = {
   title: "Partner program builder | Partner2B",
-  description: "Answer a few questions and get a partner program blueprint: your ideal partner profile, program structure, a 90-day plan and ten matched programs to benchmark.",
+  description: "Answer a few questions and get a full partner program strategy as a PDF in your own branding: partner types, tiers, commercial model, KPIs and a 90-day plan.",
   alternates: { canonical: "/program-builder" },
 };
 
-const steps = ["Tell us about your company and goals", "We define your ideal partner profile", "You get a blueprint and ten matched programs"];
+const steps = ["Tell us about your company, buyers and goals", "We write your partner program strategy", "You download a PDF in your own branding"];
 
 export default function Page() {
   return (
@@ -21,11 +21,11 @@ export default function Page() {
           <div className="wrap" style={{ padding: "24px 40px clamp(36px,9vw,90px)", display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 40, flexWrap: "wrap" }}>
             <div style={{ maxWidth: "100%" }}>
               <h1 className="h1big" style={{ fontSize: "clamp(28px,4vw,64px)" }}>Partner program builder</h1>
-              <p style={{ margin: "22px 0 0", maxWidth: 560, fontSize: 21, lineHeight: 1.5, fontWeight: 300 }}>Not sure which partners fit your product? Answer a few questions and get a program built around your ideal partner profile</p>
+              <p style={{ margin: "22px 0 0", maxWidth: 560, fontSize: 21, lineHeight: 1.5, fontWeight: 300 }}>Not sure which partners fit your product? Answer a few questions and get a full partner program strategy</p>
             </div>
             <div className="cut statcard" style={{ flex: "0 0 320px", margin: "20px 40px 0 0", transform: "rotate(-4deg)", background: "#0A0A0B", color: "#ECECEE", padding: "28px 32px" }}>
               <div style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 49, letterSpacing: 0, lineHeight: 1, color: "#A8FF5C" }}>Free</div>
-              <div style={{ marginTop: 8, fontSize: 18 }}>blueprint in 2 minutes</div>
+              <div style={{ marginTop: 8, fontSize: 18 }}>strategy in 3 minutes</div>
             </div>
           </div>
         </div>

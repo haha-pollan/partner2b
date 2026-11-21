@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  serverExternalPackages: ["@react-pdf/renderer"],
   async redirects() {
     return [
       { source: "/blog", destination: "/post", permanent: true },

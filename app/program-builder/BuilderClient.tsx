@@ -1,216 +1,221 @@
 "use client";
-import { useState } from "react";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { GOALS, AUDIENCES, SIZES, STAGES, REGIONS, BUILDER_CATEGORIES } from "@/lib/builder/config";
-import type { Teaser, Result } from "@/lib/builder/engine";
+import { BUILDER_CATEGORIES, DELIVERY, AUDIENCES, REGIONS, STAGES, CURRENCIES, GOALS } from "@/lib/builder2/intake";
+import { DEMOS } from "./demos";
 
 const inputS: React.CSSProperties = { width: "100%", background: "#1C1D20", color: "#ECECEE", border: "1px solid #2A2B2F", borderRadius: 12, padding: "14px 16px", font: "inherit", fontSize: 17 };
-const Lbl = ({ t, req }: { t: string; req?: boolean }) => (
-  <label style={{ display: "block", fontSize: 15, fontWeight: 500, margin: "22px 0 8px" }}>{t}{req && <span style={{ color: "#A8FF5C" }}> *</span>}</label>
-);
+const Lbl = ({ t, req }: { t: string; req?: boolean }) => (<label style={{ display: "block", fontSize: 15, fontWeight: 500, margin: "22px 0 8px" }}>{t}{req && <span style={{ color: "#A8FF5C" }}> *</span>}</label>);
 const Hint = ({ t }: { t: string }) => <div style={{ marginTop: 8, fontSize: 14, color: "#85868B" }}>{t}</div>;
 const btn: React.CSSProperties = { background: "#A8FF5C", color: "#0A0A0B", fontWeight: 400, fontFamily: "'Michroma',sans-serif", padding: "16px 30px", borderRadius: 12, fontSize: 14, border: 0, cursor: "pointer" };
-const h3s: React.CSSProperties = { fontWeight: 400, fontSize: 20, letterSpacing: 0, margin: "36px 0 14px", color: "#fff" };
-const sub: React.CSSProperties = { fontSize: 14, color: "#A8FF5C", fontWeight: 500, margin: "0 0 6px" };
-const box: React.CSSProperties = { background: "#1C1D20", borderRadius: 16, padding: "18px 20px", marginBottom: 12 };
+const ghost: React.CSSProperties = { background: "transparent", border: 0, color: "#A8FF5C", cursor: "pointer", font: "inherit", fontSize: 15, textDecoration: "underline", padding: 0 };
 
 type Vals = Record<string, string>;
-const empty: Vals = { url: "", category: "", goal: "", goal2: "", audience: "", size: "", stage: "", region: "" };
+const empty: Vals = { website: "", companyName: "", category: "", offeringSummary: "", keyFeatures: "", differentiators: "", deliveryModel: "", competitors: "", endUser: "", primaryBuyer: "", audience: "", industriesServed: "", region: "", pricing: "", acvLow: "", acvHigh: "", currency: "USD", stage: "", year1PartnerRevenueTarget: "", partnerRevenueSharePercent: "" };
+const REQUIRED: string[][] = [
+  ["website", "category", "offeringSummary", "keyFeatures", "differentiators", "deliveryModel"],
+  ["endUser", "primaryBuyer", "audience", "industriesServed", "region", "pricing", "acvLow", "acvHigh", "currency"],
+  ["stage", "year1PartnerRevenueTarget", "partnerRevenueSharePercent"],
+];
+const STEPS = ["Your company", "Your buyers", "Your goals", "Your branding"];
+const same = (a: string[]) => a.map((x) => ({ value: x, label: x }));
+const toFile = (c: string) => c.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "company";
 
-function Sel({ name, v, set, opts, ph, req }: { name: string; v: Vals; set: (k: string, x: string) => void; opts: { value: string; label: string }[]; ph: string; req?: boolean }) {
+const Ctx = createContext<{ v: Vals; set: (k: string, x: string) => void }>({ v: empty, set: () => {} });
+function Field({ k, label, ph, hint, area }: { k: string; label: string; ph?: string; hint?: string; area?: boolean }) {
+  const { v, set } = useContext(Ctx);
   return (
-    <select name={name} required={req} value={v[name]} onChange={(e) => set(name, e.target.value)} style={inputS}>
-      <option value="" disabled={req}>{ph}</option>
-      {opts.map((o) => (<option key={o.value} value={o.value}>{o.label}</option>))}
-    </select>
+    <>
+      <Lbl t={label} req />
+      {area ? <textarea rows={3} value={v[k]} onChange={(e) => set(k, e.target.value)} placeholder={ph} maxLength={600} style={{ ...inputS, resize: "vertical" }} />
+        : <input value={v[k]} onChange={(e) => set(k, e.target.value)} placeholder={ph} maxLength={300} style={inputS} />}
+      {hint && <Hint t={hint} />}
+    </>
   );
 }
-const same = (a: string[]) => a.map((x) => ({ value: x, label: x }));
+function Sel({ k, label, opts, req = true }: { k: string; label: string; opts: string[]; req?: boolean }) {
+  const { v, set } = useContext(Ctx);
+  return (
+    <>
+      <Lbl t={label} req={req} />
+      <select value={v[k]} onChange={(e) => set(k, e.target.value)} style={inputS}>
+        <option value="" disabled>Choose one</option>
+        {same(opts).map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
+      </select>
+    </>
+  );
+}
 
 export function BuilderClient() {
+  const [step, setStep] = useState(0);
   const [v, setV] = useState<Vals>(empty);
-  const [teaser, setTeaser] = useState<Teaser | null>(null);
-  const [full, setFull] = useState<{ result: Result; pdf: string } | null>(null);
-  const [busy, setBusy] = useState(false);
-  const [err, setErr] = useState("");
+  const [goals, setGoals] = useState<string[]>([]);
+  const [brand, setBrand] = useState({ color: "", logo: "" });
   const [email, setEmail] = useState("");
   const [consent, setConsent] = useState(false);
   const [trap, setTrap] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [secs, setSecs] = useState(0);
+  const [err, setErr] = useState("");
+  const [done, setDone] = useState<{ pdf: string; company: string } | null>(null);
+  const top = useRef<HTMLDivElement>(null);
   const set = (k: string, x: string) => setV((p) => ({ ...p, [k]: x }));
 
-  async function call(payload: object) {
-    setBusy(true); setErr("");
+  useEffect(() => {
+    const d = new URLSearchParams(window.location.search).get("demo");
+    const demo = d ? DEMOS[d] : null;
+    if (!demo) return;
+    const next: Vals = { ...empty };
+    for (const k of Object.keys(empty)) if (demo[k] !== undefined) next[k] = String(demo[k]);
+    setV(next); setGoals((demo.programGoals as string[]) ?? []);
+  }, []);
+  useEffect(() => { if (!busy) return; setSecs(0); const t = setInterval(() => setSecs((s) => s + 1), 1000); return () => clearInterval(t); }, [busy]);
+  const scroll = () => setTimeout(() => top.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 30);
+
+  function missing(i: number) {
+    if (REQUIRED[i]?.some((k) => !v[k].trim())) return "Please fill in the fields marked with a star.";
+    if (i === 1 && !(Number(v.acvHigh) >= Number(v.acvLow) && Number(v.acvLow) > 0)) return "Please enter the contract value range from a lower to a higher number.";
+    if (i === 2 && goals.length < 1) return "Please choose at least one goal.";
+    if (i === 2 && !(Number(v.partnerRevenueSharePercent) > 0 && Number(v.partnerRevenueSharePercent) <= 100)) return "The share of revenue from partners must be between 1 and 100.";
+    return "";
+  }
+  async function next(e: React.FormEvent) {
+    e.preventDefault();
+    const m = missing(step); if (m) { setErr(m); return; }
+    setErr("");
+    if (step === 0 && (!brand.logo || !v.companyName)) {
+      setBusy(true);
+      try {
+        const res = await fetch("/api/program-builder", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ action: "prefill", website: v.website, website_confirm: trap }) });
+        const j = await res.json();
+        if (j.ok) { setBrand((b) => ({ color: b.color || j.color || "", logo: b.logo || j.logo || "" })); setV((p) => ({ ...p, companyName: p.companyName || j.name || "" })); }
+      } catch { /* branding is optional */ }
+      setBusy(false);
+    }
+    setStep(step + 1); scroll();
+  }
+  async function generate(e: React.FormEvent) {
+    e.preventDefault();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || !consent) { setErr("Please enter a valid email and tick the box to receive your report."); return; }
+    setErr(""); setBusy(true);
     try {
-      const res = await fetch("/api/program-builder", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...payload, website_confirm: trap }) });
-      const j = await res.json();
-      if (!res.ok || !j.ok) { setErr(j.error ?? "Something went wrong. Please try again."); return null; }
-      return j;
-    } catch { setErr("We could not reach the server. Please try again."); return null; } finally { setBusy(false); }
-  }
-  async function build(e: React.FormEvent) {
-    e.preventDefault();
-    const j = await call({ action: "preview", input: v });
-    if (j) { setTeaser(j.teaser); setTimeout(() => document.getElementById("builder-top")?.scrollIntoView({ behavior: "smooth", block: "start" }), 50); }
-  }
-  async function unlock(e: React.FormEvent) {
-    e.preventDefault();
-    const j = await call({ action: "unlock", input: v, email, consent });
-    if (j) setFull({ result: j.result, pdf: j.pdf });
+      const res = await fetch("/api/program-builder", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ action: "generate", input: { ...v, programGoals: goals }, brand, email, consent, website_confirm: trap }) });
+      const j = await res.json().catch(() => null);
+      if (!j || !j.ok) setErr(j?.error ?? "This took longer than expected. Please try again.");
+      else { setDone({ pdf: j.pdf, company: j.company }); scroll(); }
+    } catch { setErr("We could not reach the server. Please try again."); }
+    setBusy(false);
   }
   function download() {
-    if (!full) return;
-    const bin = atob(full.pdf); const bytes = new Uint8Array(bin.length);
+    if (!done) return;
+    const bin = atob(done.pdf); const bytes = new Uint8Array(bin.length);
     for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
     const a = document.createElement("a");
     a.href = URL.createObjectURL(new Blob([bytes], { type: "application/pdf" }));
-    a.download = `${full.result.company.domain.replace(/[^a-z0-9.-]/gi, "")}-partner-program-blueprint.pdf`;
+    a.download = `${toFile(done.company)}-partner-program-strategy.pdf`;
     document.body.appendChild(a); a.click(); a.remove();
   }
+  function onLogo(f: File | undefined) {
+    if (!f) return;
+    if (!/^image\/(png|jpeg)$/.test(f.type) || f.size > 350_000) { setErr("Please upload a PNG or JPG logo under 350 KB."); return; }
+    const r = new FileReader(); r.onload = () => { setErr(""); setBrand((b) => ({ ...b, logo: String(r.result) })); }; r.readAsDataURL(f);
+  }
 
-  const goalOpts = GOALS.map((g) => ({ value: g.id, label: g.label }));
-  const goal2Opts = goalOpts.filter((o) => o.value !== v.goal);
-
-  if (full) return <Report r={full.result} onDownload={download} onEdit={() => { setFull(null); setTeaser(null); }} />;
-
-  if (teaser) {
+  if (done) {
     return (
-      <div id="builder-top">
-        <div style={sub}>Preview</div>
-        <h2 style={{ fontWeight: 400, fontSize: 26, letterSpacing: 0, color: "#fff" }}>{teaser.company.name}: your partner program</h2>
-        <p style={{ marginTop: 16, fontSize: 18, lineHeight: 1.6, color: "#C9CACE" }}>{teaser.ipp.summary}</p>
-        <h3 style={h3s}>Partner types to recruit</h3>
-        {teaser.ipp.partnerTypes.map((t) => (
-          <div key={t.type} style={box}>
-            <div style={{ fontSize: 17, fontWeight: 500, color: "#ECECEE" }}>{t.title}</div>
-            <div style={{ marginTop: 6, fontSize: 15, lineHeight: 1.55, color: "#B9BABD" }}>{t.who}</div>
-          </div>
-        ))}
-        <h3 style={h3s}>Program structure</h3>
-        <p style={{ fontSize: 17, lineHeight: 1.55, color: "#C9CACE", margin: 0 }}>{teaser.model} Tiers: {teaser.tierNames.join(", ")}.</p>
-        <h3 style={h3s}>{teaser.benchmarkCount} programs that fit your ideal partner profile</h3>
-        {teaser.benchmarkPreview.map((b) => (
-          <div key={b.company} style={{ ...box, display: "flex", justifyContent: "space-between", gap: 12, flexWrap: "wrap" }}>
-            <span style={{ fontWeight: 500, color: "#ECECEE" }}>{b.company}</span><span style={{ color: "#85868B", fontSize: 14 }}>{b.category}</span>
-          </div>
-        ))}
-        <div style={{ ...box, filter: "blur(5px)", userSelect: "none" }} aria-hidden="true">Seven more programs with the reasons they fit, the full tier design, economics, 90-day plan and enablement kit</div>
-        <div style={{ marginTop: 28, background: "#A8FF5C", color: "#0A0A0B", borderRadius: 16, padding: "26px 28px" }}>
-          <div style={{ fontFamily: "'Michroma',sans-serif", fontSize: 18 }}>Get the full blueprint as a PDF</div>
-          <p style={{ margin: "10px 0 0", fontSize: 16, lineHeight: 1.5, color: "#0A0A0B" }}>Tiers, economics, the 90-day plan, the enablement kit and all ten matched programs.</p>
-          <form onSubmit={unlock}>
-            <div aria-hidden="true" style={{ position: "absolute", left: -9999, height: 0, overflow: "hidden" }}><label>Leave this empty<input value={trap} onChange={(e) => setTrap(e.target.value)} tabIndex={-1} autoComplete="off" /></label></div>
-            <input type="email" required maxLength={320} value={email} onChange={(e) => setEmail(e.target.value)} placeholder="name@company.com" style={{ ...inputS, marginTop: 16, background: "#fff", color: "#0A0A0B", border: "1px solid #0A0A0B" }} />
-            <label style={{ display: "flex", gap: 10, alignItems: "flex-start", marginTop: 14, fontSize: 14, lineHeight: 1.45, cursor: "pointer" }}>
-              <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} style={{ width: 18, height: 18, marginTop: 1, accentColor: "#0A0A0B", flex: "0 0 18px" }} />
-              <span>I agree to the <Link href="/privacy" style={{ textDecoration: "underline" }}>privacy policy</Link> and to receive my report and occasional partner marketing news</span>
-            </label>
-            {err && <div role="alert" style={{ marginTop: 14, fontSize: 15, fontWeight: 500 }}>{err}</div>}
-            <button type="submit" disabled={busy} style={{ ...btn, background: "#0A0A0B", color: "#A8FF5C", marginTop: 18, opacity: busy ? 0.6 : 1 }}>{busy ? "Preparing your report" : "Unlock the blueprint"}</button>
-          </form>
-        </div>
-        <button type="button" onClick={() => setTeaser(null)} style={{ marginTop: 22, background: "transparent", border: 0, color: "#A8FF5C", cursor: "pointer", font: "inherit", fontSize: 15, textDecoration: "underline" }}>Change my answers</button>
+      <div ref={top}>
+        <div style={{ fontSize: 14, color: "#A8FF5C", fontWeight: 500 }}>Your strategy is ready</div>
+        <h2 style={{ fontWeight: 400, fontSize: 26, letterSpacing: 0, color: "#fff", marginTop: 6 }}>{done.company}: partner program strategy</h2>
+        <p style={{ marginTop: 14, fontSize: 17, lineHeight: 1.6, color: "#C9CACE" }}>Your PDF covers positioning, partner types, value propositions, tiers, the commercial model, year 1 KPIs and a 90-day plan.</p>
+        <div style={{ marginTop: 22 }}><button type="button" onClick={download} style={btn}>Download the PDF</button></div>
+        <div style={{ marginTop: 30 }}><button type="button" onClick={() => { setDone(null); setStep(0); }} style={ghost}>Start again with different answers</button></div>
+      </div>
+    );
+  }
+
+  if (busy && step === 3) {
+    return (
+      <div ref={top} role="status">
+        <h2 style={{ fontWeight: 400, fontSize: 24, letterSpacing: 0, color: "#fff" }}>Writing your strategy</h2>
+        <p style={{ marginTop: 14, fontSize: 17, lineHeight: 1.6, color: "#C9CACE" }}>This takes two to three minutes. Please keep this tab open, your PDF appears here when it is ready.</p>
+        <div style={{ marginTop: 22, height: 8, borderRadius: 999, background: "#1C1D20", overflow: "hidden" }}><div style={{ width: `${Math.min(95, secs / 1.8)}%`, height: "100%", background: "#A8FF5C", transition: "width 1s linear" }} /></div>
+        <div style={{ marginTop: 10, fontSize: 14, color: "#85868B" }}>{Math.floor(secs / 60)}:{String(secs % 60).padStart(2, "0")}</div>
       </div>
     );
   }
 
   return (
-    <form onSubmit={build}>
+    <Ctx.Provider value={{ v, set }}>
+    <form onSubmit={step === 3 ? generate : next} ref={top as unknown as React.RefObject<HTMLFormElement>}>
       <div aria-hidden="true" style={{ position: "absolute", left: -9999, height: 0, overflow: "hidden" }}><label>Leave this empty<input value={trap} onChange={(e) => setTrap(e.target.value)} tabIndex={-1} autoComplete="off" /></label></div>
-      <Lbl t="Company website" req />
-      <input name="url" required maxLength={300} value={v.url} onChange={(e) => set("url", e.target.value)} placeholder="yourcompany.com" style={inputS} />
-      <Hint t="We read your public homepage to name your program. Nothing else is collected" />
-      <Lbl t="What category is your product in?" req />
-      <Sel name="category" v={v} set={set} req ph="Choose one" opts={same(BUILDER_CATEGORIES)} />
-      <Lbl t="Who do you sell to?" req />
-      <Sel name="audience" v={v} set={set} req ph="Choose one" opts={same(AUDIENCES)} />
-      <Lbl t="Your company size" req />
-      <Sel name="size" v={v} set={set} req ph="Choose one" opts={same(SIZES)} />
-      <Lbl t="Main region you sell in" req />
-      <Sel name="region" v={v} set={set} req ph="Choose one" opts={same(REGIONS)} />
-      <Lbl t="Where are you with partners today?" req />
-      <Sel name="stage" v={v} set={set} req ph="Choose one" opts={same(STAGES)} />
-      <Lbl t="Main goal for your partner program" req />
-      <Sel name="goal" v={v} set={set} req ph="Choose one" opts={goalOpts} />
-      <Lbl t="Second goal" />
-      <Sel name="goal2" v={v} set={set} ph="None" opts={goal2Opts} />
+      <div style={{ display: "flex", gap: 8, marginTop: 14, flexWrap: "wrap" }}>
+        {STEPS.map((s, i) => (<span key={s} style={{ fontSize: 13, padding: "6px 12px", borderRadius: 999, background: i === step ? "#A8FF5C" : "#1C1D20", color: i === step ? "#0A0A0B" : "#85868B" }}>{i + 1}. {s}</span>))}
+      </div>
+
+      {step === 0 && (<>
+        <Field k="website" label="Company website" ph="yourcompany.com" hint="We read your public homepage for your name, logo and colour. Nothing else is collected" />
+        <Sel k="category" label="Product category" opts={BUILDER_CATEGORIES} />
+        <Field k="offeringSummary" label="What does your product do?" area ph="One or two sentences" />
+        <Field k="keyFeatures" label="Top 3 features" ph="For example: feature one, feature two, feature three" />
+        <Field k="differentiators" label="Why do customers choose you over alternatives?" area />
+        <Sel k="deliveryModel" label="How is it delivered?" opts={DELIVERY} />
+        <Lbl t="Main alternatives" /><input value={v.competitors} onChange={(e) => set("competitors", e.target.value)} maxLength={200} placeholder="Optional" style={inputS} />
+      </>)}
+      {step === 1 && (<>
+        <Field k="endUser" label="Who uses it day to day?" ph="Job title and what they use it for" />
+        <Field k="primaryBuyer" label="Who approves the purchase?" ph="Job title" />
+        <Sel k="audience" label="Company size you sell to" opts={AUDIENCES} />
+        <Field k="industriesServed" label="Industries you serve" />
+        <Sel k="region" label="Main region" opts={REGIONS} />
+        <Field k="pricing" label="How do you price?" ph="For example: from $500 per month" />
+        <Lbl t="Typical annual contract value" req />
+        <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+          <input inputMode="numeric" value={v.acvLow} onChange={(e) => set("acvLow", e.target.value)} placeholder="From" style={{ ...inputS, flex: "1 1 140px", width: "auto" }} />
+          <input inputMode="numeric" value={v.acvHigh} onChange={(e) => set("acvHigh", e.target.value)} placeholder="To" style={{ ...inputS, flex: "1 1 140px", width: "auto" }} />
+          <select value={v.currency} onChange={(e) => set("currency", e.target.value)} style={{ ...inputS, flex: "0 1 120px", width: "auto" }}>{CURRENCIES.map((c) => <option key={c}>{c}</option>)}</select>
+        </div>
+      </>)}
+      {step === 2 && (<>
+        <Sel k="stage" label="Where is your partner program today?" opts={STAGES} />
+        <Lbl t="What do you want from partners? Choose up to three" req />
+        {GOALS.map((g) => {
+          const on = goals.includes(g); const off = !on && goals.length >= 3;
+          return (<label key={g} style={{ display: "flex", gap: 12, alignItems: "center", padding: "10px 0", opacity: off ? 0.45 : 1, cursor: off ? "default" : "pointer", fontSize: 16 }}>
+            <input type="checkbox" checked={on} disabled={off} onChange={() => setGoals(on ? goals.filter((x) => x !== g) : [...goals, g])} style={{ width: 18, height: 18, accentColor: "#A8FF5C" }} />{g}</label>);
+        })}
+        <Field k="year1PartnerRevenueTarget" label="Partner revenue target for year 1" ph="A number in your currency" />
+        <Field k="partnerRevenueSharePercent" label="Share of total revenue you want from partners, in percent" ph="For example: 20" />
+      </>)}
+      {step === 3 && (<>
+        <Lbl t="Your branding" />
+        <p style={{ margin: "0 0 14px", fontSize: 15, lineHeight: 1.5, color: "#B9BABD" }}>The PDF uses your logo and colour. We found these on your site, change them if they are not right.</p>
+        <div style={{ display: "flex", gap: 20, alignItems: "center", flexWrap: "wrap" }}>
+          <div style={{ width: 64, height: 64, borderRadius: 12, background: "#fff", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            {brand.logo ? <img src={brand.logo} alt="Logo preview" style={{ maxWidth: 52, maxHeight: 52 }} /> : <span style={{ color: "#0A0A0B", fontWeight: 600, fontSize: 22 }}>{(v.companyName || "?").slice(0, 1).toUpperCase()}</span>}
+          </div>
+          <label style={{ fontSize: 15, color: "#A8FF5C", cursor: "pointer", textDecoration: "underline" }}>Upload a logo<input type="file" accept="image/png,image/jpeg" onChange={(e) => onLogo(e.target.files?.[0])} style={{ display: "none" }} /></label>
+          <label style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 15 }}>Colour
+            <input type="color" value={brand.color || "#5B3FE0"} onChange={(e) => setBrand((b) => ({ ...b, color: e.target.value }))} style={{ width: 44, height: 36, border: 0, background: "transparent", padding: 0 }} /></label>
+        </div>
+        <Lbl t="Company name on the PDF" req />
+        <input value={v.companyName} onChange={(e) => set("companyName", e.target.value)} maxLength={80} style={inputS} />
+        <div style={{ marginTop: 30, background: "#A8FF5C", color: "#0A0A0B", borderRadius: 16, padding: "24px 26px" }}>
+          <div style={{ fontFamily: "'Michroma',sans-serif", fontSize: 17 }}>Where should we send your strategy?</div>
+          <input type="email" required maxLength={320} value={email} onChange={(e) => setEmail(e.target.value)} placeholder="name@company.com" style={{ ...inputS, marginTop: 14, background: "#fff", color: "#0A0A0B", border: "1px solid #0A0A0B" }} />
+          <label style={{ display: "flex", gap: 10, alignItems: "flex-start", marginTop: 14, fontSize: 14, lineHeight: 1.45, cursor: "pointer" }}>
+            <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} style={{ width: 18, height: 18, marginTop: 1, accentColor: "#0A0A0B", flex: "0 0 18px" }} />
+            <span>I agree to the <Link href="/privacy" style={{ textDecoration: "underline" }}>privacy policy</Link> and to receive occasional partner marketing news</span>
+          </label>
+        </div>
+      </>)}
+
       {err && <div role="alert" style={{ marginTop: 18, fontSize: 15, color: "#A8FF5C" }}>{err}</div>}
-      <div style={{ marginTop: 30 }}>
-        <button type="submit" disabled={busy} style={{ ...btn, opacity: busy ? 0.6 : 1 }}>{busy ? "Building your program" : "Build my partner program"}</button>
+      <div style={{ marginTop: 30, display: "flex", gap: 20, alignItems: "center", flexWrap: "wrap" }}>
+        <button type="submit" disabled={busy} style={{ ...btn, opacity: busy ? 0.6 : 1 }}>{step === 3 ? "Create my strategy" : busy ? "One moment" : "Continue"}</button>
+        {step > 0 && <button type="button" onClick={() => { setErr(""); setStep(step - 1); scroll(); }} style={ghost}>Back</button>}
       </div>
     </form>
-  );
-}
-
-function Report({ r, onDownload, onEdit }: { r: Result; onDownload: () => void; onEdit: () => void }) {
-  const goal = GOALS.find((g) => g.id === r.input.goal)?.label;
-  return (
-    <div id="builder-top">
-      <div style={sub}>Your blueprint</div>
-      <h2 style={{ fontWeight: 400, fontSize: 26, letterSpacing: 0, color: "#fff" }}>{r.program.name}</h2>
-      <p style={{ marginTop: 10, fontSize: 15, color: "#85868B" }}>{r.company.domain} | {r.input.category} | {goal}</p>
-      <div style={{ marginTop: 20 }}><button type="button" onClick={onDownload} style={btn}>Download the PDF</button></div>
-
-      <h3 style={h3s}>1. Your ideal partner profile</h3>
-      <p style={{ fontSize: 17, lineHeight: 1.6, color: "#C9CACE", margin: "0 0 16px" }}>{r.ipp.summary}</p>
-      {r.ipp.partnerTypes.map((t) => (
-        <div key={t.type} style={box}>
-          <div style={{ fontSize: 17, fontWeight: 500, color: "#ECECEE" }}>{t.title}</div>
-          <div style={{ marginTop: 6, fontSize: 15, lineHeight: 1.55, color: "#B9BABD" }}>{t.who}</div>
-          <div style={{ marginTop: 8, fontSize: 14, color: "#85868B" }}>They earn: {t.earns.toLowerCase()}. They need: {t.need.toLowerCase()}.</div>
-        </div>
-      ))}
-      <p style={{ ...sub, marginTop: 20 }}>Who to approach first</p>
-      <ul style={{ margin: 0, paddingLeft: 22, color: "#C9CACE", lineHeight: 1.7, fontSize: 16 }}>{r.ipp.archetypes.map((a) => <li key={a}>{a}</li>)}</ul>
-
-      <h3 style={h3s}>2. Program structure</h3>
-      <p style={{ fontSize: 17, lineHeight: 1.6, color: "#C9CACE", margin: "0 0 16px" }}>{r.program.model}</p>
-      {r.program.tiers.map((t) => (
-        <div key={t.name} style={box}>
-          <div style={{ fontSize: 17, fontWeight: 500, color: "#ECECEE" }}>{t.name}</div>
-          <div style={{ marginTop: 6, fontSize: 14, color: "#85868B", lineHeight: 1.5 }}>{t.criteria}</div>
-          <ul style={{ margin: "10px 0 0", paddingLeft: 20, color: "#C9CACE", lineHeight: 1.6, fontSize: 15 }}>{t.benefits.map((b) => <li key={b}>{b}</li>)}</ul>
-        </div>
-      ))}
-      <p style={{ ...sub, marginTop: 20 }}>Economics by partner type</p>
-      {r.program.economics.map((e) => (
-        <div key={e.title} style={box}><div style={{ fontWeight: 500, color: "#ECECEE" }}>{e.title}</div><div style={{ marginTop: 6, fontSize: 15, lineHeight: 1.55, color: "#B9BABD" }}>{e.guidance}</div></div>
-      ))}
-      {r.program.insight.length > 0 && (<><p style={{ ...sub, marginTop: 20 }}>What the benchmark programs do</p>
-        <ul style={{ margin: 0, paddingLeft: 22, color: "#C9CACE", lineHeight: 1.7, fontSize: 16 }}>{r.program.insight.map((a) => <li key={a}>{a}</li>)}</ul></>)}
-      <p style={{ ...sub, marginTop: 20 }}>Terms to write down before you recruit</p>
-      <ul style={{ margin: 0, paddingLeft: 22, color: "#C9CACE", lineHeight: 1.7, fontSize: 16 }}>{r.program.terms.map((a) => <li key={a}>{a}</li>)}</ul>
-
-      <h3 style={h3s}>3. Enablement kit</h3>
-      <ul style={{ margin: 0, paddingLeft: 22, color: "#C9CACE", lineHeight: 1.7, fontSize: 16 }}>{r.enablement.map((a) => <li key={a}>{a}</li>)}</ul>
-
-      <h3 style={h3s}>4. First 90 days</h3>
-      {r.plan.map((p) => (
-        <div key={p.phase} style={box}>
-          <div style={{ fontWeight: 500, color: "#ECECEE" }}>{p.phase} <span style={{ color: "#A8FF5C", fontSize: 14, marginLeft: 8 }}>{p.weeks}</span></div>
-          <ul style={{ margin: "10px 0 0", paddingLeft: 20, color: "#C9CACE", lineHeight: 1.6, fontSize: 15 }}>{p.actions.map((b) => <li key={b}>{b}</li>)}</ul>
-        </div>
-      ))}
-      <p style={{ ...sub, marginTop: 20 }}>What to measure</p>
-      <ul style={{ margin: 0, paddingLeft: 22, color: "#C9CACE", lineHeight: 1.7, fontSize: 16 }}>{r.kpis.map((a) => <li key={a}>{a}</li>)}</ul>
-
-      <h3 style={h3s}>5. Ten programs to benchmark</h3>
-      {r.benchmarks.map((b, i) => (
-        <Link key={b.slug} href={`/directory/${b.slug}`} style={{ ...box, display: "block" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", gap: 12, flexWrap: "wrap" }}>
-            <span style={{ fontWeight: 500, color: "#ECECEE" }}>{i + 1}. {b.company}{b.note ? ` ${b.note}` : ""}</span>
-            <span style={{ color: "#A8FF5C", fontSize: 14 }}>{b.types.join(", ")}</span>
-          </div>
-          <div style={{ marginTop: 8, fontSize: 15, lineHeight: 1.55, color: "#B9BABD" }}>{b.why}</div>
-        </Link>
-      ))}
-      {r.notes.length > 0 && <p style={{ marginTop: 22, fontSize: 14, lineHeight: 1.6, color: "#85868B" }}>{r.notes.join(" ")}</p>}
-
-      <div style={{ marginTop: 36, background: "#A8FF5C", color: "#0A0A0B", borderRadius: 16, padding: "26px 28px" }}>
-        <div style={{ fontFamily: "'Michroma',sans-serif", fontSize: 18 }}>Want help running this program?</div>
-        <p style={{ margin: "10px 0 18px", fontSize: 16, lineHeight: 1.5, color: "#0A0A0B" }}>Partner2B is an AI-first partner marketing agency. We recruit, enable and market your partners.</p>
-        <a href="mailto:info@partner2b.com?subject=Partner%20program%20blueprint" style={{ ...btn, background: "#0A0A0B", color: "#A8FF5C", display: "inline-block" }}>Talk to us</a>
-      </div>
-      <button type="button" onClick={onEdit} style={{ marginTop: 22, background: "transparent", border: 0, color: "#A8FF5C", cursor: "pointer", font: "inherit", fontSize: 15, textDecoration: "underline" }}>Start again with different answers</button>
-    </div>
+    </Ctx.Provider>
   );
 }
