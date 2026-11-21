@@ -43,7 +43,7 @@ export default async function AiHub({ searchParams }: { searchParams: Promise<SP
     </div>
   );
   const after = (
-    <div style={{ position: "relative", color: "#0A0A0B", padding: "0 0 clamp(36px,9vw,96px)" }}>
+    <div style={{ position: "relative", color: "#ECECEE", padding: "clamp(36px,9vw,96px) 0" }}>
       <div className="wrap">
         <section style={{ maxWidth: 820 }}>
           <h2 style={{ fontWeight: 400, fontSize: 34, letterSpacing: 0 }}>How AI partner programs work</h2>
