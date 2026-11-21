@@ -236,8 +236,8 @@ p{text-wrap:pretty}
 .hcp{margin:22px auto 0;max-width:660px;text-wrap:balance;font-size:20px;line-height:1.5;font-weight:300}
 .hc .search{margin:30px auto 0;text-align:left}
 .hcor{margin:16px 0 14px;font-size:15px;font-weight:500}
-.hcbuild{display:inline-flex;align-items:center;gap:12px;background:#0A0A0B;color:#A8FF5C;padding:16px 56px 16px 22px;font-size:15px}
-.hcbnew{font-family:'Michroma',sans-serif;font-size:11px;background:#A8FF5C;color:#0A0A0B;padding:3px 8px;border-radius:999px}
+.hcbuild{display:inline-flex;align-items:center;gap:12px;background:#7C5CFF;color:#fff;padding:16px 56px 16px 22px;font-size:15px}
+.hcbnew{font-family:'Michroma',sans-serif;font-size:11px;background:#fff;color:#5B3FE0;padding:3px 8px;border-radius:999px}
 .hccards{display:none}
 .hctoby{display:flex;justify-content:center;margin-top:26px}
 @media (min-width:1200px){

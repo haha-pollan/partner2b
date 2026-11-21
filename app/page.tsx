@@ -49,7 +49,7 @@ export default async function Home() {
         <div className="wrap hc">
           <div className="hcin">
             <h1 className="h1big hch1">
-              <span style={{ display: "block" }}>Find a partner program</span>
+              <span style={{ display: "block" }}>Find a B2B partner program</span>
               <span style={{ display: "block" }}>or build your own</span>
             </h1>
             <p className="hcp">{`Compare commissions, tiers and requirements across ${all.length} programs, or answer a few questions and get a strategy for your own`}</p>
@@ -63,17 +63,6 @@ export default async function Home() {
               {builderIsNew() && <span suppressHydrationWarning className="hcbnew">New</span>}
               <span>Build your own program</span><span aria-hidden="true">→</span>
             </Link>
-          </div>
-          <div className="hccards" aria-hidden="false">
-            {cards.map(({ p, bg, fg, rot }, i) => (
-              <Link key={p!.id} href={`/directory/${p!.slug}`} className={`cut hcard hccard hccard${i}`} style={{ transform: `rotate(${rot}deg)`, background: bg, color: fg }}>
-                <Tile type={p!.primary_type} size={52} domain={p!.domain} />
-                <div style={{ minWidth: 0 }}>
-                  <div style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 18, lineHeight: 1.1 }}>{p!.company}</div>
-                  <div style={{ marginTop: 5, fontSize: 14, opacity: 0.8 }}>{p!.primary_type}</div>
-                </div>
-              </Link>
-            ))}
           </div>
           <div className="hctoby"><Toby height={300} /></div>
         </div>
