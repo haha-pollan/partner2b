@@ -37,6 +37,9 @@ export function Footer() {
             <div className="footcol" style={col}>
               <Link href="/services">Services</Link>
               <Link href="/post">Blog</Link>
+              <Link href="/glossary">Glossary</Link>
+              <Link href="/about-us">About</Link>
+              <Link href="/contact">Contact</Link>
               <Link href="/submit">Submit a program</Link>
               <Link href="/claim">Claim a listing</Link>
               <Link href="/report">Report a correction</Link>

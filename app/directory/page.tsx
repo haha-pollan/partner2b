@@ -4,8 +4,8 @@ import { DirectoryView, type SP } from "@/components/DirectoryView";
 
 export const revalidate = 600;
 export const metadata: Metadata = {
-  title: "Partner2B Directory: browse B2B partner programs",
-  description: "Search B2B partner programs, reseller programs, referral programs and MSP programs. Filter by type, product category, commission model, features and region.",
+  title: "B2B partner programs: compare commissions and tiers | Partner2B",
+  description: "Browse B2B partner programs: reseller, referral, technology, MSP and OEM. Filter by type, commission model, features and region, with links to official pages.",
 };
 
 export default async function DirectoryPage({ searchParams }: { searchParams: Promise<SP> }) {

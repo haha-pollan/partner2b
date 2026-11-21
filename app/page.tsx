@@ -8,8 +8,8 @@ import { AI_CATEGORIES, inCat, aiOnly, aiIsNew } from "@/lib/ai";
 
 export const revalidate = 600;
 export const metadata: Metadata = {
-  title: "Partner2B Directory: find the B2B partner program that fits",
-  description: "Free B2B partner program directory. Compare reseller, referral, technology, MSP and white label programs, partner tiers, commissions and requirements.",
+  title: "B2B partner programs directory: compare and join | Partner2B",
+  description: "Free directory of B2B partner programs. Compare reseller, referral, technology, MSP and AI partner programs by commission, tiers and requirements.",
   alternates: { canonical: "/" },
 };
 
