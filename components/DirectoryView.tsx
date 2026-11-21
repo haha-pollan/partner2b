@@ -170,7 +170,7 @@ export async function DirectoryView({ sp, pool, base, ai = false, h1, sub, befor
                   <Tile type={p.primary_type} domain={p.domain} />
                   <div style={{ flex: "1 1 0", minWidth: 0 }}>
                     <div style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 19, letterSpacing: 0, lineHeight: 1.2, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
-                      {p.company}{p.product_note ? <span style={{ fontSize: 13, fontWeight: 300, color: "#55565B", letterSpacing: 0, marginLeft: 10 }}>{p.product_note}</span> : null}
+                      {p.company}
                     </div>
                     <div style={{ marginTop: 8, display: "flex", gap: 8, alignItems: "center" }}>
                       <span className="pill">{p.primary_type}</span>
