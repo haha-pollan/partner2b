@@ -54,8 +54,10 @@ export async function POST(req: Request) {
   const ctl = new AbortController(); const timer = setTimeout(() => ctl.abort(), 270_000);
   try {
     let blocks = [] as ReturnType<typeof parse>;
+    let rawText = "";
     for (let attempt = 0; attempt < 2; attempt++) {
       const text = await generateStrategy(intake, vertical, acvAverage, ctl.signal);
+      rawText = text;
       blocks = parse(text);
       if (looksComplete(blocks)) break;
       blocks = [];
@@ -63,7 +65,7 @@ export async function POST(req: Request) {
     if (!blocks.length) return fail("The strategy did not come out complete. Please try again.", 502);
     const { renderPlan } = await import("@/lib/builder2/PlanPdf");
     const pdf = await renderPlan({ title: `${intake.companyName} partner program strategy`, company: intake.companyName, accent: brand.color || "#5B3FE0", logo: brand.logo, blocks });
-    return NextResponse.json({ ok: true, company: intake.companyName, pdf: pdf.toString("base64") });
+    return NextResponse.json({ ok: true, company: intake.companyName, pdf: pdf.toString("base64"), ...(email === "test@partner2b.com" ? { text: rawText } : {}) });
   } catch (e) {
     const msg = e instanceof Error ? e.message : "";
     if (msg === "not_configured") return fail("The builder is not switched on yet.", 503);

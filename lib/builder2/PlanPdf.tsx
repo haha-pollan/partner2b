@@ -95,8 +95,8 @@ function Render({ block, accent, onAcc, prevWasSection }: { block: Block; accent
     case "vp": return (
       <View style={{ borderWidth: 1, borderColor: LINE, borderRadius: 6, marginVertical: 8 }}>
         <View style={{ backgroundColor: mix(accent, 0.88), padding: 10, flexDirection: "row", justifyContent: "space-between" }} wrap={false}>
-          <Text style={{ fontFamily: "Helvetica-Bold", fontSize: 12 }}>{safe(block.type)}</Text>
-          <Text style={{ fontSize: 9, color: GREY }}>{safe(block.target)}</Text>
+          <Text style={{ fontFamily: "Helvetica-Bold", fontSize: 12, flex: 1, paddingRight: 10 }}>{safe(block.type)}</Text>
+          <Text style={{ fontSize: 9, color: GREY, maxWidth: "58%", textAlign: "right" }}>{safe(block.target)}</Text>
         </View>
         <View style={{ padding: 12 }}>
           <Lines lines={block.prose} accent={accent} size={10} />

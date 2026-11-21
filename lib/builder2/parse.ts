@@ -68,7 +68,7 @@ export function parse(raw: string): Block[] {
       case "VP_BLOCK": {
         const rows: string[][] = [["", "Conservative", "Optimistic"]];
         for (const l of body.split("\n")) {
-          const mm = l.match(/^(ACV|Commission per deal|Deals per month|Introductions per month):\s*(.+?)\s*\|\s*(.+)$/i);
+          const mm = l.match(/^(ACV|Commission per deal|Closed deals per year|Deals per year|Introductions per year|Earnings per year|Deals per month|Introductions per month):\s*(.+?)\s*\|\s*(.+)$/i);
           if (mm) rows.push([mm[1].toUpperCase() === "ACV" ? "ACV" : mm[1].charAt(0).toUpperCase() + mm[1].slice(1).toLowerCase(), mm[2].trim(), mm[3].trim()]);
         }
         blocks.push({ kind: "vp", type: one(get(fs, /^PARTNER TYPE/)), target: one(get(fs, /^TARGET/)), prose: toLines(get(fs, /^VP PROSE/)), earnings: rows.length > 1 ? rows : [], tier: toLines(get(fs, /^AT EACH TIER/)), extra: toLines(get(fs, /^WITH IMPLEMENTATION/)), bottom: one(get(fs, /^BOTTOM LINE/)).replace(/\*\*/g, "") });
