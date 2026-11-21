@@ -17,6 +17,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...TERMS.map((t) => ({ url: `https://partner2b.com/glossary/${t.slug}` })),
     { url: "https://partner2b.com/about-us" },
     { url: "https://partner2b.com/contact" },
+    { url: "https://partner2b.com/playbook" },
     { url: "https://partner2b.com/post" },
     { url: "https://partner2b.com/privacy" },
     { url: "https://partner2b.com/submit" },

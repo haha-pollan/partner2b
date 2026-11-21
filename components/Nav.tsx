@@ -25,6 +25,7 @@ export function Nav() {
         <div className={dd ? "navdd open" : "navdd"}>
           <button type="button" className="navddbtn" aria-expanded={dd} onClick={() => setDd((o) => !o)}>Resources<span aria-hidden="true" className="navchev">▾</span></button>
           <div className="navmenu">
+            <Link href="/playbook" onClick={close}>Playbook</Link>
             <Link href="/post" onClick={close}>Blog</Link>
             <Link href="/glossary" onClick={close}>Glossary</Link>
           </div>
