@@ -30,7 +30,7 @@ const COLS =
   "id,slug,company,product_note,product_category,program_types,primary_type,commission_models,feature_tags,region,program_url,domain,description,tiers,benefits,verification_status,verified_at,company_description,requirements,how_it_works";
 
 export async function getPrograms(): Promise<Program[]> {
-  const res = await fetch(`${URL}/rest/v1/programs?select=${COLS}&published=eq.true&order=company.asc&limit=1001`, {
+  const res = await fetch(`${URL}/rest/v1/programs?select=${COLS}&published=eq.true&order=company.asc&limit=1002`, {
     headers: { apikey: KEY },
     next: { revalidate: 600 },
   });
