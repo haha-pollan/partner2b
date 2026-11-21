@@ -137,11 +137,10 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
               {p.requirements && (<><dt>Requirements</dt><dd>{p.requirements}</dd></>)}
               
             </dl>
-            <div style={{ marginTop: 28, paddingTop: 22, borderTop: "1px solid #3A3B40" }}>
-              <div style={{ fontSize: 14, color: "#85868B", fontWeight: 400 }}>Source</div>
-              <a href={p.program_url} target="_blank" rel="noopener noreferrer" style={{ display: "inline-block", marginTop: 4, fontSize: 18, fontWeight: 400, color: "#A8FF5C", textDecoration: "underline" }}>Official {p.company} partner program page</a>
-              <p style={{ margin: "18px 0 0", fontSize: 15, lineHeight: 1.5, color: "#B9BABD" }}>Information on this page comes from the public page above</p>
-              <Link href={`/report?listing=${p.slug}`} style={{ display: "block", marginTop: 16, background: "#A8FF5C", color: "#0A0A0B", fontWeight: 400, fontFamily: "'Michroma',sans-serif", fontSize: 14, textAlign: "center", padding: "14px", borderRadius: 12 }}>Report a correction</Link>
+            <a href={p.program_url} target="_blank" rel="noopener noreferrer" style={{ display: "block", marginTop: 28, background: "#A8FF5C", color: "#0A0A0B", fontWeight: 400, fontFamily: "'Michroma',sans-serif", fontSize: 14, textAlign: "center", padding: "16px 20px", borderRadius: 12 }}>Explore partner program</a>
+            <div style={{ marginTop: 24, paddingTop: 16, borderTop: "1px solid #3A3B40", fontSize: 13, lineHeight: 1.5, color: "#85868B" }}>
+              <div>Information is compiled from open sources. <a href={p.program_url} target="_blank" rel="noopener noreferrer" style={{ color: "#B9BABD", textDecoration: "underline" }}>Official page</a></div>
+              <div style={{ marginTop: 8 }}>See something wrong? <Link href={`/report?listing=${p.slug}`} style={{ color: "#B9BABD", textDecoration: "underline" }}>Report a correction</Link></div>
             </div>
           </aside>
         </div>
