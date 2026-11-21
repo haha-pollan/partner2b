@@ -80,10 +80,11 @@ export function facts(list: Program[], c: AiCat) {
 
 export function faqs(list: Program[], c: AiCat) {
   const f = facts(list, c);
+  const nm = c.name.replace(/^(?!AI )(\w)/, (m) => m.toLowerCase());
   const names = list.slice(0, 5).map((p) => p.company).join(", ");
   return [
-    { q: `What are ${c.name.toLowerCase()} partner programs?`, a: `${c.intro} Partner2B lists ${f.n} official programs in this category, each linking to the vendor's own page.` },
-    { q: `Which ${c.name.toLowerCase()} companies have a partner program?`, a: f.n ? `Partner2B currently lists ${f.n}, including ${names}. Every listing links to the official program page.` : `No programs are listed in this category yet.` },
+    { q: `What are ${nm} partner programs?`, a: `${c.intro} Partner2B lists ${f.n} official programs in this category, each linking to the vendor's own page.` },
+    { q: `Which ${nm} companies have a partner program?`, a: f.n ? `Partner2B currently lists ${f.n}, including ${names}. Every listing links to the official program page.` : `No programs are listed in this category yet.` },
     { q: `Do ${c.what} pay partners?`, a: f.n ? `${f.referral} of ${f.n} publish a referral fee, and ${f.paid} publish at least one commission model. Many programs do not publish rates, so check each official page for current terms.` : `No data yet.` },
     { q: `Who can join these programs?`, a: `Programs in this category are aimed at ${c.who}. Requirements and tiers vary, and each listing shows what the vendor publishes.` },
     { q: `How does Partner2B choose what to list?`, a: `Only official partner program pages are listed. Each entry links to the vendor's own page, and the information comes from that public page.` },
