@@ -45,7 +45,7 @@ export default async function Home() {
         <div className="limepanel" />
         <Nav />
         <div className="wrap" style={{ padding: "24px 40px clamp(36px,9vw,110px)", display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 40, flexWrap: "wrap" }}>
-          <div style={{ flex: "0 0 auto", maxWidth: "100%" }}>
+          <div style={{ flex: "1 1 520px", maxWidth: 720 }}>
             <h1 className="h1big">
               <span style={{ display: "block" }}>Find the B2B</span>
               <span style={{ display: "block" }}>partner program</span>
