@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import posthog from "posthog-js";
 import { GOALS, AUDIENCES, SIZES, STAGES, REGIONS, BUILDER_CATEGORIES } from "@/lib/builder/config";
 import type { Teaser, Result } from "@/lib/builder/engine";
 
@@ -50,15 +51,35 @@ export function BuilderClient() {
   async function build(e: React.FormEvent) {
     e.preventDefault();
     const j = await call({ action: "preview", input: v });
-    if (j) { setTeaser(j.teaser); setTimeout(() => document.getElementById("builder-top")?.scrollIntoView({ behavior: "smooth", block: "start" }), 50); }
+    if (j) {
+      posthog.capture("program_builder_preview_generated", {
+        category: v.category,
+        audience: v.audience,
+        company_size: v.size,
+        partner_stage: v.stage,
+        region: v.region,
+        primary_goal: v.goal,
+        has_secondary_goal: Boolean(v.goal2),
+      });
+      setTeaser(j.teaser);
+      setTimeout(() => document.getElementById("builder-top")?.scrollIntoView({ behavior: "smooth", block: "start" }), 50);
+    }
   }
   async function unlock(e: React.FormEvent) {
     e.preventDefault();
     const j = await call({ action: "unlock", input: v, email, consent });
-    if (j) setFull({ result: j.result, pdf: j.pdf });
+    if (j) {
+      posthog.capture("program_builder_blueprint_unlocked", {
+        category: v.category,
+        primary_goal: v.goal,
+        has_secondary_goal: Boolean(v.goal2),
+      });
+      setFull({ result: j.result, pdf: j.pdf });
+    }
   }
   function download() {
     if (!full) return;
+    posthog.capture("program_builder_pdf_downloaded");
     const bin = atob(full.pdf); const bytes = new Uint8Array(bin.length);
     for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
     const a = document.createElement("a");
