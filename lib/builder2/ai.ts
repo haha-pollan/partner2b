@@ -1,11 +1,13 @@
 import { MASTER_PROMPT } from "./prompt";
 import type { Intake } from "./intake";
+import { buildEconomics } from "./economics";
 
 export const MODEL = process.env.OPENAI_MODEL || "gpt-4.1";
 
 export function buildPrompt(intake: Intake, vertical: string, acvAverage: number) {
   const data = { ...intake, vertical, acvAverage };
-  return MASTER_PROMPT.replace("{{intakeData}}", JSON.stringify(data, null, 2)).replace("{{previousOutputs}}", "(none)");
+  const pack = buildEconomics(intake, vertical, acvAverage);
+  return MASTER_PROMPT.replace("{{intakeData}}", JSON.stringify(data, null, 2)).replace("{{economicsPack}}", JSON.stringify(pack, null, 2)).replace("{{previousOutputs}}", "(none)");
 }
 
 // Streams the completion so the connection stays alive, and returns the full text.
