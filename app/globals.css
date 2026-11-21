@@ -151,3 +151,20 @@ p{text-wrap:pretty}
 .footcol a:hover{color:#fff}
 .gloss{display:inline-flex;align-items:center;background:#ECECEE;color:#0A0A0B;font-size:15px;font-weight:400;padding:10px 18px;border-radius:999px}
 .gloss:hover{background:#0A0A0B;color:#A8FF5C}
+.gcard{transition:transform .2s ease}
+.gcard:hover{transform:rotate(0deg) translateY(-4px)!important}
+.navdd{position:relative}
+.navddbtn{background:none;border:0;padding:0;font:inherit;color:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.navchev{font-size:11px}
+.navmenu{display:none;position:absolute;left:-18px;top:100%;padding-top:14px;z-index:20;min-width:170px}
+.navmenu a{display:block;background:#0A0A0B;color:#ECECEE;padding:14px 20px;font-size:14px}
+.navmenu a:first-child{border-radius:16px 16px 0 0}
+.navmenu a:last-child{border-radius:0 0 16px 16px}
+.navmenu a:only-child{border-radius:16px}
+.navmenu a:hover{color:#A8FF5C}
+.navdd:hover .navmenu,.navdd:focus-within .navmenu,.navdd.open .navmenu{display:block}
+@media (max-width:700px){
+  .navddbtn{display:none}
+  .navmenu{display:block;position:static;padding:0;min-width:0}
+  .navmenu a{background:transparent;border-radius:0!important;padding:15px 0;border-bottom:1px solid #2A2B2F}
+}
