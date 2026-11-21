@@ -6,8 +6,8 @@ p{text-wrap:pretty}
 .cut{clip-path:polygon(0 0,100% 0,100% calc(100% - 36px),calc(100% - 36px) 100%,0 100%)}
 .wrap{position:relative;max-width:1360px;margin:0 auto;padding:0 40px}
 .nav{position:relative;max-width:1360px;margin:0 auto;padding:24px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
-.navlinks{display:flex;align-items:center;gap:30px;flex-wrap:wrap;font-family:'Michroma',sans-serif;font-size:14px;font-weight:400;color:#0A0A0B}
-.navcta{background:#0A0A0B;color:#A8FF5C;font-weight:400;font-size:14px;padding:15px 24px;border-radius:12px}
+.navlinks{display:flex;align-items:center;gap:22px;flex-wrap:wrap;font-family:'Michroma',sans-serif;font-size:13px;font-weight:400;color:#0A0A0B}
+.navcta{background:#0A0A0B;color:#A8FF5C;font-weight:400;font-size:13px;padding:14px 20px;border-radius:12px}
 .bigword{position:absolute;left:40px;bottom:16px;font-family:'Zen Dots',sans-serif;font-weight:400;font-size:170px;line-height:.8;letter-spacing:-.03em;color:#2A2B2F;white-space:nowrap}
 .limepanel{position:absolute;left:0;top:0;width:1010px;max-width:100%;height:100%;background:#A8FF5C;clip-path:polygon(0 0,100% 0,86% 100%,0 100%)}
 .h1big{font-weight:400;font-size:clamp(32px,4.2vw,68px);line-height:1.1;letter-spacing:0}

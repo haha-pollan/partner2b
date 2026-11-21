@@ -186,6 +186,7 @@ export type Econ = {
   thresholds: { t1: string; t2: string };
 };
 const norm = (x: string) => x.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+const sameType = (a: string, b: string) => { const x = norm(a), y = norm(b); return !!x && !!y && (x === y || x.startsWith(y) || y.startsWith(x)); };
 const econFor = (econ: Econ | undefined, type: string) => {
   if (!econ) return undefined;
   const n = norm(type);
@@ -213,8 +214,9 @@ const Cap = ({ t, style }: { t: string; style?: TS }) => <Text style={{ fontFami
 const H1 = ({ t }: { t: string }) => <Text style={{ fontFamily: "Helvetica-Bold", fontSize: 22, lineHeight: 1.15 }}>{safe(t)}</Text>;
 
 function EcosystemPage({ company, logo, accent, onAcc, block, Foot }: { company: string; logo: string; accent: string; onAcc: string; block: Extract<Block, { kind: "ecosystem" }>; Foot: () => React.ReactElement }) {
-  const W = 487, H = 520, cx = W / 2, cy = 262, rx = 150, ry = 200, cw = 150, ch = 104;
   const n = block.nodes.length;
+  const big = n >= 5;
+  const W = 487, H = big ? 585 : 520, cx = W / 2, cy = big ? 293 : 262, rx = 150, ry = big ? 232 : 200, cw = 150, ch = 104;
   const pos = block.nodes.map((_, i) => { const a = (-90 + (i * 360) / n) * (Math.PI / 180); return { x: cx + rx * Math.cos(a), y: cy + ry * Math.sin(a) }; });
   return (
     <Page size="A4" style={s.page}>
@@ -270,7 +272,7 @@ function GlancePage({ blocks, econ, accent, sharePercent, ecosystem, Foot }: { b
   const rowsOf: [string, string][][] = []; for (let i = 0; i < shown.length; i += 3) rowsOf.push(shown.slice(i, i + 3));
   const max = Math.max(econ.target, econ.projected, 1);
   const below = econ.projected < econ.target;
-  const matrix = blocks.filter((b): b is Extract<Block, { kind: "vp" }> => b.kind === "vp").map((v) => ({ type: v.type, stage: ecosystem?.nodes.find((nd) => norm(nd.type) === norm(v.type))?.stage ?? "", e: econFor(econ, v.type) })).filter((m) => m.type);
+  const matrix = blocks.filter((b): b is Extract<Block, { kind: "vp" }> => b.kind === "vp").map((v) => ({ type: v.type, stage: ecosystem?.nodes.find((nd) => sameType(nd.type, v.type))?.stage ?? "", e: econFor(econ, v.type) })).filter((m) => m.type);
   const Bar = ({ label, value, text, color }: { label: string; value: number; text: string; color: string }) => (
     <View style={{ flexDirection: "row", alignItems: "center", marginBottom: 7 }}>
       <Text style={{ width: 128, fontSize: 9 }}>{safe(label)}</Text>
