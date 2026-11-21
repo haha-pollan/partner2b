@@ -1,4 +1,6 @@
-import { NextResponse } from "next/server";
+import { SeverityNumber } from "@opentelemetry/api-logs";
+import { after, NextResponse } from "next/server";
+import { flushPostHogLogs, posthogLogger } from "@/instrumentation";
 import { getPrograms, URL as SB_URL, KEY } from "@/lib/programs";
 import { parseInput, generate, teaser } from "@/lib/builder/engine";
 import { fetchSite } from "@/lib/builder/site";
@@ -35,7 +37,15 @@ export async function POST(req: Request) {
   const [site, programs] = await Promise.all([fetchSite(input.url), getPrograms()]);
   const result = generate(input, site, programs);
 
-  if (action === "preview") return NextResponse.json({ ok: true, teaser: teaser(result) });
+  if (action === "preview") {
+    posthogLogger.emit({
+      body: "Program builder preview generated",
+      severityNumber: SeverityNumber.INFO,
+      attributes: { action: "preview" },
+    });
+    after(flushPostHogLogs);
+    return NextResponse.json({ ok: true, teaser: teaser(result) });
+  }
 
   try {
     await fetch(`${SB_URL}/rest/v1/builder_leads`, {
@@ -47,5 +57,11 @@ export async function POST(req: Request) {
   } catch { /* the report is still delivered */ }
 
   const pdf = await buildPdf(result);
+  posthogLogger.emit({
+    body: "Program builder report unlocked",
+    severityNumber: SeverityNumber.INFO,
+    attributes: { action: "unlock" },
+  });
+  after(flushPostHogLogs);
   return NextResponse.json({ ok: true, result, pdf: Buffer.from(pdf).toString("base64") });
 }

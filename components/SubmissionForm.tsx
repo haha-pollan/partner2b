@@ -1,6 +1,7 @@
 "use client";
 import { useActionState } from "react";
 import Link from "next/link";
+import posthog from "posthog-js";
 import { sendSubmission, type FormState } from "@/app/actions";
 import { TYPES, CATEGORIES, ISSUES, type Kind } from "@/lib/formsConfig";
 
@@ -15,6 +16,10 @@ const Hint = ({ t }: { t: string }) => <div style={{ marginTop: 8, fontSize: 14,
 
 export function SubmissionForm({ kind, listings, defaultListing }: { kind: Kind; listings: Opt[]; defaultListing?: string }) {
   const [state, action, pending] = useActionState(sendSubmission, init);
+  const submit = (formData: FormData) => {
+    posthog.capture("directory_submission_requested", { submission_type: kind });
+    action(formData);
+  };
   if (state.ok) {
     return (
       <div style={{ padding: "8px 0 24px" }}>
@@ -34,7 +39,7 @@ export function SubmissionForm({ kind, listings, defaultListing }: { kind: Kind;
     </>
   );
   return (
-    <form action={action} noValidate={false}>
+    <form action={submit} noValidate={false}>
       <input type="hidden" name="kind" value={kind} />
       <div aria-hidden="true" style={{ position: "absolute", left: -9999, height: 0, overflow: "hidden" }}>
         <label>Leave this empty<input name="website_confirm" tabIndex={-1} autoComplete="off" /></label>
