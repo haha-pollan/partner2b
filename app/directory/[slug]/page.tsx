@@ -8,6 +8,7 @@ import { companyDescription } from "@/lib/describe";
 import { Glyph } from "@/components/Tile";
 import { getPrograms, getProgram, commissionLabel } from "@/lib/programs";
 import { isAi } from "@/lib/ai";
+import { BenefitIcon } from "@/components/BenefitIcon";
 
 export const revalidate = 600;
 
@@ -99,11 +100,9 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
               <section style={{ marginTop: 64 }}>
                 <h2 style={{ fontWeight: 400, fontSize: 34, letterSpacing: 0 }}>What partners get</h2>
                 <div style={{ marginTop: 20, display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(300px,1fr))", gap: 14 }}>
-                  {p.benefits.map((b) => (
+                  {p.benefits.map((b, i) => (
                     <div key={b} className="card cut" style={{ display: "flex", gap: 18, alignItems: "flex-start", minHeight: 110 }}>
-                      <span style={{ flex: "0 0 40px", height: 40, background: "#0A0A0B", borderRadius: 12, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                        <Glyph kind="diamond" fg="#A8FF5C" size={20} />
-                      </span>
+                      <BenefitIcon text={b} index={i} />
                       <span style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 17, letterSpacing: 0, lineHeight: 1.25 }}>{b}</span>
                     </div>
                   ))}
