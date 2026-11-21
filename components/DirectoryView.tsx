@@ -31,7 +31,7 @@ function matches(p: Program, f: { q: string; type: string[]; cat: string[]; com:
 }
 
 
-export async function DirectoryView({ sp, pool, base, ai = false, h1, sub, before, after }: { sp: SP; pool: Program[]; base: "/directory" | "/ai"; ai?: boolean; h1: [string, string]; sub: string; before?: React.ReactNode; after?: React.ReactNode }) {
+export async function DirectoryView({ sp, pool, base, ai = false, h1, sub, before, after, heroRight }: { sp: SP; pool: Program[]; base: "/directory" | "/ai"; ai?: boolean; h1: [string, string]; sub: string; before?: React.ReactNode; after?: React.ReactNode; heroRight?: React.ReactNode }) {
   const all = pool;
   const f = {
     q: (arr(sp.q)[0] ?? "").trim(),
@@ -99,7 +99,7 @@ export async function DirectoryView({ sp, pool, base, ai = false, h1, sub, befor
   return (
     <div className={ai ? "aiscope" : undefined} style={{ background: "#fff url(/mesh-directory.svg) top / 100% 100% no-repeat", overflow: "hidden" }}>
       <div style={{ position: "relative", overflow: "hidden", color: "#0A0A0B" }}>
-        <div className="limepanel" style={ai ? { background: "#7C5CFF" } : undefined} />
+        <div className="limepanel" style={ai ? { background: "linear-gradient(120deg,#7C5CFF 0%,#5B3FE0 100%)", clipPath: "none", width: "100%" } : undefined} />
         <Nav />
         <div className="wrap" style={{ padding: "24px 40px clamp(36px,9vw,96px)", display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 40, flexWrap: "wrap" }}>
           <div style={{ flex: "0 0 auto", maxWidth: "100%" }}>
@@ -113,10 +113,10 @@ export async function DirectoryView({ sp, pool, base, ai = false, h1, sub, befor
               <button type="submit">Search</button>
             </form>
           </div>
-          <div className="cut statcard" style={{ flex: "0 0 360px", margin: "40px 40px 0 0", transform: "rotate(-4deg)", background: "#0A0A0B", color: "#ECECEE", padding: "32px 34px" }}>
+          {heroRight ? <div style={{ flex: "0 1 560px", maxWidth: "100%", marginTop: 8 }}>{heroRight}</div> : <div className="cut statcard" style={{ flex: "0 0 360px", margin: "40px 40px 0 0", transform: "rotate(-4deg)", background: "#0A0A0B", color: "#ECECEE", padding: "32px 34px" }}>
             <div style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 56, letterSpacing: 0, lineHeight: 1, color: ai ? "#B9A9FF" : "#A8FF5C" }}><CountUp to={all.length} /></div>
             <div style={{ marginTop: 10, fontSize: 19, lineHeight: 1.4 }}>{ai ? "AI programs, free to browse" : "programs, free to browse"}</div>
-          </div>
+          </div>}
         </div>
       </div>
 

@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { getPrograms } from "@/lib/programs";
 import { AI_CATEGORIES, inCat, aiOnly } from "@/lib/ai";
+import { AiNetwork } from "@/components/AiNetwork";
 import { DirectoryView, type SP } from "@/components/DirectoryView";
 
 export const revalidate = 600;
@@ -38,6 +39,13 @@ export default async function AiHub({ searchParams }: { searchParams: Promise<SP
             <div style={{ marginTop: 14, fontSize: 15, fontWeight: 500 }}>{list.length} programs <span aria-hidden="true">→</span></div>
           </Link>
         ))}
+        <Link href="/submit" className="cut" style={{ display: "flex", flexDirection: "column", justifyContent: "space-between", minHeight: 190, background: "#5B3FE0", color: "#fff", padding: "26px 28px 30px" }}>
+          <div>
+            <div style={{ fontFamily: "'Michroma',sans-serif", fontSize: 18, lineHeight: 1.25 }}>Run an AI partner program?</div>
+            <p style={{ margin: "12px 0 0", fontSize: 16, lineHeight: 1.5, fontWeight: 300 }}>Get your program listed on Partner2B for free.</p>
+          </div>
+          <div style={{ marginTop: 14, fontSize: 15, fontWeight: 500 }}>Submit a program <span aria-hidden="true">→</span></div>
+        </Link>
       </div>
       <h2 style={{ fontWeight: 400, fontSize: 34, letterSpacing: 0, marginTop: 64 }}>All AI programs</h2>
     </div>
@@ -57,6 +65,7 @@ export default async function AiHub({ searchParams }: { searchParams: Promise<SP
   return (
     <DirectoryView sp={sp} pool={pool} base="/ai" ai h1={["AI partner", "programs"]}
       sub={`${pool.length} official partner programs from AI vendors, agent platforms and AI integrators. Every listing links to the vendor's own page`}
-      before={before} after={after} />
+      before={before} after={after}
+      heroRight={<AiNetwork counts={Object.fromEntries(groups.map((g) => [g.c.slug, g.list.length]))} />} />
   );
 }
