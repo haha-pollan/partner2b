@@ -54,7 +54,7 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
             <h1 style={{ fontWeight: 400, fontSize: "clamp(26px,4.2vw,68px)", lineHeight: 1, letterSpacing: 0 }}>{p.company}</h1>
           </div>
           {p.product_note && <div style={{ marginTop: 12, fontSize: 20, fontWeight: 400 }}>{p.product_note}</div>}
-          <p style={{ margin: "24px 0 0", maxWidth: 760, fontSize: 22, lineHeight: 1.5, fontWeight: 600 }}>{p.description}</p>
+          <p style={{ margin: "24px 0 0", maxWidth: 760, fontSize: 22, lineHeight: 1.5, fontWeight: 500 }}>{p.description}</p>
           <div style={{ marginTop: 28, display: "flex", gap: 10, flexWrap: "wrap" }}>
             {isAi(p) && <span className="aibadge" style={{ alignSelf: "center" }}>AI</span>}
             {p.program_types.map((t) => (<span key={t} className="pill">{t}</span>))}
@@ -75,7 +75,7 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
           <div style={{ flex: "1 1 620px", minWidth: 0 }}>
             <section style={{ marginBottom: 64 }}>
               <h2 style={{ fontWeight: 400, fontSize: 34, letterSpacing: 0 }}>About {p.company}</h2>
-              <p style={{ margin: "20px 0 0", maxWidth: 760, fontSize: 20, lineHeight: 1.6, fontWeight: 600 }}>{companyDescription(p)}</p>
+              <p style={{ margin: "20px 0 0", maxWidth: 760, fontSize: 20, lineHeight: 1.6, fontWeight: 500 }}>{companyDescription(p)}</p>
             </section>
             {p.tiers.length > 0 && (
               <section>

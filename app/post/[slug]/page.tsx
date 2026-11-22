@@ -54,7 +54,7 @@ export default async function Article({ params }: { params: Promise<{ slug: stri
             <div style={{ flex: "1 1 520px", maxWidth: 760 }}>
               <Link href="/post" className="pill">All articles</Link>
               <h1 style={{ margin: "20px 0 0", fontWeight: 400, fontSize: "clamp(23px,2.9vw,40px)", letterSpacing: 0, lineHeight: 1.05 }}>{a.title}</h1>
-              <p style={{ margin: "18px 0 0", fontSize: 16, fontWeight: 600 }}>{dateLabel(a.published_at)}</p>
+              <p style={{ margin: "18px 0 0", fontSize: 16, fontWeight: 500 }}>{dateLabel(a.published_at)}</p>
             </div>
             <div style={{ flex: "0 0 380px", maxWidth: "100%", transform: "rotate(2deg)", marginTop: 16 }}>
               <Cover slug={a.slug} title={a.title} i={idx < 0 ? 0 : idx} />

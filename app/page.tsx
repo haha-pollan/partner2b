@@ -122,11 +122,11 @@ export default async function Home() {
             const n = all.filter((p) => p.program_types.includes(t)).length;
             return (
               <Link key={t} href={`/directory?type=${encodeURIComponent(t)}`} className="stair" style={{ background: bg, color: tx, marginLeft: `${ind}%` }}>
-                <span style={{ fontSize: 15, fontWeight: 700, width: 28 }}>{String(i + 1).padStart(2, "0")}</span>
+                <span style={{ fontSize: 15, fontWeight: 500, width: 28 }}>{String(i + 1).padStart(2, "0")}</span>
                 <span className="stairname" style={{ flex: 1, fontFamily: "'Michroma',sans-serif", fontSize: 32, WebkitTextStroke: "1.2px currentColor" }}>{t}</span>
-                <span className="staircnt" style={{ fontSize: 16, fontWeight: 700 }}>{n} programs</span>
+                <span className="staircnt" style={{ fontSize: 16, fontWeight: 500 }}>{n} programs</span>
                 <span className="stairglyph" style={{ display: "flex" }}><Glyph kind={KIND[t]} fg={tx} size={34} /></span>
-                <span style={{ width: 44, height: 44, borderRadius: "50%", border: `2px solid ${tx}`, display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, fontSize: 20 }}>→</span>
+                <span style={{ width: 44, height: 44, borderRadius: "50%", border: `2px solid ${tx}`, display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 500, fontSize: 20 }}>→</span>
               </Link>
             );
           })}
@@ -137,13 +137,13 @@ export default async function Home() {
       <section style={{ padding: "0 0 100px" }}>
         <div className="wrap">
           <h2 className="sectitle">AI partner programs{aiIsNew() && <span className="newbadge" suppressHydrationWarning style={{ fontSize: 13, padding: "4px 12px", marginLeft: 14 }}>New</span>}</h2>
-          <p style={{ margin: "16px 0 0", maxWidth: 680, fontSize: 20, lineHeight: 1.5, fontWeight: 600 }}>Official programs from AI vendors, agent platforms and AI integrators, with their own categories and filters.</p>
+          <p style={{ margin: "16px 0 0", maxWidth: 680, fontSize: 20, lineHeight: 1.5, fontWeight: 500 }}>Official programs from AI vendors, agent platforms and AI integrators, with their own categories and filters.</p>
           <div style={{ marginTop: 34, display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))", gap: 16 }}>
             {AI_CATEGORIES.map((c) => (
               <Link key={c.slug} href={`/ai/${c.slug}`} className="aicard cut" style={{ ["--c" as string]: "24px" }}>
                 <span className="aibadge">AI</span>
                 <div style={{ marginTop: 14, fontFamily: "'Michroma',sans-serif", fontSize: 16, lineHeight: 1.25, WebkitTextStroke: ".8px currentColor" }}>{c.name}</div>
-                <div style={{ marginTop: 12, fontSize: 16, fontWeight: 700 }}>{inCat(all, c).length} programs <span aria-hidden="true">→</span></div>
+                <div style={{ marginTop: 12, fontSize: 16, fontWeight: 500 }}>{inCat(all, c).length} programs <span aria-hidden="true">→</span></div>
               </Link>
             ))}
             <div className="cut" aria-hidden="true" style={{ background: "#A8FF5C", display: "flex", alignItems: "flex-end", justifyContent: "center", overflow: "hidden", minHeight: 150, ["--c" as string]: "24px" }}>
@@ -169,7 +169,7 @@ export default async function Home() {
               </div>
               {[["Commission", "[Published rate]"], ["Region", "[Region]"], ["Source", "[Official program page]"]].map(([k, v]) => (
                 <div key={k} style={{ display: "flex", justifyContent: "space-between", gap: 12, borderTop: "2px solid #ECECEE", padding: "14px 0", fontSize: 17 }}>
-                  <span style={{ color: "#6A6B71", fontWeight: 600 }}>{k}</span><span style={{ fontWeight: 700 }}>{v}</span>
+                  <span style={{ color: "#6A6B71", fontWeight: 500 }}>{k}</span><span style={{ fontWeight: 500 }}>{v}</span>
                 </div>
               ))}
               <div style={{ display: "flex", gap: 12, marginTop: 14, flexWrap: "wrap" }}>
@@ -188,12 +188,12 @@ export default async function Home() {
       <section className="splitwrap">
         <div className="splitL" style={{ flex: "1 1 520px", background: "#A8FF5C", padding: "96px 80px 96px 40px", clipPath: "polygon(0 0,100% 0,92% 50%,100% 100%,0 100%)" }}>
           <h2 style={{ fontSize: 44, lineHeight: 1.05 }}>For partners</h2>
-          <p style={{ margin: "20px 0 0", maxWidth: 420, fontSize: 19, lineHeight: 1.5, fontWeight: 600 }}>Compare programs and find the ones that fit your business.</p>
+          <p style={{ margin: "20px 0 0", maxWidth: 420, fontSize: 19, lineHeight: 1.5, fontWeight: 500 }}>Compare programs and find the ones that fit your business.</p>
           <Link href="/directory" className="btn btn-s" style={{ marginTop: 28 }}>Browse programs</Link>
         </div>
         <div className="splitR" style={{ flex: "1 1 520px", padding: "96px 40px 96px 80px", color: "#fff" }}>
           <h2 style={{ fontSize: 44, lineHeight: 1.05 }}>For vendors</h2>
-          <p style={{ margin: "20px 0 0", maxWidth: 420, fontSize: 19, lineHeight: 1.5, fontWeight: 600, color: "#ECECEE" }}>Claim your listing for free and keep your terms accurate.</p>
+          <p style={{ margin: "20px 0 0", maxWidth: 420, fontSize: 19, lineHeight: 1.5, fontWeight: 500, color: "#ECECEE" }}>Claim your listing for free and keep your terms accurate.</p>
           <Link href="/claim" className="btn btn-p" style={{ marginTop: 28 }}>Claim a listing</Link>
         </div>
       </section>
@@ -206,12 +206,12 @@ export default async function Home() {
               <span style={{ display: "block" }}>Run a partner program?</span>
               <span style={{ display: "block", color: "#A8FF5C" }}>Claim your listing</span>
             </h2>
-            <p style={{ margin: "22px 0 0", maxWidth: 440, fontSize: 19, lineHeight: 1.5, fontWeight: 600, color: "#ECECEE" }}>Claiming is free. Correct your terms and keep them current</p>
+            <p style={{ margin: "22px 0 0", maxWidth: 440, fontSize: 19, lineHeight: 1.5, fontWeight: 500, color: "#ECECEE" }}>Claiming is free. Correct your terms and keep them current</p>
           </div>
           <Link href="/claim" className="claimcard cut">
             {["Company name", "Program page URL", "Work email"].map((k) => (
               <div key={k} style={{ marginBottom: 14 }}>
-                <div style={{ fontSize: 15, fontWeight: 700, color: "#4A4B51" }}>{k}</div>
+                <div style={{ fontSize: 15, fontWeight: 500, color: "#4A4B51" }}>{k}</div>
                 <div style={{ marginTop: 6, background: "#ECECEE", borderRadius: 10, height: 46 }} />
               </div>
             ))}

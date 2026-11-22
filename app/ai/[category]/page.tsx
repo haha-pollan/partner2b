@@ -49,7 +49,7 @@ export default async function AiCategory({ params }: { params: Promise<{ categor
             <Link href="/ai" style={{ textDecoration: "underline" }}>AI partner programs</Link><span>/</span><span>{c.name}</span>
           </div>
           <h1 className="h1big" style={{ marginTop: 24 }}>{c.name} partner programs</h1>
-          <p style={{ margin: "24px 0 0", maxWidth: 760, fontSize: 21, lineHeight: 1.5, fontWeight: 600 }}>{c.intro}</p>
+          <p style={{ margin: "24px 0 0", maxWidth: 760, fontSize: 21, lineHeight: 1.5, fontWeight: 500 }}>{c.intro}</p>
         </div>
       </div>
       <div style={{ position: "relative", padding: "clamp(36px,9vw,80px) 0 clamp(36px,9vw,96px)" }}>
@@ -57,7 +57,7 @@ export default async function AiCategory({ params }: { params: Promise<{ categor
           {f.n > 0 && (
             <section style={{ marginBottom: 56, maxWidth: 820 }}>
               <h2 style={{ fontWeight: 400, fontSize: 34, letterSpacing: 0 }}>At a glance</h2>
-              <ul style={{ margin: "20px 0 0", paddingLeft: 22, fontSize: 20, lineHeight: 1.7, fontWeight: 600 }}>
+              <ul style={{ margin: "20px 0 0", paddingLeft: 22, fontSize: 20, lineHeight: 1.7, fontWeight: 500 }}>
                 {f.lines.map((l) => (<li key={l}>{l}</li>))}
               </ul>
             </section>
@@ -71,7 +71,7 @@ export default async function AiCategory({ params }: { params: Promise<{ categor
             {qa.map((x) => (
               <div key={x.q} style={{ marginTop: 28 }}>
                 <h3 style={{ fontWeight: 500, fontSize: 21, lineHeight: 1.3 }}>{x.q}</h3>
-                <p style={{ margin: "10px 0 0", fontSize: 19, lineHeight: 1.6, fontWeight: 600 }}>{x.a}</p>
+                <p style={{ margin: "10px 0 0", fontSize: 19, lineHeight: 1.6, fontWeight: 500 }}>{x.a}</p>
               </div>
             ))}
           </section>

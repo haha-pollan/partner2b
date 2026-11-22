@@ -91,8 +91,8 @@ const SEGMENTS: { t: string; p: string; kind: string }[] = [
   { t: "Tech Services & Agencies", p: "Referrals only get you so far. We build the visibility that brings clients to you, not the other way around.", kind: "slants" },
 ];
 
-const btnA: React.CSSProperties = { background: "#A8FF5C", color: "#0A0A0B", fontFamily: "'Sora',sans-serif", fontWeight: 700, fontSize: 19, padding: "18px 34px", border: 0, cursor: "pointer", display: "inline-block", clipPath: "polygon(0 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%)" };
-const btnB: React.CSSProperties = { background: "#7C5CFF", color: "#fff", fontFamily: "'Sora',sans-serif", fontWeight: 700, fontSize: 19, padding: "18px 34px", border: 0, cursor: "pointer", display: "inline-block", clipPath: "polygon(0 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%)" };
+const btnA: React.CSSProperties = { background: "#A8FF5C", color: "#0A0A0B", fontFamily: "'Sora',sans-serif", fontWeight: 500, fontSize: 19, padding: "18px 34px", border: 0, cursor: "pointer", display: "inline-block", clipPath: "polygon(0 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%)" };
+const btnB: React.CSSProperties = { background: "#7C5CFF", color: "#fff", fontFamily: "'Sora',sans-serif", fontWeight: 500, fontSize: 19, padding: "18px 34px", border: 0, cursor: "pointer", display: "inline-block", clipPath: "polygon(0 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%)" };
 
 export default function Services() {
   return (
@@ -109,7 +109,7 @@ export default function Services() {
                 <span style={{ display: "block" }}>through partners?</span>
                 <span style={{ display: "block" }}>Start with your GTM</span>
               </h1>
-              <p style={{ margin: "24px 0 0", maxWidth: 560, fontSize: 21, lineHeight: 1.5, fontWeight: 600 }}>
+              <p style={{ margin: "24px 0 0", maxWidth: 560, fontSize: 21, lineHeight: 1.5, fontWeight: 500 }}>
                 B2B partner programs work when the offer, the pipeline and the operations behind them are ready. We help with all three, in that order.
               </p>
               <div style={{ display: "flex", gap: 14, flexWrap: "wrap", marginTop: 32 }}>
@@ -236,7 +236,7 @@ export default function Services() {
                   <Glyph kind={w.kind} fg={w.fg} size={38} />
                 </div>
                 <h3 style={{ margin: "22px 0 0", fontWeight: 400, fontSize: 22, letterSpacing: 0, lineHeight: 1.1 }}>{w.t}</h3>
-                <p style={{ margin: "10px 0 0", fontSize: 17, lineHeight: 1.45, fontWeight: 600, opacity: 0.85 }}>{w.p}</p>
+                <p style={{ margin: "10px 0 0", fontSize: 17, lineHeight: 1.45, fontWeight: 500, opacity: 0.85 }}>{w.p}</p>
               </div>
             ))}
           </div>
