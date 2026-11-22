@@ -121,7 +121,7 @@ export async function buildPdf(r: Result): Promise<Uint8Array> {
   page.drawRectangle({ x: M, y: y - 96, width: W - 2 * M, height: 96, color: INK });
   page.drawText("Want help running this program?", { x: M + 18, y: y - 32, size: 14, font: bold, color: LIME });
   page.drawText("Partner2B helps B2B tech companies build and run partner programs. We recruit, enable and market your partners.", { x: M + 18, y: y - 54, size: 9.5, font: reg, color: rgb(0.9, 0.9, 0.92) });
-  page.drawText("info@partner2b.com   |   partner2b.com/services", { x: M + 18, y: y - 74, size: 9.5, font: bold, color: rgb(1, 1, 1) });
+  page.drawText("hello@partner2b.com   |   partner2b.com/services", { x: M + 18, y: y - 74, size: 9.5, font: bold, color: rgb(1, 1, 1) });
   return await doc.save();
 }
 

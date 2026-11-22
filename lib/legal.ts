@@ -1,9 +1,8 @@
-// Single place for the legal entity details. Change here and both pages update.
+// Single place for the legal text. Change here and both pages update.
 export const LEGAL = {
-  entity: "Bonobee Inc.",
-  address: ["1111B South Governors Avenue, STE 99339", "Dover, DE 19904, United States"],
-  email: "info@partner2b.com",
-  updated: "November 20, 2026",
+  site: "Partner2B (partner2b.com)",
+  email: "hello@partner2b.com",
+  updated: "November 22, 2026",
 };
 
 export type Section = { h: string; p: string[] };
@@ -12,7 +11,7 @@ export const PRIVACY: Section[] = [
   {
     h: "Who we are",
     p: [
-      `Partner2B Directory (partner2b.com/directory) is a free directory of B2B partner programs. It is operated by ${LEGAL.entity}, ${LEGAL.address.join(", ")}. In this policy, "we" and "us" refer to this operator. We are the controller of the personal data described below.`,
+      "This policy covers the Partner2B website at partner2b.com, including the directory of B2B partner programs, the AI programs pages, the Program builder, the free playbook and the forms on the site. In this policy, \"we\" and \"us\" mean the team that runs the site. We decide how the personal data described below is used. You can reach us at the email address in the Contact section.",
     ],
   },
   {
@@ -20,6 +19,8 @@ export const PRIVACY: Section[] = [
     p: [
       "Browsing the directory does not require an account, and we do not ask you for any information to read it.",
       "When you download the Ecosystem-Led Growth Playbook (partner2b.com/playbook), we collect your email address and, if you choose to give them, your name and company. We also store the campaign tags in the link you came from and the page that referred you, so we know which content brought you here.",
+      "When you use the Program builder, we collect your email address and what you enter about your company and your program goals, such as your website, company name and category. This is used to create your strategy report and to follow up on it.",
+      "When you subscribe to the newsletter in the footer, we collect your email address, the page you subscribed from and the page that referred you.",
       "When you use the Submit, Claim or Report forms, we collect what you type into them: your name, work email address, role, the company and program you are writing about, links you provide, and your message. For the Report form, your email address is optional.",
       "Our hosting provider records technical data when you visit, such as your IP address, browser type, pages requested and the time of the request. This is kept in server logs for security and to keep the site running.",
       "The directory itself is built from information that companies publish about their partner programs. It describes companies and their programs, not individuals.",
@@ -29,6 +30,8 @@ export const PRIVACY: Section[] = [
     h: "Why we use it and on what basis",
     p: [
       "We use playbook download details to deliver the file, to understand which content works and to contact you about the playbook. The basis is your consent, which you give by ticking the box on the form, and you can withdraw it at any time by emailing us.",
+      "We use Program builder details to create your report and to contact you about it. The basis is steps taken at your request and our legitimate interest in running the tool.",
+      "We use newsletter email addresses to send you the Partner2B newsletter. The basis is your consent, which you give by ticking the box in the footer form. You can withdraw it at any time by emailing us, and we will remove you from the list.",
       "We use form data to review submissions, verify that a person is authorized to claim a listing, correct or remove information, and reply to you. The basis is our legitimate interest in keeping the directory accurate (GDPR Article 6(1)(f)), and, where you ask us to act on a request, steps taken at your request.",
       "We use server logs to secure and operate the site. The basis is our legitimate interest in doing so.",
       "We do not sell personal data and we do not use it for advertising.",
@@ -37,7 +40,7 @@ export const PRIVACY: Section[] = [
   {
     h: "Who we share it with",
     p: [
-      "We use service providers to run the site: Vercel for hosting and Supabase for the database where form submissions are stored. They process data on our behalf and only for that purpose. We may also use an email service to send you replies and to notify us of new submissions.",
+      "We use service providers to run the site: Vercel for hosting and Supabase for the database where submissions are stored. The Program builder sends the company details you enter to OpenAI so that it can write your report. These providers process data on our behalf and only for that purpose. We may also use an email service to send you replies and to notify us of new submissions.",
       "We may disclose data if the law requires it. We do not share form data with other companies for their own use.",
       "If you submit or claim a listing, the program details you provide may be published in the directory. Your name and email address are not published.",
     ],
@@ -51,7 +54,7 @@ export const PRIVACY: Section[] = [
   {
     h: "How long we keep it",
     p: [
-      "Form submissions are kept for as long as needed to handle your request and for up to 24 months afterwards, unless you ask us to delete them sooner or the law requires us to keep them longer. Server logs are kept for a short period set by our hosting provider.",
+      "Form submissions and Program builder details are kept for as long as needed to handle your request and for up to 24 months afterwards, unless you ask us to delete them sooner or the law requires us to keep them longer. Newsletter addresses are kept until you unsubscribe. Server logs are kept for a short period set by our hosting provider.",
     ],
   },
   {
@@ -63,8 +66,8 @@ export const PRIVACY: Section[] = [
   {
     h: "Your rights",
     p: [
-      "You can ask us to give you a copy of your personal data, correct it, delete it, restrict or object to its use, and, where it applies, receive it in a portable format. To do this, write to us at the address below. We will answer within one month.",
-      "You also have the right to complain to a data protection authority. In Poland this is the President of the Personal Data Protection Office (UODO). You can also contact the authority in the country where you live or work.",
+      "You can ask us to give you a copy of your personal data, correct it, delete it, restrict or object to its use, and, where it applies, receive it in a portable format. To do this, write to us at the email address below. We will answer within one month.",
+      "You also have the right to complain to a data protection authority in the country where you live or work.",
     ],
   },
   {
@@ -76,26 +79,25 @@ export const PRIVACY: Section[] = [
   {
     h: "Security and children",
     p: [
-      "We use reasonable technical and organizational measures to protect the data we hold. The directory is intended for business use and is not aimed at children.",
+      "We use reasonable technical and organizational measures to protect the data we hold. The site is intended for business use and is not aimed at children.",
     ],
   },
   {
     h: "Changes to this policy",
-    p: [`We may update this policy. The date at the top of the page shows when it last changed.`],
+    p: ["We may update this policy. The date at the top of the page shows when it last changed."],
   },
   {
     h: "Contact",
-    p: [
-      `${LEGAL.entity}, ${LEGAL.address.join(", ")}. Email: ${LEGAL.email}.`,
-    ],
+    p: [`Email: ${LEGAL.email}.`],
   },
 ];
 
 export const TERMS: Section[] = [
   {
-    h: "About the directory",
+    h: "About the site",
     p: [
-      `Partner2B Directory (partner2b.com/directory) is a free directory of B2B partner programs, operated by ${LEGAL.entity}, ${LEGAL.address.join(", ")}. By using the site you agree to these terms. If you do not agree, please do not use it.`,
+      "Partner2B (partner2b.com) is a free website with a directory of B2B partner programs, pages about AI programs, a Program builder, a playbook and information about our services. By using the site you agree to these terms. If you do not agree, please do not use it.",
+      "Using the site is free. We do not take payments on the site.",
     ],
   },
   {
@@ -109,6 +111,12 @@ export const TERMS: Section[] = [
     h: "No affiliation",
     p: [
       "Listing a program does not mean that the company endorses Partner2B or that Partner2B endorses the company. Company names, logos and trademarks belong to their owners and are used only to identify them.",
+    ],
+  },
+  {
+    h: "Program builder and playbook",
+    p: [
+      "The Program builder and the playbook give general guidance. Reports from the Program builder are written with the help of AI and are based on what you enter. They may contain mistakes, so please review them before you act on them. They are not legal, financial or other professional advice.",
     ],
   },
   {
@@ -134,7 +142,7 @@ export const TERMS: Section[] = [
   {
     h: "Acceptable use",
     p: [
-      "You may browse the directory and link to it. Please do not copy it in bulk, scrape it at scale, resell it, or use it in a way that harms the site or other people. Do not try to break or overload the service.",
+      "You may browse the site and link to it. Please do not copy the directory in bulk, scrape it at scale, resell it, or use it in a way that harms the site or other people. Do not try to break or overload the service.",
     ],
   },
   {
@@ -146,7 +154,7 @@ export const TERMS: Section[] = [
   {
     h: "Disclaimer and liability",
     p: [
-      `The directory is provided "as is" and "as available", without warranties of any kind, including accuracy, completeness or fitness for a particular purpose. To the extent the law allows, ${LEGAL.entity} is not liable for any indirect or consequential loss, or for loss of profit or business, arising from your use of the site or from relying on a listing.`,
+      "The site is provided \"as is\" and \"as available\", without warranties of any kind, including accuracy, completeness or fitness for a particular purpose. To the extent the law allows, Partner2B is not liable for any indirect or consequential loss, or for loss of profit or business, arising from your use of the site or from relying on a listing or a report.",
       "Nothing in these terms limits liability that cannot be limited by law, or any mandatory rights you have as a consumer.",
     ],
   },
@@ -157,13 +165,7 @@ export const TERMS: Section[] = [
     ],
   },
   {
-    h: "Governing law",
-    p: [
-      "These terms are governed by the laws of the State of Delaware, United States, without regard to its conflict of law rules. This does not remove any protection that mandatory law in your country gives you.",
-    ],
-  },
-  {
     h: "Contact",
-    p: [`${LEGAL.entity}, ${LEGAL.address.join(", ")}. Email: ${LEGAL.email}.`],
+    p: [`Email: ${LEGAL.email}.`],
   },
 ];

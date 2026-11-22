@@ -81,7 +81,7 @@ const THEMES: Theme[] = [
 ];
 
 const WORDS = ["Go-to-market", "Partner ecosystems", "Demand generation", "Automation", "AI development"];
-const MAIL = "mailto:info@partner2b.com?subject=Partner2B%20services";
+const MAIL = "mailto:hello@partner2b.com?subject=Partner2B%20services";
 const SEGMENTS: { t: string; p: string; kind: string }[] = [
   { t: "AI Vendors", p: "Every competitor claims category leadership before the category exists. We help you say something buyers believe.", kind: "diamond" },
   { t: "B2B SaaS", p: "Feature comparisons are a race to the bottom. We build the story that gets you chosen, not just compared.", kind: "bars" },
