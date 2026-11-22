@@ -30,7 +30,7 @@ export function Nav() {
             <Link href="/glossary" onClick={close}>Glossary</Link>
           </div>
         </div>
-        <Link href="/submit" className="btn btn-s btn-sm" onClick={close}>Submit a program</Link>
+        <Link href="/submit" className="btn btn-o btn-sm" onClick={close}>Submit a program</Link>
       </nav>
     </div>
   );
