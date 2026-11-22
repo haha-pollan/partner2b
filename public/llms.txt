@@ -1,6 +1,6 @@
 # Partner2B
 
-> Partner2B helps B2B tech companies build and run partner programs. We recruit, enable and market partners. The site also runs a free directory of B2B partner programs with commission models, tiers and features, taken from public program pages.
+> Partner2B is a marketing and go-to-market team for B2B tech companies. We accelerate pipeline and re-engineer company-wide workflows with AI. The site also runs a free directory of B2B partner programs, with commission models, tiers and features taken from public program pages.
 
 ## Directory and programs
 
@@ -17,7 +17,7 @@
 ## Tools and services
 
 - [Program builder](https://partner2b.com/program-builder): answer a few questions and get a partner program strategy as a PDF
-- [Services](https://partner2b.com/services): positioning, partner recruitment, enablement, co-marketing and co-selling
+- [Services](https://partner2b.com/services): marketing, go-to-market and AI transformation: positioning, partner recruitment, co-marketing, workflow automation and AI agents
 
 ## About
 

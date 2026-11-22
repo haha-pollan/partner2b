@@ -5,7 +5,7 @@ import { Footer } from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Contact | Partner2B",
-  description: "Contact Partner2B at hello@partner2b.com about partner marketing, program listings, corrections and partnerships.",
+  description: "Contact Partner2B at hello@partner2b.com about marketing, go-to-market and AI work for B2B tech companies, program listings, corrections and partnerships.",
   alternates: { canonical: "/contact" },
 };
 

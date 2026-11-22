@@ -12,8 +12,8 @@ import { builderIsNew } from "@/lib/launch";
 
 export const revalidate = 600;
 export const metadata: Metadata = {
-  title: "Partner2B: partner marketing and B2B partner program directory",
-  description: "Partner2B helps B2B tech companies build and run partner programs. Compare reseller, referral, technology, MSP and AI partner programs in the free directory.",
+  title: "Growth and AI transformation for B2B tech | Partner2B",
+  description: "Partner2B is a marketing and go-to-market team for B2B tech companies. Compare reseller, referral, technology, MSP and AI partner programs in our free directory.",
   alternates: { canonical: "/" },
 };
 

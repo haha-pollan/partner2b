@@ -10,7 +10,7 @@ export const ORG = {
   url: SITE,
   logo: `${SITE}/apple-icon.png`,
   email: "hello@partner2b.com",
-  description: "Partner2B helps B2B tech companies build and run partner programs. We recruit, enable and market partners, and run a free directory of B2B partner programs.",
+  description: "Partner2B is a marketing and go-to-market team for B2B tech companies. We accelerate pipeline and re-engineer company-wide workflows with AI, and run a free directory of B2B partner programs.",
 };
 export const crumbs = (items: [string, string][]) => ({
   "@type": "BreadcrumbList",

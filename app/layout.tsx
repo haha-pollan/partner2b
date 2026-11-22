@@ -4,8 +4,8 @@ import { JsonLd, ORG, SITE } from "@/components/JsonLd";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://partner2b.com"),
-  title: "Partner2B: partner marketing for B2B tech companies",
-  description: "Partner2B helps B2B tech companies build and run partner programs. We recruit, enable and market your partners. Includes a free directory of B2B partner programs.",
+  title: "Growth and AI transformation for B2B tech | Partner2B",
+  description: "Partner2B is a marketing and go-to-market team for B2B tech companies. We accelerate pipeline and re-engineer workflows with AI. Free partner program directory.",
   openGraph: { type: "website", siteName: "Partner2B", locale: "en_US" },
   twitter: { card: "summary_large_image" },
 };

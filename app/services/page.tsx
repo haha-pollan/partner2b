@@ -8,9 +8,9 @@ import { BuilderCta } from "@/components/BuilderCta";
 import { Glyph } from "@/components/Tile";
 
 export const metadata: Metadata = {
-  title: "Partner2B Services: B2B go-to-market and partner ecosystems",
+  title: "Marketing, go-to-market and AI transformation | Partner2B",
   description:
-    "GTM, partner recruitment, enablement, co-marketing and partner operations for B2B vendors in AI, SaaS, fintech and cybersecurity. Grow through partner ecosystems.",
+    "Marketing, go-to-market and AI transformation for B2B tech companies. Positioning, partner recruitment, co-marketing, workflow automation and AI agents.",
   alternates: { canonical: "/services" },
 };
 
@@ -98,7 +98,7 @@ const btnB: React.CSSProperties = { background: "#7C5CFF", color: "#fff", fontFa
 export default function Services() {
   return (
     <div style={{ overflow: "hidden" }}>
-      <JsonLd data={{ "@context": "https://schema.org", "@graph": [ { "@type": "Service", name: "Partner marketing and go-to-market for B2B tech companies", serviceType: "Partner marketing", description: "Positioning and messaging, partner recruitment, enablement, co-marketing and co-selling for B2B tech companies in AI, SaaS, fintech and cybersecurity.", url: `${SITE}/services`, provider: ORG, areaServed: "Worldwide" }, crumbs([["Partner2B", SITE], ["Services", `${SITE}/services`]]) ] }} />
+      <JsonLd data={{ "@context": "https://schema.org", "@graph": [ { "@type": "Service", name: "Marketing, go-to-market and AI transformation for B2B tech companies", serviceType: "Go-to-market, marketing and AI transformation", description: "Positioning, partner recruitment, co-marketing, workflow automation and AI agents for B2B tech companies in AI, SaaS, fintech and cybersecurity.", url: `${SITE}/services`, provider: ORG, areaServed: "Worldwide" }, crumbs([["Partner2B", SITE], ["Services", `${SITE}/services`]]) ] }} />
       <div style={{ overflow: "hidden" }}>
         {/* Hero */}
         <div style={{ position: "relative" }}>
