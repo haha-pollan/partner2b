@@ -136,15 +136,32 @@ export default function Page() {
           <h2 style={{ fontSize: "clamp(22px,2.6vw,36px)", lineHeight: 1.2 }}>What is inside</h2>
           <p style={{ margin: "16px 0 0", maxWidth: 720, fontSize: 18, lineHeight: 1.6, color: "#2A2B2F" }}>From the why to a working plan.</p>
           <ol style={{ margin: "36px 0 0", padding: 0, listStyle: "none", display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))", gap: 22 }}>
-            {CHAPTERS.map(([t, d], i) => (
-              <li key={t} className="cut" style={{ background: "#ECECEE", padding: "24px 26px 34px", display: "flex", gap: 18, alignItems: "flex-start" }}>
-                <span style={{ flex: "0 0 44px", height: 44, borderRadius: "50%", background: "#0A0A0B", color: "#A8FF5C", fontFamily: "'Michroma',sans-serif", fontSize: 13, display: "flex", alignItems: "center", justifyContent: "center" }}>{String(i + 1).padStart(2, "0")}</span>
-                <div>
-                  <h3 style={{ fontSize: 16, lineHeight: 1.35 }}>{t}</h3>
-                  <p style={{ margin: "8px 0 0", fontSize: 15, lineHeight: 1.55, color: "#3A3B40" }}>{d}</p>
-                </div>
-              </li>
-            ))}
+            {CHAPTERS.flatMap(([t, d], i) => {
+              const card = (
+                <li key={t} className="cut" style={{ background: "#ECECEE", padding: "24px 26px 34px", display: "flex", gap: 18, alignItems: "flex-start" }}>
+                  <span style={{ flex: "0 0 44px", height: 44, borderRadius: "50%", background: "#0A0A0B", color: "#A8FF5C", fontFamily: "'Michroma',sans-serif", fontSize: 13, display: "flex", alignItems: "center", justifyContent: "center" }}>{String(i + 1).padStart(2, "0")}</span>
+                  <div>
+                    <h3 style={{ fontSize: 16, lineHeight: 1.35 }}>{t}</h3>
+                    <p style={{ margin: "8px 0 0", fontSize: 15, lineHeight: 1.55, color: "#3A3B40" }}>{d}</p>
+                  </div>
+                </li>
+              );
+              if (i !== 3) return [card];
+              return [card, (
+                <li key="title-card" className="cut" style={{ background: "#0A0A0B", color: "#ECECEE", padding: "26px 28px 36px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                  <span className="pill" style={{ alignSelf: "flex-start", background: "#A8FF5C", color: "#0A0A0B" }}>Partner2B 2026</span>
+                  <h3 style={{ marginTop: 16, fontSize: 19, lineHeight: 1.3, color: "#A8FF5C" }}>The Ecosystem-Led Growth Playbook</h3>
+                  <p style={{ margin: "10px 0 0", fontSize: 15, lineHeight: 1.55, color: "#B9BABD" }}>A practical guide to growing revenue through partnerships.</p>
+                </li>
+              )];
+            })}
+            <li className="cut" style={{ background: "#A8FF5C", color: "#0A0A0B", padding: "24px 26px 34px", display: "flex", flexDirection: "column", justifyContent: "space-between", gap: 18 }}>
+              <div>
+                <h3 style={{ fontSize: 16, lineHeight: 1.35 }}>Put partnerships to work</h3>
+                <p style={{ margin: "8px 0 0", fontSize: 15, lineHeight: 1.55, color: "#1C1D20" }}>Download the playbook and start building your ecosystem today.</p>
+              </div>
+              <a href="#download" style={{ alignSelf: "flex-start", background: "#0A0A0B", color: "#A8FF5C", fontFamily: "'Michroma',sans-serif", fontSize: 13, padding: "14px 22px", borderRadius: 12 }}>Get the free playbook</a>
+            </li>
           </ol>
         </div>
       </section>
