@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   serverExternalPackages: ["@react-pdf/renderer"],
-  outputFileTracingIncludes: { "/api/program-builder": ["./node_modules/pdfkit/**/*", "./node_modules/@react-pdf/**/*"] },
+  outputFileTracingIncludes: { "/api/program-builder": ["./node_modules/pdfkit/**/*", "./node_modules/@react-pdf/**/*"], "/api/playbook": ["./private/**/*"] },
   async redirects() {
     return [
       { source: "/blog", destination: "/post", permanent: true },

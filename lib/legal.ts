@@ -19,6 +19,7 @@ export const PRIVACY: Section[] = [
     h: "What we collect",
     p: [
       "Browsing the directory does not require an account, and we do not ask you for any information to read it.",
+      "When you download the Ecosystem-Led Growth Playbook (partner2b.com/playbook), we collect your email address and, if you choose to give them, your name and company. We also store the campaign tags in the link you came from and the page that referred you, so we know which content brought you here.",
       "When you use the Submit, Claim or Report forms, we collect what you type into them: your name, work email address, role, the company and program you are writing about, links you provide, and your message. For the Report form, your email address is optional.",
       "Our hosting provider records technical data when you visit, such as your IP address, browser type, pages requested and the time of the request. This is kept in server logs for security and to keep the site running.",
       "The directory itself is built from information that companies publish about their partner programs. It describes companies and their programs, not individuals.",
@@ -27,6 +28,7 @@ export const PRIVACY: Section[] = [
   {
     h: "Why we use it and on what basis",
     p: [
+      "We use playbook download details to deliver the file, to understand which content works and to contact you about the playbook. The basis is your consent, which you give by ticking the box on the form, and you can withdraw it at any time by emailing us.",
       "We use form data to review submissions, verify that a person is authorized to claim a listing, correct or remove information, and reply to you. The basis is our legitimate interest in keeping the directory accurate (GDPR Article 6(1)(f)), and, where you ask us to act on a request, steps taken at your request.",
       "We use server logs to secure and operate the site. The basis is our legitimate interest in doing so.",
       "We do not sell personal data and we do not use it for advertising.",
