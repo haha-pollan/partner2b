@@ -48,7 +48,7 @@ export default async function Home() {
       {/* Hero */}
       <div className="hero">
         <Nav />
-        <div className="wrap herobody" style={{ paddingTop: 36, paddingBottom: 90 }}>
+        <div className="wrap herobody" style={{ paddingTop: 36, paddingBottom: 150 }}>
           <div className="tapewrap">
             <h1 className="ptapes">
               <span className="pt pt1">Find a B2B partner program</span>
@@ -67,7 +67,7 @@ export default async function Home() {
       </div>
 
       {/* Directory */}
-      <section aria-labelledby="hm-dir" style={{ padding: "40px 0 90px" }}>
+      <section aria-labelledby="hm-dir" style={{ padding: "70px 0 170px" }}>
         <div className="wrap" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 56, flexWrap: "wrap" }}>
           <div className="dirtext" style={{ flex: "1 1 460px" }}>
             <span className="kick">The directory</span>
@@ -87,7 +87,7 @@ export default async function Home() {
       </section>
 
       {/* Builder */}
-      <section aria-labelledby="hm-bld" style={{ padding: "0 0 100px" }}>
+      <section aria-labelledby="hm-bld" style={{ padding: "0 0 170px" }}>
         <div className="wrap">
           <div className="bldbox cut">
             <div className="bldtext">
@@ -110,7 +110,7 @@ export default async function Home() {
       </section>
 
       {/* Browse by type */}
-      <section style={{ padding: "0 0 100px" }}>
+      <section style={{ padding: "0 0 170px" }}>
         <div className="wrap"><h2 className="sectitle">Browse by program type</h2></div>
         <div style={{ marginTop: 40 }}>
           {TYPES.map((t, i) => {
@@ -130,7 +130,7 @@ export default async function Home() {
       </section>
 
       {/* AI programs */}
-      <section style={{ padding: "0 0 100px" }}>
+      <section style={{ padding: "0 0 170px" }}>
         <div className="wrap">
           <h2 className="sectitle">AI partner programs{aiIsNew() && <span className="newbadge" suppressHydrationWarning style={{ fontSize: 13, padding: "4px 12px", marginLeft: 14 }}>New</span>}</h2>
           <p style={{ margin: "16px 0 0", maxWidth: 680, fontSize: 20, lineHeight: 1.5, fontWeight: 500 }}>Official programs from AI vendors, agent platforms and AI integrators, with their own categories and filters.</p>
@@ -151,7 +151,7 @@ export default async function Home() {
       </section>
 
       {/* What every listing shows */}
-      <section style={{ padding: "0 0 110px" }}>
+      <section style={{ padding: "0 0 170px" }}>
         <div className="wrap">
           <h2 className="sectitle">What every listing shows</h2>
           <div style={{ marginTop: 56, display: "flex", alignItems: "center", justifyContent: "center", gap: 28, flexWrap: "wrap" }}>
@@ -195,7 +195,7 @@ export default async function Home() {
       </section>
 
       {/* Claim */}
-      <section style={{ padding: "110px 0 110px" }}>
+      <section style={{ padding: "150px 0 150px" }}>
         <div className="wrap" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 48, flexWrap: "wrap" }}>
           <div style={{ flex: "1 1 460px" }}>
             <h2 style={{ fontSize: 44, lineHeight: 1.1 }}>
