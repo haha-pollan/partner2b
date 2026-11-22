@@ -62,14 +62,6 @@ export default async function Home() {
           </div>
           <div className="herotoby">
             <Toby height={580} rows={38} glasses style={{ width: "100%", height: "100%" }} />
-            <div className="herostack">
-            {stats.map((s) => (
-              <div key={s.l} className="cut stat" style={{ background: s.bg, color: s.fg, transform: `rotate(${s.rot}deg)`, marginLeft: s.ml }}>
-                <span className="statn" style={{ color: s.num }}>{s.n}</span>
-                <span className="statl">{s.l}</span>
-              </div>
-            ))}
-          </div>
           </div>
         </div>
       </div>
