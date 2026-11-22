@@ -38,9 +38,8 @@ export default async function Home() {
   const all = await getPrograms();
   const aiCount = aiOnly(all).length;
   const stats = [
-    { n: all.length, l: "partner programs", bg: "#fff", fg: "#0A0A0B", num: "#0A0A0B", rot: -2, ml: 0 },
-    { n: aiCount, l: "AI partner programs", bg: "#A8FF5C", fg: "#0A0A0B", num: "#0A0A0B", rot: 1.5, ml: 40 },
-    { n: TYPES.length, l: "program types", bg: "#3A3B40", fg: "#fff", num: "#A8FF5C", rot: -1, ml: 14 },
+    { n: aiCount, l: "AI partner programs", bg: "#A8FF5C", fg: "#0A0A0B", num: "#0A0A0B", rot: -2, ml: 0 },
+    { n: TYPES.length, l: "program types", bg: "#3A3B40", fg: "#fff", num: "#A8FF5C", rot: 1.5, ml: 40 },
   ];
 
   return (
