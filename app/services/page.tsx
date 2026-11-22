@@ -147,7 +147,7 @@ export default function Services() {
             We Know Your <span style={{ color: "#A8FF5C" }}>Category</span>
           </h2>
           <p style={{ margin: "18px 0 0", maxWidth: 620, fontSize: 18, lineHeight: 1.5, color: "#B9BABD" }}>
-            From strategy and recruitment to enablement and co-marketing. One AI-first team runs your full partner marketing program.
+            From positioning and messaging to partner recruitment and co-selling. One senior team runs your go-to-market end to end.
           </p>
           <div style={{ marginTop: 52, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))", gap: 28 }}>
             {SEGMENTS.map((g, i) => {

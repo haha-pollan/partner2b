@@ -227,6 +227,7 @@ button{font-family:inherit}
   .btn{white-space:normal}
   .herobtns .btn{min-width:0;width:100%}
   .herosub::after{display:none}
+  .hidemob{display:none}
   .search{padding:8px 8px 8px 18px;margin-top:26px}
   .search input{font-size:16px}
   .search button{padding:13px 18px;font-size:15px}

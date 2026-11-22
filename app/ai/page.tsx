@@ -12,7 +12,7 @@ export async function generateMetadata({ searchParams }: { searchParams: Promise
   const filtered = Object.values(sp).some((v) => v !== undefined && v !== "");
   return {
     title: "AI partner programs: vendors, agent platforms and integrators | Partner2B",
-    description: "Browse and filter official partner programs from AI vendors: foundation models, agent platforms, AI infrastructure, vector databases, AI security, AI-first HR and sales tools, and AI integrators.",
+    description: "Browse and filter official partner programs from AI vendors: foundation models, agent platforms, AI infrastructure, vector databases, AI security, AI HR and sales tools, and AI integrators.",
     alternates: { canonical: "/ai" },
     robots: filtered ? { index: false, follow: true } : undefined,
   };
@@ -66,6 +66,6 @@ export default async function AiHub({ searchParams }: { searchParams: Promise<SP
     <DirectoryView sp={sp} pool={pool} base="/ai" ai h1={["AI partner", "programs"]}
       sub={`Find an AI partner program for your agency or consultancy: ${pool.length} programs from AI vendors, with commission, tiers and requirements in one place`}
       before={before} after={after}
-      heroRight={<AiNetwork counts={Object.fromEntries(groups.map((g) => [g.c.slug, g.list.length]))} />} />
+      heroRight={<div className="hidemob"><AiNetwork counts={Object.fromEntries(groups.map((g) => [g.c.slug, g.list.length]))} /></div>} />
   );
 }

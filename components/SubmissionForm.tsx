@@ -50,7 +50,7 @@ export function SubmissionForm({ kind, listings, defaultListing }: { kind: Kind;
           <Lbl t="Program type" />
           <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
             {TYPES.map((t) => (
-              <label key={t} style={{ display: "inline-flex", alignItems: "center", gap: 10, background: "#ECECEE", border: "1px solid #2A2B2F", borderRadius: 999, padding: "10px 16px", fontSize: 15, fontWeight: 400, cursor: "pointer" }}>
+              <label key={t} style={{ display: "inline-flex", alignItems: "center", gap: 10, background: "#ECECEE", color: "#0A0A0B", border: "1px solid #2A2B2F", borderRadius: 999, padding: "10px 16px", fontSize: 15, fontWeight: 400, cursor: "pointer" }}>
                 <input type="checkbox" name="program_types" value={t} style={{ width: 18, height: 18, accentColor: "#A8FF5C" }} />{t}
               </label>
             ))}
