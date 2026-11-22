@@ -50,7 +50,7 @@ export default async function Article({ params }: { params: Promise<{ slug: stri
       <div style={{ overflow: "hidden" }}>
         <div style={{ position: "relative" }}>
           <Nav />
-          <div className="wrap" style={{ padding: "24px 40px clamp(36px,9vw,80px)", display: "flex", gap: 48, alignItems: "flex-start", flexWrap: "wrap" }}>
+          <div className="wrap" style={{ padding: "24px var(--margin) clamp(36px,9vw,80px)", display: "flex", gap: 48, alignItems: "flex-start", flexWrap: "wrap" }}>
             <div style={{ flex: "1 1 520px", maxWidth: 760 }}>
               <Link href="/post" className="pill">All articles</Link>
               <h1 style={{ margin: "20px 0 0", fontWeight: 400, fontSize: "clamp(23px,2.9vw,40px)", letterSpacing: 0, lineHeight: 1.05 }}>{a.title}</h1>

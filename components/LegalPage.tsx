@@ -7,13 +7,13 @@ export function LegalPage({ title, intro, sections }: { title: string; intro: st
     <div>
       <div style={{ overflow: "hidden" }}>
         <Nav />
-        <div className="wrap" style={{ padding: "40px 40px clamp(36px,9vw,64px)" }}>
+        <div className="wrap" style={{ padding: "40px var(--margin) clamp(36px,9vw,64px)" }}>
           <h1 className="h1big">{title}</h1>
           <p style={{ margin: "22px 0 0", maxWidth: 720, fontSize: 20, lineHeight: 1.5, color: "#ECECEE" }}>{intro}</p>
           <p style={{ margin: "14px 0 0", fontSize: 15, color: "#2A2B2F", fontWeight: 400 }}>Last updated {LEGAL.updated}</p>
         </div>
       </div>
-      <main className="wrap" style={{ padding: "clamp(36px,9vw,64px) 40px clamp(36px,9vw,96px)" }}>
+      <main className="wrap" style={{ padding: "clamp(36px,9vw,64px) var(--margin) clamp(36px,9vw,96px)" }}>
         <div style={{ maxWidth: 760 }}>
           {sections.map((s, i) => (
             <section key={s.h} style={{ marginTop: i === 0 ? 0 : 44 }}>

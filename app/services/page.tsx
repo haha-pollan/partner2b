@@ -101,7 +101,7 @@ export default function Services() {
         {/* Hero */}
         <div style={{ position: "relative" }}>
           <Nav />
-          <div className="wrap" style={{ padding: "24px 40px clamp(36px,9vw,110px)", display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 40, flexWrap: "wrap" }}>
+          <div className="wrap" style={{ padding: "24px var(--margin) clamp(36px,9vw,110px)", display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 40, flexWrap: "wrap" }}>
             <div style={{ flex: "0 0 auto", maxWidth: "min(100%, 800px)" }}>
               <span className="pill">For B2B companies</span>
               <h1 style={{ margin: "20px 0 0", fontWeight: 400, fontSize: "clamp(26px,3.4vw,47px)", lineHeight: 1, letterSpacing: 0 }}>

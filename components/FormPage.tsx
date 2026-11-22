@@ -36,7 +36,7 @@ export function FormPage({ kind, listings, defaultListing }: { kind: Kind; listi
       <div style={{ overflow: "hidden" }}>
         <div style={{ position: "relative" }}>
           <Nav />
-          <div className="wrap" style={{ padding: "24px 40px clamp(36px,9vw,90px)", display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 40, flexWrap: "wrap" }}>
+          <div className="wrap" style={{ padding: "24px var(--margin) clamp(36px,9vw,90px)", display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 40, flexWrap: "wrap" }}>
             <div style={{ maxWidth: "100%" }}>
               <h1 className="h1big" style={{ fontSize: kind === "report" ? "clamp(26px,3.6vw,56px)" : "clamp(28px,4vw,64px)" }}>{c.title}</h1>
               <p style={{ margin: "22px 0 0", maxWidth: 560, fontSize: 21, lineHeight: 1.5, fontWeight: 400 }}>{c.intro}</p>
@@ -47,7 +47,7 @@ export function FormPage({ kind, listings, defaultListing }: { kind: Kind; listi
             </div>
           </div>
         </div>
-        <div className="wrap" style={{ padding: "40px 40px clamp(36px,9vw,120px)", display: "flex", gap: 32, alignItems: "flex-start", flexWrap: "wrap" }}>
+        <div className="wrap" style={{ padding: "40px var(--margin) clamp(36px,9vw,120px)", display: "flex", gap: 32, alignItems: "flex-start", flexWrap: "wrap" }}>
           <div className="cut" style={{ flex: "1 1 640px", minWidth: 0, background: "#0A0A0B", padding: "36px 40px 44px", position: "relative" }}>
             <h2 style={{ fontWeight: 400, fontSize: 23, letterSpacing: 0 }}>{c.card}</h2>
             <SubmissionForm kind={kind} listings={listings} defaultListing={defaultListing} />

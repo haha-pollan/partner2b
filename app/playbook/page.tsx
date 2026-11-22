@@ -91,7 +91,7 @@ export default function Page() {
       {/* HERO */}
       <div style={{ overflow: "hidden" }}>
         <Nav />
-        <div className="wrap" style={{ padding: "24px 40px clamp(40px,8vw,90px)", display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 48, flexWrap: "wrap" }}>
+        <div className="wrap" style={{ padding: "24px var(--margin) clamp(40px,8vw,90px)", display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 48, flexWrap: "wrap" }}>
           <div style={{ flex: "1 1 520px", maxWidth: 640 }}>
             <span className="pill">Free playbook 2026</span>
             <h1 className="h1big" style={{ marginTop: 20, fontSize: "clamp(28px,3.8vw,58px)" }}>The <span style={{ whiteSpace: "nowrap" }}>Ecosystem-Led</span> Growth Playbook</h1>
