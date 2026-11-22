@@ -62,7 +62,7 @@ export function PlaybookForm({ id = "download" }: { id?: string }) {
       {done ? (
         <div role="status">
           <div style={{ fontFamily: "'Michroma',sans-serif", fontSize: 22, color: "#A8FF5C", lineHeight: 1.25 }}>Your playbook is downloading</div>
-          <p style={{ margin: "14px 0 0", fontSize: 16, lineHeight: 1.6, color: "#B9BABD" }}>If nothing happened, use the button below. The file is a 55 page PDF.</p>
+          <p style={{ margin: "14px 0 0", fontSize: 16, lineHeight: 1.6, color: "#B9BABD" }}>If nothing happened, use the button below.</p>
           <button type="button" onClick={() => blobUrl.current && save(blobUrl.current)} style={{ marginTop: 20, background: "#A8FF5C", color: "#0A0A0B", fontFamily: "'Michroma',sans-serif", fontSize: 14, padding: "16px 28px", border: 0, borderRadius: 12, cursor: "pointer" }}>Download the PDF again</button>
           <div style={{ marginTop: 32, borderTop: "1px solid #2A2B2F", paddingTop: 22, fontSize: 15, lineHeight: 1.6, color: "#B9BABD" }}>
             Next, put it to work: <Link href="/program-builder" style={{ color: "#A8FF5C", textDecoration: "underline" }}>build your partner program strategy</Link> or <Link href="/directory" style={{ color: "#A8FF5C", textDecoration: "underline" }}>browse real partner programs</Link>.
@@ -71,7 +71,7 @@ export function PlaybookForm({ id = "download" }: { id?: string }) {
       ) : (
         <form onSubmit={submit} noValidate>
           <div style={{ fontFamily: "'Michroma',sans-serif", fontSize: 20, lineHeight: 1.3 }}>Get the free playbook</div>
-          <p style={{ margin: "10px 0 0", fontSize: 15, lineHeight: 1.55, color: "#B9BABD" }}>Leave your email and the 55 page PDF downloads right away.</p>
+          <p style={{ margin: "10px 0 0", fontSize: 15, lineHeight: 1.55, color: "#B9BABD" }}>Leave your email and the PDF downloads right away.</p>
           <div aria-hidden="true" style={{ position: "absolute", left: -9999, width: 1, height: 1, overflow: "hidden" }}>
             <label>Leave this empty<input tabIndex={-1} autoComplete="off" value={trap} onChange={(e) => setTrap(e.target.value)} name="website_confirm" /></label>
           </div>

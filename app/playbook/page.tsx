@@ -8,7 +8,7 @@ import { PlaybookForm } from "./PlaybookForm";
 
 const URL_ = "https://partner2b.com/playbook";
 const TITLE = "The Ecosystem-Led Growth Playbook 2026: free B2B partnership guide (PDF)";
-const DESC = "A free 55 page playbook on ecosystem-led growth for B2B marketers. Learn how partnerships work as a go-to-market motion, which partner types to build, and the 10 KPIs that prove partner ROI.";
+const DESC = "A free playbook on ecosystem-led growth for B2B marketers. Learn how partnerships work as a go-to-market motion, which partner types to build, and the 10 KPIs that prove partner ROI.";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -49,7 +49,7 @@ const FAQS: [string, string][] = [
   ["How is ecosystem-led growth different from product-led and sales-led growth?", "Product-led growth drives adoption through the product itself, often with free trials or freemium. Sales-led growth builds revenue through high-touch, relationship-driven selling. Ecosystem-led growth uses partnerships, integrations and network effects so buyers find your product through your partners. The playbook explains why the strongest companies layer all three motions rather than choosing one."],
   ["Which partnership KPIs should a B2B company track?", "The playbook covers 10 core metrics: partner-influenced revenue, partner-sourced pipeline, partner-influenced deal velocity, partner-influenced win rate, partner CAC versus direct CAC, partner program ROI, active partner percentage, integration adoption rate, partner marketplace traffic and ecosystem customer retention. Each comes with a target range."],
   ["Who is the playbook for?", "It is written for B2B marketing professionals who are new to partnerships. It explains what partnerships are, why they matter and how to use ecosystem-led growth as a core go-to-market motion."],
-  ["What is inside the playbook?", "55 pages in 10 chapters: why partnerships matter now, a glossary of essential terms, the 2026 B2B landscape, ecosystem-led growth in your GTM stack, cross-functional alignment, partner types, the five-stage partner journey, partner marketing strategies, the 10 KPIs and a roadmap with next steps."],
+  ["What is inside the playbook?", "It covers why partnerships matter now, a glossary of essential terms, the 2026 B2B landscape, ecosystem-led growth in your GTM stack, cross-functional alignment, partner types, the five-stage partner journey, partner marketing strategies, the 10 KPIs and a roadmap with next steps."],
   ["Is the playbook free?", "Yes. You leave your work email and the PDF downloads straight away. There is no payment and no account to create."],
   ["Who wrote it?", "Elena Zap, founder of Partner2B, who has more than 17 years of experience in B2B sales, marketing and partnerships."],
 ];
@@ -97,7 +97,7 @@ export default function Page() {
             <span className="pill">Free playbook 2026</span>
             <h1 className="h1big" style={{ marginTop: 20, fontSize: "clamp(28px,3.8vw,58px)" }}>The <span style={{ whiteSpace: "nowrap" }}>Ecosystem-Led</span> Growth Playbook</h1>
             <p style={{ margin: "22px 0 0", maxWidth: 560, fontSize: 21, lineHeight: 1.5, fontWeight: 300 }}>
-              How B2B marketers can drive scalable revenue through partnerships. 55 pages, 10 chapters and the 10 KPIs that prove partner ROI.
+              How B2B marketers can drive scalable revenue through partnerships, with the KPIs that prove partner ROI.
             </p>
             <ul style={{ margin: "26px 0 0", padding: 0, listStyle: "none", display: "grid", gap: 10, fontSize: 17, fontWeight: 400 }}>
               {["Why buyers now check your ecosystem before they talk to sales", "Which partner types to build, and in what order", "A five-stage journey from first partner to measurable revenue"].map((t) => (
@@ -116,7 +116,7 @@ export default function Page() {
         <div className="wrap">
           <h2 style={{ fontSize: "clamp(22px,2.6vw,36px)", lineHeight: 1.2, maxWidth: 860 }}>Partnerships are now part of the buying decision</h2>
           <p style={{ margin: "22px 0 0", maxWidth: 820, fontSize: 19, lineHeight: 1.65, color: "#C9CACE" }}>
-            The Ecosystem-Led Growth Playbook 2026 is a free 55 page guide for B2B marketing professionals. It explains how partnerships, integrations and a visible ecosystem work as a core go-to-market motion alongside product-led and sales-led growth, and how to build one step by step.
+            The Ecosystem-Led Growth Playbook 2026 is a free guide for B2B marketing professionals. It explains how partnerships, integrations and a visible ecosystem work as a core go-to-market motion alongside product-led and sales-led growth, and how to build one step by step.
           </p>
           <div style={{ marginTop: 40, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(230px, 1fr))", gap: 22 }}>
             {STATS.map(([n, t], i) => (
@@ -134,7 +134,7 @@ export default function Page() {
       <section style={{ background: "#fff", padding: "clamp(40px,9vw,84px) 0" }}>
         <div className="wrap">
           <h2 style={{ fontSize: "clamp(22px,2.6vw,36px)", lineHeight: 1.2 }}>What is inside</h2>
-          <p style={{ margin: "16px 0 0", maxWidth: 720, fontSize: 18, lineHeight: 1.6, color: "#2A2B2F" }}>Ten chapters that take you from the why to a working plan.</p>
+          <p style={{ margin: "16px 0 0", maxWidth: 720, fontSize: 18, lineHeight: 1.6, color: "#2A2B2F" }}>From the why to a working plan.</p>
           <ol style={{ margin: "36px 0 0", padding: 0, listStyle: "none", display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))", gap: 22 }}>
             {CHAPTERS.map(([t, d], i) => (
               <li key={t} className="cut" style={{ background: "#ECECEE", padding: "24px 26px 34px", display: "flex", gap: 18, alignItems: "flex-start" }}>
