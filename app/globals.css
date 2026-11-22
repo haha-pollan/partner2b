@@ -166,10 +166,8 @@ button{font-family:inherit}
 .herosub::after{content:"";position:absolute;right:-30px;top:34px;border-style:solid;border-width:15px 0 15px 30px;border-color:transparent transparent transparent #fff}
 .herobtns{display:flex;gap:18px;margin-top:34px;flex-wrap:wrap}
 .herobtns .btn{min-width:310px;text-align:center}
-.herotoby{position:absolute;z-index:3;right:var(--margin);top:-10px;width:clamp(240px,26vw,490px);aspect-ratio:490/580}
+.herotoby{position:absolute;z-index:3;right:var(--margin);top:-10px;width:clamp(240px,26vw,490px);aspect-ratio:490/580;-webkit-mask-image:linear-gradient(180deg,#000 0,#000 66%,transparent 97%);mask-image:linear-gradient(180deg,#000 0,#000 66%,transparent 97%)}
 .herotoby canvas{width:100%!important;height:100%!important}
-.herostack{position:absolute;right:0;top:calc(100% - 28px);width:clamp(400px,34vw,480px);display:flex;flex-direction:column;gap:18px;z-index:5}
-.dirstack{display:none!important}
 .stack{position:relative;z-index:4}
 .stat{display:flex;align-items:baseline;gap:14px;padding:22px 32px;--c:22px;white-space:nowrap;min-height:96px}
 .statn{font-family:'Michroma',sans-serif;font-size:clamp(32px,3.8vw,48px);line-height:1;-webkit-text-stroke:1.5px currentColor}
@@ -215,7 +213,6 @@ button{font-family:inherit}
 @media (max-width:1100px){
   .row{flex-wrap:wrap}.rowmeta{display:none}
   .herotoby{display:none}
-  .dirstack{display:flex!important}
   .hero .tapes{height:330px}
   .herobody{padding-top:270px}
   .bldpages{display:none}
