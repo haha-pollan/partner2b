@@ -9,7 +9,7 @@ export function LegalPage({ title, intro, sections }: { title: string; intro: st
         <Nav />
         <div className="wrap" style={{ padding: "40px var(--margin) clamp(36px,9vw,64px)" }}>
           <h1 className="h1big">{title}</h1>
-          <p style={{ margin: "22px 0 0", maxWidth: 720, fontSize: 20, lineHeight: 1.5, color: "#ECECEE" }}>{intro}</p>
+          <p style={{ margin: "22px 0 0", maxWidth: 900, fontSize: 20, lineHeight: 1.5, color: "#ECECEE" }}>{intro}</p>
           <p style={{ margin: "14px 0 0", fontSize: 15, color: "#2A2B2F", fontWeight: 400 }}>Last updated {LEGAL.updated}</p>
         </div>
       </div>

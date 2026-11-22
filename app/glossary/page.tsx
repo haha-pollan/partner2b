@@ -39,7 +39,7 @@ export default function Page() {
         <Nav />
         <div className="wrap" style={{ padding: "40px var(--margin) clamp(36px,9vw,64px)" }}>
           <h1 className="h1big">Partner program glossary</h1>
-          <p style={{ margin: "22px 0 0", maxWidth: 720, fontSize: 20, lineHeight: 1.5, color: "#ECECEE" }}>
+          <p style={{ margin: "22px 0 0", maxWidth: 900, fontSize: 20, lineHeight: 1.5, color: "#ECECEE" }}>
             Clear definitions of the terms used in B2B partner programs, channel sales and AI partnerships, each with examples and common questions answered.
           </p>
         </div>

@@ -12,7 +12,7 @@ export function Footer() {
         <div className="footleft">
           <Link href="/" aria-label="Partner2B home"><Logo variant="light" /></Link>
           <p style={{ margin: "20px 0 0", fontSize: 17, lineHeight: 1.6, fontWeight: 400, color: "#ECECEE" }}>
-            A free B2B partner program directory with links to official sources
+            We recruit, enable and market partners for B2B tech companies
           </p>
           <div className="foothead" style={{ marginTop: 34 }}>Newsletter</div>
           <NewsletterForm />

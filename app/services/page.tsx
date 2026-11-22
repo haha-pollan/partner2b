@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import Link from "next/link";
 import type { Metadata } from "next";
+import { JsonLd, ORG, SITE, crumbs } from "@/components/JsonLd";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { BuilderCta } from "@/components/BuilderCta";
@@ -97,6 +98,7 @@ const btnB: React.CSSProperties = { background: "#7C5CFF", color: "#fff", fontFa
 export default function Services() {
   return (
     <div style={{ overflow: "hidden" }}>
+      <JsonLd data={{ "@context": "https://schema.org", "@graph": [ { "@type": "Service", name: "Partner marketing and go-to-market for B2B tech companies", serviceType: "Partner marketing", description: "Positioning and messaging, partner recruitment, enablement, co-marketing and co-selling for B2B tech companies in AI, SaaS, fintech and cybersecurity.", url: `${SITE}/services`, provider: ORG, areaServed: "Worldwide" }, crumbs([["Partner2B", SITE], ["Services", `${SITE}/services`]]) ] }} />
       <div style={{ overflow: "hidden" }}>
         {/* Hero */}
         <div style={{ position: "relative" }}>

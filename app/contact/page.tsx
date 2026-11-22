@@ -5,7 +5,7 @@ import { Footer } from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Contact | Partner2B",
-  description: "Contact Partner2B at hello@partner2b.com for questions about the B2B partner program directory, listings, corrections and partnerships.",
+  description: "Contact Partner2B at hello@partner2b.com about partner marketing, program listings, corrections and partnerships.",
   alternates: { canonical: "/contact" },
 };
 
@@ -16,7 +16,7 @@ export default function Page() {
         <Nav />
         <div className="wrap" style={{ padding: "40px var(--margin) clamp(36px,9vw,64px)" }}>
           <h1 className="h1big">Contact</h1>
-          <p style={{ margin: "22px 0 0", maxWidth: 720, fontSize: 20, lineHeight: 1.5, color: "#ECECEE" }}>
+          <p style={{ margin: "22px 0 0", maxWidth: 900, fontSize: 20, lineHeight: 1.5, color: "#ECECEE" }}>
             Questions about the directory, a listing or a partnership? Write to us.
           </p>
         </div>

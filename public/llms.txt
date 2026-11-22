@@ -1,0 +1,28 @@
+# Partner2B
+
+> Partner2B helps B2B tech companies build and run partner programs. We recruit, enable and market partners. The site also runs a free directory of B2B partner programs with commission models, tiers and features, taken from public program pages.
+
+## Directory and programs
+
+- [Directory of B2B partner programs](https://partner2b.com/directory): reseller, referral, technology, services, MSP and OEM programs, with links to official pages
+- [AI partner programs](https://partner2b.com/ai): partner programs of AI vendors, grouped by category
+- [Glossary](https://partner2b.com/glossary): definitions of partner program terms such as MDF, deal registration, partner tiers and co-selling
+
+## Guides and data
+
+- [Blog](https://partner2b.com/post): articles on partner programs, partner marketing, co-selling and ecosystems
+- [B2B partner program commission rates in 2026](https://partner2b.com/post/b2b-partner-program-commission-rates): what 622 programs publish about how partners are paid
+- [Ecosystem-Led Growth Playbook 2026](https://partner2b.com/playbook): free playbook
+
+## Tools and services
+
+- [Program builder](https://partner2b.com/program-builder): answer a few questions and get a partner program strategy as a PDF
+- [Services](https://partner2b.com/services): positioning, partner recruitment, enablement, co-marketing and co-selling
+
+## About
+
+- [About Partner2B](https://partner2b.com/about-us)
+- [Contact](https://partner2b.com/contact): hello@partner2b.com
+- [Submit a program](https://partner2b.com/submit) | [Claim a listing](https://partner2b.com/claim) | [Report a correction](https://partner2b.com/report)
+
+Note: program information comes from public pages and is not independently verified. Confirm details with each company.
