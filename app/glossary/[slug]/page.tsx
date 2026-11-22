@@ -59,34 +59,34 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
   ];
   const accent = ai ? "#5B3FE0" : "#0A0A0B";
   return (
-    <div style={{ background: "#fff" }}>
+    <div>
       {ld.map((o, i) => (<script key={i} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(o) }} />))}
-      <div style={{ background: "#fff url(/mesh-program.svg) top / 100% 220% no-repeat", overflow: "hidden" }}>
+      <div style={{ overflow: "hidden" }}>
         <Nav />
         <div className="wrap" style={{ padding: "32px 40px clamp(36px,9vw,56px)" }}>
           <Link href="/glossary" className="pill" style={ai ? { background: "#5B3FE0", color: "#fff" } : undefined}>Glossary</Link>
-          <h1 style={{ margin: "20px 0 0", fontWeight: 400, fontSize: "clamp(28px,3.6vw,48px)", lineHeight: 1.08, letterSpacing: 0, color: "#0A0A0B", maxWidth: 900 }}>{t.term}</h1>
+          <h1 className="h1big">{t.term}</h1>
         </div>
       </div>
       <main className="wrap" style={{ padding: "clamp(28px,6vw,48px) 40px clamp(36px,9vw,80px)" }}>
         <div style={{ maxWidth: 760 }}>
-          <div className="cut" style={{ background: "#0A0A0B", color: "#ECECEE", padding: "28px 32px 36px" }}>
+          <div className="cut" style={{ background: "#2A2B30", padding: "28px 32px 36px" }}>
             <div style={{ fontFamily: "'Michroma',sans-serif", fontSize: 12, color: ai ? "#C9BDFF" : "#A8FF5C" }}>Short answer</div>
             <p style={{ margin: "14px 0 0", fontSize: 20, lineHeight: 1.55 }}>{t.short}</p>
           </div>
           {t.body.map((p, i) => (
-            <p key={i} style={{ margin: "26px 0 0", fontSize: 18, lineHeight: 1.65, color: "#2A2B2F" }}>{p}</p>
+            <p key={i} style={{ margin: "26px 0 0", fontSize: 18, lineHeight: 1.65, color: "#ECECEE" }}>{p}</p>
           ))}
           {t.link && (
             <p style={{ margin: "30px 0 0" }}>
-              <Link href={t.link.href} style={{ display: "inline-block", background: ai ? "#5B3FE0" : "#0A0A0B", color: ai ? "#fff" : "#A8FF5C", fontFamily: "'Michroma',sans-serif", fontSize: 14, padding: "14px 26px", borderRadius: 12 }}>{t.link.label}</Link>
+              <Link href={t.link.href} className="btn btn-s" style={{ display: "inline-block" }}>{t.link.label}</Link>
             </p>
           )}
           <h2 style={{ margin: "52px 0 0", fontWeight: 400, fontSize: 24, letterSpacing: 0, color: accent }}>Common questions</h2>
           {t.faqs.map(([q, a]) => (
             <div key={q} style={{ marginTop: 24 }}>
               <h3 style={{ fontWeight: 400, fontSize: 17, letterSpacing: 0, lineHeight: 1.35 }}>{q}</h3>
-              <p style={{ margin: "10px 0 0", fontSize: 18, lineHeight: 1.65, color: "#2A2B2F" }}>{a}</p>
+              <p style={{ margin: "10px 0 0", fontSize: 18, lineHeight: 1.65, color: "#ECECEE" }}>{a}</p>
             </div>
           ))}
           {rel.length > 0 && (

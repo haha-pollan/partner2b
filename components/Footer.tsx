@@ -3,38 +3,35 @@ import { Logo } from "./Logo";
 import { AI_CATEGORIES } from "@/lib/ai";
 
 const TYPES = ["Reseller", "Referral", "Technology", "Services", "MSP", "OEM or white label"];
-const head: React.CSSProperties = { fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 13, color: "#ECECEE", marginBottom: 16 };
-const col: React.CSSProperties = { display: "flex", flexDirection: "column", gap: 10 };
 
 export function Footer() {
   return (
-    <footer className="foot" style={{ background: "#0A0A0B", color: "#ECECEE", position: "relative", overflow: "hidden", minHeight: 540 }}>
-      <div className="bigword" aria-hidden="true" style={{ bottom: 58 }}>Partner2B</div>
-      <div className="footinner" style={{ position: "relative", maxWidth: 1360, margin: "0 auto", padding: "48px 40px 0", display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 32, flexWrap: "wrap" }}>
+    <footer className="foot">
+      <div className="footinner">
         <div style={{ maxWidth: 400 }}>
           <Link href="/" aria-label="Partner2B home"><Logo variant="light" /></Link>
-          <p style={{ margin: "18px 0 0", fontSize: 14, lineHeight: 1.6, fontWeight: 300, color: "#B9BABD" }}>
-            Partner2B is a free B2B partner program directory. Compare reseller, referral, technology, MSP and OEM programs, partner tiers, commission models and requirements. Every listing links to its official source.
+          <p style={{ margin: "20px 0 0", fontSize: 17, lineHeight: 1.6, fontWeight: 500, color: "#ECECEE" }}>
+            A free B2B partner program directory with links to official sources
           </p>
         </div>
-        <div className="footlinks" style={{ display: "flex", gap: 56, flexWrap: "wrap" }}>
+        <div className="footlinks" style={{ display: "flex", gap: 64, flexWrap: "wrap" }}>
           <div>
-            <div style={head}>Directory</div>
-            <div className="footcol" style={col}>
+            <div className="foothead">Directory</div>
+            <div className="footcol">
               <Link href="/directory">All programs</Link>
               {TYPES.map((t) => (<Link key={t} href={`/directory?type=${encodeURIComponent(t)}`}>{t}</Link>))}
             </div>
           </div>
           <div>
-            <div style={{ ...head, color: "#B9A9FF" }}>AI programs</div>
-            <div className="footcol" style={col}>
+            <div className="foothead">AI programs</div>
+            <div className="footcol">
               <Link href="/ai">All AI programs</Link>
               {AI_CATEGORIES.map((c) => (<Link key={c.slug} href={`/ai/${c.slug}`}>{c.name}</Link>))}
             </div>
           </div>
           <div>
-            <div style={head}>Partner2B</div>
-            <div className="footcol" style={col}>
+            <div className="foothead">Partner2B</div>
+            <div className="footcol">
               <Link href="/program-builder">Program builder</Link>
               <Link href="/services">Services</Link>
               <Link href="/playbook">Free playbook</Link>
@@ -49,13 +46,13 @@ export function Footer() {
           </div>
         </div>
       </div>
-      <div className="legalbar" style={{ position: "absolute", left: 0, right: 0, bottom: 18 }}><div style={{ maxWidth: 1360, margin: "0 auto", padding: "0 40px", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 16, flexWrap: "wrap", fontSize: 12, fontWeight: 300, color: "#85868B" }}>
+      <div className="legalbar">
         <span>© 2026 Partner2B</span>
-        <span style={{ display: "flex", gap: 20 }}>
+        <span style={{ display: "flex", gap: 22 }}>
           <Link href="/privacy">Privacy</Link>
           <Link href="/terms">Terms</Link>
         </span>
-      </div></div>
+      </div>
     </footer>
   );
 }

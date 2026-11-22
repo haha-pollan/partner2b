@@ -12,18 +12,18 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <div style={{ background: "#fff" }}>
-      <div style={{ background: "#fff url(/mesh-program.svg) top / 100% 220% no-repeat", overflow: "hidden" }}>
+    <div>
+      <div style={{ overflow: "hidden" }}>
         <Nav />
         <div className="wrap" style={{ padding: "40px 40px clamp(36px,9vw,64px)" }}>
-          <h1 style={{ fontWeight: 400, fontSize: 56, lineHeight: 1, letterSpacing: 0, color: "#0A0A0B" }}>About Partner2B</h1>
-          <p style={{ margin: "22px 0 0", maxWidth: 720, fontSize: 20, lineHeight: 1.5, color: "#1C1D20" }}>
+          <h1 className="h1big">About Partner2B</h1>
+          <p style={{ margin: "22px 0 0", maxWidth: 720, fontSize: 20, lineHeight: 1.5, color: "#ECECEE" }}>
             Partner2B helps businesses grow through partner ecosystems.
           </p>
         </div>
       </div>
       <main className="wrap" style={{ padding: "clamp(36px,9vw,64px) 40px clamp(36px,9vw,96px)" }}>
-        <div style={{ maxWidth: 760, fontSize: 18, lineHeight: 1.65, color: "#2A2B2F" }}>
+        <div style={{ maxWidth: 760, fontSize: 18, lineHeight: 1.65, color: "#ECECEE" }}>
           <p style={{ margin: 0 }}>
             Partner2B is a free directory of B2B partner programs. It brings commissions, tiers, requirements and benefits for reseller, referral, technology, services, MSP and OEM programs into one place, so you can compare programs and join the ones that fit.
           </p>

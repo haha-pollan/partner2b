@@ -85,23 +85,22 @@ export default function Page() {
   };
 
   return (
-    <div style={{ background: "#fff" }}>
+    <div>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />
 
       {/* HERO */}
-      <div style={{ background: "#fff url(/mesh-program.svg) top / 100% 100% no-repeat", position: "relative", overflow: "hidden" }}>
-        <div className="limepanel" style={{ width: 1040 }} />
+      <div style={{ overflow: "hidden" }}>
         <Nav />
         <div className="wrap" style={{ padding: "24px 40px clamp(40px,8vw,90px)", display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 48, flexWrap: "wrap" }}>
           <div style={{ flex: "1 1 520px", maxWidth: 640 }}>
             <span className="pill">Free playbook 2026</span>
             <h1 className="h1big" style={{ marginTop: 20, fontSize: "clamp(28px,3.8vw,58px)" }}>The <span style={{ whiteSpace: "nowrap" }}>Ecosystem-Led</span> Growth Playbook</h1>
-            <p style={{ margin: "22px 0 0", maxWidth: 560, fontSize: 21, lineHeight: 1.5, fontWeight: 300 }}>
+            <p style={{ margin: "22px 0 0", maxWidth: 560, fontSize: 21, lineHeight: 1.5, fontWeight: 600 }}>
               How B2B marketers can drive scalable revenue through partnerships, with the KPIs that prove partner ROI.
             </p>
             <ul style={{ margin: "26px 0 0", padding: 0, listStyle: "none", display: "grid", gap: 10, fontSize: 17, fontWeight: 400 }}>
               {["Why buyers now check your ecosystem before they talk to sales", "Which partner types to build, and in what order", "A five-stage journey from first partner to measurable revenue"].map((t) => (
-                <li key={t} style={{ display: "flex", gap: 12, alignItems: "flex-start" }}><span aria-hidden="true" style={{ flex: "0 0 10px", height: 10, background: "#0A0A0B", marginTop: 8, clipPath: "polygon(0 0,100% 0,100% 60%,60% 100%,0 100%)" }} />{t}</li>
+                <li key={t} style={{ display: "flex", gap: 12, alignItems: "flex-start" }}><span aria-hidden="true" style={{ flex: "0 0 10px", height: 10, background: "#2A2B30", marginTop: 8, clipPath: "polygon(0 0,100% 0,100% 60%,60% 100%,0 100%)" }} />{t}</li>
               ))}
             </ul>
           </div>
@@ -112,7 +111,7 @@ export default function Page() {
       </div>
 
       {/* ANSWER-FIRST SUMMARY + STATS */}
-      <section style={{ background: "#0A0A0B", backgroundImage: "radial-gradient(#2A2B2F 1.3px, transparent 1.6px)", backgroundSize: "26px 26px", color: "#ECECEE", padding: "clamp(40px,9vw,84px) 0" }}>
+      <section style={{ padding: "clamp(40px,9vw,84px) 0" }}>
         <div className="wrap">
           <h2 style={{ fontSize: "clamp(22px,2.6vw,36px)", lineHeight: 1.2, maxWidth: 860 }}>Partnerships are now part of the buying decision</h2>
           <p style={{ margin: "22px 0 0", maxWidth: 820, fontSize: 19, lineHeight: 1.65, color: "#C9CACE" }}>
@@ -131,7 +130,7 @@ export default function Page() {
       </section>
 
       {/* CHAPTERS */}
-      <section style={{ background: "#fff", padding: "clamp(40px,9vw,84px) 0" }}>
+      <section style={{ padding: "clamp(40px,9vw,84px) 0" }}>
         <div className="wrap">
           <h2 style={{ fontSize: "clamp(22px,2.6vw,36px)", lineHeight: 1.2 }}>What is inside</h2>
           <p style={{ margin: "16px 0 0", maxWidth: 720, fontSize: 18, lineHeight: 1.6, color: "#2A2B2F" }}>From the why to a working plan.</p>
@@ -139,7 +138,7 @@ export default function Page() {
             {CHAPTERS.flatMap(([t, d], i) => {
               const card = (
                 <li key={t} className="cut" style={{ background: "#ECECEE", padding: "24px 26px 34px", display: "flex", gap: 18, alignItems: "flex-start" }}>
-                  <span style={{ flex: "0 0 44px", height: 44, borderRadius: "50%", background: "#0A0A0B", color: "#A8FF5C", fontFamily: "'Michroma',sans-serif", fontSize: 13, display: "flex", alignItems: "center", justifyContent: "center" }}>{String(i + 1).padStart(2, "0")}</span>
+                  <span style={{ flex: "0 0 44px", height: 44, borderRadius: "50%", background: "#2A2B30", color: "#A8FF5C", fontFamily: "'Michroma',sans-serif", fontSize: 13, display: "flex", alignItems: "center", justifyContent: "center" }}>{String(i + 1).padStart(2, "0")}</span>
                   <div>
                     <h3 style={{ fontSize: 16, lineHeight: 1.35 }}>{t}</h3>
                     <p style={{ margin: "8px 0 0", fontSize: 15, lineHeight: 1.55, color: "#3A3B40" }}>{d}</p>
@@ -148,7 +147,7 @@ export default function Page() {
               );
               if (i !== 3) return [card];
               return [card, (
-                <li key="title-card" className="cut" style={{ background: "#0A0A0B", color: "#ECECEE", padding: "26px 28px 36px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                <li key="title-card" className="cut" style={{ background: "#2A2B30", padding: "26px 28px 36px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
                   <span className="pill" style={{ alignSelf: "flex-start", background: "#A8FF5C", color: "#0A0A0B" }}>Partner2B 2026</span>
                   <h3 style={{ marginTop: 16, fontSize: 19, lineHeight: 1.3, color: "#A8FF5C" }}>The Ecosystem-Led Growth Playbook</h3>
                   <p style={{ margin: "10px 0 0", fontSize: 15, lineHeight: 1.55, color: "#B9BABD" }}>A practical guide to growing revenue through partnerships.</p>
@@ -160,14 +159,14 @@ export default function Page() {
                 <h3 style={{ fontSize: 16, lineHeight: 1.35 }}>Put partnerships to work</h3>
                 <p style={{ margin: "8px 0 0", fontSize: 15, lineHeight: 1.55, color: "#1C1D20" }}>Download the playbook and start building your ecosystem today.</p>
               </div>
-              <a href="#download" style={{ alignSelf: "flex-start", background: "#0A0A0B", color: "#A8FF5C", fontFamily: "'Michroma',sans-serif", fontSize: 13, padding: "14px 22px", borderRadius: 12 }}>Get the free playbook</a>
+              <a href="#download" className="btn btn-s btn-sm" style={{ alignSelf: "flex-start" }}>Get the free playbook</a>
             </li>
           </ol>
         </div>
       </section>
 
       {/* PREVIEW PAGES */}
-      <section style={{ background: "#0A0A0B", color: "#ECECEE", padding: "clamp(40px,9vw,84px) 0", overflow: "hidden" }}>
+      <section style={{ padding: "clamp(40px,9vw,84px) 0", overflow: "hidden" }}>
         <div className="wrap">
           <h2 style={{ fontSize: "clamp(22px,2.6vw,36px)", lineHeight: 1.2 }}>A look at the pages</h2>
           <div style={{ marginTop: 36, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(190px, 1fr))", gap: 22 }}>
@@ -182,7 +181,7 @@ export default function Page() {
       </section>
 
       {/* WHO + AUTHOR */}
-      <section style={{ background: "#fff", padding: "clamp(40px,9vw,84px) 0" }}>
+      <section style={{ padding: "clamp(40px,9vw,84px) 0" }}>
         <div className="wrap" style={{ display: "flex", gap: 56, flexWrap: "wrap" }}>
           <div style={{ flex: "1 1 420px" }}>
             <h2 style={{ fontSize: "clamp(22px,2.4vw,32px)", lineHeight: 1.2 }}>Who it is for</h2>
@@ -222,7 +221,7 @@ export default function Page() {
       <section style={{ background: "#A8FF5C", padding: "clamp(36px,8vw,72px) 0" }}>
         <div className="wrap" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 28, flexWrap: "wrap" }}>
           <h2 style={{ fontSize: "clamp(22px,2.6vw,36px)", lineHeight: 1.2, maxWidth: 720 }}>Your ecosystem is part of your value proposition. Make it impossible to ignore.</h2>
-          <a href="#download" style={{ background: "#0A0A0B", color: "#A8FF5C", fontFamily: "'Michroma',sans-serif", fontSize: 14, padding: "18px 30px", borderRadius: 12 }}>Get the free playbook</a>
+          <a href="#download" className="btn btn-s">Get the free playbook</a>
         </div>
       </section>
 

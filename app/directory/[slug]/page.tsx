@@ -40,9 +40,8 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
     .slice(0, 3);
 
   return (
-    <div style={{ background: "#fff url(/mesh-program.svg) top / 100% 100% no-repeat", overflow: "hidden" }}>
-      <div style={{ position: "relative", overflow: "hidden", color: "#0A0A0B" }}>
-        <div className="limepanel" />
+    <div style={{ overflow: "hidden" }}>
+      <div style={{ position: "relative" }}>
         <Nav />
         <div className="wrap" style={{ padding: "8px 40px clamp(36px,9vw,80px)" }}>
           <div style={{ fontSize: 15, fontWeight: 400, display: "flex", gap: 8, flexWrap: "wrap" }}>
@@ -55,7 +54,7 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
             <h1 style={{ fontWeight: 400, fontSize: "clamp(26px,4.2vw,68px)", lineHeight: 1, letterSpacing: 0 }}>{p.company}</h1>
           </div>
           {p.product_note && <div style={{ marginTop: 12, fontSize: 20, fontWeight: 400 }}>{p.product_note}</div>}
-          <p style={{ margin: "24px 0 0", maxWidth: 760, fontSize: 22, lineHeight: 1.5, fontWeight: 300 }}>{p.description}</p>
+          <p style={{ margin: "24px 0 0", maxWidth: 760, fontSize: 22, lineHeight: 1.5, fontWeight: 600 }}>{p.description}</p>
           <div style={{ marginTop: 28, display: "flex", gap: 10, flexWrap: "wrap" }}>
             {isAi(p) && <span className="aibadge" style={{ alignSelf: "center" }}>AI</span>}
             {p.program_types.map((t) => (<span key={t} className="pill">{t}</span>))}
@@ -64,19 +63,19 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
             {p.commission_models.some((c) => c !== "Not published") && <span className="tag" style={{ background: "#ECECEE" }}>{commissionLabel(p)}</span>}
           </div>
           <div style={{ marginTop: 36, display: "flex", gap: 10, flexWrap: "wrap", maxWidth: 800 }}>
-            <a href={p.program_url} target="_blank" rel="noopener noreferrer" style={{ display: "inline-block", background: "#0A0A0B", color: "#A8FF5C", fontWeight: 400, fontFamily: "'Michroma',sans-serif", fontSize: 14, padding: "14px 26px", borderRadius: 12 }}>
+            <a href={p.program_url} target="_blank" rel="noopener noreferrer" className="btn btn-s" style={{ display: "inline-block" }}>
               Visit the official program page
             </a>
           </div>
         </div>
       </div>
 
-      <div style={{ position: "relative", color: "#0A0A0B", padding: "clamp(36px,9vw,80px) 0 clamp(36px,9vw,96px)" }}>
+      <div style={{ position: "relative", padding: "clamp(36px,9vw,80px) 0 clamp(36px,9vw,96px)" }}>
         <div className="wrap" style={{ display: "flex", gap: 40, alignItems: "flex-start", flexWrap: "wrap" }}>
           <div style={{ flex: "1 1 620px", minWidth: 0 }}>
             <section style={{ marginBottom: 64 }}>
               <h2 style={{ fontWeight: 400, fontSize: 34, letterSpacing: 0 }}>About {p.company}</h2>
-              <p style={{ margin: "20px 0 0", maxWidth: 760, fontSize: 20, lineHeight: 1.6, fontWeight: 300 }}>{companyDescription(p)}</p>
+              <p style={{ margin: "20px 0 0", maxWidth: 760, fontSize: 20, lineHeight: 1.6, fontWeight: 600 }}>{companyDescription(p)}</p>
             </section>
             {p.tiers.length > 0 && (
               <section>
@@ -131,7 +130,7 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
               {p.requirements && (<><dt>Requirements</dt><dd>{p.requirements}</dd></>)}
               
             </dl>
-            <a href={p.program_url} target="_blank" rel="noopener noreferrer" style={{ display: "block", marginTop: 28, background: "#A8FF5C", color: "#0A0A0B", fontWeight: 400, fontFamily: "'Michroma',sans-serif", fontSize: 14, textAlign: "center", padding: "16px 20px", borderRadius: 12 }}>Explore partner program</a>
+            <a href={p.program_url} target="_blank" rel="noopener noreferrer" className="btn btn-p" style={{ display: "block", marginTop: 28, textAlign: "center" }}>Explore partner program</a>
             <div style={{ marginTop: 24, paddingTop: 16, borderTop: "1px solid #3A3B40", fontSize: 13, lineHeight: 1.5, color: "#85868B" }}>
               <div>Information is compiled from open sources. <a href={p.program_url} target="_blank" rel="noopener noreferrer" style={{ color: "#B9BABD", textDecoration: "underline" }}>Official page</a></div>
               <div style={{ marginTop: 8 }}>See something wrong? <Link href={`/report?listing=${p.slug}`} style={{ color: "#B9BABD", textDecoration: "underline" }}>Report a correction</Link></div>
@@ -141,7 +140,7 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
       </div>
 
       {related.length > 0 && (
-        <div style={{ position: "relative", color: "#0A0A0B", padding: "0 0 112px" }}>
+        <div style={{ position: "relative", padding: "0 0 112px" }}>
           <div className="wrap">
             <h2 style={{ fontWeight: 400, fontSize: 34, letterSpacing: 0, color: "#ECECEE" }}>More {p.product_category} programs</h2>
             <div style={{ marginTop: 20, display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(300px,1fr))", gap: 14 }}>
@@ -156,13 +155,13 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
           </div>
         </div>
       )}
-      <div style={{ background: "#131416", color: "#ECECEE", padding: "clamp(36px,9vw,90px) 0 clamp(36px,9vw,100px)" }}>
+      <div style={{ padding: "clamp(36px,9vw,90px) 0 clamp(36px,9vw,100px)" }}>
         <div className="wrap" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 32, flexWrap: "wrap" }}>
           <div>
             <h2 style={{ fontWeight: 400, fontSize: 40, letterSpacing: 0, lineHeight: 1.05 }}>Is this your program? <span style={{ color: "#A8FF5C" }}>Claim it for free</span></h2>
             <p style={{ margin: "16px 0 0", fontSize: 20, color: "#B9BABD" }}>Correct your terms and keep them current</p>
           </div>
-          <Link href={`/claim?listing=${p.slug}`} style={{ background: "#A8FF5C", color: "#0A0A0B", fontWeight: 400, fontFamily: "'Michroma',sans-serif", padding: "16px 30px", borderRadius: 12, fontSize: 14 }}>Claim this listing</Link>
+          <Link href={`/claim?listing=${p.slug}`} className="btn btn-p">Claim this listing</Link>
         </div>
       </div>
       <script

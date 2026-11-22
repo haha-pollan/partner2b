@@ -15,7 +15,7 @@ const rnd = (n: number) => {
   return v - Math.floor(v);
 };
 
-export function Toby({ height = 300, lime = true, animate = true, className, style }: { height?: number; lime?: boolean; animate?: boolean; className?: string; style?: React.CSSProperties }) {
+export function Toby({ height = 300, lime = true, animate = true, glasses = false, rows = TOBY_H, className, style }: { height?: number; lime?: boolean; animate?: boolean; glasses?: boolean; rows?: number; className?: string; style?: React.CSSProperties }) {
   const ref = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -61,7 +61,7 @@ export function Toby({ height = 300, lime = true, animate = true, className, sty
       const h = canvas.clientHeight;
       canvas.width = Math.round(w * dpr);
       canvas.height = Math.round(h * dpr);
-      cell = Math.min(canvas.width / TOBY_W, canvas.height / TOBY_H);
+      cell = Math.min(canvas.width / TOBY_W, canvas.height / rows);
     };
 
     const rect = (x: number, y: number, s: number, color: string) => {
@@ -87,7 +87,12 @@ export function Toby({ height = 300, lime = true, animate = true, className, sty
           rect(it.x, it.y, it.s, color);
         }
       }
-      if (progress >= 1.6) {
+      if (glasses && progress >= 1.3) {
+        const R = (c0: number, r0: number, c1: number, r1: number, f: string) => { ctx.fillStyle = f; ctx.fillRect(c0 * cell, r0 * cell, (c1 - c0) * cell, (r1 - r0) * cell); };
+        R(7, 16.6, 14, 20.4, DARK); R(17.5, 16.6, 24.5, 20.4, DARK); R(13.5, 16.6, 18, 17.8, DARK); R(3, 16.6, 7.2, 17.8, DARK); R(24.3, 16.6, 28.5, 17.8, DARK);
+        R(8, 17.4, 9.6, 18.4, "#FFFFFF"); R(18.6, 17.4, 20.2, 18.4, "#FFFFFF");
+      }
+      if (progress >= 1.6 && !glasses) {
         if (blinking) {
           // lids close over the upper part of each eye, a dark line stays
           for (const [x, y] of TOBY_EYES) if (y < eyeBottom) rect(x, y, 1, TOBY_PALETTE[SKIN]);
@@ -142,8 +147,8 @@ export function Toby({ height = 300, lime = true, animate = true, className, sty
       canvas.removeEventListener("mouseleave", out);
       document.removeEventListener("visibilitychange", vis);
     };
-  }, [animate, lime]);
+  }, [animate, lime, glasses, rows]);
 
-  const w = Math.round((height * TOBY_W) / TOBY_H);
+  const w = Math.round((height * TOBY_W) / rows);
   return <canvas ref={ref} aria-hidden="true" className={className} style={{ width: w, height, display: "block", ...style }} />;
 }

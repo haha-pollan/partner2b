@@ -9,12 +9,12 @@ import { BLURBS } from "@/lib/glossary/blurbs";
 const TONES = [
   { bg: "#ECECEE", fg: "#0A0A0B", sub: "#3A3B40", ar: "#0A0A0B", arf: "#A8FF5C" },
   { bg: "#A8FF5C", fg: "#0A0A0B", sub: "#1C1D20", ar: "#0A0A0B", arf: "#A8FF5C" },
-  { bg: "#1C1D20", fg: "#ECECEE", sub: "#B9BABD", ar: "#A8FF5C", arf: "#0A0A0B" },
+  { bg: "#2A2B30", fg: "#ECECEE", sub: "#B9BABD", ar: "#A8FF5C", arf: "#0A0A0B" },
 ];
 const AI_TONES = [
   { bg: "#7C5CFF", fg: "#fff", sub: "#F1EEFF", ar: "#fff", arf: "#5B3FE0" },
   { bg: "#F1EEFF", fg: "#0A0A0B", sub: "#3A3B40", ar: "#5B3FE0", arf: "#fff" },
-  { bg: "#1C1D20", fg: "#ECECEE", sub: "#B9BABD", ar: "#C9BDFF", arf: "#0A0A0B" },
+  { bg: "#2A2B30", fg: "#ECECEE", sub: "#B9BABD", ar: "#C9BDFF", arf: "#0A0A0B" },
 ];
 const ROT = [-1.6, 1.2, -0.8, 1.4, -1.2, 1.6];
 
@@ -33,18 +33,18 @@ export default function Page() {
     hasDefinedTerm: TERMS.map((t) => ({ "@type": "DefinedTerm", name: t.term, description: t.short, url: `https://partner2b.com${termHref(t.slug)}` })),
   };
   return (
-    <div style={{ background: "#fff" }}>
+    <div>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />
-      <div style={{ background: "#fff url(/mesh-program.svg) top / 100% 220% no-repeat", overflow: "hidden" }}>
+      <div style={{ overflow: "hidden" }}>
         <Nav />
         <div className="wrap" style={{ padding: "40px 40px clamp(36px,9vw,64px)" }}>
-          <h1 style={{ fontWeight: 400, fontSize: "clamp(32px,4.2vw,56px)", lineHeight: 1.05, letterSpacing: 0, color: "#0A0A0B" }}>Partner program glossary</h1>
-          <p style={{ margin: "22px 0 0", maxWidth: 720, fontSize: 20, lineHeight: 1.5, color: "#1C1D20" }}>
+          <h1 className="h1big">Partner program glossary</h1>
+          <p style={{ margin: "22px 0 0", maxWidth: 720, fontSize: 20, lineHeight: 1.5, color: "#ECECEE" }}>
             Clear definitions of the terms used in B2B partner programs, channel sales and AI partnerships, each with examples and common questions answered.
           </p>
         </div>
       </div>
-      <section style={{ background: "#0A0A0B", backgroundImage: "radial-gradient(#2A2B2F 1.3px, transparent 1.6px)", backgroundSize: "26px 26px", color: "#ECECEE", padding: "clamp(36px,9vw,72px) 0 clamp(36px,9vw,110px)", overflow: "hidden" }}>
+      <section style={{ padding: "clamp(36px,9vw,72px) 0 clamp(36px,9vw,110px)", overflow: "hidden" }}>
         <div className="wrap">
           {GROUPS.map((g, gi) => {
             const ai = g === "AI and agents";

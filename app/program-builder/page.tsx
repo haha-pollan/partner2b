@@ -14,24 +14,23 @@ const steps = ["Tell us about your company, buyers and goals", "We write your pa
 
 export default function Page() {
   return (
-    <div style={{ background: "#0A0A0B", overflow: "hidden" }}>
-      <div style={{ background: "#fff url(/mesh-program.svg) top / 100% 100% no-repeat" }}>
-        <div style={{ position: "relative", overflow: "hidden", color: "#0A0A0B" }}>
-          <div className="limepanel" style={{ width: 1040 }} />
+    <div style={{ overflow: "hidden" }}>
+      <div style={{ overflow: "hidden" }}>
+        <div style={{ position: "relative" }}>
           <Nav />
           <div className="wrap" style={{ padding: "24px 40px clamp(36px,9vw,90px)", display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 40, flexWrap: "wrap" }}>
             <div style={{ maxWidth: "100%" }}>
               <h1 className="h1big" style={{ fontSize: "clamp(28px,4vw,64px)" }}>Partner program builder</h1>
-              <p style={{ margin: "22px 0 0", maxWidth: 560, fontSize: 21, lineHeight: 1.5, fontWeight: 300 }}>Not sure which partners fit your product? Answer a few questions and get a full partner program strategy</p>
+              <p style={{ margin: "22px 0 0", maxWidth: 560, fontSize: 21, lineHeight: 1.5, fontWeight: 600 }}>Not sure which partners fit your product? Answer a few questions and get a full partner program strategy</p>
             </div>
-            <div className="cut statcard" style={{ flex: "0 0 320px", margin: "20px 40px 0 0", transform: "rotate(-4deg)", background: "#0A0A0B", color: "#ECECEE", padding: "28px 32px" }}>
+            <div className="cut statcard" style={{ flex: "0 0 320px", margin: "20px 40px 0 0", transform: "rotate(-4deg)", background: "#0A0A0B", padding: "28px 32px" }}>
               <div style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 49, letterSpacing: 0, lineHeight: 1, color: "#A8FF5C" }}>Free</div>
               <div style={{ marginTop: 8, fontSize: 18 }}>strategy in 3 minutes</div>
             </div>
           </div>
         </div>
         <div className="wrap" style={{ padding: "40px 40px clamp(36px,9vw,120px)", display: "flex", gap: 32, alignItems: "flex-start", flexWrap: "wrap" }}>
-          <div className="cut" style={{ flex: "1 1 640px", minWidth: 0, background: "#0A0A0B", color: "#ECECEE", padding: "36px 40px 44px", position: "relative" }}>
+          <div className="cut" style={{ flex: "1 1 640px", minWidth: 0, background: "#0A0A0B", padding: "36px 40px 44px", position: "relative" }}>
             <h2 style={{ fontWeight: 400, fontSize: 23, letterSpacing: 0 }}>Your company</h2>
             <BuilderClient />
           </div>
