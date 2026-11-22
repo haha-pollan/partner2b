@@ -113,9 +113,9 @@ export async function DirectoryView({ sp, pool, base, ai = false, h1, sub, befor
               <button type="submit">Search</button>
             </form>
           </div>
-          {heroRight ? <div style={{ flex: "0 1 400px", maxWidth: "100%", marginTop: 0 }}>{heroRight}</div> : <div className="cut card" style={{ flex: "0 0 340px", maxWidth: "100%", margin: "30px 30px 0 0", transform: "rotate(-3deg)", padding: "30px 34px 36px", ["--c" as string]: "28px" }}>
-            <div style={{ fontFamily: "'Michroma',sans-serif", fontSize: 54, lineHeight: 1, WebkitTextStroke: "1.5px currentColor" }}><CountUp to={all.length} /></div>
-            <div style={{ marginTop: 12, fontSize: 19, lineHeight: 1.4, fontWeight: 500 }}>{ai ? "AI programs, free to browse" : "programs, free to browse"}</div>
+          {heroRight ? <div style={{ flex: "0 1 400px", maxWidth: "100%", marginTop: 0 }}>{heroRight}</div> : <div className="cut card stat" style={{ flex: "0 0 auto", maxWidth: "100%", margin: "30px 0 0 0", transform: "rotate(-2deg)", ["--c" as string]: "22px" }}>
+            <span className="statn"><CountUp to={all.length} /></span>
+            <span className="statl">{ai ? "AI programs, free to browse" : "programs, free to browse"}</span>
           </div>}
         </div>
       </div>
