@@ -12,7 +12,7 @@ export function Nav() {
   return (
     <div className="nav">
       <Link href="/" aria-label="Partner2B home" style={{ display: "flex", alignItems: "center" }}>
-        <Logo variant="dark" />
+        <Logo variant="dark" size={22} />
       </Link>
       <button type="button" className="navtoggle" aria-expanded={open} aria-controls="navlinks" onClick={() => setOpen((o) => !o)}>
         {open ? "Close" : "Menu"}
