@@ -2,6 +2,14 @@
 const nextConfig = {
   serverExternalPackages: ["@react-pdf/renderer"],
   outputFileTracingIncludes: { "/api/program-builder": ["./node_modules/pdfkit/**/*", "./node_modules/@react-pdf/**/*"], "/api/playbook": ["./private/**/*"] },
+  skipTrailingSlashRedirect: true,
+  async rewrites() {
+    return [
+      { source: "/ingest/static/:path*", destination: "https://eu-assets.i.posthog.com/static/:path*" },
+      { source: "/ingest/array/:path*", destination: "https://eu-assets.i.posthog.com/array/:path*" },
+      { source: "/ingest/:path*", destination: "https://eu.i.posthog.com/:path*" },
+    ];
+  },
   async redirects() {
     return [
       { source: "/blog", destination: "/post", permanent: true },

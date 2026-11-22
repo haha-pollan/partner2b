@@ -22,6 +22,7 @@ export const PRIVACY: Section[] = [
       "When you use the Program builder, we collect your email address and what you enter about your company and your program goals, such as your website, company name and category. This is used to create your strategy report and to follow up on it.",
       "When you subscribe to the newsletter in the footer, we collect your email address, the page you subscribed from and the page that referred you.",
       "When you use the Submit, Claim or Report forms, we collect what you type into them: your name, work email address, role, the company and program you are writing about, links you provide, and your message. For the Report form, your email address is optional.",
+      "We measure how the site is used with PostHog, a web analytics service hosted in the European Union. It records which pages are viewed, the page you came from, your browser and device type and your approximate country. It does not use cookies, does not store anything on your device and does not record your screen or your typing.",
       "Our hosting provider records technical data when you visit, such as your IP address, browser type, pages requested and the time of the request. This is kept in server logs for security and to keep the site running.",
       "The directory itself is built from information that companies publish about their partner programs. It describes companies and their programs, not individuals.",
     ],
@@ -33,6 +34,7 @@ export const PRIVACY: Section[] = [
       "We use Program builder details to create your report and to contact you about it. The basis is steps taken at your request and our legitimate interest in running the tool.",
       "We use newsletter email addresses to send you the Partner2B newsletter. The basis is your consent, which you give by ticking the box in the footer form. You can withdraw it at any time by emailing us, and we will remove you from the list.",
       "We use form data to review submissions, verify that a person is authorized to claim a listing, correct or remove information, and reply to you. The basis is our legitimate interest in keeping the directory accurate (GDPR Article 6(1)(f)), and, where you ask us to act on a request, steps taken at your request.",
+      "We use usage statistics to understand which pages are useful and to improve the site. The basis is our legitimate interest in doing so, and the statistics are not used to identify you.",
       "We use server logs to secure and operate the site. The basis is our legitimate interest in doing so.",
       "We do not sell personal data and we do not use it for advertising.",
     ],
@@ -40,7 +42,7 @@ export const PRIVACY: Section[] = [
   {
     h: "Who we share it with",
     p: [
-      "We use service providers to run the site: Vercel for hosting and Supabase for the database where submissions are stored. The Program builder sends the company details you enter to OpenAI so that it can write your report. These providers process data on our behalf and only for that purpose. We may also use an email service to send you replies and to notify us of new submissions.",
+      "We use service providers to run the site: Vercel for hosting, Supabase for the database where submissions are stored and PostHog for usage statistics. The Program builder sends the company details you enter to OpenAI so that it can write your report. These providers process data on our behalf and only for that purpose. We may also use an email service to send you replies and to notify us of new submissions.",
       "We may disclose data if the law requires it. We do not share form data with other companies for their own use.",
       "If you submit or claim a listing, the program details you provide may be published in the directory. Your name and email address are not published.",
     ],
@@ -60,7 +62,7 @@ export const PRIVACY: Section[] = [
   {
     h: "Cookies",
     p: [
-      "We do not use analytics, advertising or tracking cookies. If this changes, we will update this page and ask for your consent where the law requires it.",
+      "We do not use cookies for analytics, advertising or tracking. Our usage statistics work without cookies or other identifiers stored on your device. If this changes, we will update this page and ask for your consent where the law requires it.",
     ],
   },
   {
