@@ -20,7 +20,7 @@ export function BuilderCta({ images = true, variant = "band" }: { images?: boole
           <div className="bldtext">
             {builderIsNew() && <span className="newbadge" suppressHydrationWarning style={{ marginLeft: 0, marginBottom: 14 }}>New</span>}
             <h2 id={home ? "bcta-home" : undefined} style={{ fontSize: "clamp(24px,3vw,40px)", lineHeight: 1.15 }}>Build your partner program strategy</h2>
-            <p style={{ margin: "18px 0 0", fontSize: 19, lineHeight: 1.55, fontWeight: 500 }}>Answer a few questions and get a strategy PDF in your own branding, with partner types, tiers, earnings and a 90 day plan</p>
+            <p style={{ margin: "18px 0 0", fontSize: 19, lineHeight: 1.55, fontWeight: 400 }}>Answer a few questions and get a strategy PDF in your own branding, with partner types, tiers, earnings and a 90 day plan</p>
             {home && <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginTop: 20 }}>{CHIPS.map((c) => <span key={c} className="chip">{c}</span>)}</div>}
             <Link href="/program-builder" className="btn btn-s" style={{ marginTop: 28 }}>Open the program builder</Link>
           </div>

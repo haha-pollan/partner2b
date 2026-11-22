@@ -28,7 +28,7 @@ export function AiNetwork({ counts }: { counts: Record<string, number> }) {
             fill="#0A0A0B"
           />
           <text x={x} y={y - 3} textAnchor="middle" fontFamily="Michroma, sans-serif" fontSize="11" fill="#fff">{SHORT[c.slug] ?? c.name}</text>
-          <text x={x} y={y + 14} textAnchor="middle" fontFamily="Sora, sans-serif" fontSize="12" fill="#C9BDFF">{counts[c.slug] ?? 0} programs</text>
+          <text x={x} y={y + 14} textAnchor="middle" fontFamily="'IBM Plex Sans', sans-serif" fontSize="12" fill="#C9BDFF">{counts[c.slug] ?? 0} programs</text>
         </a>
       ))}
     </svg>

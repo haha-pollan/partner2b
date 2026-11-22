@@ -39,7 +39,7 @@ export function FormPage({ kind, listings, defaultListing }: { kind: Kind; listi
           <div className="wrap" style={{ padding: "24px 40px clamp(36px,9vw,90px)", display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 40, flexWrap: "wrap" }}>
             <div style={{ maxWidth: "100%" }}>
               <h1 className="h1big" style={{ fontSize: kind === "report" ? "clamp(26px,3.6vw,56px)" : "clamp(28px,4vw,64px)" }}>{c.title}</h1>
-              <p style={{ margin: "22px 0 0", maxWidth: 560, fontSize: 21, lineHeight: 1.5, fontWeight: 500 }}>{c.intro}</p>
+              <p style={{ margin: "22px 0 0", maxWidth: 560, fontSize: 21, lineHeight: 1.5, fontWeight: 400 }}>{c.intro}</p>
             </div>
             <div className="cut statcard" style={{ flex: "0 0 320px", margin: "20px 40px 0 0", transform: "rotate(-4deg)", background: "#0A0A0B", padding: "28px 32px" }}>
               <div style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 49, letterSpacing: 0, lineHeight: 1, color: "#A8FF5C" }}>{c.badge}</div>
