@@ -54,14 +54,22 @@ export default async function Home() {
               <span className="pt pt1">Find a B2B partner program</span>
               <span className="pt pt2">or build your own</span>
             </h1>
-            <p className="bubble cut herosub" style={{ marginTop: 44, ["--c" as string]: "0px" }}>{`Compare commissions, tiers and requirements across ${all.length} programs, or answer a few questions and get a strategy for your own`}</p>
+            <p className="bubble herosub" style={{ marginTop: 44 }}>{`Compare commissions, tiers and requirements across ${all.length} programs, or answer a few questions and get a strategy for your own`}</p>
             <div className="herobtns">
               <Link href="/directory" className="btn btn-p">Find partner programs →</Link>
               <Link href="/program-builder" className="btn btn-s">Build a partner program →{builderIsNew() && <span className="newbadge" suppressHydrationWarning style={{ background: "#fff", color: "#7C5CFF" }}>New</span>}</Link>
             </div>
           </div>
           <div className="herotoby">
-            <Toby height={580} rows={38} glasses />
+            <Toby height={580} rows={38} glasses style={{ width: "100%", height: "100%" }} />
+            <div className="herostack">
+            {stats.map((s) => (
+              <div key={s.l} className="cut stat" style={{ background: s.bg, color: s.fg, transform: `rotate(${s.rot}deg)`, marginLeft: s.ml }}>
+                <span className="statn" style={{ color: s.num }}>{s.n}</span>
+                <span className="statl">{s.l}</span>
+              </div>
+            ))}
+          </div>
           </div>
         </div>
       </div>
@@ -75,7 +83,7 @@ export default async function Home() {
             <p>Partner2B is a free directory of B2B partner programs. Each listing shows commissions, tiers and requirements and links to the official source, so you can compare programs before you apply</p>
             <Link href="/directory" className="btn btn-p" style={{ marginTop: 30 }}>Browse the directory</Link>
           </div>
-          <div style={{ flex: "0 1 480px", display: "flex", flexDirection: "column", gap: 18 }}>
+          <div className="dirstack" style={{ flex: "0 1 480px", display: "flex", flexDirection: "column", gap: 18 }}>
             {stats.map((s) => (
               <div key={s.l} className="cut stat" style={{ background: s.bg, color: s.fg, transform: `rotate(${s.rot}deg)`, marginLeft: s.ml }}>
                 <span className="statn" style={{ color: s.num }}>{s.n}</span>

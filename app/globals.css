@@ -34,7 +34,7 @@ button{font-family:inherit}
 /* ---------- Navigation ---------- */
 .nav{position:relative;z-index:30;max-width:1440px;margin:0 auto;padding:22px var(--margin);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px 40px}
 .nav>a{flex:0 0 auto}
-.navlinks{display:flex;align-items:center;gap:20px 30px;flex-wrap:wrap;font-family:'Sora',sans-serif;font-size:16px;font-weight:500;color:#fff}
+.navlinks{display:flex;align-items:center;gap:20px 30px;flex-wrap:wrap;font-family:'Michroma',sans-serif;font-size:13px;font-weight:400;color:#fff;letter-spacing:.01em}
 .navlinks a:not(.btn):hover,.navddbtn:hover{color:var(--lime)}
 .navddbtn{background:none;border:0;padding:0;font:inherit;color:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
 .navchev{font-size:11px}
@@ -45,6 +45,8 @@ button{font-family:inherit}
 .navmenu a:last-child{clip-path:polygon(0 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%)}
 .navdd:hover .navmenu,.navdd:focus-within .navmenu,.navdd.open .navmenu{display:block}
 .navtoggle{display:none}
+.ainav{position:relative}
+.ainav .newbadge{position:absolute;left:50%;top:-20px;margin:0;border-radius:0;padding:3px 9px;font-size:9px;line-height:1.2;transform:translateX(-30%) rotate(-8deg);clip-path:polygon(0 0,calc(100% - 6px) 0,100% 6px,100% 100%,6px 100%,0 calc(100% - 6px))}
 .newbadge{display:inline-block;margin-left:8px;background:var(--violet);color:#fff;font-weight:500;font-size:12px;padding:2px 9px;border-radius:999px;vertical-align:middle;line-height:1.5}
 .aibadge{display:inline-block;background:var(--violet);color:#fff;font-size:13px;font-weight:500;padding:2px 10px;border-radius:999px;white-space:nowrap}
 
@@ -153,15 +155,19 @@ button{font-family:inherit}
 .legalbar{max-width:1440px;margin:0 auto;padding:22px var(--margin) 34px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;font-size:15px;font-weight:500;color:var(--g300)}
 
 /* ---------- Home ---------- */
-.hero{position:relative;overflow:hidden}
+.hero{position:relative;overflow-x:clip;z-index:3}
 .hero .tapes{position:absolute;left:0;right:0;top:0;height:400px;pointer-events:none;z-index:2}
 .tape{position:absolute;white-space:nowrap;font-family:'Michroma',sans-serif;-webkit-text-stroke:1.5px currentColor;transform-origin:50% 50%;color:var(--ink)}
 .tape-w{background:#fff}.tape-l{background:var(--lime)}
 .herobody{position:relative;z-index:3;padding-top:330px;padding-bottom:0}
 .herosub{max-width:620px}
+.herosub::after{content:"";position:absolute;right:-30px;top:34px;border-style:solid;border-width:15px 0 15px 30px;border-color:transparent transparent transparent #fff}
 .herobtns{display:flex;gap:18px;margin-top:34px;flex-wrap:wrap}
 .herobtns .btn{min-width:310px;text-align:center}
-.herotoby{position:absolute;z-index:3;right:var(--margin);top:-10px;width:490px;height:580px;-webkit-mask-image:linear-gradient(180deg,#000 0,#000 62%,transparent 96%);mask-image:linear-gradient(180deg,#000 0,#000 62%,transparent 96%)}
+.herotoby{position:absolute;z-index:3;right:var(--margin);top:-10px;width:clamp(260px,28vw,490px);aspect-ratio:490/580}
+.herotoby canvas{width:100%!important;height:100%!important}
+.herostack{position:absolute;right:0;top:calc(100% - 28px);width:min(480px,36vw);min-width:400px;display:flex;flex-direction:column;gap:18px;z-index:5}
+.dirstack{display:none!important}
 .stack{position:relative;z-index:4}
 .stat{display:flex;align-items:baseline;gap:14px;padding:22px 32px;--c:22px;white-space:nowrap;min-height:96px}
 .statn{font-family:'Michroma',sans-serif;font-size:clamp(32px,3.8vw,48px);line-height:1;-webkit-text-stroke:1.5px currentColor}
@@ -207,6 +213,7 @@ button{font-family:inherit}
 @media (max-width:1100px){
   .row{flex-wrap:wrap}.rowmeta{display:none}
   .herotoby{display:none}
+  .dirstack{display:flex!important}
   .hero .tapes{height:330px}
   .herobody{padding-top:270px}
   .bldpages{display:none}
