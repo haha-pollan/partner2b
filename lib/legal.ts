@@ -1,7 +1,7 @@
 // Single place for the legal text. Change here and both pages update.
 export const LEGAL = {
   site: "Partner2B (partner2b.com)",
-  email: "info@partner2b.com",
+  email: "hello@partner2b.com",
   updated: "November 22, 2026",
 };
 
