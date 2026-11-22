@@ -75,7 +75,7 @@ export default async function Home() {
             <p>Partner2B is a free directory of B2B partner programs. Each listing shows commissions, tiers and requirements and links to the official source, so you can compare programs before you apply</p>
             <Link href="/directory" className="btn btn-p" style={{ marginTop: 30 }}>Browse the directory</Link>
           </div>
-          <div style={{ flex: "0 1 440px", display: "flex", flexDirection: "column", gap: 18 }}>
+          <div style={{ flex: "0 1 480px", display: "flex", flexDirection: "column", gap: 18 }}>
             {stats.map((s) => (
               <div key={s.l} className="cut stat" style={{ background: s.bg, color: s.fg, transform: `rotate(${s.rot}deg)`, marginLeft: s.ml }}>
                 <span className="statn" style={{ color: s.num }}>{s.n}</span>
