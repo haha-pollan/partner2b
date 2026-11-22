@@ -20,7 +20,7 @@ export default async function PostIndex() {
       <div style={{ overflow: "hidden" }}>
         <div style={{ position: "relative" }}>
           <Nav />
-          <div className="wrap" style={{ padding: "24px 40px clamp(36px,9vw,120px)" }}>
+          <div className="wrap" style={{ padding: "24px var(--margin) clamp(36px,9vw,120px)" }}>
             <h1 className="h1big">Blog</h1>
             <p style={{ margin: "24px 0 0", maxWidth: 620, fontSize: 21, lineHeight: 1.5, fontWeight: 500 }}>
               Practical articles on B2B partner programs, ecosystems and co-selling

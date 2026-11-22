@@ -14,14 +14,14 @@ export default function Page() {
     <div>
       <div style={{ overflow: "hidden" }}>
         <Nav />
-        <div className="wrap" style={{ padding: "40px 40px clamp(36px,9vw,64px)" }}>
+        <div className="wrap" style={{ padding: "40px var(--margin) clamp(36px,9vw,64px)" }}>
           <h1 className="h1big">Contact</h1>
           <p style={{ margin: "22px 0 0", maxWidth: 720, fontSize: 20, lineHeight: 1.5, color: "#ECECEE" }}>
             Questions about the directory, a listing or a partnership? Write to us.
           </p>
         </div>
       </div>
-      <main className="wrap" style={{ padding: "clamp(36px,9vw,64px) 40px clamp(36px,9vw,96px)" }}>
+      <main className="wrap" style={{ padding: "clamp(36px,9vw,64px) var(--margin) clamp(36px,9vw,96px)" }}>
         <div style={{ maxWidth: 760 }}>
           <a href="mailto:hello@partner2b.com" className="btn btn-s" style={{ display: "inline-block" }}>
             hello@partner2b.com

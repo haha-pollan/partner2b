@@ -43,7 +43,7 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
     <div style={{ overflow: "hidden" }}>
       <div style={{ position: "relative" }}>
         <Nav />
-        <div className="wrap" style={{ padding: "8px 40px clamp(36px,9vw,80px)" }}>
+        <div className="wrap" style={{ padding: "8px var(--margin) clamp(36px,9vw,80px)" }}>
           <div style={{ fontSize: 15, fontWeight: 400, display: "flex", gap: 8, flexWrap: "wrap" }}>
             <Link href="/directory" style={{ textDecoration: "underline" }}>Directory</Link><span>/</span>
             {isAi(p) && (<><Link href="/ai" style={{ textDecoration: "underline" }}>AI programs</Link><span>/</span></>)}
