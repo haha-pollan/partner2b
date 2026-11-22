@@ -60,7 +60,7 @@ export default function Page() {
                       <Link key={t.slug} href={termHref(t.slug)} className="cut gcard" style={{ background: T.bg, color: T.fg, transform: `rotate(${ROT[i % 6]}deg)`, padding: "24px 26px 30px", display: "flex", flexDirection: "column" }}>
                         <h3 style={{ fontWeight: 400, fontSize: 17, letterSpacing: 0, lineHeight: 1.25, minHeight: 44 }}>{t.term}</h3>
                         <p style={{ margin: "12px 0 0", minHeight: 72, fontSize: 15, lineHeight: 1.5, color: T.sub }}>{BLURBS[t.slug]}</p>
-                        <span style={{ marginTop: 18, alignSelf: "flex-start", width: 40, height: 40, borderRadius: "50%", background: T.ar, color: T.arf, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20, fontWeight: 500 }} aria-hidden="true">→</span>
+                        <span style={{ marginTop: 18, alignSelf: "flex-start", width: 40, height: 40, borderRadius: "50%", background: T.ar, color: T.arf, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20, fontWeight: 400 }} aria-hidden="true">→</span>
                       </Link>
                     );
                   })}

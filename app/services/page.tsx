@@ -91,8 +91,8 @@ const SEGMENTS: { t: string; p: string; kind: string }[] = [
   { t: "Tech Services & Agencies", p: "Referrals only get you so far. We build the visibility that brings clients to you, not the other way around.", kind: "slants" },
 ];
 
-const btnA: React.CSSProperties = { background: "#A8FF5C", color: "#0A0A0B", fontFamily: "'Sora',sans-serif", fontWeight: 500, fontSize: 19, padding: "18px 34px", border: 0, cursor: "pointer", display: "inline-block", clipPath: "polygon(0 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%)" };
-const btnB: React.CSSProperties = { background: "#7C5CFF", color: "#fff", fontFamily: "'Sora',sans-serif", fontWeight: 500, fontSize: 19, padding: "18px 34px", border: 0, cursor: "pointer", display: "inline-block", clipPath: "polygon(0 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%)" };
+const btnA: React.CSSProperties = { background: "#A8FF5C", color: "#0A0A0B", fontFamily: "'IBM Plex Sans',sans-serif", fontWeight: 400, fontSize: 19, padding: "18px 34px", border: 0, cursor: "pointer", display: "inline-block", clipPath: "polygon(0 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%)" };
+const btnB: React.CSSProperties = { background: "#7C5CFF", color: "#fff", fontFamily: "'IBM Plex Sans',sans-serif", fontWeight: 400, fontSize: 19, padding: "18px 34px", border: 0, cursor: "pointer", display: "inline-block", clipPath: "polygon(0 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%)" };
 
 export default function Services() {
   return (
@@ -109,7 +109,7 @@ export default function Services() {
                 <span style={{ display: "block" }}>through partners?</span>
                 <span style={{ display: "block" }}>Start with your GTM</span>
               </h1>
-              <p style={{ margin: "24px 0 0", maxWidth: 560, fontSize: 21, lineHeight: 1.5, fontWeight: 500 }}>
+              <p style={{ margin: "24px 0 0", maxWidth: 560, fontSize: 21, lineHeight: 1.5, fontWeight: 400 }}>
                 B2B partner programs work when the offer, the pipeline and the operations behind them are ready. We help with all three, in that order.
               </p>
               <div style={{ display: "flex", gap: 14, flexWrap: "wrap", marginTop: 32 }}>
@@ -128,7 +128,7 @@ export default function Services() {
                     <Glyph kind={s.kind} fg={gl} size={38} />
                   </div>
                   <div style={{ minWidth: 0 }}>
-                    <div style={{ fontSize: 14, fontWeight: 500, opacity: 0.8 }}>Step {s.n}</div>
+                    <div style={{ fontSize: 14, fontWeight: 400, opacity: 0.8 }}>Step {s.n}</div>
                     <div style={{ marginTop: 4, fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 18, letterSpacing: 0, lineHeight: 1.1 }}>{s.title}</div>
                   </div>
                 </a>
@@ -147,7 +147,7 @@ export default function Services() {
             We Know Your <span style={{ color: "#A8FF5C" }}>Category</span>
           </h2>
           <p style={{ margin: "18px 0 0", maxWidth: 620, fontSize: 18, lineHeight: 1.5, color: "#B9BABD" }}>
-            From strategy and recruitment to enablement and co-marketing. One AI-first team runs your full partner marketing program.
+            From positioning and messaging to partner recruitment and co-selling. One senior team runs your go-to-market end to end.
           </p>
           <div style={{ marginTop: 52, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))", gap: 28 }}>
             {SEGMENTS.map((g, i) => {
@@ -189,7 +189,7 @@ export default function Services() {
             <div style={{ display: "flex", flexWrap: "wrap", gap: 24, marginTop: 56 }}>
               {s.svcs.map((v) => (
                 <article key={v.title} className="cut" style={{ flex: "1 1 320px", background: v.hot ? THEMES[i].hot : THEMES[i].card, color: v.hot ? THEMES[i].hotTx : THEMES[i].ctx, padding: "30px 30px 40px", display: "flex", flexDirection: "column" }}>
-                  <span style={{ alignSelf: "flex-start", fontSize: 13, fontWeight: 500, padding: "5px 12px", borderRadius: 999, background: v.hot ? "#0A0A0B" : THEMES[i].ctag, color: v.hot ? "#A8FF5C" : THEMES[i].ctagTx }}>{v.tag}</span>
+                  <span style={{ alignSelf: "flex-start", fontSize: 13, fontWeight: 400, padding: "5px 12px", borderRadius: 999, background: v.hot ? "#0A0A0B" : THEMES[i].ctag, color: v.hot ? "#A8FF5C" : THEMES[i].ctagTx }}>{v.tag}</span>
                   <h3 style={{ margin: "20px 0 0", minHeight: 58, fontWeight: 400, fontSize: 18, letterSpacing: 0, lineHeight: 1.2 }}>{v.title}</h3>
                   <p style={{ margin: "12px 0 0", minHeight: 78, fontSize: 16, lineHeight: 1.5, color: v.hot ? "#0A0A0B" : THEMES[i].csub }}>{v.text}</p>
                   <ul style={{ listStyle: "none", margin: "22px 0 0", padding: "20px 0 0", borderTop: `1px solid ${v.hot ? "#0A0A0B" : THEMES[i].line}`, display: "grid", gap: 12 }}>
@@ -236,7 +236,7 @@ export default function Services() {
                   <Glyph kind={w.kind} fg={w.fg} size={38} />
                 </div>
                 <h3 style={{ margin: "22px 0 0", fontWeight: 400, fontSize: 22, letterSpacing: 0, lineHeight: 1.1 }}>{w.t}</h3>
-                <p style={{ margin: "10px 0 0", fontSize: 17, lineHeight: 1.45, fontWeight: 500, opacity: 0.85 }}>{w.p}</p>
+                <p style={{ margin: "10px 0 0", fontSize: 17, lineHeight: 1.45, fontWeight: 400, opacity: 0.85 }}>{w.p}</p>
               </div>
             ))}
           </div>

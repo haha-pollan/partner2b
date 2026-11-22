@@ -104,7 +104,7 @@ export async function DirectoryView({ sp, pool, base, ai = false, h1, sub, befor
         <div className="wrap" style={{ padding: "30px var(--margin) clamp(36px,9vw,80px)", display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 40, flexWrap: "wrap" }}>
           <div style={{ flex: ai ? "1 1 480px" : "0 0 auto", maxWidth: "100%" }}>
             <h1 className="ptapes"><span className="pt pt1">{h1[0]}</span><span className="pt pt2">{h1[1]}</span></h1>
-            <p style={{ margin: "40px 0 0", maxWidth: ai ? 560 : 720, fontSize: 21, lineHeight: 1.5, fontWeight: 500 }}>
+            <p style={{ margin: "40px 0 0", maxWidth: ai ? 560 : 720, fontSize: 21, lineHeight: 1.5, fontWeight: 400 }}>
               {sub}
             </p>
             <form method="get" action={base} className="search" role="search">
@@ -127,7 +127,7 @@ export async function DirectoryView({ sp, pool, base, ai = false, h1, sub, befor
             <FiltersToggle active={chips.length}>
             <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: 18 }}>
               <div style={{ fontFamily: "'Michroma',sans-serif", fontSize: 22, WebkitTextStroke: "1px currentColor" }}>Filters</div>
-              <Link href={base} className="clearall" style={{ fontSize: 15, fontWeight: 500, color: "#7C5CFF" }}>Clear all</Link>
+              <Link href={base} className="clearall" style={{ fontSize: 15, fontWeight: 400, color: "#7C5CFF" }}>Clear all</Link>
             </div>
             <AutoForm q={f.q} action={base}>
               {base === "/directory" && (
@@ -158,10 +158,10 @@ export async function DirectoryView({ sp, pool, base, ai = false, h1, sub, befor
             {chips.length > 0 && (
               <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center", marginBottom: 20 }}>
                 {chips.map((c) => (<Link key={c.label} href={c.href} className="chip">{c.label}<span>×</span></Link>))}
-                <Link href={base} style={{ fontSize: 15, fontWeight: 500, textDecoration: "underline" }}>Clear all</Link>
+                <Link href={base} style={{ fontSize: 15, fontWeight: 400, textDecoration: "underline" }}>Clear all</Link>
               </div>
             )}
-            <div style={{ marginBottom: 20, fontSize: 18, fontWeight: 500 }}>
+            <div style={{ marginBottom: 20, fontSize: 18, fontWeight: 400 }}>
               {results.length === 0 ? "No programs match these filters" : `Showing ${(cur - 1) * PAGE + 1} to ${(cur - 1) * PAGE + shown.length} of ${results.length} programs`}
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
@@ -175,7 +175,7 @@ export async function DirectoryView({ sp, pool, base, ai = false, h1, sub, befor
                     <div style={{ marginTop: 8, display: "flex", gap: 8, alignItems: "center" }}>
                       <span className="pill">{p.primary_type}</span>
                       {base === "/directory" && isAi(p) && <span className="aibadge">AI</span>}
-                      <span style={{ color: "#6A6B71", fontSize: 14, fontWeight: 500, whiteSpace: "nowrap" }}>{p.region}</span>
+                      <span style={{ color: "#6A6B71", fontSize: 14, fontWeight: 400, whiteSpace: "nowrap" }}>{p.region}</span>
                     </div>
                     <div className="desc">{p.description}</div>
                     <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
@@ -185,8 +185,8 @@ export async function DirectoryView({ sp, pool, base, ai = false, h1, sub, befor
                     </div>
                     <div className="more">Read full details <span aria-hidden="true">→</span></div>
                   </div>
-                  <div className="rowmeta" style={{ flex: "0 0 170px", fontSize: 14, color: "#6A6B71", fontWeight: 500, lineHeight: 1.5 }}>Program types<div style={{ fontSize: 17, color: "#0A0A0B", fontWeight: 500 }}>{p.program_types.slice(0, 2).join(", ")}{p.program_types.length > 2 ? ` +${p.program_types.length - 2}` : ""}</div></div>
-                  <div className="rowmeta" style={{ flex: "0 0 110px", fontSize: 14, color: "#6A6B71", fontWeight: 500, lineHeight: 1.5 }}>Partner tiers<div style={{ fontSize: 17, color: "#0A0A0B", fontWeight: 500 }}>{p.tiers.length > 0 ? `${p.tiers.length} ${p.tiers.length === 1 ? "tier" : "tiers"}` : "Not listed"}</div></div>
+                  <div className="rowmeta" style={{ flex: "0 0 170px", fontSize: 14, color: "#6A6B71", fontWeight: 400, lineHeight: 1.5 }}>Program types<div style={{ fontSize: 17, color: "#0A0A0B", fontWeight: 400 }}>{p.program_types.slice(0, 2).join(", ")}{p.program_types.length > 2 ? ` +${p.program_types.length - 2}` : ""}</div></div>
+                  <div className="rowmeta" style={{ flex: "0 0 110px", fontSize: 14, color: "#6A6B71", fontWeight: 400, lineHeight: 1.5 }}>Partner tiers<div style={{ fontSize: 17, color: "#0A0A0B", fontWeight: 400 }}>{p.tiers.length > 0 ? `${p.tiers.length} ${p.tiers.length === 1 ? "tier" : "tiers"}` : "Not listed"}</div></div>
                   <div className="arrow">→</div>
                 </Link>
               ))}

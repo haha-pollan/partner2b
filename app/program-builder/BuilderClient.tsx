@@ -6,9 +6,9 @@ import { BUILDER_CATEGORIES, DELIVERY, AUDIENCES, REGIONS, STAGES, CURRENCIES, G
 import { DEMOS } from "./demos";
 
 const inputS: React.CSSProperties = { width: "100%", background: "#ECECEE", color: "#0A0A0B", border: 0, borderRadius: 10, padding: "14px 16px", font: "inherit", fontSize: 17 };
-const Lbl = ({ t, req }: { t: string; req?: boolean }) => (<label style={{ display: "block", fontSize: 15, fontWeight: 500, margin: "22px 0 8px" }}>{t}{req && <span style={{ color: "#A8FF5C" }}> *</span>}</label>);
+const Lbl = ({ t, req }: { t: string; req?: boolean }) => (<label style={{ display: "block", fontSize: 15, fontWeight: 400, margin: "22px 0 8px" }}>{t}{req && <span style={{ color: "#A8FF5C" }}> *</span>}</label>);
 const Hint = ({ t }: { t: string }) => <div style={{ marginTop: 8, fontSize: 14, color: "#85868B" }}>{t}</div>;
-const btn: React.CSSProperties = { background: "#A8FF5C", color: "#0A0A0B", fontFamily: "'Sora',sans-serif", fontWeight: 500, fontSize: 19, padding: "18px 34px", border: 0, cursor: "pointer", display: "inline-block", clipPath: "polygon(0 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%)" };
+const btn: React.CSSProperties = { background: "#A8FF5C", color: "#0A0A0B", fontFamily: "'IBM Plex Sans',sans-serif", fontWeight: 400, fontSize: 19, padding: "18px 34px", border: 0, cursor: "pointer", display: "inline-block", clipPath: "polygon(0 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%)" };
 const ghost: React.CSSProperties = { background: "transparent", border: 0, color: "#A8FF5C", cursor: "pointer", font: "inherit", fontSize: 15, textDecoration: "underline", padding: 0 };
 
 type Vals = Record<string, string>;
@@ -127,7 +127,7 @@ export function BuilderClient() {
   if (done) {
     return (
       <div ref={top}>
-        <div style={{ fontSize: 14, color: "#A8FF5C", fontWeight: 500 }}>Your strategy is ready</div>
+        <div style={{ fontSize: 14, color: "#A8FF5C", fontWeight: 400 }}>Your strategy is ready</div>
         <h2 style={{ fontWeight: 400, fontSize: 26, letterSpacing: 0, color: "#fff", marginTop: 6 }}>{done.company}: partner program strategy</h2>
         <p style={{ marginTop: 14, fontSize: 17, lineHeight: 1.6, color: "#C9CACE" }}>Your PDF covers positioning, partner types, value propositions, tiers, the commercial model, year 1 KPIs and a 90-day plan.</p>
         <div style={{ marginTop: 22 }}><button type="button" onClick={download} style={btn}>Download the PDF</button></div>
@@ -196,7 +196,7 @@ export function BuilderClient() {
         <div style={{ display: "flex", gap: 20, alignItems: "center", flexWrap: "wrap" }}>
           <div style={{ width: 64, height: 64, borderRadius: 12, background: "#fff", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            {brand.logo ? <img src={brand.logo} alt="Logo preview" style={{ maxWidth: 52, maxHeight: 52 }} /> : <span style={{ color: "#0A0A0B", fontWeight: 500, fontSize: 22 }}>{(v.companyName || "?").slice(0, 1).toUpperCase()}</span>}
+            {brand.logo ? <img src={brand.logo} alt="Logo preview" style={{ maxWidth: 52, maxHeight: 52 }} /> : <span style={{ color: "#0A0A0B", fontWeight: 400, fontSize: 22 }}>{(v.companyName || "?").slice(0, 1).toUpperCase()}</span>}
           </div>
           <label style={{ fontSize: 15, color: "#A8FF5C", cursor: "pointer", textDecoration: "underline" }}>Upload a logo<input type="file" accept="image/png,image/jpeg" onChange={(e) => onLogo(e.target.files?.[0])} style={{ display: "none" }} /></label>
           <label style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 15 }}>Colour

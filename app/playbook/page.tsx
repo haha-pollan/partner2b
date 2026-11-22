@@ -95,12 +95,12 @@ export default function Page() {
           <div style={{ flex: "1 1 520px", maxWidth: 640 }}>
             <span className="pill">Free playbook 2026</span>
             <h1 className="h1big" style={{ marginTop: 20, fontSize: "clamp(28px,3.8vw,58px)" }}>The <span style={{ whiteSpace: "nowrap" }}>Ecosystem-Led</span> Growth Playbook</h1>
-            <p style={{ margin: "22px 0 0", maxWidth: 560, fontSize: 21, lineHeight: 1.5, fontWeight: 500 }}>
+            <p style={{ margin: "22px 0 0", maxWidth: 560, fontSize: 21, lineHeight: 1.5, fontWeight: 400 }}>
               How B2B marketers can drive scalable revenue through partnerships, with the KPIs that prove partner ROI.
             </p>
             <ul style={{ margin: "26px 0 0", padding: 0, listStyle: "none", display: "grid", gap: 10, fontSize: 17, fontWeight: 400 }}>
               {["Why buyers now check your ecosystem before they talk to sales", "Which partner types to build, and in what order", "A five-stage journey from first partner to measurable revenue"].map((t) => (
-                <li key={t} style={{ display: "flex", gap: 12, alignItems: "flex-start" }}><span aria-hidden="true" style={{ flex: "0 0 10px", height: 10, background: "#2A2B30", marginTop: 8, clipPath: "polygon(0 0,100% 0,100% 60%,60% 100%,0 100%)" }} />{t}</li>
+                <li key={t} style={{ display: "flex", gap: 12, alignItems: "flex-start" }}><span aria-hidden="true" style={{ flex: "0 0 10px", height: 10, background: "#A8FF5C", marginTop: 8, clipPath: "polygon(0 0,100% 0,100% 60%,60% 100%,0 100%)" }} />{t}</li>
               ))}
             </ul>
           </div>
