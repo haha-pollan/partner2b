@@ -95,7 +95,7 @@ export default function Page() {
           <div style={{ flex: "1 1 520px", maxWidth: 640 }}>
             <span className="pill">Free playbook 2026</span>
             <h1 className="h1big" style={{ marginTop: 20, fontSize: "clamp(28px,3.8vw,58px)" }}>The <span style={{ whiteSpace: "nowrap" }}>Ecosystem-Led</span> Growth Playbook</h1>
-            <p style={{ margin: "22px 0 0", maxWidth: 560, fontSize: 21, lineHeight: 1.5, fontWeight: 600 }}>
+            <p style={{ margin: "22px 0 0", maxWidth: 560, fontSize: 21, lineHeight: 1.5, fontWeight: 500 }}>
               How B2B marketers can drive scalable revenue through partnerships, with the KPIs that prove partner ROI.
             </p>
             <ul style={{ margin: "26px 0 0", padding: 0, listStyle: "none", display: "grid", gap: 10, fontSize: 17, fontWeight: 400 }}>
