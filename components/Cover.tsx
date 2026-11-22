@@ -11,7 +11,7 @@ export function Cover({ slug, title, i = 0 }: { slug: string; title: string; i?:
         <rect width="320" height="180" fill="#0A0A0B" />
         {c.paths.map((p) => <path key={p.fill} d={p.d} fill={p.fill} />)}
         <rect x="14.5" y="13.5" width={tw} height="20" rx="4" fill="#0A0A0B" stroke={c.accent} />
-        <text x={14.5 + tw / 2} y="27.5" textAnchor="middle" fill="#ECECEE" fontSize="11" fontWeight="500" fontFamily="Sora,system-ui,sans-serif">{c.tag}</text>
+        <text x={14.5 + tw / 2} y="27.5" textAnchor="middle" fill="#ECECEE" fontSize="11" fontWeight="400" fontFamily="'IBM Plex Sans',system-ui,sans-serif">{c.tag}</text>
       </g>
     </svg>
   );
