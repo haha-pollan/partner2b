@@ -68,16 +68,16 @@ const STEPS: Step[] = [
 ];
 
 const WHY = [
-  { t: "Diagnostic range", p: "Unbiased advice. We fix your real constraint, not what an agency sells.", kind: "hex", bg: "#0A0A0B", fg: "#ECECEE", rot: -2 },
+  { t: "Diagnostic range", p: "Unbiased advice. We fix your real constraint, not what an agency sells.", kind: "hex", bg: "#2A2B30", fg: "#ECECEE", rot: -2 },
   { t: "Senior execution", p: "Led by operators who have run B2B revenue and operations at executive level.", kind: "bars", bg: "#ECECEE", fg: "#0A0A0B", rot: 2 },
   { t: "One accountable team", p: "Growth and engineering run under one plan, with no agency handoffs.", kind: "diamond", bg: "#A8FF5C", fg: "#0A0A0B", rot: -2 },
 ];
 
 type Theme = { bg: string; tx: string; sub: string; num: string; card: string; ctx: string; csub: string; ctag: string; ctagTx: string; line: string; gl: string; hot: string; hotTx: string };
 const THEMES: Theme[] = [
-  { bg: "#fff url(/mesh-program.svg) center / cover no-repeat", tx: "#0A0A0B", sub: "#1C1D20", num: "#0A0A0B", card: "#0A0A0B", ctx: "#ECECEE", csub: "#B9BABD", ctag: "#2A2B2F", ctagTx: "#B9BABD", line: "#3A3B40", gl: "#A8FF5C", hot: "#A8FF5C", hotTx: "#0A0A0B" },
-  { bg: "#0A0A0B", tx: "#ECECEE", sub: "#B9BABD", num: "#A8FF5C", card: "#ECECEE", ctx: "#0A0A0B", csub: "#3A3B40", ctag: "#0A0A0B", ctagTx: "#A8FF5C", line: "#B9BABD", gl: "#0A0A0B", hot: "#A8FF5C", hotTx: "#0A0A0B" },
-  { bg: "#A8FF5C", tx: "#0A0A0B", sub: "#1C1D20", num: "#0A0A0B", card: "#0A0A0B", ctx: "#ECECEE", csub: "#B9BABD", ctag: "#2A2B2F", ctagTx: "#B9BABD", line: "#3A3B40", gl: "#A8FF5C", hot: "#ECECEE", hotTx: "#0A0A0B" },
+  { bg: "transparent", tx: "#fff", sub: "#ECECEE", num: "#A8FF5C", card: "#2A2B30", ctx: "#ECECEE", csub: "#B9BABD", ctag: "#2A2B2F", ctagTx: "#B9BABD", line: "#3A3B40", gl: "#A8FF5C", hot: "#A8FF5C", hotTx: "#0A0A0B" },
+  { bg: "transparent", tx: "#fff", sub: "#ECECEE", num: "#A8FF5C", card: "#ECECEE", ctx: "#0A0A0B", csub: "#3A3B40", ctag: "#0A0A0B", ctagTx: "#A8FF5C", line: "#B9BABD", gl: "#0A0A0B", hot: "#A8FF5C", hotTx: "#0A0A0B" },
+  { bg: "#A8FF5C", tx: "#0A0A0B", sub: "#1C1D20", num: "#0A0A0B", card: "#2A2B30", ctx: "#ECECEE", csub: "#B9BABD", ctag: "#2A2B2F", ctagTx: "#B9BABD", line: "#3A3B40", gl: "#A8FF5C", hot: "#ECECEE", hotTx: "#0A0A0B" },
 ];
 
 const WORDS = ["Go-to-market", "Partner ecosystems", "Demand generation", "Automation", "AI development"];
@@ -91,16 +91,15 @@ const SEGMENTS: { t: string; p: string; kind: string }[] = [
   { t: "Tech Services & Agencies", p: "Referrals only get you so far. We build the visibility that brings clients to you, not the other way around.", kind: "slants" },
 ];
 
-const btnA: React.CSSProperties = { background: "#0A0A0B", color: "#A8FF5C", fontWeight: 400, fontFamily: "'Michroma',sans-serif", padding: "16px 30px", borderRadius: 12, fontSize: 14 };
-const btnB: React.CSSProperties = { background: "#fff", color: "#0A0A0B", fontWeight: 400, fontFamily: "'Michroma',sans-serif", padding: "16px 30px", borderRadius: 12, fontSize: 14 };
+const btnA: React.CSSProperties = { background: "#A8FF5C", color: "#0A0A0B", fontFamily: "'Sora',sans-serif", fontWeight: 700, fontSize: 19, padding: "18px 34px", border: 0, cursor: "pointer", display: "inline-block", clipPath: "polygon(0 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%)" };
+const btnB: React.CSSProperties = { background: "#7C5CFF", color: "#fff", fontFamily: "'Sora',sans-serif", fontWeight: 700, fontSize: 19, padding: "18px 34px", border: 0, cursor: "pointer", display: "inline-block", clipPath: "polygon(0 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%)" };
 
 export default function Services() {
   return (
-    <div style={{ background: "#0A0A0B", overflow: "hidden" }}>
-      <div style={{ background: "#fff url(/mesh-program.svg) top / 100% 130% no-repeat" }}>
+    <div style={{ overflow: "hidden" }}>
+      <div style={{ overflow: "hidden" }}>
         {/* Hero */}
-        <div style={{ position: "relative", overflow: "hidden", color: "#0A0A0B" }}>
-          <div className="limepanel" />
+        <div style={{ position: "relative" }}>
           <Nav />
           <div className="wrap" style={{ padding: "24px 40px clamp(36px,9vw,110px)", display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 40, flexWrap: "wrap" }}>
             <div style={{ flex: "0 0 auto", maxWidth: "min(100%, 800px)" }}>
@@ -110,7 +109,7 @@ export default function Services() {
                 <span style={{ display: "block" }}>through partners?</span>
                 <span style={{ display: "block" }}>Start with your GTM</span>
               </h1>
-              <p style={{ margin: "24px 0 0", maxWidth: 560, fontSize: 21, lineHeight: 1.5, fontWeight: 300 }}>
+              <p style={{ margin: "24px 0 0", maxWidth: 560, fontSize: 21, lineHeight: 1.5, fontWeight: 600 }}>
                 B2B partner programs work when the offer, the pipeline and the operations behind them are ready. We help with all three, in that order.
               </p>
               <div style={{ display: "flex", gap: 14, flexWrap: "wrap", marginTop: 32 }}>
@@ -120,7 +119,7 @@ export default function Services() {
             </div>
             <div style={{ flex: "0 0 380px", maxWidth: "100%", display: "flex", flexDirection: "column", gap: 22, marginTop: 20 }}>
               {[
-                { s: STEPS[0], bg: "#0A0A0B", fg: "#ECECEE", gl: "#A8FF5C", rot: -5, ml: 0 },
+                { s: STEPS[0], bg: "#2A2B30", fg: "#ECECEE", gl: "#A8FF5C", rot: -5, ml: 0 },
                 { s: STEPS[1], bg: "#ECECEE", fg: "#0A0A0B", gl: "#0A0A0B", rot: 3, ml: 36 },
                 { s: STEPS[2], bg: "#A8FF5C", fg: "#0A0A0B", gl: "#0A0A0B", rot: -3, ml: 12 },
               ].map(({ s, bg, fg, gl, rot, ml }) => (
@@ -141,7 +140,7 @@ export default function Services() {
       </div>
 
       {/* Segments */}
-      <section style={{ background: "#0A0A0B", backgroundImage: "radial-gradient(#2A2B2F 1.3px, transparent 1.6px)", backgroundSize: "26px 26px", color: "#ECECEE", padding: "clamp(36px,9vw,72px) 0 clamp(36px,9vw,96px)", position: "relative", overflow: "hidden" }}>
+      <section style={{ padding: "clamp(36px,9vw,72px) 0 clamp(36px,9vw,96px)", position: "relative", overflow: "hidden" }}>
         <div className="wrap" style={{ position: "relative" }}>
           <span className="pill" style={{ background: "#A8FF5C", color: "#0A0A0B" }}>Your vertical</span>
           <h2 style={{ margin: "18px 0 0", fontWeight: 400, fontSize: "clamp(26px,3.4vw,44px)", letterSpacing: 0, lineHeight: 1.15 }}>
@@ -155,7 +154,7 @@ export default function Services() {
               const T = [
                 { bg: "#ECECEE", fg: "#0A0A0B", sub: "#3A3B40", gl: "#0A0A0B", num: "#85868B" },
                 { bg: "#A8FF5C", fg: "#0A0A0B", sub: "#1C1D20", gl: "#0A0A0B", num: "#3F7A12" },
-                { bg: "#1C1D20", fg: "#ECECEE", sub: "#B9BABD", gl: "#A8FF5C", num: "#55565B" },
+                { bg: "#2A2B30", fg: "#ECECEE", sub: "#B9BABD", gl: "#A8FF5C", num: "#55565B" },
               ][(i + Math.floor(i / 3)) % 3];
               const rot = [-1.6, 1.2, -0.8, 1.4, -1.2, 1.6][i];
               return (
@@ -205,7 +204,7 @@ export default function Services() {
               ))}
             </div>
             {i === 0 && (
-              <Link href="/directory" style={{ display: "inline-block", marginTop: 32, background: "#0A0A0B", color: "#A8FF5C", fontWeight: 400, fontFamily: "'Michroma',sans-serif", padding: "14px 26px", borderRadius: 12, fontSize: 14 }}>
+              <Link href="/directory" className="btn btn-s" style={{ display: "inline-block", marginTop: 32 }}>
                 See how real partner programs are built
               </Link>
             )}
@@ -213,7 +212,7 @@ export default function Services() {
         </section>
         {i === 0 && (
     <div aria-hidden="true" style={{ position: "relative", height: 150, overflow: "hidden", background: "linear-gradient(#cfd0d3 50%, #0A0A0B 50%)" }}>
-      {[{ bg: "#0A0A0B", fg: "#A8FF5C", rot: 2, top: 34 }, { bg: "#A8FF5C", fg: "#0A0A0B", rot: -2, top: 44 }].map((b, i) => (
+      {[{ bg: "#fff", fg: "#0A0A0B", rot: 2, top: 34 }, { bg: "#A8FF5C", fg: "#0A0A0B", rot: -2, top: 44 }].map((b, i) => (
         <div key={i} style={{ position: "absolute", left: -40, right: -40, top: b.top, transform: `rotate(${b.rot}deg)`, background: b.bg, color: b.fg, padding: "14px 0", whiteSpace: "nowrap", overflow: "hidden", fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 20, letterSpacing: 0, textTransform: "uppercase" }}>
           {Array.from({ length: 3 }).map(() => WORDS.map((t) => `${t} ◆ `).join("")).join("")}
         </div>
@@ -225,7 +224,7 @@ export default function Services() {
       ))}
 
       {/* Why us */}
-      <section style={{ background: "#131416", color: "#ECECEE", padding: "clamp(36px,9vw,110px) 0 clamp(36px,9vw,130px)" }}>
+      <section style={{ padding: "clamp(36px,9vw,110px) 0 clamp(36px,9vw,130px)" }}>
         <div className="wrap">
           <h2 style={{ fontWeight: 400, fontSize: "clamp(26px,3.4vw,44px)", letterSpacing: 0, lineHeight: 1.05 }}>
             Why B2B tech companies <span style={{ color: "#A8FF5C" }}>work with us</span>
@@ -237,7 +236,7 @@ export default function Services() {
                   <Glyph kind={w.kind} fg={w.fg} size={38} />
                 </div>
                 <h3 style={{ margin: "22px 0 0", fontWeight: 400, fontSize: 22, letterSpacing: 0, lineHeight: 1.1 }}>{w.t}</h3>
-                <p style={{ margin: "10px 0 0", fontSize: 17, lineHeight: 1.45, fontWeight: 300, opacity: 0.85 }}>{w.p}</p>
+                <p style={{ margin: "10px 0 0", fontSize: 17, lineHeight: 1.45, fontWeight: 600, opacity: 0.85 }}>{w.p}</p>
               </div>
             ))}
           </div>
@@ -254,14 +253,14 @@ export default function Services() {
             </h2>
             <p style={{ margin: "22px 0 0", maxWidth: 440, fontSize: 19, lineHeight: 1.5, color: "#B9BABD" }}>Tell us where your B2B growth is stuck. We will tell you which step to start with.</p>
           </div>
-          <a href={MAIL} className="cut" style={{ flex: "0 0 400px", maxWidth: "100%", transform: "rotate(3deg)", background: "#17181B", color: "#ECECEE", padding: "28px 30px 32px", display: "block" }}>
+          <a href={MAIL} className="cut" style={{ flex: "0 0 400px", maxWidth: "100%", transform: "rotate(3deg)", background: "#fff", color: "#0A0A0B", padding: "28px 30px 32px", display: "block" }}>
             {["Company name", "Work email", "Where growth is stuck"].map((k) => (
               <div key={k} style={{ marginBottom: 14 }}>
                 <div style={{ fontSize: 14, fontWeight: 400 }}>{k}</div>
-                <div style={{ marginTop: 6, background: "#1C1D20", border: "1px solid #2A2B2F", borderRadius: 12, height: 46 }} />
+                <div style={{ marginTop: 6, background: "#ECECEE", borderRadius: 10, height: 46 }} />
               </div>
             ))}
-            <div style={{ marginTop: 22, background: "#A8FF5C", color: "#0A0A0B", fontWeight: 400, fontFamily: "'Michroma',sans-serif", fontSize: 14, textAlign: "center", padding: "16px 30px", borderRadius: 12 }}>Talk to us</div>
+            <div className="btn btn-p" style={{ marginTop: 22, textAlign: "center" }}>Talk to us</div>
           </a>
         </div>
       </section>

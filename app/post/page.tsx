@@ -16,20 +16,19 @@ export const metadata: Metadata = {
 export default async function PostIndex() {
   const all = await getArticles();
   return (
-    <div style={{ background: "#0A0A0B", overflow: "hidden" }}>
-      <div style={{ background: "#fff url(/mesh-program.svg) top / 100% 130% no-repeat" }}>
-        <div style={{ position: "relative", overflow: "hidden", color: "#0A0A0B" }}>
-          <div className="limepanel" />
+    <div style={{ overflow: "hidden" }}>
+      <div style={{ overflow: "hidden" }}>
+        <div style={{ position: "relative" }}>
           <Nav />
           <div className="wrap" style={{ padding: "24px 40px clamp(36px,9vw,120px)" }}>
             <h1 className="h1big">Blog</h1>
-            <p style={{ margin: "24px 0 0", maxWidth: 620, fontSize: 21, lineHeight: 1.5, fontWeight: 300 }}>
+            <p style={{ margin: "24px 0 0", maxWidth: 620, fontSize: 21, lineHeight: 1.5, fontWeight: 600 }}>
               Practical articles on B2B partner programs, ecosystems and co-selling
             </p>
           </div>
         </div>
       </div>
-      <section style={{ background: "#131416", color: "#ECECEE", padding: "clamp(36px,9vw,90px) 0 clamp(36px,9vw,120px)" }}>
+      <section style={{ padding: "clamp(36px,9vw,90px) 0 clamp(36px,9vw,120px)" }}>
         <div className="wrap" style={{ display: "flex", flexWrap: "wrap", gap: 36 }}>
           {all.map((a, i) => (
             <Link key={a.slug} href={`/post/${a.slug}`} style={{ flex: "1 1 340px", maxWidth: 420, display: "flex", flexDirection: "column", gap: 18 }}>

@@ -1,10 +1,11 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { Toby } from "@/components/Toby";
-import { HomeModules } from "@/components/HomeModules";
-import { Glyph, Tile } from "@/components/Tile";
+import CountUp from "@/components/CountUp";
+import { Glyph } from "@/components/Tile";
 import { getPrograms } from "@/lib/programs";
 import { AI_CATEGORIES, inCat, aiOnly, aiIsNew } from "@/lib/ai";
 import { builderIsNew } from "@/lib/launch";
@@ -18,83 +19,114 @@ export const metadata: Metadata = {
 
 const TYPES = ["Reseller", "Referral", "Technology", "Services", "MSP", "OEM or white label"];
 const KIND: Record<string, string> = { Reseller: "bars", Referral: "diamond", Technology: "grid", Services: "slants", MSP: "hex", "OEM or white label": "stairs" };
-// background, text, glyph colour, indent
-const ROWS: [string, string, string, number][] = [
-  ["#ECECEE", "#0A0A0B", "#0A0A0B", 0],
-  ["#B9BABD", "#0A0A0B", "#0A0A0B", 4],
-  ["#A8FF5C", "#0A0A0B", "#0A0A0B", 8],
-  ["#85868B", "#0A0A0B", "#0A0A0B", 12],
-  ["#3A3B40", "#ECECEE", "#ECECEE", 16],
-  ["#0A0A0B", "#A8FF5C", "#A8FF5C", 20],
+// background, text, indent
+const ROWS: [string, string, number][] = [
+  ["#ECECEE", "#0A0A0B", 0],
+  ["#B9BABD", "#0A0A0B", 4],
+  ["#A8FF5C", "#0A0A0B", 8],
+  ["#85868B", "#0A0A0B", 12],
+  ["#4A4B51", "#fff", 16],
+  ["#2A2B30", "#A8FF5C", 20],
 ];
-
-const label: React.CSSProperties = { background: "#A8FF5C", color: "#0A0A0B", fontWeight: 500, fontSize: 14, padding: "7px 14px", borderRadius: 12, whiteSpace: "nowrap" };
+const STEPS = [
+  { t: "Answer a few questions", d: "Your product, customers and goals" },
+  { t: "Get your program shaped", d: "Partner types, tiers and modelled earnings" },
+  { t: "Download your PDF", d: "With an ecosystem map and a 90 day plan" },
+];
 
 export default async function Home() {
   const all = await getPrograms();
   const aiCount = aiOnly(all).length;
-  const pick = (t: string) => all.find((p) => p.primary_type === t && p.domain);
-  const cards = [
-    { p: pick("Reseller"), bg: "#0A0A0B", fg: "#ECECEE", rot: -5, ml: 0 },
-    { p: pick("MSP") ?? pick("Services"), bg: "#ECECEE", fg: "#0A0A0B", rot: 3, ml: 36 },
-  ].filter((c) => c.p);
+  const stats = [
+    { n: all.length, l: "partner programs", bg: "#fff", fg: "#0A0A0B", num: "#0A0A0B", rot: -2, ml: 0 },
+    { n: aiCount, l: "AI partner programs", bg: "#A8FF5C", fg: "#0A0A0B", num: "#0A0A0B", rot: 1.5, ml: 40 },
+    { n: TYPES.length, l: "program types", bg: "#3A3B40", fg: "#fff", num: "#A8FF5C", rot: -1, ml: 14 },
+  ];
 
   return (
-    <div style={{ background: "#0A0A0B", overflow: "hidden" }}>
-      <div style={{ background: "#fff url(/mesh-program.svg) top / 100% 100% no-repeat" }}>
+    <>
       {/* Hero */}
-      <div style={{ position: "relative", overflow: "hidden", color: "#0A0A0B" }}>
-        <div className="limefull" />
+      <div className="hero">
         <Nav />
-        <div className="wrap hc">
-          <div className="hcin">
-            <h1 className="h1big hch1">
-              <span style={{ display: "block" }}>Find a B2B partner program</span>
-              <span style={{ display: "block" }}>or build your own</span>
+        <div className="wrap herobody" style={{ paddingTop: 36, paddingBottom: 90 }}>
+          <div className="tapewrap">
+            <h1 className="ptapes">
+              <span className="pt pt1">Find a B2B partner program</span>
+              <span className="pt pt2">or build your own</span>
             </h1>
-            <p className="hcp">{`Compare commissions, tiers and requirements across ${all.length} programs, or answer a few questions and get a strategy for your own`}</p>
-            <form method="get" action="/directory" className="search" role="search">
-              <label htmlFor="q" style={{ position: "absolute", left: -9999 }}>Search programs or companies</label>
-              <input id="q" name="q" type="search" placeholder="Search programs or companies" />
-              <button type="submit">Search</button>
-            </form>
-            <div className="hcor"><span>or</span></div>
-            <Link href="/program-builder" className="cut hcbuild">
-              {builderIsNew() && <span suppressHydrationWarning className="hcbnew">New</span>}
-              <span>Build your own program</span><span aria-hidden="true">→</span>
-            </Link>
+            <p className="bubble cut herosub" style={{ marginTop: 44, ["--c" as string]: "0px" }}>{`Compare commissions, tiers and requirements across ${all.length} programs, or answer a few questions and get a strategy for your own`}</p>
+            <div className="herobtns">
+              <Link href="/directory" className="btn btn-p">Find partner programs →</Link>
+              <Link href="/program-builder" className="btn btn-s">Build a partner program →{builderIsNew() && <span className="newbadge" suppressHydrationWarning style={{ background: "#fff", color: "#7C5CFF" }}>New</span>}</Link>
+            </div>
           </div>
-          <div className="hctoby"><Toby height={300} /></div>
+          <div className="herotoby">
+            <Toby height={580} rows={38} glasses />
+            <div className="card cut stat stack" style={{ position: "absolute", left: -90, bottom: 40, ["--c" as string]: "22px", transform: "rotate(-2deg)" }}>
+              <span className="statn"><CountUp to={all.length} /></span>
+              <span className="statl">partner programs</span>
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Marquee band */}
-      <div aria-hidden="true" style={{ position: "relative", height: 150, overflow: "hidden" }}>
-        {[{ bg: "#0A0A0B", fg: "#A8FF5C", rot: 2, top: 34 }, { bg: "#A8FF5C", fg: "#0A0A0B", rot: -2, top: 44 }].map((b, i) => (
-          <div key={i} style={{ position: "absolute", left: -40, right: -40, top: b.top, transform: `rotate(${b.rot}deg)`, background: b.bg, color: b.fg, padding: "14px 0", whiteSpace: "nowrap", overflow: "hidden", fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 20, letterSpacing: 0, textTransform: "uppercase" }}>
-            {Array.from({ length: 3 }).map((_, k) => TYPES.map((t) => `${t} ◆ `).join("")).join("")}
+      {/* Directory */}
+      <section aria-labelledby="hm-dir" style={{ padding: "40px 0 90px" }}>
+        <div className="wrap" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 56, flexWrap: "wrap" }}>
+          <div className="dirtext" style={{ flex: "1 1 460px" }}>
+            <span className="kick">The directory</span>
+            <h2 id="hm-dir">Every partner program in one place</h2>
+            <p>Partner2B is a free directory of B2B partner programs. Each listing shows commissions, tiers and requirements and links to the official source, so you can compare programs before you apply</p>
+            <Link href="/directory" className="btn btn-p" style={{ marginTop: 30 }}>Browse the directory</Link>
           </div>
-        ))}
-      </div>
+          <div style={{ flex: "0 1 440px", display: "flex", flexDirection: "column", gap: 18 }}>
+            {stats.map((s) => (
+              <div key={s.l} className="cut stat" style={{ background: s.bg, color: s.fg, transform: `rotate(${s.rot}deg)`, marginLeft: s.ml }}>
+                <span className="statn" style={{ color: s.num }}>{s.n}</span>
+                <span className="statl">{s.l}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-      <HomeModules programs={all.length} aiPrograms={aiCount} types={TYPES.length} />
+      {/* Builder */}
+      <section aria-labelledby="hm-bld" style={{ padding: "0 0 100px" }}>
+        <div className="wrap">
+          <div className="bldbox cut">
+            <div className="bldtext">
+              <span className="kick" style={{ borderColor: "#0A0A0B", color: "#0A0A0B" }}>Program builder{builderIsNew() && <span className="newbadge" suppressHydrationWarning>New</span>}</span>
+              <h2 id="hm-bld">Build your own partner program</h2>
+              <p>Answer a few questions about your company and get a strategy PDF in your own branding</p>
+              <ol className="bldsteps">
+                {STEPS.map((s, i) => (
+                  <li key={s.t}><span className="bldn">{i + 1}</span><span><b>{s.t}</b><i>{s.d}</i></span></li>
+                ))}
+              </ol>
+              <Link href="/program-builder" className="btn btn-s" style={{ marginTop: 30 }}>Open the program builder</Link>
+            </div>
+            <div className="bldpages" aria-hidden="true">
+              <Image src="/builder/sample-ecosystem.jpg" alt="" width={728} height={1029} sizes="270px" className="bldpg bldpg0" />
+              <Image src="/builder/sample-cover.jpg" alt="" width={728} height={1029} sizes="270px" className="bldpg bldpg1" />
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Browse by type */}
-      <section style={{ padding: "clamp(36px,9vw,64px) 0 clamp(36px,9vw,96px)" }}>
-        <div className="wrap">
-          <h2 style={{ fontWeight: 400, fontSize: 44, letterSpacing: 0, color: "#0A0A0B" }}>Browse by program type</h2>
-        </div>
+      <section style={{ padding: "0 0 100px" }}>
+        <div className="wrap"><h2 className="sectitle">Browse by program type</h2></div>
         <div style={{ marginTop: 40 }}>
           {TYPES.map((t, i) => {
-            const [bg, tx, gl, ind] = ROWS[i];
+            const [bg, tx, ind] = ROWS[i];
             const n = all.filter((p) => p.program_types.includes(t)).length;
             return (
-              <Link key={t} href={`/directory?type=${encodeURIComponent(t)}`} className="typerow" style={{ display: "flex", alignItems: "center", gap: 24, background: bg, color: tx, padding: "16px 40px", marginLeft: `${ind}%` }}>
-                <span style={{ fontSize: 14, fontWeight: 500, width: 28 }}>{String(i + 1).padStart(2, "0")}</span>
-                <span className="typename" style={{ flex: 1, fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 34, letterSpacing: 0 }}>{t}</span>
-                <span className="typecnt" style={{ fontSize: 15, fontWeight: 400 }}>{n} programs</span>
-                <span className="typeglyph" style={{ display: "flex" }}><Glyph kind={KIND[t]} fg={gl} size={34} /></span>
-                <span style={{ width: 44, height: 44, borderRadius: "50%", border: `2px solid ${tx}`, display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 500, fontSize: 20 }}>→</span>
+              <Link key={t} href={`/directory?type=${encodeURIComponent(t)}`} className="stair" style={{ background: bg, color: tx, marginLeft: `${ind}%` }}>
+                <span style={{ fontSize: 15, fontWeight: 700, width: 28 }}>{String(i + 1).padStart(2, "0")}</span>
+                <span className="stairname" style={{ flex: 1, fontFamily: "'Michroma',sans-serif", fontSize: 32, WebkitTextStroke: "1.2px currentColor" }}>{t}</span>
+                <span className="staircnt" style={{ fontSize: 16, fontWeight: 700 }}>{n} programs</span>
+                <span className="stairglyph" style={{ display: "flex" }}><Glyph kind={KIND[t]} fg={tx} size={34} /></span>
+                <span style={{ width: 44, height: 44, borderRadius: "50%", border: `2px solid ${tx}`, display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, fontSize: 20 }}>→</span>
               </Link>
             );
           })}
@@ -102,95 +134,92 @@ export default async function Home() {
       </section>
 
       {/* AI programs */}
-      <section style={{ padding: "0 0 clamp(36px,9vw,96px)" }}>
+      <section style={{ padding: "0 0 100px" }}>
         <div className="wrap">
-          <h2 style={{ fontWeight: 400, fontSize: 44, letterSpacing: 0, color: "#0A0A0B" }}>AI partner programs{aiIsNew() && <span className="newbadge" style={{ fontSize: 12, padding: "5px 11px" }}>New</span>}</h2>
-          <p style={{ margin: "16px 0 0", maxWidth: 680, fontSize: 20, lineHeight: 1.5, fontWeight: 300, color: "#0A0A0B" }}>Official programs from AI vendors, agent platforms and AI integrators, with their own categories and filters.</p>
-          <div style={{ marginTop: 32, display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))", gap: 14 }}>
+          <h2 className="sectitle">AI partner programs{aiIsNew() && <span className="newbadge" suppressHydrationWarning style={{ fontSize: 13, padding: "4px 12px", marginLeft: 14 }}>New</span>}</h2>
+          <p style={{ margin: "16px 0 0", maxWidth: 680, fontSize: 20, lineHeight: 1.5, fontWeight: 600 }}>Official programs from AI vendors, agent platforms and AI integrators, with their own categories and filters.</p>
+          <div style={{ marginTop: 34, display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))", gap: 16 }}>
             {AI_CATEGORIES.map((c) => (
-              <Link key={c.slug} href={`/ai/${c.slug}`} className="aicard cut" style={{ padding: "22px 24px 24px" }}>
-                <div style={{ fontFamily: "'Michroma',sans-serif", fontSize: 16, lineHeight: 1.25 }}>{c.name}</div>
-                <div style={{ marginTop: 12, fontSize: 15, fontWeight: 500 }}>{inCat(all, c).length} programs <span aria-hidden="true">→</span></div>
+              <Link key={c.slug} href={`/ai/${c.slug}`} className="aicard cut" style={{ ["--c" as string]: "24px" }}>
+                <span className="aibadge">AI</span>
+                <div style={{ marginTop: 14, fontFamily: "'Michroma',sans-serif", fontSize: 16, lineHeight: 1.25, WebkitTextStroke: ".8px currentColor" }}>{c.name}</div>
+                <div style={{ marginTop: 12, fontSize: 16, fontWeight: 700 }}>{inCat(all, c).length} programs <span aria-hidden="true">→</span></div>
               </Link>
             ))}
+            <div className="cut" aria-hidden="true" style={{ background: "#A8FF5C", display: "flex", alignItems: "flex-end", justifyContent: "center", overflow: "hidden", minHeight: 150, ["--c" as string]: "24px" }}>
+              <Toby height={150} rows={26} glasses animate={false} />
+            </div>
           </div>
-          <Link href="/ai" style={{ display: "inline-block", marginTop: 28, background: "#7C5CFF", color: "#fff", fontWeight: 400, fontFamily: "'Michroma',sans-serif", padding: "14px 26px", borderRadius: 12, fontSize: 14 }}>Browse AI programs</Link>
+          <Link href="/ai" className="btn btn-s" style={{ marginTop: 30 }}>Browse AI programs</Link>
         </div>
       </section>
 
-      <div style={{ background: "rgba(10,10,11,0.5)" }}>
       {/* What every listing shows */}
-      <section style={{ padding: "40px 0 clamp(36px,9vw,120px)", color: "#ECECEE" }}>
+      <section style={{ padding: "0 0 110px" }}>
         <div className="wrap">
-          <h2 style={{ fontWeight: 400, fontSize: 44, letterSpacing: 0 }}>What every listing shows</h2>
+          <h2 className="sectitle">What every listing shows</h2>
           <div style={{ marginTop: 56, display: "flex", alignItems: "center", justifyContent: "center", gap: 28, flexWrap: "wrap" }}>
-            <div className="lblcol" style={{ display: "flex", flexDirection: "column", gap: 56, alignItems: "flex-end" }}>
-              <span style={label}>Type of program</span>
-              <span style={label}>Terms as published</span>
-              <span style={label}>Report a correction</span>
+            <div className="lblcol" style={{ alignItems: "flex-end" }}>
+              <span className="chip">Type of program</span><span className="chip">Terms as published</span><span className="chip">Report a correction</span>
             </div>
-            <div className="cut mockcard" style={{ width: 620, maxWidth: "100%", background: "#0A0A0B", padding: "28px 32px 36px" }}>
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16 }}>
-                <span style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 22, letterSpacing: 0 }}>[Company name]</span>
-                <span className="pill" style={{ background: "#A8FF5C", color: "#0A0A0B" }}>Reseller program</span>
+            <div className="card cut" style={{ width: 620, maxWidth: "100%", padding: "28px 32px 38px", ["--c" as string]: "28px" }}>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, flexWrap: "wrap" }}>
+                <span style={{ fontFamily: "'Michroma',sans-serif", fontSize: 22, WebkitTextStroke: "1.2px currentColor" }}>[Company name]</span>
+                <span className="pill">Reseller program</span>
               </div>
               {[["Commission", "[Published rate]"], ["Region", "[Region]"], ["Source", "[Official program page]"]].map(([k, v]) => (
-                <div key={k} style={{ display: "flex", justifyContent: "space-between", borderTop: "1px solid #3A3B40", padding: "14px 0", fontSize: 16 }}>
-                  <span style={{ color: "#85868B" }}>{k}</span><span style={{ fontWeight: 400 }}>{v}</span>
+                <div key={k} style={{ display: "flex", justifyContent: "space-between", gap: 12, borderTop: "2px solid #ECECEE", padding: "14px 0", fontSize: 17 }}>
+                  <span style={{ color: "#6A6B71", fontWeight: 600 }}>{k}</span><span style={{ fontWeight: 700 }}>{v}</span>
                 </div>
               ))}
               <div style={{ display: "flex", gap: 12, marginTop: 14, flexWrap: "wrap" }}>
-                <span style={{ background: "#A8FF5C", color: "#0A0A0B", fontWeight: 400, fontFamily: "'Michroma',sans-serif", padding: "12px 20px", borderRadius: 12, fontSize: 14 }}>Go to program</span>
-                <span style={{ border: "1.5px solid #55565B", fontWeight: 400, fontFamily: "'Michroma',sans-serif", padding: "12px 20px", borderRadius: 12, fontSize: 14 }}>Report a correction</span>
+                <span className="btn btn-p btn-sm">Go to program</span>
+                <span className="btn btn-s btn-sm">Report a correction</span>
               </div>
             </div>
-            <div className="lblcol" style={{ display: "flex", flexDirection: "column", gap: 56, alignItems: "flex-start" }}>
-              <span style={label}>Link to the source</span>
-              <span style={label}>Apply on the official page</span>
+            <div className="lblcol" style={{ alignItems: "flex-start" }}>
+              <span className="chip">Link to the source</span><span className="chip">Apply on the official page</span>
             </div>
           </div>
         </div>
       </section>
 
       {/* For partners / For vendors */}
-      <section style={{ display: "flex", flexWrap: "wrap", color: "#0A0A0B" }}>
+      <section className="splitwrap">
         <div className="splitL" style={{ flex: "1 1 520px", background: "#A8FF5C", padding: "96px 80px 96px 40px", clipPath: "polygon(0 0,100% 0,92% 50%,100% 100%,0 100%)" }}>
-          <h2 style={{ fontWeight: 400, fontSize: 49, letterSpacing: 0, lineHeight: 1 }}>For partners</h2>
-          <p style={{ margin: "20px 0 0", maxWidth: 420, fontSize: 19, lineHeight: 1.5, fontWeight: 300 }}>Compare programs and find the ones that fit your business.</p>
-          <Link href="/directory" style={{ display: "inline-block", marginTop: 28, background: "#0A0A0B", color: "#A8FF5C", fontWeight: 400, fontFamily: "'Michroma',sans-serif", padding: "14px 26px", borderRadius: 12, fontSize: 14 }}>Browse programs</Link>
+          <h2 style={{ fontSize: 44, lineHeight: 1.05 }}>For partners</h2>
+          <p style={{ margin: "20px 0 0", maxWidth: 420, fontSize: 19, lineHeight: 1.5, fontWeight: 600 }}>Compare programs and find the ones that fit your business.</p>
+          <Link href="/directory" className="btn btn-s" style={{ marginTop: 28 }}>Browse programs</Link>
         </div>
-        <div className="splitR" style={{ flex: "1 1 520px", padding: "96px 40px 96px 80px", color: "#ECECEE" }}>
-          <h2 style={{ fontWeight: 400, fontSize: 49, letterSpacing: 0, lineHeight: 1 }}>For vendors</h2>
-          <p style={{ margin: "20px 0 0", maxWidth: 420, fontSize: 19, lineHeight: 1.5, color: "#B9BABD" }}>Claim your listing for free and keep your terms accurate.</p>
-          <Link href="/claim" style={{ display: "inline-block", marginTop: 28, background: "#A8FF5C", color: "#0A0A0B", fontWeight: 400, fontFamily: "'Michroma',sans-serif", padding: "14px 26px", borderRadius: 12, fontSize: 14 }}>Claim a listing</Link>
+        <div className="splitR" style={{ flex: "1 1 520px", padding: "96px 40px 96px 80px", color: "#fff" }}>
+          <h2 style={{ fontSize: 44, lineHeight: 1.05 }}>For vendors</h2>
+          <p style={{ margin: "20px 0 0", maxWidth: 420, fontSize: 19, lineHeight: 1.5, fontWeight: 600, color: "#ECECEE" }}>Claim your listing for free and keep your terms accurate.</p>
+          <Link href="/claim" className="btn btn-p" style={{ marginTop: 28 }}>Claim a listing</Link>
         </div>
       </section>
 
-      {/* Claim band */}
-      <section style={{ padding: "clamp(36px,9vw,120px) 0 clamp(36px,9vw,140px)", color: "#ECECEE" }}>
+      {/* Claim */}
+      <section style={{ padding: "110px 0 110px" }}>
         <div className="wrap" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 48, flexWrap: "wrap" }}>
           <div style={{ flex: "1 1 460px" }}>
-            <h2 style={{ fontWeight: 400, fontSize: 44, letterSpacing: 0, lineHeight: 1.05 }}>
+            <h2 style={{ fontSize: 44, lineHeight: 1.1 }}>
               <span style={{ display: "block" }}>Run a partner program?</span>
               <span style={{ display: "block", color: "#A8FF5C" }}>Claim your listing</span>
             </h2>
-            <p style={{ margin: "22px 0 0", maxWidth: 440, fontSize: 19, lineHeight: 1.5, color: "#B9BABD" }}>Claiming is free. Correct your terms and keep them current</p>
+            <p style={{ margin: "22px 0 0", maxWidth: 440, fontSize: 19, lineHeight: 1.5, fontWeight: 600, color: "#ECECEE" }}>Claiming is free. Correct your terms and keep them current</p>
           </div>
-          <Link href="/claim" className="cut" style={{ flex: "0 0 400px", maxWidth: "100%", transform: "rotate(3deg)", background: "#17181B", color: "#ECECEE", padding: "28px 30px 32px", display: "block" }}>
+          <Link href="/claim" className="claimcard cut">
             {["Company name", "Program page URL", "Work email"].map((k) => (
               <div key={k} style={{ marginBottom: 14 }}>
-                <div style={{ fontSize: 14, fontWeight: 400 }}>{k}</div>
-                <div style={{ marginTop: 6, background: "#1C1D20", border: "1px solid #2A2B2F", borderRadius: 12, height: 46 }} />
+                <div style={{ fontSize: 15, fontWeight: 700, color: "#4A4B51" }}>{k}</div>
+                <div style={{ marginTop: 6, background: "#ECECEE", borderRadius: 10, height: 46 }} />
               </div>
             ))}
-            <div style={{ marginTop: 20, background: "#A8FF5C", color: "#0A0A0B", fontWeight: 400, fontFamily: "'Michroma',sans-serif", fontSize: 14, textAlign: "center", padding: "16px 30px", borderRadius: 12 }}>Claim a listing</div>
+            <div className="btn btn-p" style={{ marginTop: 20, display: "block", textAlign: "center" }}>Claim a listing</div>
           </Link>
         </div>
       </section>
-
-      </div>
-      </div>
       <Footer />
-    </div>
+    </>
   );
 }
