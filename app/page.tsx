@@ -38,6 +38,7 @@ export default async function Home() {
   const all = await getPrograms();
   const aiCount = aiOnly(all).length;
   const stats = [
+    { n: all.length, l: "partner programs", bg: "#FFFFFF", fg: "#0A0A0B", num: "#0A0A0B", rot: 1.5, ml: 40 },
     { n: aiCount, l: "AI partner programs", bg: "#A8FF5C", fg: "#0A0A0B", num: "#0A0A0B", rot: -2, ml: 0 },
     { n: TYPES.length, l: "program types", bg: "#3A3B40", fg: "#fff", num: "#A8FF5C", rot: 1.5, ml: 40 },
   ];
@@ -61,10 +62,6 @@ export default async function Home() {
           </div>
           <div className="herotoby">
             <Toby height={580} rows={38} glasses />
-            <div className="card cut stat stack" style={{ position: "absolute", left: -90, bottom: 40, ["--c" as string]: "22px", transform: "rotate(-2deg)" }}>
-              <span className="statn"><CountUp to={all.length} /></span>
-              <span className="statl">partner programs</span>
-            </div>
           </div>
         </div>
       </div>
