@@ -23,7 +23,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title: `${a.title} | Partner2B`,
     description: a.description ?? undefined,
     alternates: { canonical: `/post/${a.slug}` },
-    openGraph: { title: a.title, description: a.description ?? undefined, type: "article", publishedTime: a.published_at },
+    openGraph: { title: a.title, description: a.description ?? undefined, type: "article", publishedTime: a.published_at, url: `/post/${a.slug}` },
+    twitter: { card: "summary", title: a.title, description: a.description ?? undefined },
   };
 }
 
@@ -34,15 +35,37 @@ export default async function Article({ params }: { params: Promise<{ slug: stri
   const list = await getArticles();
   const idx = list.findIndex((x) => x.slug === a.slug);
   const more = list.map((x, i) => ({ ...x, i })).filter((x) => x.slug !== a.slug).slice(0, 3);
+  const html = a.content_html ?? "";
+  const plain = (h: string) => h.replace(/<[^>]*>/g, "").replace(/&amp;/g, "&").replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/\s+/g, " ").trim();
+  // Optional byline: <p class="byline">By Name, role. ...</p> becomes a Person author
+  const by = html.match(/<p class="byline">\s*By ([^,.<]+)(?:,\s*([^.<]+))?/i);
+  const author = by
+    ? { "@type": "Person", name: by[1].trim(), ...(by[2] ? { jobTitle: by[2].trim() } : {}), worksFor: { "@type": "Organization", name: "Partner2B" } }
+    : { "@type": "Organization", name: "Partner2B" };
+  // FAQ block: every h3 after an h2 named FAQ becomes a Question with the following paragraphs as the answer
+  const faqSection = html.split(/<h2[^>]*>\s*(?:faq|frequently asked questions)[^<]*<\/h2>/i)[1];
+  const faq = faqSection
+    ? faqSection.split(/<h3[^>]*>/i).slice(1).map((part) => {
+        const [q, ...rest] = part.split(/<\/h3>/i);
+        return { "@type": "Question", name: plain(q), acceptedAnswer: { "@type": "Answer", text: plain(rest.join("")) } };
+      }).filter((x) => x.name && x.acceptedAnswer.text)
+    : [];
+  const url = `https://partner2b.com/post/${a.slug}`;
   const ld = {
     "@context": "https://schema.org",
-    "@type": "Article",
-    headline: a.title,
-    datePublished: a.published_at,
-    description: a.description,
-    author: { "@type": "Organization", name: "Partner2B" },
-    publisher: { "@type": "Organization", name: "Partner2B" },
-    mainEntityOfPage: `https://partner2b.com/post/${a.slug}`,
+    "@graph": [
+      {
+        "@type": "Article",
+        headline: a.title,
+        datePublished: a.published_at,
+        dateModified: a.published_at,
+        description: a.description,
+        author,
+        publisher: { "@type": "Organization", name: "Partner2B", url: "https://partner2b.com" },
+        mainEntityOfPage: url,
+      },
+      ...(faq.length ? [{ "@type": "FAQPage", mainEntity: faq }] : []),
+    ],
   };
   return (
     <div style={{ overflow: "hidden" }}>
