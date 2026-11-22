@@ -1,23 +1,25 @@
 import type { Metadata } from "next";
+import { JsonLd, ORG, SITE, crumbs } from "@/components/JsonLd";
 import Link from "next/link";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { BuilderCta } from "@/components/BuilderCta";
 
 export const metadata: Metadata = {
-  title: "About Partner2B | B2B partner program directory",
-  description: "Partner2B is a free directory of B2B partner programs. Compare reseller, referral, technology and MSP programs, with commissions, tiers and requirements from official sources.",
+  title: "About Partner2B | Partner marketing for B2B tech companies",
+  description: "Partner2B helps B2B tech companies build and run partner programs, from recruitment and enablement to co-marketing. It also runs a free directory of B2B partner programs.",
   alternates: { canonical: "/about-us" },
 };
 
 export default function Page() {
   return (
     <div>
+      <JsonLd data={{ "@context": "https://schema.org", "@graph": [ { "@type": "AboutPage", name: "About Partner2B", url: `${SITE}/about-us`, about: { "@id": `${SITE}/#organization` } }, { ...ORG, founder: { "@type": "Person", name: "Elena Zap", jobTitle: "Founder, Partner2B" } }, crumbs([["Partner2B", SITE], ["About", `${SITE}/about-us`]]) ] }} />
       <div style={{ overflow: "hidden" }}>
         <Nav />
         <div className="wrap" style={{ padding: "40px var(--margin) clamp(36px,9vw,64px)" }}>
           <h1 className="h1big">About Partner2B</h1>
-          <p style={{ margin: "22px 0 0", maxWidth: 720, fontSize: 20, lineHeight: 1.5, color: "#ECECEE" }}>
+          <p style={{ margin: "22px 0 0", maxWidth: 900, fontSize: 20, lineHeight: 1.5, color: "#ECECEE" }}>
             Partner2B helps businesses grow through partner ecosystems.
           </p>
         </div>

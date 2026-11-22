@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { JsonLd, ORG, SITE, crumbs } from "@/components/JsonLd";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import Image from "next/image";
@@ -15,6 +16,7 @@ const steps = ["Tell us about your company, buyers and goals", "We write your pa
 export default function Page() {
   return (
     <div style={{ overflow: "hidden" }}>
+      <JsonLd data={{ "@context": "https://schema.org", "@graph": [ { "@type": "WebApplication", name: "Partner2B Program builder", url: `${SITE}/program-builder`, applicationCategory: "BusinessApplication", operatingSystem: "Web", description: "Answer a few questions and get a partner program strategy as a PDF: partner types, tiers, commercial model, KPIs and a 90-day plan.", offers: { "@type": "Offer", price: "0", priceCurrency: "USD" }, provider: ORG }, crumbs([["Partner2B", SITE], ["Program builder", `${SITE}/program-builder`]]) ] }} />
       <div style={{ overflow: "hidden" }}>
         <div style={{ position: "relative" }}>
           <Nav />
