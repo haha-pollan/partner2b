@@ -44,7 +44,7 @@ export default async function AiCategory({ params }: { params: Promise<{ categor
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />
       <div style={{ position: "relative" }}>
         <Nav />
-        <div className="wrap" style={{ padding: "8px 40px clamp(36px,9vw,80px)" }}>
+        <div className="wrap" style={{ padding: "8px var(--margin) clamp(36px,9vw,80px)" }}>
           <div style={{ fontSize: 15, display: "flex", gap: 8, flexWrap: "wrap" }}>
             <Link href="/ai" style={{ textDecoration: "underline" }}>AI partner programs</Link><span>/</span><span>{c.name}</span>
           </div>

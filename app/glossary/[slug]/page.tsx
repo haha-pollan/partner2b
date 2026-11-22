@@ -63,12 +63,12 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
       {ld.map((o, i) => (<script key={i} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(o) }} />))}
       <div style={{ overflow: "hidden" }}>
         <Nav />
-        <div className="wrap" style={{ padding: "32px 40px clamp(36px,9vw,56px)" }}>
+        <div className="wrap" style={{ padding: "32px var(--margin) clamp(36px,9vw,56px)" }}>
           <Link href="/glossary" className="pill" style={ai ? { background: "#5B3FE0", color: "#fff" } : undefined}>Glossary</Link>
           <h1 className="h1big">{t.term}</h1>
         </div>
       </div>
-      <main className="wrap" style={{ padding: "clamp(28px,6vw,48px) 40px clamp(36px,9vw,80px)" }}>
+      <main className="wrap" style={{ padding: "clamp(28px,6vw,48px) var(--margin) clamp(36px,9vw,80px)" }}>
         <div style={{ maxWidth: 760 }}>
           <div className="cut" style={{ background: "#2A2B30", padding: "28px 32px 36px" }}>
             <div style={{ fontFamily: "'Michroma',sans-serif", fontSize: 12, color: ai ? "#C9BDFF" : "#A8FF5C" }}>Short answer</div>

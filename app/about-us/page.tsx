@@ -15,14 +15,14 @@ export default function Page() {
     <div>
       <div style={{ overflow: "hidden" }}>
         <Nav />
-        <div className="wrap" style={{ padding: "40px 40px clamp(36px,9vw,64px)" }}>
+        <div className="wrap" style={{ padding: "40px var(--margin) clamp(36px,9vw,64px)" }}>
           <h1 className="h1big">About Partner2B</h1>
           <p style={{ margin: "22px 0 0", maxWidth: 720, fontSize: 20, lineHeight: 1.5, color: "#ECECEE" }}>
             Partner2B helps businesses grow through partner ecosystems.
           </p>
         </div>
       </div>
-      <main className="wrap" style={{ padding: "clamp(36px,9vw,64px) 40px clamp(36px,9vw,96px)" }}>
+      <main className="wrap" style={{ padding: "clamp(36px,9vw,64px) var(--margin) clamp(36px,9vw,96px)" }}>
         <div style={{ maxWidth: 760, fontSize: 18, lineHeight: 1.65, color: "#ECECEE" }}>
           <p style={{ margin: 0 }}>
             Partner2B is a free directory of B2B partner programs. It brings commissions, tiers, requirements and benefits for reseller, referral, technology, services, MSP and OEM programs into one place, so you can compare programs and join the ones that fit.
