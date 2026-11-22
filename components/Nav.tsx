@@ -18,7 +18,6 @@ export function Nav() {
         {open ? "Close" : "Menu"}
       </button>
       <nav id="navlinks" className={open ? "navlinks open" : "navlinks"}>
-        <Link href="/directory" onClick={close}>Directory</Link>
         <Link href="/ai" className="ainav" onClick={close}>AI programs{aiIsNew() ? <span className="newbadge" suppressHydrationWarning>New</span> : null}</Link>
         <Link href="/program-builder" className="ainav" onClick={close}>Program builder{builderIsNew() ? <span className="newbadge" suppressHydrationWarning>New</span> : null}</Link>
         <Link href="/services" onClick={close}>Services</Link>
@@ -30,6 +29,7 @@ export function Nav() {
             <Link href="/glossary" onClick={close}>Glossary</Link>
           </div>
         </div>
+        <Link href="/directory" className="navcta2" onClick={close}>Browse directory</Link>
         <Link href="/submit" className="navcta" onClick={close}>Submit a program</Link>
       </nav>
     </div>
