@@ -241,8 +241,8 @@ p{text-wrap:pretty}
 
 @media (max-width:700px){.hch1{white-space:normal;font-size:clamp(24px,7vw,32px)!important}}
 
-/* Menu collapses into the Menu button below 1340px. Keep this at the end so it wins over the base nav rules. */
-@media (max-width:1340px){
+/* Menu collapses into the Menu button below 1300px. Keep this at the end so it wins over the base nav rules. */
+@media (max-width:1300px){
   .nav{padding:16px 20px!important;flex-wrap:wrap}
   .nav .logo{gap:9px!important}
   .nav .logo-cube{width:32px!important;height:32px!important}
