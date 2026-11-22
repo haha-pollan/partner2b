@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Logo } from "./Logo";
 import { AI_CATEGORIES } from "@/lib/ai";
+import { NewsletterForm } from "./NewsletterForm";
 
 const TYPES = ["Reseller", "Referral", "Technology", "Services", "MSP", "OEM or white label"];
 
@@ -8,11 +9,13 @@ export function Footer() {
   return (
     <footer className="foot">
       <div className="footinner">
-        <div style={{ maxWidth: 400 }}>
+        <div className="footleft">
           <Link href="/" aria-label="Partner2B home"><Logo variant="light" /></Link>
           <p style={{ margin: "20px 0 0", fontSize: 17, lineHeight: 1.6, fontWeight: 400, color: "#ECECEE" }}>
             A free B2B partner program directory with links to official sources
           </p>
+          <div className="foothead" style={{ marginTop: 34 }}>Newsletter</div>
+          <NewsletterForm />
         </div>
         <div className="footlinks" style={{ display: "flex", gap: 64, flexWrap: "wrap" }}>
           <div>
