@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { JsonLd, ORG, SITE } from "@/components/JsonLd";
+import { PostHog } from "@/components/PostHog";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://partner2b.com"),
@@ -23,6 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <JsonLd data={{ "@context": "https://schema.org", "@graph": [ORG, { "@type": "WebSite", "@id": `${SITE}/#website`, url: SITE, name: "Partner2B", publisher: { "@id": `${SITE}/#organization` } }] }} />
+        <PostHog />
         <div className="ground">{children}</div>
       </body>
     </html>
