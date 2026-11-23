@@ -15,6 +15,9 @@ export async function sendSubmission(_prev: FormState, f: FormData): Promise<For
   if (!["submit", "claim", "report"].includes(kind)) return { ok: false, error: "Something went wrong. Please try again." };
 
   const row: Record<string, unknown> = { kind };
+  const first = s(f, "first_name").slice(0, 100), last = s(f, "last_name").slice(0, 100);
+  const fullName = [first, last].filter(Boolean).join(" ");
+  if (first || last) Object.assign(row, { first_name: first || null, last_name: last || null, name: fullName });
   const email = s(f, "email");
   const details = s(f, "details");
   const need = (cond: boolean) => cond;
@@ -22,14 +25,14 @@ export async function sendSubmission(_prev: FormState, f: FormData): Promise<For
   if (kind === "submit") {
     const company = s(f, "company"), url = s(f, "program_url"), cat = s(f, "product_category");
     const types = f.getAll("program_types").map(String).filter((t) => TYPES.includes(t));
-    if (!need(!!company && isUrl(url) && CATEGORIES.includes(cat) && isEmail(email) && f.get("confirmed") === "on"))
-      return { ok: false, error: "Please fill in the required fields with a valid link and email, and tick the confirmation." };
+    if (!need(!!company && isUrl(url) && CATEGORIES.includes(cat) && !!first && !!last && isEmail(email) && f.get("confirmed") === "on"))
+      return { ok: false, error: "Please fill in the required fields, including your first and last name, with a valid link and email, and tick the confirmation." };
     Object.assign(row, { company, program_url: url, product_category: cat, program_types: types, details, company_description: s(f, "company_description"), email, confirmed: true });
   } else if (kind === "claim") {
-    const listing = s(f, "listing"), name = s(f, "name");
-    if (!need(!!listing && !!name && isEmail(email) && f.get("confirmed") === "on"))
-      return { ok: false, error: "Please fill in the required fields with a valid email, and tick the confirmation." };
-    Object.assign(row, { listing, name, email, role: s(f, "role"), details, company_description: s(f, "company_description"), how_it_works: s(f, "how_it_works"), requirements: s(f, "requirements"), confirmed: true });
+    const listing = s(f, "listing");
+    if (!need(!!listing && !!first && !!last && isEmail(email) && f.get("confirmed") === "on"))
+      return { ok: false, error: "Please fill in the required fields, including your first and last name, with a valid email, and tick the confirmation." };
+    Object.assign(row, { listing, email, role: s(f, "role"), details, company_description: s(f, "company_description"), how_it_works: s(f, "how_it_works"), requirements: s(f, "requirements"), confirmed: true });
   } else {
     const listing = s(f, "listing"), issue = s(f, "issue"), src = s(f, "source_url");
     if (!need(!!listing && ISSUES.includes(issue) && !!details && (!src || isUrl(src)) && (!email || isEmail(email))))
