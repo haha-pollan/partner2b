@@ -6,7 +6,7 @@ import { Nav } from "@/components/Nav";
 import { Toby } from "@/components/Toby";
 import { Footer } from "@/components/Footer";
 import { AREAS } from "@/lib/assessment/model";
-import { FAQ, RELATED, REASONS, SHORT_ANSWER, SIGNS, STATS, UPDATED_ISO, UPDATED_LABEL } from "@/lib/assessment/seo";
+import { FAQ, RELATED, REASONS, SHORT_ANSWER, SIGNS, STATS, UPDATED_ISO } from "@/lib/assessment/seo";
 import { AssessmentClient } from "./AssessmentClient";
 import { StartLink } from "./StartLink";
 
@@ -80,11 +80,10 @@ export default function Page() {
           <figure className="cut" style={{ flex: "1 1 520px", minWidth: 0, margin: 0, background: "#A8FF5C", color: "#0A0A0B", padding: "30px 40px 40px", ["--c" as string]: "26px" }}>
             <h2 id="short-answer" style={{ position: "absolute", width: 1, height: 1, overflow: "hidden", clip: "rect(0 0 0 0)", whiteSpace: "nowrap" }}>Short answer</h2>
             <div aria-hidden="true" style={{ ...michroma, fontSize: 96, lineHeight: 0.8, height: 56, WebkitTextStroke: "2px currentColor" }}>{"\u201C"}</div>
-            <blockquote style={{ margin: "10px 0 0", fontSize: 22, lineHeight: 1.55 }}>{SHORT_ANSWER}</blockquote>
+            <blockquote style={{ margin: "10px 0 0", fontSize: 22, lineHeight: 1.55, fontStyle: "italic" }}>{SHORT_ANSWER}</blockquote>
             <figcaption style={{ marginTop: 26, display: "flex", alignItems: "center", gap: 14, flexWrap: "wrap" }}>
               <span style={{ display: "inline-block", width: 36, height: 3, background: "#0A0A0B" }} aria-hidden="true" />
               <span style={{ fontSize: 17 }}>Elena Zap, founder of Partner2B</span>
-              <span style={{ fontSize: 15, color: "#3A3B40" }}>Updated {UPDATED_LABEL}</span>
             </figcaption>
           </figure>
           <div style={{ flex: "1 1 380px", display: "flex", flexDirection: "column", gap: 18, padding: "6px 0 10px" }}>
