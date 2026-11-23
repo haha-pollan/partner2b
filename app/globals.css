@@ -42,13 +42,14 @@ button{font-family:inherit}
 .navchev{font-size:11px}
 .navdd{position:relative}
 .navmenu{display:none;position:absolute;left:-18px;top:100%;padding-top:14px;z-index:40;min-width:190px}
-.navmenu a{display:block;background:var(--g800);color:#fff;padding:14px 22px;font-size:16px;font-weight:400}
+.navmenu a{white-space:nowrap;display:block;background:var(--g800);color:#fff;padding:14px 22px;font-size:16px;font-weight:400}
 .navmenu a:hover{color:var(--lime)}
 .navmenu a:last-child{clip-path:polygon(0 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%)}
 .navdd:hover .navmenu,.navdd:focus-within .navmenu,.navdd.open .navmenu{display:block}
 .navtoggle{display:none}
 .ainav{position:relative}
 .ainav .newbadge{position:absolute;left:50%;top:-20px;margin:0;border-radius:0;padding:3px 9px;font-size:9px;line-height:1.2;transform:translateX(-30%) rotate(-8deg);clip-path:polygon(0 0,calc(100% - 6px) 0,100% 6px,100% 100%,6px 100%,0 calc(100% - 6px))}
+.navmenu .navitembadge{display:none!important}
 .newbadge{display:inline-block;margin-left:8px;background:var(--violet);color:#fff;font-weight:400;font-size:12px;padding:2px 9px;border-radius:999px;vertical-align:middle;line-height:1.5}
 .aibadge{display:inline-block;background:var(--violet);color:#fff;font-size:13px;font-weight:400;padding:2px 10px;border-radius:999px;white-space:nowrap}
 
@@ -219,6 +220,7 @@ button{font-family:inherit}
   .navmenu{display:block;position:static;padding:0;min-width:0}
   .navmenu a{background:transparent;clip-path:none!important;padding:15px 0;border-bottom:2px solid var(--g700)}
   .ainav .newbadge{position:static;display:inline-block;margin-left:8px}
+  .navmenu .navitembadge{display:inline-block!important}
 }
 @media (max-width:1100px){
   .row{flex-wrap:wrap}.rowmeta{display:none}

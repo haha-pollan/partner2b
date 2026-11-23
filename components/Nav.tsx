@@ -3,12 +3,13 @@ import { useState } from "react";
 import Link from "next/link";
 import { Logo } from "./Logo";
 import { aiIsNew } from "@/lib/ai";
-import { builderIsNew } from "@/lib/launch";
+import { builderIsNew, calcIsNew } from "@/lib/launch";
 
 export function Nav() {
   const [open, setOpen] = useState(false);
   const [dd, setDd] = useState(false);
-  const close = () => { setOpen(false); setDd(false); };
+  const [tools, setTools] = useState(false);
+  const close = () => { setOpen(false); setDd(false); setTools(false); };
   return (
     <div className="nav">
       <Link href="/" aria-label="Partner2B home" style={{ display: "flex", alignItems: "center" }}>
@@ -20,10 +21,16 @@ export function Nav() {
       <nav id="navlinks" className={open ? "navlinks open" : "navlinks"}>
         <Link href="/directory" onClick={close}>Browse directory</Link>
         <Link href="/ai" className="ainav" onClick={close}>AI programs{aiIsNew() ? <span className="newbadge" suppressHydrationWarning>New</span> : null}</Link>
-        <Link href="/program-builder" className="ainav" onClick={close}>Program builder{builderIsNew() ? <span className="newbadge" suppressHydrationWarning>New</span> : null}</Link>
+        <div className={tools ? "navdd ainav open" : "navdd ainav"}>
+          <button type="button" className="navddbtn" aria-expanded={tools} onClick={() => { setTools((o) => !o); setDd(false); }}>AI partner tools<span aria-hidden="true" className="navchev">▾</span>{builderIsNew() || calcIsNew() ? <span className="newbadge" suppressHydrationWarning>New</span> : null}</button>
+          <div className="navmenu">
+            <Link href="/program-builder" onClick={close}>Program builder{builderIsNew() ? <span className="newbadge navitembadge" suppressHydrationWarning>New</span> : null}</Link>
+            <Link href="/partner-pipeline-calculator" onClick={close}>Partner pipeline calculator{calcIsNew() ? <span className="newbadge navitembadge" suppressHydrationWarning>New</span> : null}</Link>
+          </div>
+        </div>
         <Link href="/services" onClick={close}>Services</Link>
         <div className={dd ? "navdd open" : "navdd"}>
-          <button type="button" className="navddbtn" aria-expanded={dd} onClick={() => setDd((o) => !o)}>Resources<span aria-hidden="true" className="navchev">▾</span></button>
+          <button type="button" className="navddbtn" aria-expanded={dd} onClick={() => { setDd((o) => !o); setTools(false); }}>Resources<span aria-hidden="true" className="navchev">▾</span></button>
           <div className="navmenu">
             <Link href="/playbook" onClick={close}>Playbook</Link>
             <Link href="/post" onClick={close}>Blog</Link>
