@@ -11,7 +11,7 @@ export function Footer() {
       <div className="footinner">
         <div className="footleft">
           <Link href="/" aria-label="Partner2B home"><Logo variant="light" /></Link>
-          <p style={{ margin: "20px 0 0", fontSize: 17, lineHeight: 1.6, fontWeight: 400, color: "#ECECEE" }}>
+          <p style={{ margin: "20px 0 0", fontSize: 15, lineHeight: 1.6, fontWeight: 400, color: "#ECECEE" }}>
             We recruit, enable and market partners for B2B tech companies
           </p>
           <div className="foothead" style={{ marginTop: 34 }}>Newsletter</div>
