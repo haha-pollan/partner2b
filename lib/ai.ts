@@ -63,6 +63,7 @@ export const AI_EXTRA_SLUGS = new Set([
   "eightfold-ai", "seekout", "findem", "hrflow-ai", "humanly", "hireez", "hirevue", "phenom", "leena-ai", "juicebox", "metaview",
   "nooks", "zowie", "pactum", "landbase", "shift-technology", "workfusion", "dropzone-ai", "skan-ai", "atomicwork", "testmu-ai",
   "beamery", "gloat", "prophet-security", "silent-eight", "uptiq", "orum", "lemlist",
+  "darktrace", "vectra-ai", "deep-instinct", "horizon3-ai", "cyera", "linx-security", "lumos",
 ]);
 export const isAi = (p: Program) => aiNames.includes(p.product_category) || AI_EXTRA_SLUGS.has(p.slug);
 export const aiOnly = (all: Program[]) => all.filter(isAi);
