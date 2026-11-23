@@ -37,7 +37,7 @@ export default function Page() {
               <p style={{ margin: "22px 0 0", maxWidth: 640, fontSize: 21, lineHeight: 1.5, fontWeight: 400 }}>Not sure how many partners you need? Enter your revenue goal and deal size and see how big your partner list has to be</p>
             </div>
             <div className="cut statcard" style={{ flex: "0 0 320px", margin: "20px 40px 0 0", transform: "rotate(-4deg)", background: "#0A0A0B", padding: "28px 32px" }}>
-              <div style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 49, letterSpacing: 0, lineHeight: 1, color: "#A8FF5C" }}>Free</div>
+              <div style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 49, letterSpacing: 0, lineHeight: 1, color: "var(--violet)" }}>Free</div>
               <div style={{ marginTop: 8, fontSize: 18 }}>result in 1 minute</div>
             </div>
           </div>
