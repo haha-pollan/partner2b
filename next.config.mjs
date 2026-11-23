@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   serverExternalPackages: ["@react-pdf/renderer"],
-  outputFileTracingIncludes: { "/api/program-builder": ["./node_modules/pdfkit/**/*", "./node_modules/@react-pdf/**/*"], "/api/playbook": ["./private/**/*"] },
+  outputFileTracingIncludes: { "/api/program-builder": ["./node_modules/pdfkit/**/*", "./node_modules/@react-pdf/**/*"], "/api/playbook": ["./private/**/*"], "/api/pipeline-calculator/pdf": ["./lib/pipeline/assets/**/*", "./node_modules/pdfkit/**/*", "./node_modules/@react-pdf/**/*"] },
   skipTrailingSlashRedirect: true,
   async rewrites() {
     return [
