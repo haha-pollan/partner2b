@@ -18,7 +18,7 @@
 
 - [Program builder](https://partner2b.com/program-builder): answer a few questions and get a partner program strategy as a PDF
 - [Partner pipeline calculator](https://partner2b.com/partner-pipeline-calculator): enter a revenue goal, deal size and sales cycle and see how many partner companies to list and reach out to
-- [Partner program assessment](https://partner2b.com/partner-program-assessment): answer 16 short statements and see which two things hold a partner program back and what to fix first
+- [Partner program assessment](https://partner2b.com/partner-program-assessment): free assessment for a partner program that does not perform: 16 short statements show which two of eight areas hold it back, with benchmarks on partner activation and answers to common questions
 - [Services](https://partner2b.com/services): positioning, partner recruitment, enablement, co-marketing and co-selling
 
 ## About
