@@ -221,17 +221,18 @@ function Results({ r, i, lever, unlocked, gate }: { r: Result; i: Inputs; lever:
   }[band];
   const lowPayout = i.partner !== "technology" && r.payoutPerDeal < MIN_PAYOUT_PER_DEAL;
   const overMarket = i.marketSize !== null && r.list > i.marketSize;
+  const keep = Math.max(1, Math.min(99, Math.round((r.reached / r.list) * 100)));
   const levels: [string, number, string][] = [
-    ["Start with a list of partner companies", r.list, "Companies that fit your offer. Research each one and find a verified contact."],
-    ["Reach out to", r.reached, `Companies you contact over the first ${trim(i.recruitMonths)} months, about ${fmt(r.perWeek)} a week.`],
+    ["Start with a list of partner companies", r.list, "Companies you research. Some drop out before you write: they do not fit on a closer look, or you cannot find a verified email."],
+    ["Reach out to", r.reached, `The ${keep}% of the list that fits and has a verified email. You contact them over the first ${trim(i.recruitMonths)} months, about ${fmt(r.perWeek)} a week.`],
     [r.signed === 1 ? "Sign 1 partner" : `Sign ${fmt(r.signed)} partners`, r.signed, "Companies that reply and agree to work with you."],
     ["Active partners", r.activePartners, "Signed partners that start bringing you deals."],
     ["Deals closed", r.deals, `Enough to reach ${usd(i.goal)} in ${trim(i.windowMonths)} months.`],
   ];
   const firstDeal = Math.min(i.windowMonths, Math.ceil(i.recruitMonths + (i.cycleWeeks * 7) / 30.4));
   const plan: [string, string, string][] = [
-    ["Month 0", `Build a list of ${fmt(r.list)} partner companies`, "Research each company and find a verified contact"],
-    ["Months 1 to " + trim(i.recruitMonths), `Reach out to ${fmt(r.reached)} companies`, `About ${fmt(r.perWeek)} a week until the list is worked`],
+    ["Month 0", `Build a list of ${fmt(r.list)} partner companies`, `Research each company. About ${100 - keep}% drop out: poor fit or no verified email`],
+    ["Months 1 to " + trim(i.recruitMonths), `Reach out to ${fmt(r.reached)} companies`, `The ${keep}% that fits and has a verified email, about ${fmt(r.perWeek)} a week`],
     ["Month " + trim(i.recruitMonths), `${fmt(r.signed)} partners signed`, `${fmt(r.activePartners)} of them active and bringing deals`],
     ["Month " + trim(firstDeal), "First deals close", `After a sales cycle of ${trim(i.cycleWeeks)} weeks`],
     ["Month " + trim(i.windowMonths), `${usd(i.goal)} reached`, `${fmt(r.deals)} ${r.deals === 1 ? "deal" : "deals"} closed in total`],
