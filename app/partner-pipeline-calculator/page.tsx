@@ -18,15 +18,21 @@ export default function Page() {
     <div style={{ overflow: "hidden" }}>
       <JsonLd data={{ "@context": "https://schema.org", "@graph": [ { "@type": "WebApplication", name: "Partner2B Partner pipeline calculator", url: `${SITE}/partner-pipeline-calculator`, applicationCategory: "BusinessApplication", operatingSystem: "Web", description: "Enter a revenue goal, deal size and sales cycle and see how many partner companies to list and reach out to.", offers: { "@type": "Offer", price: "0", priceCurrency: "USD" }, provider: ORG }, crumbs([["Partner2B", SITE], ["Partner pipeline calculator", `${SITE}/partner-pipeline-calculator`]]) ] }} />
       <div style={{ overflow: "hidden" }}>
-        <div style={{ position: "relative" }}>
+        <div className="hero">
           <Nav />
-          <div className="wrap" style={{ padding: "24px var(--margin) clamp(36px,9vw,90px)", display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 40, flexWrap: "wrap" }}>
-            <div style={{ maxWidth: "100%" }}>
-              <h1 className="h1big" style={{ fontSize: "clamp(28px,4vw,64px)" }}>Partner pipeline calculator</h1>
-              <p style={{ margin: "22px 0 0", maxWidth: 640, fontSize: 21, lineHeight: 1.5, fontWeight: 400 }}>Not sure how many partners you need? Enter your revenue goal and deal size and see how big your partner list has to be</p>
+          <div className="wrap herobody" style={{ paddingTop: 36, paddingBottom: 110 }}>
+            <div className="tapewrap">
+              <h1 className="ptapes">
+                <span className="pt pt1">Partner pipeline calculator</span>
+                <span className="pt pt2">Know your pipeline before you start</span>
+              </h1>
+              <p className="bubble herosub" style={{ marginTop: 44 }}>Not sure how many partners you need? Enter your revenue goal and deal size and see how big your partner list has to be</p>
             </div>
-            <div className="cut statcard" style={{ flex: "0 0 320px", margin: "20px 40px 0 0", transform: "rotate(-4deg)", background: "#0A0A0B", padding: "28px 32px" }}>
-              <div style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 49, letterSpacing: 0, lineHeight: 1, color: "#0A0A0B" }}>Free</div>
+            <div className="herotoby" aria-hidden="true">
+              <Toby height={580} rows={38} glasses style={{ width: "100%", height: "100%" }} />
+            </div>
+            <div className="cut freecard">
+              <div style={{ fontFamily: "'Michroma',sans-serif", fontSize: 40, lineHeight: 1, WebkitTextStroke: "1.5px currentColor" }}>Free</div>
               <div style={{ marginTop: 8, fontSize: 18 }}>result in 1 minute</div>
             </div>
           </div>

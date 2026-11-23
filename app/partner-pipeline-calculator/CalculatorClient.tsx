@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
+import { Toby } from "@/components/Toby";
 import {
   APPROACHES, APPROACH_DEFAULTS, COMPANY_TYPES, PARTNER_TYPES, PAYOUT_DEFAULT, DEFAULT_RECRUIT_MONTHS, DEFAULT_WINDOW_MONTHS,
   MIN_PAYOUT_PER_DEAL, biggestLever, bucket, compute, defaultDealsPerPartner, fmt, listBand, trim, usd,
@@ -218,11 +219,13 @@ function Results({ r, i, lever, unlocked, gate }: { r: Result; i: Inputs; lever:
   }[band];
   const lowPayout = i.partner !== "technology" && r.payoutPerDeal < MIN_PAYOUT_PER_DEAL;
   const overMarket = i.marketSize !== null && r.list > i.marketSize;
+  const perPartner = r.dealsPerPartnerInWindow;
+  const perTxt = perPartner >= 10 ? fmt(perPartner) : String(Math.max(0.1, Math.round(perPartner * 10) / 10));
   const levels: [string, number, string, string, string][] = [
-    ["Build a list and reach out to", r.list, `Companies that match your ideal partner profile. About ${fmt(r.perWeek)} a week over the first ${trim(i.recruitMonths)} months.`, "#ECECEE", "#0A0A0B"],
-    [r.signed === 1 ? "Sign 1 partner" : `Sign ${fmt(r.signed)} partners`, r.signed, "Companies that reply and agree to work with you.", "#A8FF5C", "#0A0A0B"],
-    ["Active partners", r.activePartners, "Signed partners that start bringing you deals.", "#85868B", "#0A0A0B"],
-    ["Deals closed", r.deals, `Enough to reach ${usd(i.goal)} in ${trim(i.windowMonths)} months.`, "#4A4B51", "#fff"],
+    ["Find", r.list, `Build a list of partner companies that match your ideal partner profile and reach out to every one. About ${fmt(r.perWeek)} a week over the first ${trim(i.recruitMonths)} months.`, "#ECECEE", "#0A0A0B"],
+    ["Sign", r.signed, "Partners that reply and agree to work with you.", "#A8FF5C", "#0A0A0B"],
+    ["Activate", r.activePartners, `Signed partners that start bringing you deals. Each one closes about ${perTxt} ${perTxt === "1" ? "deal" : "deals"} in your window.`, "#85868B", "#0A0A0B"],
+    ["Close", r.deals, `Deals closed, enough to reach ${usd(i.goal)} in ${trim(i.windowMonths)} months.`, "#4A4B51", "#fff"],
   ];
   const widths = [100, 82, 64, 48];
   const firstDeal = Math.min(i.windowMonths, Math.ceil(i.recruitMonths + (i.cycleWeeks * 7) / 30.4));
@@ -247,9 +250,17 @@ function Results({ r, i, lever, unlocked, gate }: { r: Result; i: Inputs; lever:
                 <span style={{ fontSize: 15, width: 28 }}>{String(k + 1).padStart(2, "0")}</span>
                 <span className="pipen" style={{ color: k === 3 ? "#A8FF5C" : fg }}>{fmt(n)}</span>
                 <span style={{ flex: 1, minWidth: 0 }}>
-                  <span style={{ display: "block", fontSize: 18 }}>{label}</span>
+                  <span style={{ display: "block", fontFamily: "'Michroma',sans-serif", fontSize: 19, WebkitTextStroke: "1px currentColor" }}>{label}</span>
                   <span style={{ display: "block", marginTop: 3, fontSize: 15, lineHeight: 1.4 }}>{text}</span>
                 </span>
+              </div>
+            ))}
+          </div>
+          <div style={{ marginTop: 40, display: "flex", flexDirection: "column", gap: 18, maxWidth: 520 }}>
+            {([[trim(firstDeal), firstDeal === 1 ? "month to your first deal" : "months to your first deal", "#FFFFFF", "#0A0A0B", "#0A0A0B", 1.5, 40], [perTxt, "deals per active partner", "#A8FF5C", "#0A0A0B", "#0A0A0B", -2, 0], [fmt(r.perWeek), "outreach messages a week", "#3A3B40", "#fff", "#A8FF5C", 1.5, 40]] as [string, string, string, string, string, number, number][]).map(([n, l, bg, fg, num, rot, ml]) => (
+              <div key={l} className="cut stat" style={{ background: bg, color: fg, transform: `rotate(${rot}deg)`, marginLeft: ml, whiteSpace: "normal", flexWrap: "wrap" }}>
+                <span className="statn" style={{ color: num }}>{n}</span>
+                <span className="statl">{l}</span>
               </div>
             ))}
           </div>
@@ -314,9 +325,14 @@ function Results({ r, i, lever, unlocked, gate }: { r: Result; i: Inputs; lever:
                 ))}
               </ol>
               {lever && (
-                <p style={{ margin: "26px 0 0", fontSize: 17, lineHeight: 1.55, color: "#C9CACE" }}>
-                  <span style={{ color: "#A8FF5C" }}>The change that helps most.</span> {lever.text} would cut your initial list from {fmt(lever.from)} to {fmt(lever.to)}.
-                </p>
+                <div style={{ marginTop: 34, display: "flex", alignItems: "flex-end", gap: 26, flexWrap: "wrap" }}>
+                  <div aria-hidden="true" style={{ flex: "0 0 150px", height: 150, background: "#A8FF5C", overflow: "hidden", display: "flex", alignItems: "flex-end", justifyContent: "center", clipPath: "polygon(0 0,100% 0,100% calc(100% - 22px),calc(100% - 22px) 100%,0 100%)" }}>
+                    <Toby height={150} rows={26} glasses animate={false} />
+                  </div>
+                  <p className="bubble" style={{ flex: "1 1 260px", margin: 0, fontSize: 18 }}>
+                    <span style={{ background: "#A8FF5C", padding: "2px 10px", borderRadius: 999 }}>The change that helps most</span> {lever.text} would cut your list from {fmt(lever.from)} to {fmt(lever.to)}.
+                  </p>
+                </div>
               )}
             </div>
           )}
