@@ -248,6 +248,13 @@ export function ResultsClient({ nav, footer }: { nav: React.ReactNode; footer: R
                 <p style={{ margin: 0, fontSize: 19, lineHeight: 1.55 }}>A partnership strategy session turns this result into a plan: which partners to go after, what to offer them and what to do in the first 90 days</p>
                 <Link href="/contact" className="btn btn-s" style={{ background: "#0A0A0B", color: "#fff" }}>Book a strategy call</Link>
               </div>
+              {firstKey !== "D" && secondKey !== "D" && (
+                <div className="cut" style={{ background: "#ECE8FF", color: "#0A0A0B", padding: "40px 40px 48px", display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 20, ["--c" as string]: "28px" }}>
+                  <div style={{ ...michroma, fontSize: 22 }}>Free partner pipeline calculator</div>
+                  <p style={{ margin: 0, fontSize: 18, lineHeight: 1.5 }}>Whatever you fix first, see how many partner conversations you need each month to reach your revenue goal</p>
+                  <Link href="/partner-pipeline-calculator" className="btn btn-s" style={{ background: "#0A0A0B", color: "#fff" }}>Open the free calculator</Link>
+                </div>
+              )}
               <div className="cut" style={{ background: "#fff", color: "#0A0A0B", padding: "40px 40px 48px", display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 20, ["--c" as string]: "28px" }}>
                 <div style={{ ...michroma, fontSize: 22 }}>Keep this result</div>
                 <p style={{ margin: 0, fontSize: 18, lineHeight: 1.5 }}>One page with your score, both bottlenecks and the first fixes, ready to share with your team</p>
