@@ -221,6 +221,13 @@ function Results({ r, i, lever, unlocked, gate }: { r: Result; i: Inputs; lever:
   }[band];
   const lowPayout = i.partner !== "technology" && r.payoutPerDeal < MIN_PAYOUT_PER_DEAL;
   const overMarket = i.marketSize !== null && r.list > i.marketSize;
+  const levels: [string, number, string][] = [
+    ["Start with a list of partner companies", r.list, "Companies that fit your offer. Research each one and find a verified contact."],
+    ["Reach out to", r.reached, `Companies you contact over the first ${trim(i.recruitMonths)} months, about ${fmt(r.perWeek)} a week.`],
+    [r.signed === 1 ? "Sign 1 partner" : `Sign ${fmt(r.signed)} partners`, r.signed, "Companies that reply and agree to work with you."],
+    ["Active partners", r.activePartners, "Signed partners that start bringing you deals."],
+    ["Deals closed", r.deals, `Enough to reach ${usd(i.goal)} in ${trim(i.windowMonths)} months.`],
+  ];
   const firstDeal = Math.min(i.windowMonths, Math.ceil(i.recruitMonths + (i.cycleWeeks * 7) / 30.4));
   const plan: [string, string, string][] = [
     ["Month 0", `Build a list of ${fmt(r.list)} partner companies`, "Research each company and find a verified contact"],
@@ -237,14 +244,22 @@ function Results({ r, i, lever, unlocked, gate }: { r: Result; i: Inputs; lever:
           <p style={{ margin: "16px 0 0", fontSize: 19, lineHeight: 1.5 }}>Your existing active partners already cover this goal. Raise the goal or lower the number of existing partners to see the pipeline you would need.</p>
         ) : (
           <>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(190px,1fr))", gap: 26, marginTop: 22 }}>
-              {([["Start with a list of", r.list, "partner companies"], ["Reach out to", r.reached, "partner companies"], ["Sign", r.signed, r.signed === 1 ? "partner" : "partners"]] as [string, number, string][]).map(([l, n, u]) => (
-                <div key={l}>
-                  <div style={{ fontSize: 16 }}>{l}</div>
-                  <div style={{ ...numStyle, fontSize: "clamp(30px,4.2vw,52px)", marginTop: 10 }}>{fmt(n)}</div>
-                  <div style={{ fontSize: 16, marginTop: 8 }}>{u}</div>
-                </div>
-              ))}
+            <div style={{ marginTop: 24 }}>
+              {levels.map(([label, n, text], k) => {
+                const w = [100, 80, 62, 46, 34, 26];
+                const x1 = (100 - w[k]) / 2, x2 = (100 - w[k + 1]) / 2;
+                return (
+                  <div key={label} style={{ display: "flex", gap: "8px 24px", alignItems: "center", flexWrap: "wrap", marginTop: k ? 4 : 0 }}>
+                    <div style={{ flex: "1 1 280px", height: 78, background: "#0A0A0B", color: "#A8FF5C", clipPath: `polygon(${x1}% 0, ${100 - x1}% 0, ${100 - x2}% 100%, ${x2}% 100%)`, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center" }}>
+                      <div style={{ ...numStyle, fontSize: "clamp(20px,2.6vw,30px)" }}>{fmt(n)}</div>
+                    </div>
+                    <div style={{ flex: "1 1 240px", minWidth: 0 }}>
+                      <div style={{ fontSize: 17 }}>{label}</div>
+                      <div style={{ marginTop: 3, fontSize: 15, lineHeight: 1.45 }}>{text}</div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
             <p style={{ margin: "24px 0 0", fontSize: 17, lineHeight: 1.55 }}>
               To close {usd(i.goal)} in {trim(i.windowMonths)} months at {usd(i.dealSize)} per deal, you need {fmt(r.deals)} {r.deals === 1 ? "deal" : "deals"}.
