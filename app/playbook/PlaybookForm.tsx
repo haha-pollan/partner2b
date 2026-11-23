@@ -11,7 +11,8 @@ const Lbl = ({ t, req }: { t: string; req?: boolean }) => (
 
 export function PlaybookForm({ id = "download" }: { id?: string }) {
   const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
+  const [first, setFirst] = useState("");
+  const [last, setLast] = useState("");
   const [company, setCompany] = useState("");
   const [consent, setConsent] = useState(false);
   const [trap, setTrap] = useState("");
@@ -37,7 +38,7 @@ export function PlaybookForm({ id = "download" }: { id?: string }) {
       const res = await fetch("/api/playbook", {
         method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          email, name, company, consent, website_confirm: trap,
+          email, name: [first.trim(), last.trim()].filter(Boolean).join(" "), company, consent, website_confirm: trap,
           utm_source: q.get("utm_source") ?? "", utm_medium: q.get("utm_medium") ?? "", utm_campaign: q.get("utm_campaign") ?? "",
           referrer: document.referrer,
         }),
@@ -77,8 +78,16 @@ export function PlaybookForm({ id = "download" }: { id?: string }) {
           </div>
           <Lbl t="Work email" req />
           <input type="email" required maxLength={320} value={email} onChange={(e) => setEmail(e.target.value)} placeholder="name@company.com" autoComplete="email" style={inputS} />
-          <Lbl t="Your name" />
-          <input maxLength={200} value={name} onChange={(e) => setName(e.target.value)} autoComplete="name" style={inputS} />
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(160px,1fr))", gap: "0 14px" }}>
+            <div>
+              <Lbl t="First name" />
+              <input maxLength={100} value={first} onChange={(e) => setFirst(e.target.value)} autoComplete="given-name" style={inputS} />
+            </div>
+            <div>
+              <Lbl t="Last name" />
+              <input maxLength={100} value={last} onChange={(e) => setLast(e.target.value)} autoComplete="family-name" style={inputS} />
+            </div>
+          </div>
           <Lbl t="Company" />
           <input maxLength={200} value={company} onChange={(e) => setCompany(e.target.value)} autoComplete="organization" style={inputS} />
           <label style={{ display: "flex", alignItems: "flex-start", gap: 12, marginTop: 22, fontSize: 14, lineHeight: 1.5, color: "#4A4B51", cursor: "pointer" }}>

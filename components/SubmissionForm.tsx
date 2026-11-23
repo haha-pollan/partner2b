@@ -12,6 +12,18 @@ const Lbl = ({ t, req }: { t: string; req?: boolean }) => (
   <label style={{ display: "block", fontSize: 15, fontWeight: 400, margin: "22px 0 8px" }}>{t}{req && <span style={{ color: "#A8FF5C" }}> *</span>}</label>
 );
 const Hint = ({ t }: { t: string }) => <div style={{ marginTop: 8, fontSize: 14, color: "#85868B" }}>{t}</div>;
+const NameFields = ({ req }: { req?: boolean }) => (
+  <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))", gap: "0 16px" }}>
+    <div>
+      <Lbl t="First name" req={req} />
+      <input name="first_name" required={req} maxLength={100} autoComplete="given-name" style={inputS} />
+    </div>
+    <div>
+      <Lbl t="Last name" req={req} />
+      <input name="last_name" required={req} maxLength={100} autoComplete="family-name" style={inputS} />
+    </div>
+  </div>
+);
 
 export function SubmissionForm({ kind, listings, defaultListing }: { kind: Kind; listings: Opt[]; defaultListing?: string }) {
   const [state, action, pending] = useActionState(sendSubmission, init);
@@ -65,6 +77,7 @@ export function SubmissionForm({ kind, listings, defaultListing }: { kind: Kind;
           <textarea name="details" maxLength={4000} rows={4} placeholder="A sentence or two is enough" style={{ ...inputS, resize: "vertical" }} />
           <Lbl t="Company description" />
           <textarea name="company_description" maxLength={2000} rows={4} placeholder="Two or three sentences on what the company does" style={{ ...inputS, resize: "vertical" }} />
+          <NameFields req />
           <Lbl t="Your email" req />
           <input name="email" type="email" required maxLength={320} placeholder="name@company.com" style={inputS} />
           <Hint t="Only used if we need to check a detail" />
@@ -74,8 +87,7 @@ export function SubmissionForm({ kind, listings, defaultListing }: { kind: Kind;
       {kind === "claim" && (
         <>
           {listingSelect}
-          <Lbl t="Your name" req />
-          <input name="name" required maxLength={200} style={inputS} />
+          <NameFields req />
           <Lbl t="Work email" req />
           <input name="email" type="email" required maxLength={320} placeholder="name@company.com" style={inputS} />
           <Hint t="Use an email on your company's domain so we can confirm you work there" />
@@ -105,9 +117,10 @@ export function SubmissionForm({ kind, listings, defaultListing }: { kind: Kind;
           <Lbl t="Link to a source" />
           <input name="source_url" type="url" maxLength={500} placeholder="https://" style={inputS} />
           <Hint t="The official page that shows the correct information" />
+          <NameFields />
           <Lbl t="Your email" />
           <input name="email" type="email" maxLength={320} placeholder="name@company.com" style={inputS} />
-          <Hint t="Only if you want a reply" />
+          <Hint t="Name and email only if you want a reply" />
         </>
       )}
 
