@@ -221,17 +221,14 @@ function Results({ r, i, lever, unlocked, gate }: { r: Result; i: Inputs; lever:
   }[band];
   const lowPayout = i.partner !== "technology" && r.payoutPerDeal < MIN_PAYOUT_PER_DEAL;
   const overMarket = i.marketSize !== null && r.list > i.marketSize;
-  const stages: [string, number, string][] = [
-    ["Initial list", r.list, "Companies you research"],
-    ["Pass your fit check", r.fitPassed, `${trim(i.fit)}% of the list`],
-    ["With a verified contact", r.contactFound, `${trim(i.found)}% of those`],
-    ["Reached by email", r.reached, `${trim(i.deliverable)}% arrive without bouncing`],
-    ["Replied", r.replies, `${trim(i.reply)}% reply`],
-    ["Signed as partners", r.signed, `${trim(i.replyToSigned)}% of replies sign`],
-    ["Active partners", r.activePartners, `${trim(i.activation)}% of signed partners activate`],
-    ["Deals closed", r.deals, `${trim(i.winRate)}% of ${fmt(r.opportunities)} qualified opportunities`],
+  const firstDeal = Math.min(i.windowMonths, Math.ceil(i.recruitMonths + (i.cycleWeeks * 7) / 30.4));
+  const plan: [string, string, string][] = [
+    ["Month 0", `Build a list of ${fmt(r.list)} partner companies`, "Research each company and find a verified contact"],
+    ["Months 1 to " + trim(i.recruitMonths), `Reach out to ${fmt(r.reached)} companies`, `About ${fmt(r.perWeek)} a week until the list is worked`],
+    ["Month " + trim(i.recruitMonths), `${fmt(r.signed)} partners signed`, `${fmt(r.activePartners)} of them active and bringing deals`],
+    ["Month " + trim(firstDeal), "First deals close", `After a sales cycle of ${trim(i.cycleWeeks)} weeks`],
+    ["Month " + trim(i.windowMonths), `${usd(i.goal)} reached`, `${fmt(r.deals)} ${r.deals === 1 ? "deal" : "deals"} closed in total`],
   ];
-  const top = Math.max(1, r.list);
   return (
     <div style={{ marginTop: 40 }}>
       <div className="cut" style={{ background: "#A8FF5C", color: "#0A0A0B", padding: "30px 32px 36px", ["--c" as string]: "28px" }}>
@@ -240,20 +237,17 @@ function Results({ r, i, lever, unlocked, gate }: { r: Result; i: Inputs; lever:
           <p style={{ margin: "16px 0 0", fontSize: 19, lineHeight: 1.5 }}>Your existing active partners already cover this goal. Raise the goal or lower the number of existing partners to see the pipeline you would need.</p>
         ) : (
           <>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))", gap: 26, marginTop: 22 }}>
-              <div>
-                <div style={{ fontSize: 16 }}>Build a list of</div>
-                <div style={{ ...numStyle, fontSize: "clamp(30px,4.2vw,52px)", marginTop: 10 }}>{fmt(r.list)}</div>
-                <div style={{ fontSize: 16, marginTop: 8 }}>partner companies</div>
-              </div>
-              <div>
-                <div style={{ fontSize: 16 }}>Reach out to</div>
-                <div style={{ ...numStyle, fontSize: "clamp(30px,4.2vw,52px)", marginTop: 10 }}>{fmt(r.reached)}</div>
-                <div style={{ fontSize: 16, marginTop: 8 }}>partner companies</div>
-              </div>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(190px,1fr))", gap: 26, marginTop: 22 }}>
+              {([["Start with a list of", r.list, "partner companies"], ["Reach out to", r.reached, "partner companies"], ["Sign", r.signed, r.signed === 1 ? "partner" : "partners"]] as [string, number, string][]).map(([l, n, u]) => (
+                <div key={l}>
+                  <div style={{ fontSize: 16 }}>{l}</div>
+                  <div style={{ ...numStyle, fontSize: "clamp(30px,4.2vw,52px)", marginTop: 10 }}>{fmt(n)}</div>
+                  <div style={{ fontSize: 16, marginTop: 8 }}>{u}</div>
+                </div>
+              ))}
             </div>
             <p style={{ margin: "24px 0 0", fontSize: 17, lineHeight: 1.55 }}>
-              To close {usd(i.goal)} in {trim(i.windowMonths)} months at {usd(i.dealSize)} per deal, you need {fmt(r.deals)} {r.deals === 1 ? "deal" : "deals"}. That takes about {fmt(r.activePartners)} active {r.activePartners === 1 ? "partner" : "partners"}, so you need to sign {fmt(r.signed)}.
+              To close {usd(i.goal)} in {trim(i.windowMonths)} months at {usd(i.dealSize)} per deal, you need {fmt(r.deals)} {r.deals === 1 ? "deal" : "deals"}.
             </p>
           </>
         )}
@@ -288,8 +282,8 @@ function Results({ r, i, lever, unlocked, gate }: { r: Result; i: Inputs; lever:
 
           {!unlocked ? (
             <form onSubmit={gate.unlock} style={{ marginTop: 26, background: "#A8FF5C", color: "#0A0A0B", borderRadius: 16, padding: "24px 26px" }}>
-              <div style={{ fontFamily: "'Michroma',sans-serif", fontSize: 17 }}>See every stage of your funnel</div>
-              <p style={{ margin: "10px 0 0", fontSize: 16, lineHeight: 1.5 }}>Stage by stage numbers, partner payout, outreach per week and the one change that helps most.</p>
+              <div style={{ fontFamily: "'Michroma',sans-serif", fontSize: 17 }}>See your timeline</div>
+              <p style={{ margin: "10px 0 0", fontSize: 16, lineHeight: 1.5 }}>Your milestones from the first message to the goal, and the one change that helps most.</p>
               <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(160px,1fr))", gap: 12, marginTop: 16 }}>
                 <input required maxLength={60} value={gate.first} onChange={(e) => gate.setFirst(e.target.value)} placeholder="First name" autoComplete="given-name" style={gateInput} />
                 <input required maxLength={60} value={gate.last} onChange={(e) => gate.setLast(e.target.value)} placeholder="Last name" autoComplete="family-name" style={gateInput} />
@@ -304,30 +298,15 @@ function Results({ r, i, lever, unlocked, gate }: { r: Result; i: Inputs; lever:
             </form>
           ) : (
             <div style={{ marginTop: 34 }}>
-              <h2 style={{ fontWeight: 400, fontSize: 23, letterSpacing: 0, color: "#fff" }}>Your funnel, stage by stage</h2>
-              <div style={{ marginTop: 18, display: "flex", flexDirection: "column", gap: 12 }}>
-                {stages.map(([name, n, note]) => (
-                  <div key={name}>
-                    <div style={{ display: "flex", justifyContent: "space-between", gap: 16, flexWrap: "wrap", fontSize: 16 }}>
-                      <span>{name}</span><span style={{ color: "#A8FF5C" }}>{fmt(n)}</span>
+              <h2 style={{ fontWeight: 400, fontSize: 23, letterSpacing: 0, color: "#fff" }}>Your milestones</h2>
+              <div style={{ marginTop: 18, display: "flex", flexDirection: "column" }}>
+                {plan.map(([when, what, note], k) => (
+                  <div key={when} style={{ display: "flex", gap: 20, padding: "16px 0", borderTop: k ? "1px solid #26272B" : "none", flexWrap: "wrap" }}>
+                    <div style={{ flex: "0 0 150px", color: "#A8FF5C", fontSize: 16 }}>{when}</div>
+                    <div style={{ flex: "1 1 260px" }}>
+                      <div style={{ fontSize: 18 }}>{what}</div>
+                      <div style={{ marginTop: 4, fontSize: 15, color: "#85868B" }}>{note}</div>
                     </div>
-                    <div style={{ marginTop: 6, height: 10, background: "#1C1D20", overflow: "hidden" }}>
-                      <div style={{ width: `${Math.max(2, Math.sqrt(n / top) * 100)}%`, height: "100%", background: "#A8FF5C" }} />
-                    </div>
-                    <div style={{ marginTop: 5, fontSize: 14, color: "#85868B" }}>{note}</div>
-                  </div>
-                ))}
-              </div>
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))", gap: 16, marginTop: 30 }}>
-                {[
-                  [fmt(r.opportunities), "Qualified opportunities needed", `At a ${trim(i.winRate)}% win rate`],
-                  [usd(r.payoutTotal), `Partner payout at ${trim(i.payout)}%`, `About ${usd(r.payoutPerDeal)} per deal`],
-                  [fmt(r.perWeek), "Outreach per week", `If spread over the first ${trim(i.recruitMonths)} months`],
-                ].map(([n, l, s]) => (
-                  <div key={l} className="cut" style={{ background: "#fff", color: "#0A0A0B", padding: "22px 22px 26px", ["--c" as string]: "18px" }}>
-                    <div style={{ ...numStyle, fontSize: 26 }}>{n}</div>
-                    <div style={{ marginTop: 10, fontSize: 16 }}>{l}</div>
-                    <div style={{ marginTop: 4, fontSize: 14, color: "#4A4B51" }}>{s}</div>
                   </div>
                 ))}
               </div>
