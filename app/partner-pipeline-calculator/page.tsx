@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { JsonLd, ORG, SITE, crumbs } from "@/components/JsonLd";
 import { Nav } from "@/components/Nav";
+import { Toby } from "@/components/Toby";
 import { Footer } from "@/components/Footer";
 import { CalculatorClient } from "./CalculatorClient";
 
@@ -25,7 +26,7 @@ export default function Page() {
               <p style={{ margin: "22px 0 0", maxWidth: 640, fontSize: 21, lineHeight: 1.5, fontWeight: 400 }}>Not sure how many partners you need? Enter your revenue goal and deal size and see how big your partner list has to be</p>
             </div>
             <div className="cut statcard" style={{ flex: "0 0 320px", margin: "20px 40px 0 0", transform: "rotate(-4deg)", background: "#0A0A0B", padding: "28px 32px" }}>
-              <div style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 49, letterSpacing: 0, lineHeight: 1, color: "var(--violet)" }}>Free</div>
+              <div style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 49, letterSpacing: 0, lineHeight: 1, color: "#0A0A0B" }}>Free</div>
               <div style={{ marginTop: 8, fontSize: 18 }}>result in 1 minute</div>
             </div>
           </div>
@@ -35,7 +36,8 @@ export default function Page() {
             <h2 style={{ fontWeight: 400, fontSize: 23, letterSpacing: 0 }}>Your goal</h2>
             <CalculatorClient />
           </div>
-          <div className="cut" style={{ flex: "0 0 340px", background: "#ECECEE", color: "#0A0A0B", padding: "28px 28px 34px" }}>
+          <div style={{ flex: "0 0 340px", display: "flex", flexDirection: "column", gap: 16 }}>
+          <div className="cut" style={{ background: "#ECECEE", color: "#0A0A0B", padding: "28px 28px 34px" }}>
             <h3 style={{ fontWeight: 400, fontSize: 18, letterSpacing: 0, paddingBottom: 12, borderBottom: "2px solid #0A0A0B" }}>How it works</h3>
             {steps.map((t, i) => (
               <div key={i} style={{ display: "flex", gap: 18, alignItems: "flex-start", padding: "16px 0", borderBottom: i < 2 ? "2px solid #0A0A0B" : 0 }}>
@@ -43,6 +45,10 @@ export default function Page() {
                 <span style={{ fontSize: 16, fontWeight: 400, lineHeight: 1.4, paddingTop: 4 }}>{t}</span>
               </div>
             ))}
+          </div>
+          <div className="cut" aria-hidden="true" style={{ background: "#A8FF5C", display: "flex", alignItems: "flex-end", justifyContent: "center", overflow: "hidden", minHeight: 190, ["--c" as string]: "24px" }}>
+            <Toby height={190} rows={30} glasses animate={false} />
+          </div>
           </div>
         </div>
       </div>

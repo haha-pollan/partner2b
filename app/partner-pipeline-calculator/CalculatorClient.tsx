@@ -235,7 +235,7 @@ function Results({ r, i, lever, unlocked, gate }: { r: Result; i: Inputs; lever:
   ];
   return (
     <div style={{ marginTop: 44 }}>
-      <span className="kick">Your pipeline</span>
+      <h2 style={{ fontWeight: 400, fontSize: "clamp(24px,2.6vw,34px)", letterSpacing: 0, color: "#fff" }}>Your partner pipeline</h2>
       {r.covered ? (
         <p style={{ margin: "18px 0 0", fontSize: 19, lineHeight: 1.5 }}>Your existing active partners already cover this goal. Raise the goal or lower the number of existing partners to see the pipeline you would need.</p>
       ) : (
