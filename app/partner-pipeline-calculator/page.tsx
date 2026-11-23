@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import { JsonLd, ORG, SITE, crumbs } from "@/components/JsonLd";
 import { Nav } from "@/components/Nav";
@@ -40,7 +41,7 @@ export default function Page() {
         <div className="wrap" style={{ padding: "40px var(--margin) clamp(36px,9vw,120px)", display: "flex", gap: 32, alignItems: "flex-start", flexWrap: "wrap" }}>
           <div className="cut" style={{ flex: "1 1 640px", minWidth: 0, background: "#0A0A0B", padding: "36px 40px 44px", position: "relative" }}>
             <h2 style={{ fontWeight: 400, fontSize: 23, letterSpacing: 0 }}>Your goal</h2>
-            <CalculatorClient />
+            <Suspense fallback={null}><CalculatorClient /></Suspense>
           </div>
           <div style={{ flex: "0 0 340px", display: "flex", flexDirection: "column", gap: 16 }}>
           <div className="cut" style={{ background: "#ECECEE", color: "#0A0A0B", padding: "28px 28px 34px" }}>
