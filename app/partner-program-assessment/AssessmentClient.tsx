@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ACTIVE, AGE, AREAS, ANSWERS, MAX_SYMPTOMS, OWNER, SYMPTOMS, TYPES, toQuery } from "@/lib/assessment/model";
 import { track } from "@/lib/track";
+import { OPEN_EVENT } from "./StartLink";
 
 const btn: React.CSSProperties = { background: "#A8FF5C", color: "#0A0A0B", fontFamily: "'IBM Plex Sans',sans-serif", fontWeight: 400, fontSize: 19, padding: "18px 34px", border: 0, cursor: "pointer", display: "inline-block", clipPath: "polygon(0 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%)" };
 const plain: React.CSSProperties = { background: "transparent", border: 0, color: "inherit", cursor: "pointer", font: "inherit", fontSize: 17, textDecoration: "underline", padding: 0 };
@@ -12,7 +13,7 @@ const michroma: React.CSSProperties = { fontFamily: "'Michroma',sans-serif", fon
 
 const STATEMENTS = AREAS.flatMap((a) => a.statements.map((s) => ({ area: a.name, text: s })));
 
-export function AssessmentClient() {
+function Flow() {
   const router = useRouter();
   const [symptoms, setSymptoms] = useState<string[]>([]);
   const [age, setAge] = useState<number | null>(null);
@@ -29,7 +30,7 @@ export function AssessmentClient() {
   useEffect(() => {
     if (opened.current) return;
     opened.current = true;
-    track("partner_program_assessment_opened");
+    track("partner_program_assessment_start_clicked");
   }, []);
   useEffect(() => { if (step >= 0) top.current?.scrollIntoView({ block: "start" }); }, [step]);
 
@@ -122,6 +123,32 @@ export function AssessmentClient() {
         <button type="button" onClick={begin} style={btn}>Start the assessment</button>
         <span style={{ fontSize: 16, color: "#3A3B40" }}>Your answers stay private. We never ask for a company name</span>
       </div>
+    </div>
+  );
+}
+
+// The public page shows the questions only after a click on a Start button (or a link ending in #start).
+export function AssessmentClient() {
+  const [open, setOpen] = useState(false);
+  const seen = useRef(false);
+  const box = useRef<HTMLDivElement>(null);
+  const justOpened = useRef(false);
+
+  useEffect(() => {
+    if (!seen.current) { seen.current = true; track("partner_program_assessment_opened"); }
+    const show = () => { justOpened.current = true; setOpen(true); };
+    if (window.location.hash === "#start") show();
+    window.addEventListener(OPEN_EVENT, show);
+    return () => window.removeEventListener(OPEN_EVENT, show);
+  }, []);
+  useEffect(() => {
+    if (open && justOpened.current) { justOpened.current = false; box.current?.scrollIntoView({ block: "start", behavior: "smooth" }); }
+  }, [open]);
+
+  if (!open) return null;
+  return (
+    <div id="start" ref={box} className="wrap" style={{ padding: "60px var(--margin) clamp(36px,9vw,120px)", scrollMarginTop: 0 }}>
+      <Flow />
     </div>
   );
 }
