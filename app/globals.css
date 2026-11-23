@@ -281,5 +281,5 @@ button{font-family:inherit}
 .pipe{display:flex;align-items:center;gap:18px;padding:18px 28px 20px 24px}
 .pipen{font-family:'Michroma',sans-serif;font-size:clamp(24px,3.2vw,38px);line-height:1;-webkit-text-stroke:1.2px currentColor;flex:0 0 auto;min-width:96px}
 @media (max-width:760px){.pipe{width:100%!important;padding:14px 18px 16px;gap:12px;flex-wrap:wrap}.pipen{min-width:0}}
-.freecard{position:absolute;z-index:4;right:calc(var(--margin) + 30px);bottom:34px;background:#fff;color:var(--ink);padding:24px 30px 28px;transform:rotate(-4deg);--c:22px}
+.freecard{position:absolute;z-index:4;right:calc(var(--margin) + 70px);bottom:-50px;background:#fff;color:var(--ink);padding:24px 30px 28px;transform:rotate(-4deg);--c:22px}
 @media (max-width:760px){.freecard{position:relative;right:auto;bottom:auto;display:inline-block;margin-top:30px}}
