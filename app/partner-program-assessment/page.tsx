@@ -77,19 +77,21 @@ export default function Page() {
       <main className="wrap" style={{ padding: "clamp(48px,7vw,84px) var(--margin) clamp(36px,9vw,120px)" }}>
         {/* Short answer and three numbers */}
         <section aria-labelledby="short-answer" style={{ display: "flex", gap: 36, flexWrap: "wrap", alignItems: "flex-start" }}>
-          <div className="cut" style={{ flex: "1 1 520px", minWidth: 0, background: "#A8FF5C", color: "#0A0A0B", padding: "34px 38px 42px", ["--c" as string]: "26px" }}>
-            <h2 id="short-answer" style={{ display: "inline-block", background: "#0A0A0B", color: "#A8FF5C", fontWeight: 400, fontSize: 15, padding: "4px 14px", borderRadius: 999, letterSpacing: 0 }}>Short answer</h2>
-            <p style={{ margin: "18px 0 0", fontSize: 21, lineHeight: 1.55 }}>{SHORT_ANSWER}</p>
-            <p style={{ margin: "22px 0 0", fontSize: 15 }}>By Elena Zap, founder of Partner2B. Updated {UPDATED_LABEL}</p>
-          </div>
+          <figure className="cut" style={{ flex: "1 1 520px", minWidth: 0, margin: 0, background: "#A8FF5C", color: "#0A0A0B", padding: "30px 40px 40px", ["--c" as string]: "26px" }}>
+            <h2 id="short-answer" style={{ position: "absolute", width: 1, height: 1, overflow: "hidden", clip: "rect(0 0 0 0)", whiteSpace: "nowrap" }}>Short answer</h2>
+            <div aria-hidden="true" style={{ ...michroma, fontSize: 96, lineHeight: 0.8, height: 56, WebkitTextStroke: "2px currentColor" }}>{"\u201C"}</div>
+            <blockquote style={{ margin: "10px 0 0", fontSize: 22, lineHeight: 1.55 }}>{SHORT_ANSWER}</blockquote>
+            <figcaption style={{ marginTop: 26, display: "flex", alignItems: "center", gap: 14, flexWrap: "wrap" }}>
+              <span style={{ display: "inline-block", width: 36, height: 3, background: "#0A0A0B" }} aria-hidden="true" />
+              <span style={{ fontSize: 17 }}>Elena Zap, founder of Partner2B</span>
+              <span style={{ fontSize: 15, color: "#3A3B40" }}>Updated {UPDATED_LABEL}</span>
+            </figcaption>
+          </figure>
           <div style={{ flex: "1 1 380px", display: "flex", flexDirection: "column", gap: 18, padding: "6px 0 10px" }}>
             {STATS.map((s, i) => (
-              <div key={s.n} className="cut" style={{ background: TINTS[i % 3], color: "#0A0A0B", padding: "20px 26px 24px", transform: `rotate(${[-1.2, 1, -0.8][i]}deg)`, marginLeft: [0, 28, 8][i], ["--c" as string]: "18px" }}>
-                <div style={{ display: "flex", alignItems: "baseline", gap: 16, flexWrap: "wrap" }}>
-                  <span style={{ ...michroma, fontSize: 30, lineHeight: 1, WebkitTextStroke: "1.3px currentColor" }}>{s.n}</span>
-                  <span style={{ fontSize: 17, lineHeight: 1.4, flex: "1 1 200px" }}>{s.l}</span>
-                </div>
-                <a href={s.href} target="_blank" rel="noopener" style={{ display: "inline-block", marginTop: 10, fontSize: 14, color: "#3A3B40", textDecoration: "underline" }}>{s.s}</a>
+              <div key={s.n} className="cut" style={{ background: TINTS[i % 3], color: "#0A0A0B", padding: "22px 28px 26px", transform: `rotate(${[-1.2, 1, -0.8][i]}deg)`, marginLeft: [0, 28, 8][i], ["--c" as string]: "18px" }}>
+                <div style={{ ...michroma, fontSize: 32, lineHeight: 1, WebkitTextStroke: "1.3px currentColor" }}>{s.n}</div>
+                <div style={{ marginTop: 12, fontSize: 18, lineHeight: 1.4 }}>{s.l}</div>
               </div>
             ))}
           </div>
