@@ -110,17 +110,19 @@ export default function Page() {
         {/* Signs */}
         <section aria-labelledby="signs" style={section}>
           <h2 id="signs" className="sectitle">Signs your partner program is not working</h2>
-          <div className="cut" style={{ marginTop: 32, background: "#fff", color: "#0A0A0B", padding: "10px 34px 22px", overflowX: "auto", ["--c" as string]: "26px" }}>
-            <table style={{ width: "100%", minWidth: 680, borderCollapse: "collapse", textAlign: "left" }}>
+          <div style={{ marginTop: 28, overflowX: "auto" }}>
+            <table style={{ width: "100%", minWidth: 720, borderCollapse: "collapse", textAlign: "left" }}>
               <thead>
-                <tr>{["What you see", "What it usually means", "Look first at"].map((h) => <th key={h} scope="col" style={{ fontWeight: 400, fontSize: 15, color: "#3A3B40", padding: "18px 18px 12px 0", borderBottom: "2px solid #0A0A0B" }}>{h}</th>)}</tr>
+                <tr>{["What you see", "What it usually means", "Look first at"].map((h) => <th key={h} scope="col" style={{ fontWeight: 400, fontSize: 15, color: "rgba(255,255,255,.6)", padding: "0 20px 14px 0", borderBottom: "2px solid #A8FF5C" }}>{h}</th>)}</tr>
               </thead>
               <tbody>
-                {SIGNS.map((s, i) => (
+                {SIGNS.map((s) => (
                   <tr key={s.sign}>
-                    <th scope="row" style={{ ...michroma, fontSize: 16, lineHeight: 1.4, WebkitTextStroke: "0.8px currentColor", padding: "20px 24px 20px 0", verticalAlign: "top", width: "30%", borderBottom: i < SIGNS.length - 1 ? "2px solid #ECECEE" : 0 }}>{s.sign}</th>
-                    <td style={{ fontSize: 17, lineHeight: 1.5, padding: "20px 24px 20px 0", verticalAlign: "top", width: "40%", borderBottom: i < SIGNS.length - 1 ? "2px solid #ECECEE" : 0 }}>{s.means}</td>
-                    <td style={{ fontSize: 17, lineHeight: 1.5, padding: "20px 0", verticalAlign: "top", borderBottom: i < SIGNS.length - 1 ? "2px solid #ECECEE" : 0 }}>{s.look}</td>
+                    <th scope="row" style={{ ...michroma, fontSize: 17, lineHeight: 1.45, WebkitTextStroke: "0.8px currentColor", padding: "26px 28px 26px 0", verticalAlign: "top", width: "30%", color: "#fff", borderBottom: "1px solid rgba(255,255,255,.18)" }}>{s.sign}</th>
+                    <td style={{ fontSize: 18, lineHeight: 1.5, padding: "26px 28px 26px 0", verticalAlign: "top", width: "38%", color: "rgba(255,255,255,.88)", borderBottom: "1px solid rgba(255,255,255,.18)" }}>{s.means}</td>
+                    <td style={{ padding: "22px 0", verticalAlign: "top", borderBottom: "1px solid rgba(255,255,255,.18)" }}>
+                      <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>{s.look.split(", ").map((w) => <span key={w} style={{ background: "#A8FF5C", color: "#0A0A0B", fontSize: 15, padding: "4px 13px", borderRadius: 999, whiteSpace: "nowrap" }}>{w.charAt(0).toUpperCase() + w.slice(1)}</span>)}</div>
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -150,15 +152,13 @@ export default function Page() {
         {/* FAQ */}
         <section aria-labelledby="faq" style={section}>
           <h2 id="faq" className="sectitle">Questions about partner programs that do not perform</h2>
-          <div className="cut" style={{ marginTop: 32, background: "#fff", color: "#0A0A0B", padding: "34px 40px 30px", ["--c" as string]: "26px" }}>
-            <div style={{ columnWidth: 440, columnGap: 56 }}>
-              {FAQ.map((f, fi) => (
-                <div key={f.q} style={{ breakInside: "avoid", paddingBottom: 26, marginBottom: fi === FAQ.length - 1 ? 0 : 26, borderBottom: fi === FAQ.length - 1 ? 0 : "2px solid #ECECEE" }}>
-                  <h3 style={{ ...michroma, fontSize: 17, lineHeight: 1.45, margin: 0, WebkitTextStroke: "0.8px currentColor", textWrap: "balance" as React.CSSProperties["textWrap"] }}>{f.q}</h3>
-                  <p style={{ margin: "12px 0 0", fontSize: 17, lineHeight: 1.6 }}>{f.a}</p>
-                </div>
-              ))}
-            </div>
+          <div style={{ marginTop: 32, columnWidth: 440, columnGap: 64 }}>
+            {FAQ.map((f, fi) => (
+              <div key={f.q} style={{ breakInside: "avoid", paddingBottom: 28, marginBottom: 28, borderBottom: "1px solid rgba(255,255,255,.18)" }}>
+                <h3 style={{ ...michroma, fontSize: 18, lineHeight: 1.45, margin: 0, color: "#fff", WebkitTextStroke: "0.8px currentColor", textWrap: "balance" as React.CSSProperties["textWrap"] }}><span style={{ color: "#A8FF5C", marginRight: 12 }}>{String(fi + 1).padStart(2, "0")}</span>{f.q}</h3>
+                <p style={{ margin: "14px 0 0", fontSize: 18, lineHeight: 1.6, color: "rgba(255,255,255,.88)" }}>{f.a}</p>
+              </div>
+            ))}
           </div>
         </section>
 
