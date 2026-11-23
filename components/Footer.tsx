@@ -33,9 +33,15 @@ export function Footer() {
             </div>
           </div>
           <div>
-            <div className="foothead">Partner2B</div>
+            <div className="foothead">AI partner tools</div>
             <div className="footcol">
               <Link href="/program-builder">Program builder</Link>
+              <Link href="/partner-pipeline-calculator">Partner pipeline calculator</Link>
+            </div>
+          </div>
+          <div>
+            <div className="foothead">Partner2B</div>
+            <div className="footcol">
               <Link href="/services">Services</Link>
               <Link href="/playbook">Free playbook</Link>
               <Link href="/post">Blog</Link>

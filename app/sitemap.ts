@@ -10,6 +10,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [
     { url: "https://partner2b.com/directory" },
     { url: "https://partner2b.com/program-builder" },
+    { url: "https://partner2b.com/partner-pipeline-calculator" },
     { url: "https://partner2b.com/ai" },
     ...AI_CATEGORIES.map((c) => ({ url: `https://partner2b.com/ai/${c.slug}` })),
     { url: "https://partner2b.com/services" },

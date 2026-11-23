@@ -2,7 +2,7 @@
 export const LEGAL = {
   site: "Partner2B (partner2b.com)",
   email: "hello@partner2b.com",
-  updated: "November 22, 2026",
+  updated: "November 23, 2026",
 };
 
 export type Section = { h: string; p: string[] };
@@ -20,6 +20,7 @@ export const PRIVACY: Section[] = [
       "Browsing the directory does not require an account, and we do not ask you for any information to read it.",
       "When you download the Ecosystem-Led Growth Playbook (partner2b.com/playbook), we collect your email address and, if you choose to give them, your name and company. We also store the campaign tags in the link you came from and the page that referred you, so we know which content brought you here.",
       "When you use the Program builder, we collect your email address and what you enter about your company and your program goals, such as your website, company name and category. This is used to create your strategy report and to follow up on it.",
+      "When you use the Partner pipeline calculator, you enter figures about your company, such as a revenue goal, a deal size and a sales cycle. If you choose to see the full results, we also collect your name and email address, the figures you entered, the campaign tags in the link you came from and the page that referred you.",
       "When you subscribe to the newsletter in the footer, we collect your email address, the page you subscribed from and the page that referred you.",
       "When you use the Submit, Claim or Report forms, we collect what you type into them: your name, work email address, role, the company and program you are writing about, links you provide, and your message. For the Report form, your email address is optional.",
       "We measure how the site is used with PostHog, a web analytics service hosted in the European Union. It records which pages are viewed, the page you came from, your browser and device type and your approximate country. It does not use cookies, does not store anything on your device and does not record your screen or your typing.",
@@ -32,6 +33,7 @@ export const PRIVACY: Section[] = [
     p: [
       "We use playbook download details to deliver the file, to understand which content works and to contact you about the playbook. The basis is your consent, which you give by ticking the box on the form, and you can withdraw it at any time by emailing us.",
       "We use Program builder details to create your report and to contact you about it. The basis is steps taken at your request and our legitimate interest in running the tool.",
+      "We use Partner pipeline calculator details to show you the full results and to contact you about them. The basis is your consent, which you give by ticking the box on the form, and you can withdraw it at any time by emailing us.",
       "We use newsletter email addresses to send you the Partner2B newsletter. The basis is your consent, which you give by ticking the box in the footer form. You can withdraw it at any time by emailing us, and we will remove you from the list.",
       "We use form data to review submissions, verify that a person is authorized to claim a listing, correct or remove information, and reply to you. The basis is our legitimate interest in keeping the directory accurate (GDPR Article 6(1)(f)), and, where you ask us to act on a request, steps taken at your request.",
       "We use usage statistics to understand which pages are useful and to improve the site. The basis is our legitimate interest in doing so, and the statistics are not used to identify you.",
