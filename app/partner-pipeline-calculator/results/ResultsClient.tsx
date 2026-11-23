@@ -115,6 +115,7 @@ export function ResultsClient({ nav, footer }: { nav: React.ReactNode; footer: R
     ["Activate", fmt(r.activePartners), 8, "#85868B", "#0A0A0B", "grid", `Signed partners that start bringing you deals. Each one closes about ${perTxt} ${perTxt === "1" ? "deal" : "deals"} in your window.`],
     ["Close", fmt(r.deals), 12, "#4A4B51", "#fff", "stairs", `Deals closed, enough to reach ${usd(inputs.goal)} in ${win} months.`],
   ];
+  const units = ["partner companies", r.signed === 1 ? "partner" : "partners", r.activePartners === 1 ? "active partner" : "active partners", r.deals === 1 ? "deal" : "deals"];
   const stats: [string, string, string, string, string, number, number][] = [
     [trim(firstDeal), firstDeal === 1 ? "month to your first deal" : "months to your first deal", "#FFFFFF", "#0A0A0B", "#0A0A0B", 1.5, 40],
     [perTxt, "deals per active partner", "#A8FF5C", "#0A0A0B", "#0A0A0B", -2, 0],
@@ -168,8 +169,10 @@ export function ResultsClient({ nav, footer }: { nav: React.ReactNode; footer: R
         <div style={{ marginTop: 44 }}>
           {stages.map(([name, n, ind, bg, tx, glyph, text], k) => (
             <div key={name} className="stair plstair" style={{ background: bg, color: tx, marginLeft: `${ind}%` }}>
-              <span style={{ fontSize: 15, width: 28 }}>{String(k + 1).padStart(2, "0")}</span>
-              <span className="plnum" style={{ color: k === 3 ? "#A8FF5C" : tx }}>{n}</span>
+              <span className="plnumwrap">
+                <span className="plnum" style={{ color: k === 3 ? "#A8FF5C" : tx }}>{n}</span>
+                <span style={{ display: "block", marginTop: 10, fontSize: 16 }}>{units[k]}</span>
+              </span>
               <span style={{ flex: 1, minWidth: 0 }}>
                 <span className="stairname" style={{ display: "block", fontFamily: "'Michroma',sans-serif", fontSize: 28, WebkitTextStroke: "1.2px currentColor" }}>{name}</span>
                 <span style={{ display: "block", marginTop: 8, fontSize: 17, lineHeight: 1.5, maxWidth: 640 }}>{text}</span>
