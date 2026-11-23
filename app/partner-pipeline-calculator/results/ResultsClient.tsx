@@ -29,6 +29,8 @@ export function ResultsClient({ nav, footer }: { nav: React.ReactNode; footer: R
   const [busy, setBusy] = useState(false);
   const [leadErr, setLeadErr] = useState("");
   const [unlocked, setUnlocked] = useState(false);
+  const [pdfBusy, setPdfBusy] = useState(false);
+  const [pdfErr, setPdfErr] = useState("");
   const done = useRef(false);
 
   useEffect(() => {
@@ -102,6 +104,21 @@ export function ResultsClient({ nav, footer }: { nav: React.ReactNode; footer: R
     medium: { t: "Give the work a named owner", p: "A list this size needs a dedicated owner, a sequence of messages and a simple way to track partners. Settle your partner types, tiers and earnings first, so outreach has a clear offer." },
     large: { t: "Change the levers before you start", p: "A list this large is hard to build and harder to work. Try a higher activation rate, a longer window or a partner type that closes more deals per partner. You can also add inbound routes, such as listing your program in the directory." },
   }[band];
+  async function downloadPdf() {
+    if (pdfBusy) return;
+    setPdfBusy(true); setPdfErr("");
+    try {
+      const res = await fetch("/api/pipeline-calculator/pdf", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ q: qs }) });
+      if (!res.ok) { setPdfErr("We could not create the PDF. Please try again."); return; }
+      const url = URL.createObjectURL(await res.blob());
+      const a = document.createElement("a");
+      a.href = url; a.download = "Partner2B_Partner_Pipeline_One-pager.pdf";
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 2000);
+      track("partner_pipeline_calculator_pdf_downloaded");
+    } catch { setPdfErr("We could not create the PDF. Please try again."); }
+    finally { setPdfBusy(false); }
+  }
   const lowPayout = inputs.partner !== "technology" && r.payoutPerDeal < MIN_PAYOUT_PER_DEAL;
   const overMarket = inputs.marketSize !== null && r.list > inputs.marketSize;
   const perTxt = r.dealsPerPartnerInWindow >= 10 ? fmt(r.dealsPerPartnerInWindow) : String(Math.max(0.1, Math.round(r.dealsPerPartnerInWindow * 10) / 10));
@@ -235,6 +252,13 @@ export function ResultsClient({ nav, footer }: { nav: React.ReactNode; footer: R
               <p className="bubble" style={{ flex: "1 1 320px", margin: 0, fontSize: 20, maxWidth: 760 }}>
                 <span style={{ background: "#A8FF5C", padding: "2px 12px", borderRadius: 999 }}>The change that helps most</span> {lever.text} would cut your list from {fmt(lever.from)} to {fmt(lever.to)}.
               </p>
+            </div>
+          )}
+          {unlocked && (
+            <div style={{ marginTop: 50, display: "flex", alignItems: "center", gap: 22, flexWrap: "wrap" }}>
+              <button type="button" onClick={downloadPdf} disabled={pdfBusy} style={{ ...btnStyle, opacity: pdfBusy ? 0.6 : 1 }}>{pdfBusy ? "Creating your PDF" : "Download your one-pager (PDF)"}</button>
+              <span style={{ fontSize: 17, lineHeight: 1.5, color: "#ECECEE" }}>Your pipeline on one page, ready to share with your team.</span>
+              {pdfErr && <span role="alert" style={{ fontSize: 17, color: "#B3261E" }}>{pdfErr}</span>}
             </div>
           )}
         </div>
