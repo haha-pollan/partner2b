@@ -105,17 +105,6 @@ export default function Page() {
           </div>
         </section>
 
-        {/* Own data */}
-        <section aria-label="From the Partner2B directory" style={section}>
-          <div className="cut" style={{ background: "#fff", color: "#0A0A0B", padding: "34px 40px 42px", display: "flex", gap: 36, alignItems: "center", flexWrap: "wrap", transform: "rotate(-0.6deg)", ["--c" as string]: "26px" }}>
-            <span style={{ ...michroma, fontSize: "clamp(54px,7vw,84px)", lineHeight: 1, WebkitTextStroke: "2px currentColor" }}><span className="hl">55%</span></span>
-            <div style={{ flex: "1 1 340px", minWidth: 0 }}>
-              <p style={{ margin: 0, fontSize: 22, lineHeight: 1.45 }}>of the 622 programs in the Partner2B directory do not say how their partners are paid. A partner who cannot see the earnings has little reason to start</p>
-              <p style={{ margin: "14px 0 0", fontSize: 15, color: "#3A3B40" }}>Based on public program pages, 22 November 2026. <Link href="/directory" style={{ textDecoration: "underline" }}>Browse the directory</Link></p>
-            </div>
-          </div>
-        </section>
-
         {/* Signs */}
         <section aria-labelledby="signs" style={section}>
           <h2 id="signs" className="sectitle">Signs your partner program is not working</h2>
