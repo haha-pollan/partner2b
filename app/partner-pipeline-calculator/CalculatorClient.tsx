@@ -25,9 +25,6 @@ const ASSUMPTIONS: { k: string; label: string; unit: string; hint: string }[] = 
   { k: "activation", label: "Activation rate", unit: "%", hint: "Signed partners that bring a qualified deal within 90 days" },
   { k: "reply", label: "Reply rate", unit: "%", hint: "Companies that reply to your outreach" },
   { k: "replyToSigned", label: "Replies that become signed partners", unit: "%", hint: "Share of replying companies that sign" },
-  { k: "fit", label: "Fit check pass rate", unit: "%", hint: "Researched companies that match your ideal partner" },
-  { k: "found", label: "Contact found rate", unit: "%", hint: "Companies where you find a verified decision maker" },
-  { k: "deliverable", label: "Deliverability", unit: "%", hint: "Emails that arrive without bouncing" },
   { k: "recruitMonths", label: "Months to recruit and onboard", unit: "months", hint: "Before the first partner can bring a deal" },
   { k: "payout", label: "Partner payout or margin", unit: "%", hint: "Share of deal value paid to the partner" },
   { k: "existingActive", label: "Active partners you already have", unit: "", hint: "Partners already bringing you deals" },
@@ -68,7 +65,7 @@ export function CalculatorClient() {
     const d = num(deal) > 0 ? num(deal) : preset.deal;
     return {
       winRate: preset.win, dealsPerPartner: defaultDealsPerPartner(d, partner),
-      activation: ap.activation, reply: ap.reply, replyToSigned: ap.replyToSigned, fit: ap.fit, found: ap.found, deliverable: ap.deliverable,
+      activation: ap.activation, reply: ap.reply, replyToSigned: ap.replyToSigned,
       recruitMonths: DEFAULT_RECRUIT_MONTHS, payout: PAYOUT_DEFAULT[partner], existingActive: 0,
     };
   }, [approach, partner, deal, preset]);
@@ -79,8 +76,8 @@ export function CalculatorClient() {
   const inputs: Inputs = {
     goal: num(goal), dealSize: num(deal), cycleWeeks: num(cycle), windowMonths: num(windowM), partner,
     winRate: num(val("winRate")), dealsPerPartner: num(val("dealsPerPartner")), activation: num(val("activation")),
-    reply: num(val("reply")), replyToSigned: num(val("replyToSigned")), fit: num(val("fit")), found: num(val("found")),
-    deliverable: num(val("deliverable")), recruitMonths: num(val("recruitMonths")), existingActive: num(val("existingActive")) || 0,
+    reply: num(val("reply")), replyToSigned: num(val("replyToSigned")),
+    recruitMonths: num(val("recruitMonths")), existingActive: num(val("existingActive")) || 0,
     marketSize: num(val("marketSize")) > 0 ? num(val("marketSize")) : null, payout: num(val("payout")),
   };
   const result = useMemo(() => compute(inputs), [JSON.stringify(inputs)]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -174,7 +171,7 @@ export function CalculatorClient() {
         </select>
 
         <Lbl t="How will you reach partners" req />
-        <select value={approach} onChange={(e) => { setApproach(e.target.value as Approach); drop(["reply", "replyToSigned", "activation", "fit", "found", "deliverable"]); }} style={inputS}>
+        <select value={approach} onChange={(e) => { setApproach(e.target.value as Approach); drop(["reply", "replyToSigned", "activation"]); }} style={inputS}>
           {APPROACHES.map((a) => <option key={a.key} value={a.key}>{a.label}</option>)}
         </select>
         <Hint t={APPROACHES.find((a) => a.key === approach)!.hint} />
@@ -221,54 +218,43 @@ function Results({ r, i, lever, unlocked, gate }: { r: Result; i: Inputs; lever:
   }[band];
   const lowPayout = i.partner !== "technology" && r.payoutPerDeal < MIN_PAYOUT_PER_DEAL;
   const overMarket = i.marketSize !== null && r.list > i.marketSize;
-  const keep = Math.max(1, Math.min(99, Math.round((r.reached / r.list) * 100)));
-  const levels: [string, number, string][] = [
-    ["Start with a list of partner companies", r.list, "Companies you research. Some drop out before you write: they do not fit on a closer look, or you cannot find a verified email."],
-    ["Reach out to", r.reached, `The ${keep}% of the list that fits and has a verified email. You contact them over the first ${trim(i.recruitMonths)} months, about ${fmt(r.perWeek)} a week.`],
-    [r.signed === 1 ? "Sign 1 partner" : `Sign ${fmt(r.signed)} partners`, r.signed, "Companies that reply and agree to work with you."],
-    ["Active partners", r.activePartners, "Signed partners that start bringing you deals."],
-    ["Deals closed", r.deals, `Enough to reach ${usd(i.goal)} in ${trim(i.windowMonths)} months.`],
+  const levels: [string, number, string, string, string][] = [
+    ["Build a list and reach out to", r.list, `Companies that match your ideal partner profile. About ${fmt(r.perWeek)} a week over the first ${trim(i.recruitMonths)} months.`, "#ECECEE", "#0A0A0B"],
+    [r.signed === 1 ? "Sign 1 partner" : `Sign ${fmt(r.signed)} partners`, r.signed, "Companies that reply and agree to work with you.", "#A8FF5C", "#0A0A0B"],
+    ["Active partners", r.activePartners, "Signed partners that start bringing you deals.", "#85868B", "#0A0A0B"],
+    ["Deals closed", r.deals, `Enough to reach ${usd(i.goal)} in ${trim(i.windowMonths)} months.`, "#4A4B51", "#fff"],
   ];
+  const widths = [100, 82, 64, 48];
   const firstDeal = Math.min(i.windowMonths, Math.ceil(i.recruitMonths + (i.cycleWeeks * 7) / 30.4));
   const plan: [string, string, string][] = [
-    ["Month 0", `Build a list of ${fmt(r.list)} partner companies`, `Research each company. About ${100 - keep}% drop out: poor fit or no verified email`],
-    ["Months 1 to " + trim(i.recruitMonths), `Reach out to ${fmt(r.reached)} companies`, `The ${keep}% that fits and has a verified email, about ${fmt(r.perWeek)} a week`],
-    ["Month " + trim(i.recruitMonths), `${fmt(r.signed)} partners signed`, `${fmt(r.activePartners)} of them active and bringing deals`],
+    ["Month 0", `Build a list of ${fmt(r.list)} partner companies`, "Companies that match your ideal partner profile, each with a verified contact"],
+    ["Months 1 to " + trim(i.recruitMonths), `Reach out to all ${fmt(r.list)}`, `About ${fmt(r.perWeek)} a week`],
+    ["Month " + trim(i.recruitMonths), `${fmt(r.signed)} ${r.signed === 1 ? "partner" : "partners"} signed`, `${fmt(r.activePartners)} of them active and bringing deals`],
     ["Month " + trim(firstDeal), "First deals close", `After a sales cycle of ${trim(i.cycleWeeks)} weeks`],
     ["Month " + trim(i.windowMonths), `${usd(i.goal)} reached`, `${fmt(r.deals)} ${r.deals === 1 ? "deal" : "deals"} closed in total`],
   ];
   return (
-    <div style={{ marginTop: 40 }}>
-      <div className="cut" style={{ background: "#A8FF5C", color: "#0A0A0B", padding: "30px 32px 36px", ["--c" as string]: "28px" }}>
-        <div style={{ fontFamily: "'Michroma',sans-serif", fontSize: 17 }}>Your pipeline</div>
-        {r.covered ? (
-          <p style={{ margin: "16px 0 0", fontSize: 19, lineHeight: 1.5 }}>Your existing active partners already cover this goal. Raise the goal or lower the number of existing partners to see the pipeline you would need.</p>
-        ) : (
-          <>
-            <div style={{ marginTop: 24 }}>
-              {levels.map(([label, n, text], k) => {
-                const w = [100, 80, 62, 46, 34, 26];
-                const x1 = (100 - w[k]) / 2, x2 = (100 - w[k + 1]) / 2;
-                return (
-                  <div key={label} style={{ display: "flex", gap: "8px 24px", alignItems: "center", flexWrap: "wrap", marginTop: k ? 4 : 0 }}>
-                    <div style={{ flex: "1 1 280px", height: 78, background: "#0A0A0B", color: "#A8FF5C", clipPath: `polygon(${x1}% 0, ${100 - x1}% 0, ${100 - x2}% 100%, ${x2}% 100%)`, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center" }}>
-                      <div style={{ ...numStyle, fontSize: "clamp(20px,2.6vw,30px)" }}>{fmt(n)}</div>
-                    </div>
-                    <div style={{ flex: "1 1 240px", minWidth: 0 }}>
-                      <div style={{ fontSize: 17 }}>{label}</div>
-                      <div style={{ marginTop: 3, fontSize: 15, lineHeight: 1.45 }}>{text}</div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-            <p style={{ margin: "24px 0 0", fontSize: 17, lineHeight: 1.55 }}>
-              To close {usd(i.goal)} in {trim(i.windowMonths)} months at {usd(i.dealSize)} per deal, you need {fmt(r.deals)} {r.deals === 1 ? "deal" : "deals"}.
-            </p>
-          </>
-        )}
-      </div>
-
+    <div style={{ marginTop: 44 }}>
+      <span className="kick">Your pipeline</span>
+      {r.covered ? (
+        <p style={{ margin: "18px 0 0", fontSize: 19, lineHeight: 1.5 }}>Your existing active partners already cover this goal. Raise the goal or lower the number of existing partners to see the pipeline you would need.</p>
+      ) : (
+        <>
+          <p style={{ margin: "18px 0 0", fontSize: 19, lineHeight: 1.5, maxWidth: 640 }}>If you plan to reach {usd(i.goal)} in {trim(i.windowMonths)} months with a deal size of {usd(i.dealSize)}, this is the pipeline you need. It takes {fmt(r.deals)} {r.deals === 1 ? "deal" : "deals"}.</p>
+          <div style={{ marginTop: 26, display: "flex", flexDirection: "column", gap: 6 }}>
+            {levels.map(([label, n, text, bg, fg], k) => (
+              <div key={label} className="cut pipe" style={{ background: bg, color: fg, width: `${widths[k]}%`, alignSelf: "center", ["--c" as string]: "24px" }}>
+                <span style={{ fontSize: 15, width: 28 }}>{String(k + 1).padStart(2, "0")}</span>
+                <span className="pipen" style={{ color: k === 3 ? "#A8FF5C" : fg }}>{fmt(n)}</span>
+                <span style={{ flex: 1, minWidth: 0 }}>
+                  <span style={{ display: "block", fontSize: 18 }}>{label}</span>
+                  <span style={{ display: "block", marginTop: 3, fontSize: 15, lineHeight: 1.4 }}>{text}</span>
+                </span>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
       {!r.covered && (
         <>
           {lowPayout && (
@@ -315,17 +301,18 @@ function Results({ r, i, lever, unlocked, gate }: { r: Result; i: Inputs; lever:
           ) : (
             <div style={{ marginTop: 34 }}>
               <h2 style={{ fontWeight: 400, fontSize: 23, letterSpacing: 0, color: "#fff" }}>Your milestones</h2>
-              <div style={{ marginTop: 18, display: "flex", flexDirection: "column" }}>
+              <ol className="bldsteps" style={{ marginTop: 22, gap: 18 }}>
                 {plan.map(([when, what, note], k) => (
-                  <div key={when} style={{ display: "flex", gap: 20, padding: "16px 0", borderTop: k ? "1px solid #26272B" : "none", flexWrap: "wrap" }}>
-                    <div style={{ flex: "0 0 150px", color: "#A8FF5C", fontSize: 16 }}>{when}</div>
-                    <div style={{ flex: "1 1 260px" }}>
-                      <div style={{ fontSize: 18 }}>{what}</div>
-                      <div style={{ marginTop: 4, fontSize: 15, color: "#85868B" }}>{note}</div>
-                    </div>
-                  </div>
+                  <li key={when} style={{ alignItems: "flex-start" }}>
+                    <span className="bldn" style={{ background: "#A8FF5C", color: "#0A0A0B" }}>{k + 1}</span>
+                    <span>
+                      <span style={{ display: "block", fontSize: 15, color: "#A8FF5C" }}>{when}</span>
+                      <b style={{ marginTop: 2 }}>{what}</b>
+                      <i style={{ color: "#85868B" }}>{note}</i>
+                    </span>
+                  </li>
                 ))}
-              </div>
+              </ol>
               {lever && (
                 <p style={{ margin: "26px 0 0", fontSize: 17, lineHeight: 1.55, color: "#C9CACE" }}>
                   <span style={{ color: "#A8FF5C" }}>The change that helps most.</span> {lever.text} would cut your initial list from {fmt(lever.from)} to {fmt(lever.to)}.

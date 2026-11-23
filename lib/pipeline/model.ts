@@ -19,10 +19,10 @@ export const APPROACHES: { key: Approach; label: string; hint: string }[] = [
 ];
 
 // Rates in percent
-export const APPROACH_DEFAULTS: Record<Approach, { reply: number; replyToSigned: number; activation: number; fit: number; found: number; deliverable: number }> = {
-  hand: { reply: 15, replyToSigned: 30, activation: 45, fit: 90, found: 70, deliverable: 98 },
-  targeted: { reply: 5, replyToSigned: 20, activation: 35, fit: 70, found: 60, deliverable: 95 },
-  broad: { reply: 3.4, replyToSigned: 15, activation: 25, fit: 50, found: 55, deliverable: 92 },
+export const APPROACH_DEFAULTS: Record<Approach, { reply: number; replyToSigned: number; activation: number }> = {
+  hand: { reply: 15, replyToSigned: 30, activation: 45 },
+  targeted: { reply: 5, replyToSigned: 20, activation: 35 },
+  broad: { reply: 3.4, replyToSigned: 15, activation: 25 },
 };
 
 export type CompanyType = "saas" | "ai" | "cyber" | "fintech" | "enterprise";
@@ -63,9 +63,6 @@ export type Inputs = {
   activation: number;
   reply: number;
   replyToSigned: number;
-  fit: number;
-  found: number;
-  deliverable: number;
   recruitMonths: number;
   existingActive: number;
   marketSize: number | null; // optional: partner companies the user can identify
@@ -83,8 +80,6 @@ export type Result = {
   signed: number;
   replies: number;
   reached: number;
-  contactFound: number; // partners with a verified contact before delivery losses
-  fitPassed: number;
   list: number;
   perWeek: number;
   payoutTotal: number;
@@ -96,7 +91,7 @@ export type Failure = { ok: false; reason: "time" | "input"; message: string };
 const pos = (n: number) => Number.isFinite(n) && n > 0;
 
 export function compute(i: Inputs): Result | Failure {
-  const rates = [i.winRate, i.activation, i.reply, i.replyToSigned, i.fit, i.found, i.deliverable];
+  const rates = [i.winRate, i.activation, i.reply, i.replyToSigned];
   if (![i.goal, i.dealSize, i.windowMonths, i.recruitMonths, i.dealsPerPartner].every(pos) || !pos(i.cycleWeeks + 0.0001) || i.cycleWeeks < 0 || !rates.every((r) => pos(r) && r <= 100)) {
     return { ok: false, reason: "input", message: "Please check your numbers. Every field needs a positive value and rates must be between 0 and 100." };
   }
@@ -113,9 +108,8 @@ export function compute(i: Inputs): Result | Failure {
   const signed = Math.ceil(activePartners / (i.activation / 100));
   const replies = Math.ceil(signed / (i.replyToSigned / 100));
   const reached = Math.ceil(replies / (i.reply / 100));
-  const contactFound = Math.ceil(reached / (i.deliverable / 100));
-  const fitPassed = Math.ceil(contactFound / (i.found / 100));
-  const list = Math.ceil(fitPassed / (i.fit / 100));
+  // The list is the set of companies that match the ideal partner profile and are contacted
+  const list = reached;
   const weeks = Math.max(1, i.recruitMonths * 4.33);
   return {
     ok: true,
@@ -128,8 +122,6 @@ export function compute(i: Inputs): Result | Failure {
     signed,
     replies,
     reached,
-    contactFound,
-    fitPassed,
     list,
     perWeek: Math.ceil(reached / weeks),
     payoutTotal: (i.goal * i.payout) / 100,
