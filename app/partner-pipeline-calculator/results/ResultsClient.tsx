@@ -157,9 +157,6 @@ export function ResultsClient({ nav, footer }: { nav: React.ReactNode; footer: R
             <p className="bubble herosub" style={{ marginTop: 44 }}>If you plan to reach {usd(inputs.goal)} in {win} months with a deal size of {usd(inputs.dealSize)}, this is the pipeline you need. It takes {fmt(r.deals)} {r.deals === 1 ? "deal" : "deals"}.</p>
             <div className="herobtns"><Link href={back} className="btn btn-s">Change your inputs</Link></div>
           </div>
-          <div className="herotoby" aria-hidden="true">
-            <Toby height={580} rows={38} glasses style={{ width: "100%", height: "100%" }} />
-          </div>
         </div>
       </div>
 
@@ -171,7 +168,7 @@ export function ResultsClient({ nav, footer }: { nav: React.ReactNode; footer: R
             <div key={name} className="stair plstair" style={{ background: bg, color: tx, marginLeft: `${ind}%` }}>
               <span className="plnumwrap">
                 <span className="plnum" style={{ color: k === 3 ? "#A8FF5C" : tx }}>{n}</span>
-                <span style={{ display: "block", marginTop: 10, fontSize: 16 }}>{units[k]}</span>
+                <span style={{ display: "block", marginTop: 10, fontSize: 17 }}>{units[k]}</span>
               </span>
               <span style={{ flex: 1, minWidth: 0 }}>
                 <span className="stairname" style={{ display: "block", fontFamily: "'Michroma',sans-serif", fontSize: 28, WebkitTextStroke: "1.2px currentColor" }}>{name}</span>
