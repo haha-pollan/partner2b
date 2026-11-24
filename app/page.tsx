@@ -57,7 +57,7 @@ export default async function Home() {
             <p className="bubble herosub" style={{ marginTop: 44 }}>{`Compare commissions, tiers and requirements across ${all.length} programs, or use our free tools to make your own partner program more efficient`}</p>
             <div className="herobtns">
               <Link href="/directory" className="btn btn-p">Find partner programs →</Link>
-              <Link href="/ai-tools" className="btn btn-s">Explore AI partner tools →{(builderIsNew() || calcIsNew() || assessIsNew()) && <span className="newbadge" suppressHydrationWarning style={{ background: "#fff", color: "#7C5CFF" }}>New</span>}</Link>
+              <Link href="/ai-tools" className="btn btn-s">Explore free tools →{(builderIsNew() || calcIsNew() || assessIsNew()) && <span className="newbadge" suppressHydrationWarning style={{ background: "#fff", color: "#7C5CFF" }}>New</span>}</Link>
             </div>
           </div>
           <div className="herotoby">

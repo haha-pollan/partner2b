@@ -55,20 +55,6 @@ export const TOOLS: Tool[] = [
   },
 ];
 
-export const STATS: { n: string; l: string }[] = [
-  { n: "3", l: "free partner program tools live today" },
-  { n: "6", l: "more tools in development" },
-  { n: "3 min", l: "to find your two biggest bottlenecks with the assessment" },
-];
-
-export const WHEN: { q: string; tool: string; href: string; enter: string; get: string }[] = TOOLS.map((t) => ({
-  q: t.best,
-  tool: t.name,
-  href: t.href,
-  enter: t.enter,
-  get: t.get,
-}));
-
 export const WHAT_IS = [
   "Partner program tools are small, focused tools that help you plan, size and fix a partner program before you spend money on software or hire a team. They answer one question each, for example what to build, how many partners you need to approach, or why partners are not selling.",
   "They are different from partner relationship management (PRM) software. PRM software runs a program you already have: portals, deal registration, payouts. The tools on this page work earlier and alongside it. They help you decide what the program should be, how big the outreach has to be and where it leaks, so the software you pick later has something worth running.",

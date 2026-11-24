@@ -33,7 +33,7 @@ export function Footer() {
             </div>
           </div>
           <div>
-            <Link href="/ai-tools" className="foothead" style={{ display: "block" }}>AI partner tools</Link>
+            <Link href="/ai-tools" className="foothead" style={{ display: "block" }}>Free tools</Link>
             <div className="footcol">
               <Link href="/program-builder">Program builder</Link>
               <Link href="/partner-pipeline-calculator">Partner pipeline calculator</Link>
