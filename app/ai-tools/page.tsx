@@ -63,8 +63,8 @@ export default function Page() {
               return (
                 <Link key={t.href} href={t.href} className="cut gcard" style={{ background: T.bg, color: T.fg, transform: `rotate(${ROT[i % 6]}deg)`, padding: "24px 26px 30px", display: "flex", flexDirection: "column" }}>
                   <h3 style={{ fontWeight: 400, fontSize: 17, letterSpacing: 0, lineHeight: 1.25, minHeight: 44 }}>{t.name}</h3>
-                  <div style={{ display: "flex", gap: 8, minHeight: 26, marginTop: 8, flexWrap: "wrap" }}>
-                    {isNew[t.href] && <span className="newbadge" suppressHydrationWarning style={{ marginLeft: 0 }}>New</span>}
+                  <div style={{ display: "flex", alignItems: "center", gap: 8, minHeight: 30, marginTop: 8, flexWrap: "wrap" }}>
+                    {isNew[t.href] && <span className="pill" suppressHydrationWarning style={{ background: "#7C5CFF", color: "#fff" }}>New</span>}
                     {t.ai && <span className="pill" style={{ background: "#7C5CFF", color: "#fff" }}>Uses AI</span>}
                   </div>
                   <p style={{ margin: "8px 0 0", minHeight: 72, fontSize: 15, lineHeight: 1.5, color: T.sub }}>{t.promise}</p>
