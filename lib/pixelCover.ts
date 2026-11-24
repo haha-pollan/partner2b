@@ -148,12 +148,35 @@ const TEMPLATES: Tpl[] = [
   },
 ];
 
+// Covers made for one specific article. They are picked by slug, so they do not depend on the article's position in the list.
+const PINNED: Record<string, { tpl: Tpl; accent: string }> = {
+  "why-do-partners-go-quiet-after-signing": {
+    accent: "#8B7BFF",
+    tpl: { // one hub, many partners, only a few lit
+      tag: "Partner activation",
+      layers: (_r, a) => {
+        const hub: Cell = [3, 7];
+        const nodes: Cell[] = [];
+        for (const x of [10, 15, 20]) for (const y of [2, 5, 8, 11]) nodes.push([x, y]);
+        const on = new Set([2, 5, 8]);
+        const dimL: Cell[] = [], litL: Cell[] = [], dimN: Cell[] = [], litN: Cell[] = [];
+        nodes.forEach(([x, y], k) => {
+          if (on.has(k)) { litL.push(...line(hub[0], hub[1], x, y + 1)); litN.push(...blk(x, y)); }
+          else { dimL.push(...line(hub[0], hub[1], x, y + 1)); dimN.push(...blk(x, y)); }
+        });
+        return [[mix(BG, "#85868B", 0.28), dimL], [mix(BG, LIME, 0.7), litL], [mix(BG, "#85868B", 0.5), dimN], [a, litN], [LIME, blk(hub[0] - 1, hub[1] - 1, 3, 3)]];
+      },
+    },
+  },
+};
+
 export function buildCover(slug: string, title: string, i: number) {
   let h = 0;
   for (const c of slug) h = (h * 31 + c.charCodeAt(0)) >>> 0;
   const r = rng(h);
-  const tpl = TEMPLATES[i % TEMPLATES.length];
-  const accent = ACCENTS[(i + Math.floor(i / TEMPLATES.length)) % ACCENTS.length];
+  const pin = PINNED[slug];
+  const tpl = pin ? pin.tpl : TEMPLATES[i % TEMPLATES.length];
+  const accent = pin ? pin.accent : ACCENTS[(i + Math.floor(i / TEMPLATES.length)) % ACCENTS.length];
   const bg = new Map<string, string>();
   for (let x = 0; x < W; x++) for (let y = 0; y < H; y++) if (r() < 0.3) bg.set(x + "," + y, mix(BG, "#3A3B40", 0.18 + r() * 0.3));
   const fg = new Map<string, string>();

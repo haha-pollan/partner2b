@@ -43,7 +43,7 @@ export default async function Article({ params }: { params: Promise<{ slug: stri
     ? { "@type": "Person", name: by[1].trim(), ...(by[2] ? { jobTitle: by[2].trim() } : {}), worksFor: { "@type": "Organization", name: "Partner2B" } }
     : { "@type": "Organization", name: "Partner2B" };
   // FAQ block: every h3 after an h2 named FAQ becomes a Question with the following paragraphs as the answer
-  const faqSection = html.split(/<h2[^>]*>\s*(?:faq|frequently asked questions)[^<]*<\/h2>/i)[1];
+  const faqSection = html.split(/<h2[^>]*>\s*(?:faq|frequently asked questions)[^<]*<\/h2>/i)[1]?.split(/<h2[\s>]/i)[0];
   const faq = faqSection
     ? faqSection.split(/<h3[^>]*>/i).slice(1).map((part) => {
         const [q, ...rest] = part.split(/<\/h3>/i);
