@@ -80,10 +80,16 @@ export const AUDIENCE: { t: string; d: string }[] = [
   { t: "Partner and channel managers", d: "You run a program that is not delivering and need to find the real cause before you ask for budget." },
 ];
 
-export const TRUST = [
-  "All three tools are free to start. The pipeline calculator shows the headline numbers without an email, and the assessment shows your first bottleneck right away. To see the full result and download the PDF, you leave your name and email.",
-  "The assessment never asks for a company name, so you can answer honestly about a program that is not working. The calculator and the assessment are rule based and do not use AI.",
-  "The program builder is the one tool that uses AI. It sends the company details you enter to OpenAI so that it can write your report. You can read how we handle your data in the privacy policy.",
+export const TRUST: { t: string; d: string }[] = [
+  { t: "Free to start", d: "All three tools are free to start. The pipeline calculator shows the headline numbers without an email, and the assessment shows your first bottleneck right away. To see the full result and download the PDF, you leave your name and email." },
+  { t: "Private by design", d: "The assessment never asks for a company name, so you can answer honestly about a program that is not working. The calculator and the assessment are rule based and do not use AI." },
+  { t: "AI only in the builder", d: "The program builder is the one tool that uses AI. It sends the company details you enter to OpenAI so that it can write your report. You can read how we handle your data in the privacy policy." },
+];
+
+export const WANTS: { label: string; tool: string; href: string }[] = [
+  { label: "I am starting a partner program", tool: "Program builder", href: "/program-builder" },
+  { label: "I need a number for my plan", tool: "Partner pipeline calculator", href: "/partner-pipeline-calculator" },
+  { label: "My partner program is not performing", tool: "Partner program assessment", href: "/partner-program-assessment" },
 ];
 
 export const COMING = "Six more tools are in development, and we build them one at a time. Tell us which one would help you most and it moves up the list.";
