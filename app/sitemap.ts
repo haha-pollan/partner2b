@@ -9,6 +9,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const posts = await getArticles();
   return [
     { url: "https://partner2b.com/directory" },
+    { url: "https://partner2b.com/ai-tools" },
     { url: "https://partner2b.com/program-builder" },
     { url: "https://partner2b.com/partner-pipeline-calculator" },
     { url: "https://partner2b.com/partner-program-assessment" },

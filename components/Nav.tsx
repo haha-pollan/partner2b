@@ -24,6 +24,7 @@ export function Nav() {
         <div className={tools ? "navdd ainav open" : "navdd ainav"}>
           <button type="button" className="navddbtn" aria-expanded={tools} onClick={() => { setTools((o) => !o); setDd(false); }}>AI partner tools<span aria-hidden="true" className="navchev">▾</span>{builderIsNew() || calcIsNew() || assessIsNew() ? <span className="newbadge" suppressHydrationWarning>New</span> : null}</button>
           <div className="navmenu">
+            <Link href="/ai-tools" onClick={close}>All AI partner tools</Link>
             <Link href="/program-builder" onClick={close}>Program builder{builderIsNew() ? <span className="newbadge navitembadge" suppressHydrationWarning>New</span> : null}</Link>
             <Link href="/partner-pipeline-calculator" onClick={close}>Partner pipeline calculator{calcIsNew() ? <span className="newbadge navitembadge" suppressHydrationWarning>New</span> : null}</Link>
             <Link href="/partner-program-assessment" onClick={close}>Partner program assessment{assessIsNew() ? <span className="newbadge navitembadge" suppressHydrationWarning>New</span> : null}</Link>
