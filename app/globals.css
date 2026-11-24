@@ -40,6 +40,8 @@ button{font-family:inherit}
 .navlinks a:not(.btn):hover,.navddbtn:hover{color:var(--lime)}
 .navddbtn{background:none;border:0;padding:0;font:inherit;color:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
 .navchev{font-size:11px}
+.navddrow{display:inline-flex;align-items:center;gap:6px}
+.navddlink:hover{color:var(--lime)}
 .navdd{position:relative}
 .navmenu{display:none;position:absolute;left:-18px;top:100%;padding-top:14px;z-index:40;min-width:190px}
 .navmenu a{white-space:nowrap;display:block;background:var(--g800);color:#fff;padding:14px 22px;font-size:16px;font-weight:400}
@@ -217,6 +219,7 @@ button{font-family:inherit}
   .navlinks a:not(.btn){color:#fff;padding:15px 0;border-bottom:2px solid var(--g700)}
   .navlinks a.btn{text-align:center;margin:16px 0 0}
   .navddbtn{display:none}
+  .navddrow{display:block}
   .navmenu{display:block;position:static;padding:0;min-width:0}
   .navmenu a{background:transparent;clip-path:none!important;padding:15px 0;border-bottom:2px solid var(--g700)}
   .ainav .newbadge{position:static;display:inline-block;margin-left:8px}
