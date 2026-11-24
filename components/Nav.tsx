@@ -22,7 +22,7 @@ export function Nav() {
         <Link href="/directory" onClick={close}>Browse directory</Link>
         <Link href="/ai" className="ainav" onClick={close}>AI programs{aiIsNew() ? <span className="newbadge" suppressHydrationWarning>New</span> : null}</Link>
         <div className={tools ? "navdd ainav open" : "navdd ainav"}>
-          <span className="navddrow"><Link href="/ai-tools" className="navddlink" onClick={close}>AI partner tools{builderIsNew() || calcIsNew() || assessIsNew() ? <span className="newbadge" suppressHydrationWarning>New</span> : null}</Link><button type="button" className="navddbtn" aria-label="Show AI partner tools menu" aria-expanded={tools} onClick={() => { setTools((o) => !o); setDd(false); }}><span aria-hidden="true" className="navchev">▾</span></button></span>
+          <span className="navddrow"><Link href="/ai-tools" className="navddlink" onClick={close}>Free tools{builderIsNew() || calcIsNew() || assessIsNew() ? <span className="newbadge" suppressHydrationWarning>New</span> : null}</Link><button type="button" className="navddbtn" aria-label="Show free tools menu" aria-expanded={tools} onClick={() => { setTools((o) => !o); setDd(false); }}><span aria-hidden="true" className="navchev">▾</span></button></span>
           <div className="navmenu">
             <Link href="/program-builder" onClick={close}>Program builder{builderIsNew() ? <span className="newbadge navitembadge" suppressHydrationWarning>New</span> : null}</Link>
             <Link href="/partner-pipeline-calculator" onClick={close}>Partner pipeline calculator{calcIsNew() ? <span className="newbadge navitembadge" suppressHydrationWarning>New</span> : null}</Link>
