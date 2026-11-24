@@ -8,7 +8,7 @@ import CountUp from "@/components/CountUp";
 import { Glyph } from "@/components/Tile";
 import { getPrograms } from "@/lib/programs";
 import { AI_CATEGORIES, inCat, aiOnly, aiIsNew } from "@/lib/ai";
-import { builderIsNew } from "@/lib/launch";
+import { assessIsNew, builderIsNew, calcIsNew } from "@/lib/launch";
 
 export const revalidate = 600;
 export const metadata: Metadata = {
@@ -54,10 +54,10 @@ export default async function Home() {
               <span className="pt pt1">Find a B2B partner program</span>
               <span className="pt pt2">or build your own</span>
             </h1>
-            <p className="bubble herosub" style={{ marginTop: 44 }}>{`Compare commissions, tiers and requirements across ${all.length} programs, or answer a few questions and get a strategy for your own`}</p>
+            <p className="bubble herosub" style={{ marginTop: 44 }}>{`Compare commissions, tiers and requirements across ${all.length} programs, or use our free tools to make your own partner program more efficient`}</p>
             <div className="herobtns">
               <Link href="/directory" className="btn btn-p">Find partner programs →</Link>
-              <Link href="/program-builder" className="btn btn-s">Build a partner program →{builderIsNew() && <span className="newbadge" suppressHydrationWarning style={{ background: "#fff", color: "#7C5CFF" }}>New</span>}</Link>
+              <Link href="/ai-tools" className="btn btn-s">Explore AI partner tools →{(builderIsNew() || calcIsNew() || assessIsNew()) && <span className="newbadge" suppressHydrationWarning style={{ background: "#fff", color: "#7C5CFF" }}>New</span>}</Link>
             </div>
           </div>
           <div className="herotoby">

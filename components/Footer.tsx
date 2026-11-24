@@ -35,6 +35,7 @@ export function Footer() {
           <div>
             <div className="foothead">AI partner tools</div>
             <div className="footcol">
+              <Link href="/ai-tools">All AI partner tools</Link>
               <Link href="/program-builder">Program builder</Link>
               <Link href="/partner-pipeline-calculator">Partner pipeline calculator</Link>
               <Link href="/partner-program-assessment">Partner program assessment</Link>
