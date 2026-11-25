@@ -70,9 +70,6 @@ async function harvest(src: Source, programs: Map<string, number>): Promise<{ fo
   const page = await safeGet(src.url);
   if (!page.ok) return { found: 0, added: 0, note: `error: ${page.error}` };
   const ex = extract(page.html, page.url, 5000);
-  // Parked, for-sale and empty sites are not companies. Without real text the model would invent a description from the name.
-  if (PARKED.test(`${ex.title} ${ex.description} ${ex.text.slice(0, 1500)}`)) { await mark(row, "skipped", "parked or for-sale domain"); return "skipped"; }
-  if (ex.text.length < 400) { await mark(row, "skipped", "site has too little content"); return "skipped"; }
   const srcHost = hostOf(page.url);
   const linkSet = new Set(ex.links.map((l) => l.href));
   const linksTxt = ex.links.map((l) => `${l.text} | ${l.href}`).join("\n").slice(0, 30_000);
@@ -157,6 +154,9 @@ async function enrichOne(row: QRow, programs: Map<string, number>): Promise<"add
   const page = await safeGet(home);
   if (!page.ok) { const dead = row.attempts >= 1; await mark(row, dead ? "failed" : "queued", `site: ${page.error}`); return dead ? "failed" : "retry"; }
   const ex = extract(page.html, page.url, 5000);
+  // Parked, for-sale and empty sites are not companies. Without real text the model would invent a description from the name.
+  if (PARKED.test(`${ex.title} ${ex.description} ${ex.text.slice(0, 1500)}`)) { await mark(row, "skipped", "parked or for-sale domain"); return "skipped"; }
+  if (ex.text.length < 400) { await mark(row, "skipped", "site has too little content"); return "skipped"; }
   const pl = ex.links.filter((l) => { const h = hostOf(l.href); return (h === domain || h.endsWith("." + domain)) && (PARTNER_LINK.test(l.text) || PARTNER_LINK.test(new URL(l.href).pathname)); }).slice(0, 15);
   const hints = [row.partner_type_hint && `Hint from the source list: partner type ${row.partner_type_hint}.`, row.category_hint && `Hint from the source list: category ${row.category_hint}.`].filter(Boolean).join(" ");
   const c = await askJson<Classified>(CLASSIFY_SYS, `WEBSITE: ${home}\nNAME FROM LIST: ${row.name ?? ""}\n${hints}\nTITLE: ${ex.title}\nDESCRIPTION: ${ex.description}\nPAGE TEXT:\n${ex.text}\n\nPARTNER LINKS (text | url):\n${pl.map((l) => `${l.text} | ${l.href}`).join("\n")}`);
