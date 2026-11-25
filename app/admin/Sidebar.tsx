@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { Logo } from "@/components/Logo";
 
 type Item = { label: string; href?: string; badge?: number; soon?: boolean };
 type Group = { title: string; items: Item[]; superOnly?: boolean };
@@ -16,7 +17,7 @@ export default function Sidebar({ isSuper, newSubmissions, name, role, logout }:
     { title: "Directory", items: [{ label: "Programs", href: "/admin/programs" }, { label: "Data quality", soon: true }] },
     { title: "Content", items: [{ label: "Blog articles", soon: true }, { label: "Subscribers", soon: true }] },
     { title: "Vendors", items: [{ label: "Vendor accounts", soon: true }, { label: "Claims", soon: true }] },
-    { title: "Admin", superOnly: true, items: [{ label: "Team and roles", soon: true }, { label: "Activity log", soon: true }, { label: "Import and export", soon: true }, { label: "Settings and prompts", soon: true }] },
+    { title: "Admin", superOnly: true, items: [{ label: "Team and roles", soon: true }, { label: "Activity log", soon: true }, { label: "Import, export", soon: true }, { label: "Settings", soon: true }] },
   ];
 
   const active = (href: string) => (href === "/admin" ? path === "/admin" : path === href || path.startsWith(href + "/"));
@@ -24,7 +25,7 @@ export default function Sidebar({ isSuper, newSubmissions, name, role, logout }:
   return (
     <aside className={`adm-side${open ? " open" : ""}`}>
       <div className="adm-side-head">
-        <Link href="/admin" className="adm-brand">Partner2B <b>admin</b></Link>
+        <Link href="/admin" className="adm-brand" aria-label="Partner2B admin"><Logo variant="light" size={17} /></Link>
         <button type="button" className="adm-burger" aria-label="Menu" aria-expanded={open} onClick={() => setOpen(!open)}>{open ? "Close" : "Menu"}</button>
       </div>
       <nav className="adm-nav" onClick={() => setOpen(false)}>
