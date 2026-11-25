@@ -75,22 +75,22 @@ export default async function Dashboard() {
     <>
       <div className="adm-pagehead">
         <h1>{hello}</h1>
-        <p className="adm-sub">What needs you today.</p>
+        <p className="adm-sub">What needs you today</p>
       </div>
 
       <div className="adm-kpis">
-        <Link href="/admin/submissions" className="adm-kpi cut"><span className="adm-kpi-n">{na(subs ? waiting.length : null)}</span><span className="adm-kpi-l">New submissions waiting</span></Link>
-        <Link href="/admin/programs?show=published" className="adm-kpi cut"><span className="adm-kpi-n">{na(progs ? published.length : null)}</span><span className="adm-kpi-l">Programs published{progs ? `, ${drafts} in draft` : ""}</span></Link>
-        <div className="adm-kpi cut"><span className="adm-kpi-n">{na(leadsBlocked ? null : leads7)}</span><span className="adm-kpi-l">Leads in the last 7 days</span></div>
-        <div className="adm-kpi cut"><span className="adm-kpi-n">{na(subscribers ? subscribers.length : null)}</span><span className="adm-kpi-l">Newsletter subscribers</span></div>
-        <div className="adm-kpi cut"><span className="adm-kpi-n">{na(progs ? needInfo : null)}</span><span className="adm-kpi-l">Programs missing a description</span></div>
+        <Link href="/admin/submissions" className="adm-kpi cut"><span className="adm-kpi-n">{na(subs ? waiting.length : null)}</span><span className="adm-kpi-l">New submissions</span></Link>
+        <Link href="/admin/programs?show=published" className="adm-kpi cut"><span className="adm-kpi-n">{na(progs ? published.length : null)}</span><span className="adm-kpi-l">Programs live</span>{progs && <span className="adm-kpi-s">{drafts} in draft</span>}</Link>
+        <div className="adm-kpi cut"><span className="adm-kpi-n">{na(leadsBlocked ? null : leads7)}</span><span className="adm-kpi-l">Leads, 7 days</span></div>
+        <div className="adm-kpi cut"><span className="adm-kpi-n">{na(subscribers ? subscribers.length : null)}</span><span className="adm-kpi-l">Subscribers</span></div>
+        <div className="adm-kpi cut"><span className="adm-kpi-n">{na(progs ? needInfo : null)}</span><span className="adm-kpi-l">Missing description</span></div>
       </div>
 
       {leadsBlocked && <p className="adm-note">Some lead tables cannot be read yet. Run the grants block at the end of supabase/admin.sql in the Supabase SQL editor.</p>}
 
       <div className="adm-cols">
         <section className="adm-card cut">
-          <div className="adm-card-head"><h2>Needs attention</h2><Link href="/admin/submissions">All submissions</Link></div>
+          <div className="adm-card-head"><h2>Needs attention</h2><Link href="/admin/submissions">View all</Link></div>
           {!subs ? <div className="adm-empty">Could not load submissions.</div> : waiting.length === 0 ? <div className="adm-empty">No new submissions. All caught up.</div> : (
             <table className="adm-table">
               <thead><tr><th>Waiting</th><th>Type</th><th>Company or listing</th><th>Person</th></tr></thead>
@@ -110,7 +110,7 @@ export default async function Dashboard() {
         </section>
 
         <section className="adm-card cut">
-          <div className="adm-card-head"><h2>Leads, last 30 days</h2><span className="adm-total">{leadsBlocked ? "-" : total30}</span></div>
+          <div className="adm-card-head"><h2>Leads, 30 days</h2><span className="adm-total">{leadsBlocked ? "-" : total30}</span></div>
           <div className="adm-bars" role="img" aria-label="Leads per day over the last 30 days">
             {days.map((x) => (<i key={x.d} title={`${x.d}: ${x.n}`} style={{ height: `${Math.max(x.n ? 8 : 2, (x.n / max) * 100)}%` }} className={x.n ? "on" : ""} />))}
           </div>
@@ -133,17 +133,17 @@ export default async function Dashboard() {
           <div className="adm-card-head"><h2>Directory to-do</h2><Link href="/admin/programs">Programs</Link></div>
           {!progs ? <div className="adm-empty">Could not load programs.</div> : (
             <ul className="adm-todo">
-              <li><b>{noDesc.length}</b> published programs have no or a very short description</li>
-              <li><b>{noCompany.length}</b> have no company description</li>
-              <li><b>{noCommission.length}</b> do not show commission details</li>
-              <li><b>{drafts}</b> are drafts that are not on the site</li>
+              <li><b>{noDesc.length}</b> without a description</li>
+              <li><b>{noCompany.length}</b> without a company description</li>
+              <li><b>{noCommission.length}</b> without commission details</li>
+              <li><b>{drafts}</b> drafts, not on the site</li>
             </ul>
           )}
         </section>
       </div>
 
       <section className="adm-card cut">
-        <div className="adm-card-head"><h2>{isSuper ? "Recent activity" : "Your recent activity"}</h2></div>
+        <div className="adm-card-head"><h2>{isSuper ? "Recent activity" : "Your activity"}</h2></div>
         {!log ? <div className="adm-empty">Activity could not be loaded.</div> : log.length === 0 ? <div className="adm-empty">Nothing yet.</div> : (
           <table className="adm-table">
             <thead><tr><th>When</th><th>Who</th><th>Action</th><th>Item</th></tr></thead>

@@ -106,3 +106,52 @@ a.adm-kpi:hover{outline:2px solid var(--lime)}
   .adm-table{min-width:460px}
   .adm-kpi-n{font-size:28px}
 }
+
+/* Density pass: product-style sizes, one-line titles */
+.adm-shell{font-size:14px;line-height:1.45}
+.adm-main{padding:26px 32px 64px}
+.adm-main h1{font-size:22px;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.adm-pagehead{margin-bottom:18px}
+.adm-pagehead h1{font-size:24px}
+.adm-sub{font-size:14px;margin:0 0 16px}
+.adm-pagehead .adm-sub{margin:0}
+.adm-card{padding:20px 22px 24px}
+.adm-main .adm-card{margin-bottom:20px}
+.adm-card-head{margin-bottom:10px}
+.adm-card-head h2{font-size:16px;white-space:nowrap}
+.adm-card-head a{font-size:13px;white-space:nowrap}
+.adm-total{font-size:16px}
+.adm-kpis{gap:14px;margin-bottom:20px}
+.adm-kpi{padding:14px 16px 16px;gap:3px}
+.adm-kpi-n{font-size:24px}
+.adm-kpi-l{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.adm-kpi-s{font-size:12px;color:var(--g500);opacity:.8}
+.adm-cols{gap:20px}
+.adm-table{font-size:13.5px}
+.adm-table th{font-size:11.5px;padding:7px 10px;white-space:nowrap}
+.adm-table td{padding:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:260px}
+.adm-todo{font-size:14px;gap:10px}
+.adm-todo li{padding-bottom:10px;white-space:nowrap}
+.adm-todo b{font-size:15px;min-width:28px;display:inline-block}
+.adm-bars{height:130px}
+.adm-note{font-size:13.5px}
+.adm-pill{font-size:12px;padding:1px 9px}
+.adm-tab{font-size:13.5px;padding:6px 12px}
+.adm-box h2{font-size:15px}
+.adm-box label,.adm-dl dt{font-size:13px}
+.adm-dl{font-size:14px}
+.adm-main .field{font-size:14px;padding:9px 12px}
+.adm-main .btn,.adm-main .btn-sm{font-size:13.5px}
+.adm-side{padding:18px 12px 14px}
+.adm-brand{font-size:17px;white-space:nowrap}
+.adm-group{margin-bottom:14px}
+.adm-group-title{font-size:11px}
+.adm-item{font-size:14px;padding:7px 10px;white-space:nowrap}
+.adm-item span:first-child{overflow:hidden;text-overflow:ellipsis}
+.adm-badge{font-size:12px;padding:0 8px}
+.adm-soon{font-size:10px}
+.adm-user{font-size:13px}
+.adm-side-foot button{font-size:13px;padding:5px 10px}
+.adm-shell{grid-template-columns:232px minmax(0,1fr)}
+@media(max-width:860px){.adm-shell{grid-template-columns:1fr}.adm-table td{max-width:200px}.adm-kpi-n{font-size:22px}}
+.adm-main form.adm-formwide,.adm-main .adm-card>form{max-width:980px}
