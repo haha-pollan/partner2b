@@ -63,13 +63,20 @@ export async function findNow() {
   go({ tab: "sources", msg: note });
 }
 
-export async function setState(f: FormData) {
+export async function setCap(f: FormData) {
+  const staff = await requireSuper();
+  const cap = Math.max(10, Math.min(3000, Math.round(Number(f.get("cap")) || 300)));
+  await db("enrich_state?id=eq.1", { method: "PATCH", headers: { Prefer: "return=minimal" }, body: JSON.stringify({ daily_cap: cap }) });
+  await logAction(staff, "enrich_cap", undefined, String(cap));
+  go({ msg: `Daily cap saved: ${cap} companies` });
+}
+
+export async function togglePause(f: FormData) {
   const staff = await requireSuper();
   const paused = String(f.get("paused")) === "true";
-  const cap = Math.max(10, Math.min(3000, Math.round(Number(f.get("cap")) || 300)));
-  await db("enrich_state?id=eq.1", { method: "PATCH", headers: { Prefer: "return=minimal" }, body: JSON.stringify({ paused, daily_cap: cap }) });
-  await logAction(staff, "enrich_state", undefined, `paused=${paused} cap=${cap}`);
-  go({ msg: paused ? "Paused" : `Running, daily cap ${cap}` });
+  await db("enrich_state?id=eq.1", { method: "PATCH", headers: { Prefer: "return=minimal" }, body: JSON.stringify({ paused }) });
+  await logAction(staff, "enrich_pause", undefined, `paused=${paused}`);
+  go({ msg: paused ? "Paused. Nothing runs until you resume." : "Resumed" });
 }
 
 // Starting set: every published directory program becomes an approved vendor record.
