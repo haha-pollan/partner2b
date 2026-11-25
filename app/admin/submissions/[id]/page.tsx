@@ -63,6 +63,12 @@ export default async function SubmissionPage({ params, searchParams }: { params:
           </dl>
         </div>
         <div>
+          {s.kind === "submit" && (
+            <div className="adm-box">
+              <h2>Listing</h2>
+              <Link href={`/admin/programs/new?from=${s.id}`} className="btn btn-s btn-sm">Create draft listing</Link>
+            </div>
+          )}
           <form action={updateSubmission} className="adm-box">
             <h2>Status</h2>
             <input type="hidden" name="id" value={s.id} />
