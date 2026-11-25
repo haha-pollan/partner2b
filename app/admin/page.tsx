@@ -17,7 +17,7 @@ const TOOLS: [string, string][] = [
 
 type Sub = { id: number; created_at: string; kind: string; status: string | null; company: string | null; listing: string | null; name: string | null };
 type Lead = { created_at: string; email: string };
-type Prog = { id: number; slug: string; company: string; description: string | null; company_description: string | null; commission_models: string[] | null; published: boolean };
+type Prog = { id: number; slug: string; company: string; product_category: string | null; description: string | null; company_description: string | null; commission_models: string[] | null; published: boolean };
 type Log = { at: string; staff_email: string; action: string; target: string | null };
 
 async function rows<T>(path: string): Promise<T[] | null> {
@@ -49,7 +49,7 @@ export default async function Dashboard() {
   const [toolCounts, subs, progs, log, ...leadSets] = await Promise.all([
     Promise.all(TOOL_DEFS.map((t) => count(t.table))),
     rows<Sub>("submissions?select=id,created_at,kind,status,company,listing,name&order=created_at.asc&limit=5000"),
-    rows<Prog>("programs?select=id,slug,company,description,company_description,commission_models,published&limit=2000"),
+    rows<Prog>("programs?select=id,slug,company,product_category,description,company_description,commission_models,published&limit=2000"),
     rows<Log>(`admin_log?select=at,staff_email,action,target&order=at.desc&limit=8${isSuper ? "" : `&staff_email=eq.${encodeURIComponent(staff.email)}`}`),
     ...TOOLS.map(([t]) => rows<Lead>(`${t}?select=created_at,email&order=created_at.desc&limit=1000`)),
   ]);
@@ -59,9 +59,11 @@ export default async function Dashboard() {
   const published = (progs ?? []).filter((p) => p.published);
   const drafts = (progs ?? []).length - published.length;
 
-  const noDesc = published.filter((p) => !p.description || p.description.trim().length < 40);
-  const noCompany = published.filter((p) => !p.company_description || p.company_description.trim().length < 20);
-  const noCommission = published.filter((p) => !(p.commission_models ?? []).filter((m) => m !== "Not published").length);
+  const segCount = new Map<string, number>();
+  for (const p of published) { const k = (p.product_category || "").trim(); if (k) segCount.set(k, (segCount.get(k) ?? 0) + 1); }
+  const segments = [...segCount.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])).slice(0, 7);
+  const segMax = Math.max(1, ...segments.map((x) => x[1]));
+
 
   // Leads: every tool except the newsletter counts as a lead; subscribers are shown separately
   const leadTools = TOOLS.map(([t, label], i) => ({ t, label, data: leadSets[i] }));
@@ -184,16 +186,19 @@ export default async function Dashboard() {
         </section>
 
         <section className="adm-card lime cut">
-          <div className="adm-card-head"><h2>Directory to-do</h2><Link href="/admin/programs">Programs</Link></div>
-          {!progs ? <div className="adm-empty">Could not load programs.</div> : (
-            <ul className="adm-todo">
-              <li><b>{noDesc.length}</b> without a description</li>
-              <li><b>{noCompany.length}</b> without an "About the company" text</li>
-              <li><b>{noCommission.length}</b> without commission details</li>
-              <li><b>{drafts}</b> drafts, not on the site</li>
-            </ul>
+          <div className="adm-card-head"><h2>Top 7 segments</h2><Link href="/admin/programs?show=published">Programs</Link></div>
+          {!progs ? <div className="adm-empty">Could not load programs.</div> : segments.length === 0 ? <div className="adm-empty">No categories yet.</div> : (
+            <div className="adm-seg">
+              {segments.map(([name, n]) => (
+                <div key={name} className="adm-seg-row">
+                  <span className="adm-seg-name" title={name}>{name}</span>
+                  <span className="adm-seg-bar"><i style={{ width: `${Math.max(4, (n / segMax) * 100)}%` }} /></span>
+                  <span className="adm-seg-v">{n}</span>
+                </div>
+              ))}
+            </div>
           )}
-          <Link href="/admin/programs" className="adm-cta">Open programs</Link>
+          <p className="adm-seg-note">Published programs by product category</p>
         </section>
       </div>
 
