@@ -12,13 +12,14 @@ const countOf = (r: Response) => Number((r.headers.get("content-range") || "").s
 
 export async function review(f: FormData) {
   const staff = await requireStaff();
-  const ids = f.getAll("id").map(Number).filter((n) => Number.isInteger(n) && n > 0).slice(0, 200);
-  const decision = String(f.get("decision") ?? "");
-  if (!ids.length || !["approve", "reject"].includes(decision)) go({ tab: "review" });
-  const status = decision === "approve" ? "approved" : "rejected";
+  // A row button sends "approve:12" or "reject:12" and acts on that one company; the bulk buttons send "approve" or "reject" for the ticked rows.
+  const [verb, one] = String(f.get("decision") ?? "").split(":");
+  const ids = (one ? [Number(one)] : f.getAll("id").map(Number)).filter((n) => Number.isInteger(n) && n > 0).slice(0, 200);
+  if (!ids.length || !["approve", "reject"].includes(verb)) return go({ tab: "review", msg: "Tick at least one company first" });
+  const status = verb === "approve" ? "approved" : "rejected";
   await db(`companies?id=in.(${ids.join(",")})`, { method: "PATCH", headers: { Prefer: "return=minimal" }, body: JSON.stringify({ status }) });
   await logAction(staff, `companies_${status}`, String(ids.length), ids.slice(0, 20).join(","));
-  go({ tab: "review", msg: `${ids.length} ${status}` });
+  go({ tab: String(f.get("tab") || "review"), msg: `${ids.length} ${status}` });
 }
 
 export async function approveConfident() {

@@ -115,8 +115,9 @@ export default async function Enrichment({ searchParams }: { searchParams: Promi
           {tab === "review" && isSuper && pending > 0 ? <form action={approveConfident} style={{ marginBottom: 14 }}><Submit label="Approve everything with confidence 80 or more" busy="Approving" cls="btn-s" /></form> : null}
           {rows.length === 0 ? <div className="adm-empty">{tab === "review" ? "Nothing to review. Run a batch, or add sources." : "Nothing found."}</div> : (
             <form action={review}>
+              <input type="hidden" name="tab" value={tab} />
               <table className="adm-table">
-                <thead><tr>{tab === "review" ? <th><SelectAll /></th> : null}<th>Company</th><th>Partner type</th><th>Categories</th><th>Serves</th><th>Partner program</th><th>Conf.</th><th>{tab === "review" ? "Source" : "Status"}</th></tr></thead>
+                <thead><tr>{tab === "review" ? <th><SelectAll /></th> : null}<th>Company</th><th>Partner type</th><th>Categories</th><th>Serves</th><th>Partner program</th><th>Conf.</th><th>{tab === "review" ? "Source" : "Status"}</th><th>Action</th></tr></thead>
                 <tbody>{rows.map((c) => (
                   <tr key={c.id}>
                     {tab === "review" ? <td><input type="checkbox" name="id" value={c.id} aria-label={`Select ${c.name}`} /></td> : null}
@@ -127,6 +128,10 @@ export default async function Enrichment({ searchParams }: { searchParams: Promi
                     <td>{c.has_program ? (c.program_url ? <a href={c.program_url} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "underline" }}>Yes</a> : "Yes") : c.has_program === false ? "No page found" : "Unclear"}</td>
                     <td>{c.confidence ?? ""}</td>
                     <td>{tab === "review" ? (c.source_url ? hostOf(c.source_url) : "") : <span className={`adm-pill ${pillClass(c.status)}`}>{c.status === "pending" ? "To review" : c.status[0].toUpperCase() + c.status.slice(1)}</span>}</td>
+                    <td style={{ whiteSpace: "nowrap" }}>
+                      {c.status !== "approved" ? <button name="decision" value={`approve:${c.id}`} className="btn btn-p btn-sm" type="submit">Approve</button> : null}{" "}
+                      {c.status !== "rejected" ? <button name="decision" value={`reject:${c.id}`} className="btn btn-s btn-sm" type="submit">Reject</button> : null}
+                    </td>
                   </tr>
                 ))}</tbody>
               </table>
