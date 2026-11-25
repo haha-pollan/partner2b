@@ -3,8 +3,9 @@ import { adminConfigured, db, requireStaff } from "@/lib/admin/session";
 import { getState, processedToday } from "@/lib/enrich/run";
 import { ALL_CATEGORIES, PARTNER_TYPES } from "@/lib/enrich/vocab";
 import { hostOf } from "@/lib/enrich/fetch";
-import { addSource, approveConfident, findNow, importDirectory, review, runNow, setState, toggleSource } from "./actions";
+import { addSource, approveConfident, findNow, importDirectory, review, runNow, setCap, toggleSource, togglePause } from "./actions";
 import SelectAll from "./SelectAll";
+import Submit from "./Submit";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 300;
@@ -64,14 +65,14 @@ export default async function Enrichment({ searchParams }: { searchParams: Promi
 
       {isSuper ? (
         <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center", margin: "14px 0 22px" }}>
-          <form action={runNow}><button className="btn btn-p btn-sm" type="submit">Run a batch now</button></form>
-          <form action={findNow}><button className="btn btn-s btn-sm" type="submit">Find new sources</button></form>
-          <form action={importDirectory}><button className="btn btn-s btn-sm" type="submit">Add directory vendors</button></form>
-          <form action={setState} style={{ display: "flex", gap: 8, alignItems: "center" }}>
-            <input type="hidden" name="paused" value={state.paused ? "false" : "true"} />
+          <form action={runNow}><Submit label="Run a batch now" busy="Running, this takes a few minutes" cls="btn-p" /></form>
+          <form action={findNow}><Submit label="Find new sources" busy="Searching, about a minute" cls="btn-s" /></form>
+          <form action={importDirectory}><Submit label="Add directory vendors" busy="Adding, about a minute" cls="btn-s" /></form>
+          <form action={setCap} style={{ display: "flex", gap: 8, alignItems: "center" }}>
             <input name="cap" type="number" defaultValue={state.daily_cap} min={10} max={3000} className="field" style={{ width: 90, padding: "8px 12px", fontSize: 15 }} aria-label="Daily cap" />
-            <button className="btn btn-s btn-sm" type="submit">{state.paused ? "Resume and save cap" : "Pause and save cap"}</button>
+            <Submit label="Save daily cap" busy="Saving" cls="btn-s" />
           </form>
+          <form action={togglePause}><input type="hidden" name="paused" value={state.paused ? "false" : "true"} /><Submit label={state.paused ? "Resume" : "Pause"} busy="Saving" cls="btn-s" /></form>
         </div>
       ) : null}
 
@@ -111,7 +112,7 @@ export default async function Enrichment({ searchParams }: { searchParams: Promi
               <button className="btn btn-s btn-sm" type="submit">Search</button>
             </form>
           ) : null}
-          {tab === "review" && isSuper && pending > 0 ? <form action={approveConfident} style={{ marginBottom: 14 }}><button className="btn btn-s btn-sm" type="submit">Approve everything with confidence 80 or more</button></form> : null}
+          {tab === "review" && isSuper && pending > 0 ? <form action={approveConfident} style={{ marginBottom: 14 }}><Submit label="Approve everything with confidence 80 or more" busy="Approving" cls="btn-s" /></form> : null}
           {rows.length === 0 ? <div className="adm-empty">{tab === "review" ? "Nothing to review. Run a batch, or add sources." : "Nothing found."}</div> : (
             <form action={review}>
               <table className="adm-table">
