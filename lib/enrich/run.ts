@@ -116,7 +116,7 @@ Rules:
 - serves_sizes: from ${JSON.stringify(SIZES)}. serves_industries: at most 120 characters or "".
 - engages_at: where the company meets its customers around a software purchase: from ${JSON.stringify(STAGES)} (Pre-use is advice and selection, In use is implementation and daily operation, Post-use is support, optimisation and renewal).
 - size_band: one of ${JSON.stringify(SIZE_BANDS)} or "" if the page does not say.
-- has_program: true only if the links show the company runs a program that OTHER companies can apply to join (become a partner, reseller, channel, referral or affiliate program). A page that only lists the technology vendors or clients the company works with, a "Our partners" page, or a partner badge is NOT a program: set false. false if there is clearly none. null if unclear. For agencies and consultancies the answer is usually false. program_url: copy exactly from PARTNER LINKS, or null.
+- has_program: true if the company invites other companies to work with it: a partner, reseller, channel, referral, agency, technology or affiliate program, OR a partner page with a "become a partner" button, an application or contact form, or a stated list of partner types it is looking for. Published terms, tiers or commission are NOT required: an open invitation to partner is the signal. false only if the page just shows the technology vendors or clients the company already works with and does not invite anyone, or if there is clearly nothing. null if unclear. Use the PARTNER PAGE TEXT when it is given. program_url: copy exactly from PARTNER LINKS, or null.
 - confidence: 0 to 100, how sure you are that every field above is right.`;
 
 type Classified = { relevant?: boolean; name?: string; description?: string; country?: string; region?: string; company_kind?: string; partner_types?: unknown; subtype?: string; categories?: unknown; serves_sizes?: unknown; serves_industries?: string; engages_at?: unknown; size_band?: string; has_program?: boolean | null; program_url?: string | null; confidence?: number };
@@ -158,8 +158,16 @@ async function enrichOne(row: QRow, programs: Map<string, number>): Promise<"add
   if (PARKED.test(`${ex.title} ${ex.description} ${ex.text.slice(0, 1500)}`)) { await mark(row, "skipped", "parked or for-sale domain"); return "skipped"; }
   if (ex.text.length < 400) { await mark(row, "skipped", "site has too little content"); return "skipped"; }
   const pl = ex.links.filter((l) => { const h = hostOf(l.href); return (h === domain || h.endsWith("." + domain)) && (PARTNER_LINK.test(l.text) || PARTNER_LINK.test(new URL(l.href).pathname)); }).slice(0, 15);
+  // Read the company's own partner page too, so "become a partner" pages without published terms are recognised.
+  let partnerText = "";
+  const pageLink = pl.find((l) => /partner/i.test(new URL(l.href).pathname)) ?? pl[0];
+  if (pageLink && pageLink.href !== home && pageLink.href !== `${home}/`) {
+    try {
+      if (await allowedByRobots(pageLink.href)) { const pp = await safeGet(pageLink.href); if (pp.ok) partnerText = extract(pp.html, pp.url, 1800).text; }
+    } catch { /* the home page alone is enough */ }
+  }
   const hints = [row.partner_type_hint && `Hint from the source list: partner type ${row.partner_type_hint}.`, row.category_hint && `Hint from the source list: category ${row.category_hint}.`].filter(Boolean).join(" ");
-  const c = await askJson<Classified>(CLASSIFY_SYS, `WEBSITE: ${home}\nNAME FROM LIST: ${row.name ?? ""}\n${hints}\nTITLE: ${ex.title}\nDESCRIPTION: ${ex.description}\nPAGE TEXT:\n${ex.text}\n\nPARTNER LINKS (text | url):\n${pl.map((l) => `${l.text} | ${l.href}`).join("\n")}`);
+  const c = await askJson<Classified>(CLASSIFY_SYS, `WEBSITE: ${home}\nNAME FROM LIST: ${row.name ?? ""}\n${hints}\nTITLE: ${ex.title}\nDESCRIPTION: ${ex.description}\nPAGE TEXT:\n${ex.text}\n\nPARTNER LINKS (text | url):\n${pl.map((l) => `${l.text} | ${l.href}`).join("\n")}\n\nPARTNER PAGE TEXT (${pageLink?.href ?? "none"}):\n${partnerText}`);
   if (!c) { await mark(row, row.attempts >= 1 ? "failed" : "queued", "model gave no answer"); return row.attempts >= 1 ? "failed" : "retry"; }
   const types = pick(c.partner_types, PARTNER_TYPES);
   let cats = pick(c.categories, ALL_CATEGORIES).slice(0, 3);
