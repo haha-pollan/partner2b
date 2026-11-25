@@ -16,6 +16,21 @@ export const cookieOpts = (maxAge: number) => ({
 });
 
 const serviceKey = () => (process.env.SUPABASE_SERVICE_ROLE_KEY || "").trim().replace(/^["']|["']$/g, "");
+// Tells the team what is wrong with the server key, without ever showing the key itself.
+export function keyProblem(): string | null {
+  const k = serviceKey();
+  if (!k) return "SUPABASE_SERVICE_ROLE_KEY is empty.";
+  if (k.startsWith("sb_secret_")) return null;
+  if (k.startsWith("sb_publishable_")) return "SUPABASE_SERVICE_ROLE_KEY is the publishable key. Use the secret key that starts with sb_secret_.";
+  try {
+    const role = JSON.parse(atob(k.split(".")[1].replace(/-/g, "+").replace(/_/g, "/"))).role;
+    if (role === "service_role") return null;
+    return `SUPABASE_SERVICE_ROLE_KEY has the role "${role}". Use the secret key (sb_secret_) or the service_role key.`;
+  } catch {
+    return "SUPABASE_SERVICE_ROLE_KEY is not a Supabase key. Use the secret key that starts with sb_secret_.";
+  }
+}
+
 export const adminConfigured = () => !!serviceKey();
 
 // Server-only database access with the service key. Never import this in a client component.

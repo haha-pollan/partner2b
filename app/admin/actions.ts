@@ -2,7 +2,7 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { URL as SB_URL, KEY as ANON } from "@/lib/programs";
-import { AT, RT, cookieOpts, db, logAction, requireStaff } from "@/lib/admin/session";
+import { AT, RT, cookieOpts, db, keyProblem, logAction, requireStaff } from "@/lib/admin/session";
 
 export type LoginState = { error?: string };
 
@@ -11,6 +11,8 @@ export async function login(_prev: LoginState, f: FormData): Promise<LoginState>
   const password = String(f.get("password") ?? "");
   if (!email || !password) return { error: "Enter your email and password." };
   if (!process.env.SUPABASE_SERVICE_ROLE_KEY) return { error: "The admin is not set up yet." };
+  const kp = keyProblem();
+  if (kp) return { error: `Setup problem: ${kp}` };
   const r = await fetch(`${SB_URL}/auth/v1/token?grant_type=password`, {
     method: "POST",
     headers: { apikey: ANON, "Content-Type": "application/json" },
