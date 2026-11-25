@@ -10,17 +10,24 @@ import { AI_CATEGORIES } from "@/lib/ai";
 const go = (q: Record<string, string>) => redirect(`/admin/enrichment?${new URLSearchParams(q).toString()}`);
 const countOf = (r: Response) => Number((r.headers.get("content-range") || "").split("/")[1]) || 0;
 
-export async function review(f: FormData) {
+async function applyReview(verb: string, ids: number[], f: FormData) {
   const staff = await requireStaff();
-  // A row button sends "approve:12" or "reject:12" and acts on that one company; the bulk buttons send "approve" or "reject" for the ticked rows.
-  const [verb, one] = String(f.get("decision") ?? "").split(":");
-  const ids = (one ? [Number(one)] : f.getAll("id").map(Number)).filter((n) => Number.isInteger(n) && n > 0).slice(0, 200);
-  if (!ids.length || !["approve", "reject"].includes(verb)) return go({ tab: "review", msg: "Tick at least one company first" });
+  const back = { tab: String(f.get("tab") || "review"), show: String(f.get("show") || "approved"), q: String(f.get("q") || "") };
+  ids = ids.filter((n) => Number.isInteger(n) && n > 0).slice(0, 200);
+  if (!ids.length || !["approve", "reject"].includes(verb)) return go({ ...back, msg: "Tick at least one company first" });
   const status = verb === "approve" ? "approved" : "rejected";
-  await db(`companies?id=in.(${ids.join(",")})`, { method: "PATCH", headers: { Prefer: "return=minimal" }, body: JSON.stringify({ status }) });
-  await logAction(staff, `companies_${status}`, String(ids.length), ids.slice(0, 20).join(","));
-  go({ tab: String(f.get("tab") || "review"), show: String(f.get("show") || "approved"), q: String(f.get("q") || ""), msg: `${ids.length} ${status}` });
+  const r = await db(`companies?id=in.(${ids.join(",")})&select=id,name`, { method: "PATCH", headers: { Prefer: "return=representation" }, body: JSON.stringify({ status }) });
+  if (!r.ok) return go({ ...back, msg: `Could not save, nothing was changed (error ${r.status})` });
+  const done: { id: number; name: string }[] = await r.json();
+  if (!done.length) return go({ ...back, msg: "Nothing was changed, the company was not found" });
+  await logAction(staff, `companies_${status}`, String(done.length), done.slice(0, 20).map((c) => c.id).join(","));
+  const word = status === "approved" ? "Approved" : "Rejected";
+  return go({ ...back, msg: done.length === 1 ? `${word}: ${done[0].name}` : `${word} ${done.length} companies` });
 }
+
+// Row buttons act on one company, the buttons under the list act on the ticked rows.
+export async function reviewOne(verb: string, id: number, f: FormData) { return applyReview(verb, [id], f); }
+export async function reviewMany(verb: string, f: FormData) { return applyReview(verb, f.getAll("id").map(Number), f); }
 
 export async function approveConfident() {
   const staff = await requireSuper();
