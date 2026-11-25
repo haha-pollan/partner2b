@@ -15,7 +15,7 @@ export const cookieOpts = (maxAge: number) => ({
   maxAge,
 });
 
-const serviceKey = () => process.env.SUPABASE_SERVICE_ROLE_KEY || "";
+const serviceKey = () => (process.env.SUPABASE_SERVICE_ROLE_KEY || "").trim().replace(/^["']|["']$/g, "");
 export const adminConfigured = () => !!serviceKey();
 
 // Server-only database access with the service key. Never import this in a client component.
