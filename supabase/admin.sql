@@ -30,6 +30,12 @@ alter table public.submissions
   add column if not exists replied_at timestamptz,
   add column if not exists replied_by text;
 
+-- The admin uses the server-only key (service_role). Tables created in the SQL Editor
+-- do not give that role table rights automatically, so grant them here.
+grant usage on schema public to service_role;
+grant select, insert, update, delete on public.staff, public.admin_log, public.submissions, public.programs to service_role;
+grant usage, select on sequence public.admin_log_id_seq to service_role;
+
 -- After creating each person under Authentication > Users (Add user, with password),
 -- add them here. Replace the email, keep the role.
 -- insert into public.staff (user_id, email, name, role)
