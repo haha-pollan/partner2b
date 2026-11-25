@@ -127,6 +127,7 @@ export default async function Enrichment({ searchParams }: { searchParams: Promi
               <button className="btn btn-s btn-sm" type="submit">Search</button>
             </form>
           ) : null}
+          {tab === "review" ? <p className="adm-sub" style={{ marginBottom: 12 }}>Approving a company that has a partner program page also adds an unpublished draft listing to the directory. Find it in Programs, Drafts to publish, add the details and publish it there.</p> : null}
           {tab === "review" && isSuper && pending > 0 ? <form action={approveConfident} style={{ marginBottom: 14 }}><Submit label="Approve everything with confidence 80 or more" busy="Approving" cls="btn-s" /></form> : null}
           {rows.length === 0 ? <div className="adm-empty">{tab === "review" ? "Nothing to review. Run a batch, or add sources." : "Nothing found."}</div> : (
             <form action={reviewMany.bind(null, "approve")}>
