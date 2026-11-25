@@ -13,6 +13,20 @@ const DAY = 86_400_000;
 const chunk = <T,>(a: T[], n: number) => Array.from({ length: Math.ceil(a.length / n) }, (_, i) => a.slice(i * n, i * n + n));
 const clip = (s: unknown, n: number) => tidy(String(s ?? "")).replace(/\s+/g, " ").trim().slice(0, n);
 
+
+// Supabase returns at most 1000 rows per request, so read big tables in pages.
+export async function fetchAll<T>(path: string): Promise<T[]> {
+  const out: T[] = [];
+  for (let off = 0; off < 100_000; off += 1000) {
+    const r = await db(`${path}${path.includes("?") ? "&" : "?"}limit=1000&offset=${off}`);
+    if (!r.ok) break;
+    const rows = (await r.json()) as T[];
+    out.push(...rows);
+    if (rows.length < 1000) break;
+  }
+  return out;
+}
+
 async function pool<T>(items: T[], n: number, fn: (x: T) => Promise<void>) {
   let i = 0;
   await Promise.all(Array.from({ length: Math.min(n, items.length) }, async () => { while (i < items.length) await fn(items[i++]); }));
@@ -51,7 +65,7 @@ Rules:
 - At most 150 companies. next_pages are links to further pages of the same list (pagination), at most 5, copied exactly from LINKS.
 - If the page does not list companies, return {"companies":[],"next_pages":[]}.`;
 
-async function harvest(src: Source): Promise<{ found: number; added: number; note: string }> {
+async function harvest(src: Source, programs: Map<string, number>): Promise<{ found: number; added: number; note: string }> {
   if (!(await allowedByRobots(src.url))) return { found: 0, added: 0, note: "skipped: blocked by robots.txt" };
   const page = await safeGet(src.url);
   if (!page.ok) return { found: 0, added: 0, note: `error: ${page.error}` };
@@ -72,7 +86,7 @@ async function harvest(src: Source): Promise<{ found: number; added: number; not
   }
   const fresh = new Set(rows.map((r) => r.domain as string));
   for (const d of await known(rows.filter((r) => !r.needs_resolve).map((r) => r.domain as string))) fresh.delete(d);
-  const insert = rows.filter((r) => fresh.has(r.domain as string));
+  const insert = rows.filter((r) => fresh.has(r.domain as string) && !programs.has(r.domain as string));
   let added = 0;
   for (const part of chunk(insert, 100)) {
     const r = await db("enrich_queue?on_conflict=domain&select=id", { method: "POST", headers: { Prefer: "resolution=ignore-duplicates,return=representation" }, body: JSON.stringify(part) });
@@ -132,6 +146,7 @@ async function enrichOne(row: QRow, programs: Map<string, number>): Promise<"add
   }
   const home = new URL(website).origin; const domain = hostOf(home);
   if (skipHost(domain)) { await mark(row, "skipped", "not a company site"); return "skipped"; }
+  if (programs.has(domain)) { await mark(row, "skipped", "already in the directory"); return "skipped"; }
   if (!(await allowedByRobots(home))) { await mark(row, "skipped", "blocked by robots.txt"); return "skipped"; }
   const page = await safeGet(home);
   if (!page.ok) { const dead = row.attempts >= 1; await mark(row, dead ? "failed" : "queued", `site: ${page.error}`); return dead ? "failed" : "retry"; }
@@ -161,8 +176,7 @@ async function enrichOne(row: QRow, programs: Map<string, number>): Promise<"add
 
 // ---------- Stage 3: find new source pages where our coverage is thinnest ----------
 export async function findSources(): Promise<{ added: number; note: string }> {
-  const r = await db("companies?select=categories,partner_types&status=neq.rejected&limit=20000");
-  const rows: { categories: string[]; partner_types: string[] }[] = r.ok ? await r.json() : [];
+  const rows = await fetchAll<{ categories: string[]; partner_types: string[] }>("companies?select=categories,partner_types&status=neq.rejected&order=id.asc");
   const count = new Map<string, number>();
   for (const x of rows) for (const cat of x.categories) for (const t of x.partner_types) count.set(`${cat}|${t}`, (count.get(`${cat}|${t}`) ?? 0) + 1);
   const combos = ALL_CATEGORIES.flatMap((cat) => Object.keys(TYPE_WORDS).map((t) => ({ cat, t, n: count.get(`${cat}|${t}`) ?? 0 }))).sort((a, b) => a.n - b.n || Math.random() - 0.5);
@@ -186,20 +200,19 @@ export async function runEnrichment(opts: { maxSeconds: number; autoFind?: boole
   const save = async (note: string) => { s.note = note; await db("enrich_state?id=eq.1", { method: "PATCH", headers: { Prefer: "return=minimal" }, body: JSON.stringify({ last_run_at: new Date().toISOString(), last_run_note: note.slice(0, 300) }) }); return s; };
   if (state.paused) return save("paused, nothing run");
 
+  const programs = new Map<string, number>();
+  for (const p of await fetchAll<{ id: number; domain: string | null }>("programs?select=id,domain&order=id.asc")) if (p.domain) programs.set(String(p.domain).toLowerCase().replace(/^www\./, ""), p.id);
+
   const stale = new Date(Date.now() - 14 * DAY).toISOString();
   const dr = await db(`enrich_sources?active=eq.true&or=(last_run_at.is.null,last_run_at.lt.${stale})&order=last_run_at.asc.nullsfirst&limit=8&select=*`);
   const due: Source[] = dr.ok ? await dr.json() : [];
   for (const src of due) {
     if (left() < 90_000) break;
     let res: { found: number; added: number; note: string };
-    try { res = await harvest(src); } catch (e) { if (e instanceof Error && e.message === "not_configured") return save("OpenAI key missing"); res = { found: 0, added: 0, note: `error: ${e instanceof Error ? e.message : "failed"}` }; }
+    try { res = await harvest(src, programs); } catch (e) { if (e instanceof Error && e.message === "not_configured") return save("OpenAI key missing"); res = { found: 0, added: 0, note: `error: ${e instanceof Error ? e.message : "failed"}` }; }
     await db(`enrich_sources?id=eq.${src.id}`, { method: "PATCH", headers: { Prefer: "return=minimal" }, body: JSON.stringify({ last_run_at: new Date().toISOString(), last_status: res.note.slice(0, 200), found_count: src.found_count + res.added }) });
     s.sources++; s.queued += res.added;
   }
-
-  const pr = await db("programs?select=id,domain&limit=5000");
-  const programs = new Map<string, number>();
-  if (pr.ok) for (const p of (await pr.json()) as { id: number; domain: string | null }[]) if (p.domain) programs.set(String(p.domain).toLowerCase().replace(/^www\./, ""), p.id);
 
   let capLeft = state.daily_cap - (await processedToday());
   let moreQueued = true;

@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import { db, logAction, requireStaff, requireSuper } from "@/lib/admin/session";
 import { normaliseUrl } from "@/lib/builder2/intake";
 import { hostOf, skipHost } from "@/lib/enrich/fetch";
-import { findSources, runEnrichment } from "@/lib/enrich/run";
+import { fetchAll, findSources, runEnrichment } from "@/lib/enrich/run";
 import { ALL_CATEGORIES, PARTNER_TYPES } from "@/lib/enrich/vocab";
 import { AI_CATEGORIES } from "@/lib/ai";
 
@@ -82,8 +82,7 @@ export async function togglePause(f: FormData) {
 // Starting set: every published directory program becomes an approved vendor record.
 export async function importDirectory() {
   const staff = await requireSuper();
-  const r = await db("programs?select=id,company,domain,product_category,program_url&published=eq.true&limit=5000");
-  const rows: { id: number; company: string; domain: string | null; product_category: string | null; program_url: string | null }[] = r.ok ? await r.json() : [];
+  const rows = await fetchAll<{ id: number; company: string; domain: string | null; product_category: string | null; program_url: string | null }>("programs?select=id,company,domain,product_category,program_url&published=eq.true&order=id.asc");
   const aiPartners = AI_CATEGORIES.some((c) => c.name === "AI integrators and consultancies") ? "AI integrators and consultancies" : "";
   const body = rows.filter((p) => p.domain && p.company).map((p) => {
     const domain = String(p.domain).toLowerCase().replace(/^www\./, "");
