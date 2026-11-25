@@ -5,6 +5,8 @@ import { parseIntake, normaliseUrl } from "@/lib/builder2/intake";
 import { fetchBrand, cleanBrand } from "@/lib/builder2/brand";
 import { generateStrategy } from "@/lib/builder2/ai";
 import { parse, looksComplete } from "@/lib/builder2/parse";
+import { savePdf } from "@/lib/builder2/store";
+import { randomUUID } from "crypto";
 
 export const runtime = "nodejs";
 export const maxDuration = 300;
@@ -44,11 +46,12 @@ export async function POST(req: Request) {
   const { intake, vertical, acvAverage } = parsed;
   const brand = cleanBrand((body.brand ?? {}) as { color?: unknown; logo?: unknown });
 
+  const pdfKey = randomUUID();
   try {
     await fetch(`${SB_URL}/rest/v1/builder_leads`, {
       method: "POST", cache: "no-store",
       headers: { apikey: KEY, "Content-Type": "application/json", Prefer: "return=minimal" },
-      body: JSON.stringify({ email, url: intake.website, company_name: intake.companyName, category: intake.category, goal: intake.programGoals.join("; "), inputs: intake }),
+      body: JSON.stringify({ email, url: intake.website, company_name: intake.companyName, category: intake.category, goal: intake.programGoals.join("; "), inputs: { ...intake, pdf_key: pdfKey } }),
     });
   } catch { /* the report is still delivered */ }
 
@@ -64,6 +67,7 @@ export async function POST(req: Request) {
     if (!blocks.length) return fail("The strategy did not come out complete. Please try again.", 502);
     const { renderPlan } = await import("@/lib/builder2/PlanPdf");
     const pdf = await renderPlan({ title: `${intake.companyName} partner program strategy`, company: intake.companyName, accent: brand.color || "#5B3FE0", logo: brand.logo, blocks, econ: buildEconomics(intake, vertical, acvAverage).chart, sharePercent: intake.partnerRevenueSharePercent, contactName: intake.contactName, website: intake.website, goals: intake.programGoals, category: intake.category, region: intake.region, audience: intake.audience });
+    await savePdf(pdfKey, pdf);
     const kinds: Record<string, number> = {}; for (const b of blocks) kinds[b.kind] = (kinds[b.kind] ?? 0) + 1;
     const eco = blocks.find((b) => b.kind === "ecosystem");
     return NextResponse.json({ ok: true, company: intake.companyName, pdf: pdf.toString("base64"), info: { blocks: kinds, ecosystemNodes: eco && eco.kind === "ecosystem" ? eco.nodes.map((n) => `${n.type} | ${n.stage}`) : [] } });

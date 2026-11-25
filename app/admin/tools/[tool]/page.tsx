@@ -40,7 +40,8 @@ export default async function ToolPage({ params, searchParams }: { params: Promi
             const detail = [
               ...lines(x.inputs, "inputs"), ...lines(x.results, "results"),
               ...(["url", "category", "goal", "playbook"] as const).flatMap((k) => (x[k] ? ([[k, String(x[k])]] as [string, string][]) : [])),
-            ].map(([k, v]) => [k.replace(/^Inputs |^Results /, (m) => (m === "Inputs " ? "" : "Result: ")), v] as [string, string]);
+            ].filter(([k]) => k !== "Pdf key").map(([k, v]) => [k.replace(/^Inputs |^Results /, (m) => (m === "Inputs " ? "" : "Result: ")), v] as [string, string]);
+            const pdfKey = t.slug === "builder" ? String((x.inputs as Record<string, unknown> | null)?.pdf_key || "") : "";
             const extra: [string, string][] = [
               ["Campaign", [x.utm_source, x.utm_medium, x.utm_campaign].filter(Boolean).join(" / ")],
               ["Came from", String(x.referrer || "")],
@@ -55,6 +56,11 @@ export default async function ToolPage({ params, searchParams }: { params: Promi
                   <span>{company}</span>
                   <span>{String(x.utm_source || hostOf(x.referrer as string) || "-")}</span>
                 </summary>
+                {t.slug === "builder" && (
+                  <p style={{ margin: "10px 0 0" }}>
+                    {pdfKey ? <a className="btn btn-s btn-sm" href={`/admin/tools/builder-pdf/${pdfKey}`} target="_blank" rel="noreferrer">Open the PDF that was sent</a> : <span className="adm-sub">No PDF was saved for this entry.</span>}
+                  </p>
+                )}
                 <dl className="adm-dl adm-use-d">
                   {[...detail, ...extra].length === 0 ? <Fragment><dt>Details</dt><dd>Nothing else was saved.</dd></Fragment> : [...detail, ...extra].map(([k, v], j) => (<Fragment key={j}><dt>{k}</dt><dd>{v}</dd></Fragment>))}
                 </dl>
