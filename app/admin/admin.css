@@ -184,3 +184,16 @@ a.adm-kpi:hover{transform:translateY(-3px) rotate(0deg)!important}
 @media(max-width:1180px){.adm-tools{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:860px){.adm-use{overflow-x:auto}.adm-use-h,.adm-use-r>summary{min-width:640px}.adm-use-d{grid-template-columns:130px 1fr}.adm-tools{gap:14px}}
 .adm-pagehead .adm-sub{color:var(--g300)}
+
+/* Tool use card */
+.adm-tu-total{display:flex;align-items:center;gap:16px;margin-bottom:20px}
+.adm-tu-n{background:var(--lime);color:var(--ink);font-family:'Michroma',sans-serif;-webkit-text-stroke:1px currentColor;font-size:34px;line-height:1;padding:12px 20px 14px;--c:14px}
+.adm-tu-l{font-size:15px;color:var(--g600)}
+.adm-tu{display:flex;flex-direction:column;gap:10px}
+.adm-tu-row{display:grid;grid-template-columns:150px minmax(0,1fr) 46px;align-items:center;gap:14px;font-size:14px}
+.adm-tu-row:hover .adm-tu-name{text-decoration:underline;text-underline-offset:3px}
+.adm-tu-name{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.adm-tu-bar{height:14px;background:var(--g100);display:block}
+.adm-tu-bar i{display:block;height:100%;background:var(--g800)}
+.adm-tu-v{text-align:right;font-family:'Michroma',sans-serif;font-size:13px}
+.adm-card.lime .adm-todo{margin-bottom:24px}

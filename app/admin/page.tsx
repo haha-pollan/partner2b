@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { adminConfigured, db, requireStaff } from "@/lib/admin/session";
 import { Toby } from "@/components/Toby";
+import { TOOLS as TOOL_DEFS } from "@/lib/admin/tools";
 
 export const dynamic = "force-dynamic";
 
@@ -26,6 +27,15 @@ async function rows<T>(path: string): Promise<T[] | null> {
   } catch { return null; }
 }
 
+async function count(table: string): Promise<number | null> {
+  try {
+    const r = await db(`${table}?select=id&limit=1`, { headers: { Prefer: "count=exact" } });
+    if (!r.ok) return null;
+    const n = Number((r.headers.get("content-range") || "").split("/")[1]);
+    return Number.isFinite(n) ? n : null;
+  } catch { return null; }
+}
+
 function ago(iso: string) {
   const d = Math.floor((Date.now() - new Date(iso).getTime()) / DAY);
   return d <= 0 ? "today" : d === 1 ? "1 day" : `${d} days`;
@@ -36,7 +46,8 @@ export default async function Dashboard() {
   if (!adminConfigured()) return <div className="adm-card cut"><h1>Setup needed</h1><p className="adm-sub">SUPABASE_SERVICE_ROLE_KEY is not set.</p></div>;
   const isSuper = staff.role === "super_admin";
 
-  const [subs, progs, log, ...leadSets] = await Promise.all([
+  const [toolCounts, subs, progs, log, ...leadSets] = await Promise.all([
+    Promise.all(TOOL_DEFS.map((t) => count(t.table))),
     rows<Sub>("submissions?select=id,created_at,kind,status,company,listing,name&order=created_at.asc&limit=5000"),
     rows<Prog>("programs?select=id,slug,company,description,company_description,commission_models,published&limit=2000"),
     rows<Log>(`admin_log?select=at,staff_email,action,target&order=at.desc&limit=8${isSuper ? "" : `&staff_email=eq.${encodeURIComponent(staff.email)}`}`),
@@ -68,6 +79,10 @@ export default async function Dashboard() {
   });
   const max = Math.max(1, ...days.map((x) => x.n));
   const total30 = days.reduce((a, x) => a + x.n, 0);
+
+  const toolUse = TOOL_DEFS.map((t, i) => ({ ...t, n: toolCounts[i] }));
+  const toolTotal = toolUse.some((t) => t.n === null) ? null : toolUse.reduce((a, t) => a + (t.n ?? 0), 0);
+  const toolMax = Math.max(1, ...toolUse.map((t) => t.n ?? 0));
 
   const hour = Number(new Date().toLocaleString("en-GB", { hour: "numeric", hour12: false, timeZone: "Europe/Warsaw" })) % 24;
   const greet = hour < 12 ? "Good morning" : hour < 18 ? "Good afternoon" : "Good evening";
@@ -156,13 +171,17 @@ export default async function Dashboard() {
 
       <div className="adm-cols">
         <section className="adm-card cut">
-          <div className="adm-card-head"><h2>Latest tool users</h2><Link href="/admin/tools">All tools</Link></div>
-          {latest.length === 0 ? <div className="adm-empty">{leadsBlocked ? "Lead tables are not readable yet." : "No leads yet."}</div> : (
-            <table className="adm-table">
-              <thead><tr><th>When</th><th>Source</th><th>Email</th></tr></thead>
-              <tbody>{latest.map((l, i) => (<tr key={i}><td>{ago(l.created_at)}</td><td>{l.label}</td><td>{l.email}</td></tr>))}</tbody>
-            </table>
-          )}
+          <div className="adm-card-head"><h2>Tool use</h2><Link href="/admin/tools">All tools</Link></div>
+          <div className="adm-tu-total"><span className="adm-tu-n cut">{toolTotal ?? "-"}</span><span className="adm-tu-l">uses in total, all tools</span></div>
+          <div className="adm-tu">
+            {toolUse.map((t) => (
+              <Link key={t.slug} href={`/admin/tools/${t.slug}`} className="adm-tu-row">
+                <span className="adm-tu-name">{t.label}</span>
+                <span className="adm-tu-bar"><i style={{ width: `${t.n ? Math.max(4, (t.n / toolMax) * 100) : 0}%` }} /></span>
+                <span className="adm-tu-v">{t.n ?? "-"}</span>
+              </Link>
+            ))}
+          </div>
         </section>
 
         <section className="adm-card lime cut">
@@ -178,6 +197,16 @@ export default async function Dashboard() {
           <Link href="/admin/programs" className="adm-cta">Open programs</Link>
         </section>
       </div>
+
+      <section className="adm-card cut">
+          <div className="adm-card-head"><h2>Latest tool users</h2><Link href="/admin/tools">All tools</Link></div>
+        {latest.length === 0 ? <div className="adm-empty">{leadsBlocked ? "Lead tables are not readable yet." : "No leads yet."}</div> : (
+          <table className="adm-table">
+            <thead><tr><th>When</th><th>Source</th><th>Email</th></tr></thead>
+            <tbody>{latest.map((l, i) => (<tr key={i}><td>{ago(l.created_at)}</td><td>{l.label}</td><td>{l.email}</td></tr>))}</tbody>
+          </table>
+        )}
+      </section>
 
       <section className="adm-card dark cut">
         <div className="adm-card-head"><h2>{isSuper ? "Recent activity" : "Your activity"}</h2></div>
