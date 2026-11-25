@@ -48,7 +48,7 @@ export async function updateSubmission(f: FormData) {
   const id = Number(f.get("id"));
   const status = String(f.get("status") ?? "");
   const note = String(f.get("note") ?? "").slice(0, 4000);
-  if (!Number.isInteger(id) || id < 1 || !STATUSES.includes(status)) redirect("/admin");
+  if (!Number.isInteger(id) || id < 1 || !STATUSES.includes(status)) redirect("/admin/submissions");
   await db(`submissions?id=eq.${id}`, {
     method: "PATCH",
     headers: { Prefer: "return=minimal" },
@@ -61,7 +61,7 @@ export async function updateSubmission(f: FormData) {
 export async function markReplied(f: FormData) {
   const staff = await requireStaff();
   const id = Number(f.get("id"));
-  if (!Number.isInteger(id) || id < 1) redirect("/admin");
+  if (!Number.isInteger(id) || id < 1) redirect("/admin/submissions");
   await db(`submissions?id=eq.${id}`, {
     method: "PATCH",
     headers: { Prefer: "return=minimal" },
