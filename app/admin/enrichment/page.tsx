@@ -28,9 +28,9 @@ export default async function Enrichment({ searchParams }: { searchParams: Promi
   const isSuper = staff.role === "super_admin";
   const page = Math.max(1, Number(p) || 1);
 
-  const [pending, approved, rejected, queued, sources, today, state] = await Promise.all([
+  const [pending, approved, rejected, queued, sources, today, state, withProg, noProg] = await Promise.all([
     count("companies?status=eq.pending"), count("companies?status=eq.approved"), count("companies?status=eq.rejected"),
-    count("enrich_queue?status=eq.queued"), count("enrich_sources?active=eq.true"), processedToday(), getState(),
+    count("enrich_queue?status=eq.queued"), count("enrich_sources?active=eq.true"), processedToday(), getState(), count("companies?status=eq.approved&has_program=eq.true"), count("companies?status=eq.approved&has_program=eq.false"),
   ]);
 
   let rows: Co[] = []; let total = 0; let srcs: Src[] = [];
@@ -57,7 +57,7 @@ export default async function Enrichment({ searchParams }: { searchParams: Promi
       {msg ? <div className="adm-ok">{msg}</div> : null}
 
       <div style={{ display: "flex", gap: 28, flexWrap: "wrap", margin: "18px 0" }}>
-        {[["Approved", approved], ["To review", pending], ["Queued", queued], ["Active sources", sources], ["Checked today", `${today} of ${state.daily_cap}`]].map(([l, n]) => (
+        {[["Approved", approved], ["With partner program", withProg], ["Without partner program", noProg], ["To review", pending], ["Queued", queued], ["Active sources", sources], ["Checked today", `${today} of ${state.daily_cap}`]].map(([l, n]) => (
           <div key={String(l)}><div className="adm-stat">{n}</div><div className="adm-sub">{l}</div></div>
         ))}
       </div>
