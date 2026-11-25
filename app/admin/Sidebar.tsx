@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Logo } from "@/components/Logo";
 
-type Item = { label: string; href?: string; badge?: number; soon?: boolean };
+type Item = { label: string; href?: string; badge?: number; soon?: boolean; exact?: boolean };
 type Group = { title: string; items: Item[]; superOnly?: boolean };
 
 export default function Sidebar({ isSuper, newSubmissions, name, role, logout }: { isSuper: boolean; newSubmissions: number; name: string; role: string; logout: () => Promise<void> }) {
@@ -13,14 +13,15 @@ export default function Sidebar({ isSuper, newSubmissions, name, role, logout }:
 
   const groups: Group[] = [
     { title: "Overview", items: [{ label: "Dashboard", href: "/admin" }] },
-    { title: "Inbox", items: [{ label: "Submissions", href: "/admin/submissions", badge: newSubmissions }, { label: "Leads", soon: true }] },
+    { title: "Inbox", items: [{ label: "Submissions", href: "/admin/submissions", badge: newSubmissions }] },
+    { title: "Tools", items: [{ label: "Overview", href: "/admin/tools", exact: true }, { label: "Assessment", href: "/admin/tools/assessment" }, { label: "Calculator", href: "/admin/tools/calculator" }, { label: "Program builder", href: "/admin/tools/builder" }, { label: "Playbook", href: "/admin/tools/playbook" }] },
     { title: "Directory", items: [{ label: "Programs", href: "/admin/programs" }, { label: "Data quality", soon: true }] },
     { title: "Content", items: [{ label: "Blog articles", soon: true }, { label: "Subscribers", soon: true }] },
     { title: "Vendors", items: [{ label: "Vendor accounts", soon: true }, { label: "Claims", soon: true }] },
     { title: "Admin", superOnly: true, items: [{ label: "Team and roles", soon: true }, { label: "Activity log", soon: true }, { label: "Import, export", soon: true }, { label: "Settings", soon: true }] },
   ];
 
-  const active = (href: string) => (href === "/admin" ? path === "/admin" : path === href || path.startsWith(href + "/"));
+  const active = (href: string, exact?: boolean) => (href === "/admin" || exact ? path === href : path === href || path.startsWith(href + "/"));
 
   return (
     <aside className={`adm-side${open ? " open" : ""}`}>
@@ -34,7 +35,7 @@ export default function Sidebar({ isSuper, newSubmissions, name, role, logout }:
             <div className="adm-group-title">{g.title}</div>
             {g.items.map((i) =>
               i.href ? (
-                <Link key={i.label} href={i.href} className={`adm-item${active(i.href) ? " on" : ""}`}>
+                <Link key={i.label} href={i.href} className={`adm-item${active(i.href, i.exact) ? " on" : ""}`}>
                   <span>{i.label}</span>
                   {i.badge ? <em className="adm-badge">{i.badge}</em> : null}
                 </Link>
