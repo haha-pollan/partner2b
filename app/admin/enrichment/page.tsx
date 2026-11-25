@@ -3,9 +3,10 @@ import { adminConfigured, db, requireStaff } from "@/lib/admin/session";
 import { getState, processedToday } from "@/lib/enrich/run";
 import { ALL_CATEGORIES, PARTNER_TYPES } from "@/lib/enrich/vocab";
 import { hostOf } from "@/lib/enrich/fetch";
-import { addSource, approveConfident, findNow, importDirectory, review, runNow, setCap, toggleSource, togglePause } from "./actions";
+import { addSource, approveConfident, findNow, importDirectory, reviewMany, reviewOne, runNow, setCap, toggleSource, togglePause } from "./actions";
 import SelectAll from "./SelectAll";
 import Submit from "./Submit";
+import ActButton from "./ActButton";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 300;
@@ -128,7 +129,7 @@ export default async function Enrichment({ searchParams }: { searchParams: Promi
           ) : null}
           {tab === "review" && isSuper && pending > 0 ? <form action={approveConfident} style={{ marginBottom: 14 }}><Submit label="Approve everything with confidence 80 or more" busy="Approving" cls="btn-s" /></form> : null}
           {rows.length === 0 ? <div className="adm-empty">{tab === "review" ? "Nothing to review. Run a batch, or add sources." : "Nothing found."}</div> : (
-            <form action={review}>
+            <form action={reviewMany.bind(null, "approve")}>
               <input type="hidden" name="tab" value={tab} /><input type="hidden" name="show" value={show} /><input type="hidden" name="q" value={q} />
               <div style={{ overflowX: "auto" }}><table className="adm-table">
                 <thead><tr>{tab === "review" ? <th><SelectAll /></th> : null}<th>Action</th><th>Company</th><th>Partner type</th><th>Categories</th><th>Serves</th><th>Partner program</th><th>Conf.</th><th>{tab === "review" ? "Source" : "Status"}</th></tr></thead>
@@ -136,8 +137,8 @@ export default async function Enrichment({ searchParams }: { searchParams: Promi
                   <tr key={c.id}>
                     {tab === "review" ? <td><input type="checkbox" name="id" value={c.id} aria-label={`Select ${c.name}`} /></td> : null}
                     <td style={{ whiteSpace: "nowrap" }}>
-                      {c.status !== "approved" ? <button name="decision" value={`approve:${c.id}`} className="btn btn-p btn-sm" type="submit">Approve</button> : null}{" "}
-                      {c.status !== "rejected" ? <button name="decision" value={`reject:${c.id}`} className="btn btn-s btn-sm" type="submit">Reject</button> : null}
+                      {c.status !== "approved" ? <ActButton label="Approve" busy="Saving" cls="btn-p" action={reviewOne.bind(null, "approve", c.id)} /> : null}{" "}
+                      {c.status !== "rejected" ? <ActButton label="Reject" busy="Saving" cls="btn-s" action={reviewOne.bind(null, "reject", c.id)} /> : null}
                     </td>
                     <td><a href={c.website} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "underline" }}>{c.name}</a><br /><span className="adm-sub">{c.domain}{c.country ? ` · ${c.country}` : ""}</span>{c.description ? <div className="adm-sub">{c.description}</div> : null}</td>
                     <td>{c.partner_types.join(", ")}{c.subtype ? <><br /><span className="adm-sub">{c.subtype}</span></> : null}</td>
@@ -149,7 +150,7 @@ export default async function Enrichment({ searchParams }: { searchParams: Promi
                   </tr>
                 ))}</tbody>
               </table></div>
-              {tab === "review" ? <div style={{ display: "flex", gap: 10, marginTop: 16 }}><button name="decision" value="approve" className="btn btn-p btn-sm" type="submit">Approve selected</button><button name="decision" value="reject" className="btn btn-s btn-sm" type="submit">Reject selected</button></div> : null}
+              {tab === "review" ? <div style={{ display: "flex", gap: 10, marginTop: 16 }}><ActButton label="Approve selected" busy="Saving" cls="btn-p" action={reviewMany.bind(null, "approve")} /><ActButton label="Reject selected" busy="Saving" cls="btn-s" action={reviewMany.bind(null, "reject")} /></div> : null}
             </form>
           )}
           <div style={{ display: "flex", gap: 16, marginTop: 18, fontSize: 15 }}>
