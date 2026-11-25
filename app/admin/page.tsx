@@ -62,7 +62,7 @@ export default async function Dashboard() {
   const noDesc = published.filter((p) => !p.description || p.description.trim().length < 40);
   const noCompany = published.filter((p) => !p.company_description || p.company_description.trim().length < 20);
   const noCommission = published.filter((p) => !(p.commission_models ?? []).filter((m) => m !== "Not published").length);
-  const needInfo = new Set([...noDesc, ...noCompany].map((p) => p.id)).size;
+  const needInfo = noDesc.length;
 
   // Leads: every tool except the newsletter counts as a lead; subscribers are shown separately
   const leadTools = TOOLS.map(([t, label], i) => ({ t, label, data: leadSets[i] }));
@@ -189,7 +189,7 @@ export default async function Dashboard() {
           {!progs ? <div className="adm-empty">Could not load programs.</div> : (
             <ul className="adm-todo">
               <li><b>{noDesc.length}</b> without a description</li>
-              <li><b>{noCompany.length}</b> without a company description</li>
+              <li><b>{noCompany.length}</b> without an "About the company" text</li>
               <li><b>{noCommission.length}</b> without commission details</li>
               <li><b>{drafts}</b> drafts, not on the site</li>
             </ul>
