@@ -27,7 +27,7 @@ function directoryTypes(c: Approved): string[] {
   return [...out];
 }
 
-// An approved company with a partner program page becomes an unpublished draft in the directory. Staff add the details and publish it from Programs.
+// An approved company with a partner program page is added to the directory and published straight away.
 async function draftForDirectory(c: Approved): Promise<"drafted" | "exists" | "skipped"> {
   if (c.has_program !== true || !c.program_url || c.program_id || !/^https?:\/\//i.test(c.program_url)) return "skipped";
   let dom = "";
@@ -46,7 +46,7 @@ async function draftForDirectory(c: Approved): Promise<"drafted" | "exists" | "s
   const ins = await db("programs", { method: "POST", headers: { Prefer: "return=minimal" }, body: JSON.stringify({
     id: next, slug, company: c.name, product_category: category, program_types: types, primary_type: types[0], commission_models: ["Not published"], feature_tags: [],
     region: "Global", program_url: c.program_url, domain: dom, description: clean(c.description), company_description: clean(c.description), tiers: [], benefits: [], how_it_works: [],
-    verification_status: "not_verified", published: false,
+    verification_status: "not_verified", published: true,
   }) });
   if (!ins.ok) return "skipped";
   await db(`companies?id=eq.${c.id}`, { method: "PATCH", headers: { Prefer: "return=minimal" }, body: JSON.stringify({ program_id: next }) });
@@ -67,7 +67,7 @@ async function applyReview(verb: string, ids: number[], f: FormData) {
   const word = status === "approved" ? "Approved" : "Rejected";
   let drafted = 0;
   if (status === "approved") for (const c of done) if ((await draftForDirectory(c)) === "drafted") drafted++;
-  const tail = drafted ? ` ${drafted} draft listing${drafted === 1 ? "" : "s"} added to the directory (Programs, Drafts to publish).` : "";
+  const tail = drafted ? ` ${drafted} listing${drafted === 1 ? "" : "s"} published in the directory.` : "";
   return go({ ...back, msg: (done.length === 1 ? `${word}: ${done[0].name}.` : `${word} ${done.length} companies.`) + tail });
 }
 
@@ -83,7 +83,7 @@ export async function approveConfident() {
   let drafted = 0;
   for (const c of done) if ((await draftForDirectory(c)) === "drafted") drafted++;
   await logAction(staff, "companies_approve_confident", String(done.length));
-  go({ tab: "review", msg: `${done.length} approved (confidence 80 or more).${drafted ? ` ${drafted} draft listings added to the directory (Programs, Drafts to publish).` : ""}` });
+  go({ tab: "review", msg: `${done.length} approved (confidence 80 or more).${drafted ? ` ${drafted} listings published in the directory.` : ""}` });
 }
 
 export async function addSource(f: FormData) {
