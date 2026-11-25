@@ -28,9 +28,9 @@ export default async function Enrichment({ searchParams }: { searchParams: Promi
   const isSuper = staff.role === "super_admin";
   const page = Math.max(1, Number(p) || 1);
 
-  const [pending, approved, rejected, queued, sources, today, state] = await Promise.all([
+  const [pending, approved, rejected, queued, sources, today, state, withProg, noProg, unclearProg, mine, live] = await Promise.all([
     count("companies?status=eq.pending"), count("companies?status=eq.approved"), count("companies?status=eq.rejected"),
-    count("enrich_queue?status=eq.queued"), count("enrich_sources?active=eq.true"), processedToday(), getState(),
+    count("enrich_queue?status=eq.queued"), count("enrich_sources?active=eq.true"), processedToday(), getState(), count("companies?status=eq.approved&added_by=eq.enrichment&has_program=eq.true"), count("companies?status=eq.approved&added_by=eq.enrichment&has_program=eq.false"), count("companies?status=eq.approved&added_by=eq.enrichment&has_program=is.null"), count("companies?status=eq.approved&added_by=eq.enrichment"), count("programs?published=eq.true"),
   ]);
 
   let rows: Co[] = []; let total = 0; let srcs: Src[] = [];
@@ -56,12 +56,26 @@ export default async function Enrichment({ searchParams }: { searchParams: Promi
       <p className="adm-sub">Builds the company database for partner discovery. It reads source pages, opens each company website, and files what it finds for your review. Company facts only, no personal data.</p>
       {msg ? <div className="adm-ok">{msg}</div> : null}
 
-      <div style={{ display: "flex", gap: 28, flexWrap: "wrap", margin: "18px 0" }}>
-        {[["Approved", approved], ["To review", pending], ["Queued", queued], ["Active sources", sources], ["Checked today", `${today} of ${state.daily_cap}`]].map(([l, n]) => (
+      <div className="adm-sub" style={{ marginTop: 18, textTransform: "uppercase", letterSpacing: 1 }}>1. Directory on partner2b.com (partner programs only)</div>
+      <div style={{ display: "flex", gap: 28, flexWrap: "wrap", margin: "8px 0 18px" }}>
+        {[["Programs published", live]].map(([l, n]) => (
           <div key={String(l)}><div className="adm-stat">{n}</div><div className="adm-sub">{l}</div></div>
         ))}
       </div>
-      <p className="adm-sub">{state.paused ? "Paused. " : ""}Last run: {when(state.last_run_at)}{state.last_run_note ? `, ${state.last_run_note}` : ""}. The job also runs by itself every night.</p>
+      <div className="adm-sub" style={{ textTransform: "uppercase", letterSpacing: 1 }}>2. Company database found by enrichment (internal, for discovery)</div>
+      <div style={{ display: "flex", gap: 28, flexWrap: "wrap", margin: "8px 0 18px" }}>
+        {[["Approved companies", mine], ["With partner program", withProg], ["Without partner program", noProg], ["Program unclear", unclearProg], ["To review", pending]].map(([l, n]) => (
+          <div key={String(l)}><div className="adm-stat">{n}</div><div className="adm-sub">{l}</div></div>
+        ))}
+      </div>
+      <div className="adm-sub" style={{ textTransform: "uppercase", letterSpacing: 1 }}>The job</div>
+      <div style={{ display: "flex", gap: 28, flexWrap: "wrap", margin: "8px 0 18px" }}>
+        {[["Queued", queued], ["Active sources", sources], ["Checked today", `${today} of ${state.daily_cap}`]].map(([l, n]) => (
+          <div key={String(l)}><div className="adm-stat">{n}</div><div className="adm-sub">{l}</div></div>
+        ))}
+      </div>
+      <div className="adm-sub">{approved - mine} directory vendors are also copied into the company database so discovery can suggest them. They are not counted in the numbers above.</div>
+      <p className="adm-sub">{state.paused ? "Paused. " : ""}Last run: {when(state.last_run_at)}{state.last_run_note ? `, ${state.last_run_note}` : ""}. The job also runs by itself every hour.</p>
 
       {isSuper ? (
         <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center", margin: "14px 0 22px" }}>
