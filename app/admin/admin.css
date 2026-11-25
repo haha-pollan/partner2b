@@ -197,3 +197,10 @@ a.adm-kpi:hover{transform:translateY(-3px) rotate(0deg)!important}
 .adm-tu-bar i{display:block;height:100%;background:var(--g800)}
 .adm-tu-v{text-align:right;font-family:'Michroma',sans-serif;font-size:13px}
 .adm-card.lime .adm-todo{margin-bottom:24px}
+
+/* Menu: module titles in the brand title font, submenu items in the normal text font */
+.adm-group{margin-bottom:20px}
+.adm-group-title{font-family:'Michroma',sans-serif;-webkit-text-stroke:.6px currentColor;font-size:12px;color:#fff;padding:0 12px 8px;letter-spacing:0}
+.adm-item{font-family:'IBM Plex Sans',sans-serif;font-size:15px;letter-spacing:0;padding:8px 12px;color:var(--g100)}
+.adm-item.off{color:var(--g500)}
+.adm-item.on{color:var(--ink)}
