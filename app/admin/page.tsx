@@ -85,7 +85,7 @@ export default async function Dashboard() {
   const kpis: { label: string; n: number | string; sub?: string; href?: string; tone: number; rot: number }[] = [
     { label: "New submissions", n: na(subs ? waiting.length : null), href: "/admin/submissions", tone: 1, rot: -1.2 },
     { label: "Programs live", n: na(progs ? published.length : null), sub: progs ? `${drafts} in draft` : undefined, href: "/admin/programs?show=published", tone: 0, rot: 0.9 },
-    { label: "Leads, 7 days", n: na(leadsBlocked ? null : leads7), tone: 2, rot: -0.7 },
+    { label: "Tool leads, 7 days", n: na(leadsBlocked ? null : leads7), href: "/admin/tools", tone: 2, rot: -0.7 },
     { label: "Subscribers", n: na(subscribers ? subscribers.length : null), tone: 0, rot: 1.1 },
     { label: "Missing description", n: na(progs ? needInfo : null), href: "/admin/programs", tone: 1, rot: -0.9 },
   ];
@@ -156,7 +156,7 @@ export default async function Dashboard() {
 
       <div className="adm-cols">
         <section className="adm-card cut">
-          <div className="adm-card-head"><h2>Latest leads</h2></div>
+          <div className="adm-card-head"><h2>Latest tool users</h2><Link href="/admin/tools">All tools</Link></div>
           {latest.length === 0 ? <div className="adm-empty">{leadsBlocked ? "Lead tables are not readable yet." : "No leads yet."}</div> : (
             <table className="adm-table">
               <thead><tr><th>When</th><th>Source</th><th>Email</th></tr></thead>

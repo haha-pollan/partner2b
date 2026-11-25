@@ -166,3 +166,21 @@ a.adm-kpi:hover{transform:translateY(-3px) rotate(0deg)!important}
 .adm-main h2{font-size:14px!important}
 .adm-main h1{font-size:20px!important}
 .adm-main .adm-hero h1{font-size:24px!important;white-space:normal}
+
+/* Tools screens */
+.adm-tools{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;margin-bottom:22px;padding:6px 4px}
+.adm-toolcard{min-height:190px}
+.adm-use{font-size:14px}
+.adm-use-h,.adm-use-r>summary{display:grid;grid-template-columns:96px minmax(0,1fr) minmax(0,1.5fr) minmax(0,1fr) minmax(0,.9fr);gap:12px;padding:10px 12px;align-items:center}
+.adm-use-h{background:var(--g800);color:var(--lime);font-size:13px}
+.adm-use-r{border-bottom:2px solid var(--g100)}
+.adm-use-r:nth-of-type(even){background:var(--g100)}
+.adm-use-r>summary{cursor:pointer;list-style:none}
+.adm-use-r>summary::-webkit-details-marker{display:none}
+.adm-use-r>summary:hover{background:var(--lav)}
+.adm-use-h span,.adm-use-r>summary span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.adm-use-r[open]>summary{background:var(--lime)}
+.adm-use-d{padding:14px 16px 18px;background:#fff;grid-template-columns:200px 1fr}
+@media(max-width:1180px){.adm-tools{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:860px){.adm-use{overflow-x:auto}.adm-use-h,.adm-use-r>summary{min-width:640px}.adm-use-d{grid-template-columns:130px 1fr}.adm-tools{gap:14px}}
+.adm-pagehead .adm-sub{color:var(--g300)}
