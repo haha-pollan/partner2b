@@ -62,7 +62,6 @@ export default async function Dashboard() {
   const noDesc = published.filter((p) => !p.description || p.description.trim().length < 40);
   const noCompany = published.filter((p) => !p.company_description || p.company_description.trim().length < 20);
   const noCommission = published.filter((p) => !(p.commission_models ?? []).filter((m) => m !== "Not published").length);
-  const needInfo = noDesc.length;
 
   // Leads: every tool except the newsletter counts as a lead; subscribers are shown separately
   const leadTools = TOOLS.map(([t, label], i) => ({ t, label, data: leadSets[i] }));
@@ -93,16 +92,16 @@ export default async function Dashboard() {
     ? "I could not load the inbox. Check the connection and reload."
     : waiting.length > 0
     ? `${waiting.length === 1 ? "One new submission is" : `${waiting.length} new submissions are`} waiting. Start with ${oldest.company || oldest.listing || "the oldest one"}.`
-    : needInfo > 0
-    ? `The inbox is clear. ${needInfo} ${needInfo === 1 ? "listing needs" : "listings need"} a description.`
+    : drafts > 0
+    ? `The inbox is clear. ${drafts} ${drafts === 1 ? "draft waits" : "drafts wait"} to be published.`
     : "The inbox is clear and the directory looks tidy.";
 
   const kpis: { label: string; n: number | string; sub?: string; href?: string; tone: number; rot: number }[] = [
     { label: "New submissions", n: na(subs ? waiting.length : null), href: "/admin/submissions", tone: 1, rot: -1.2 },
-    { label: "Programs live", n: na(progs ? published.length : null), sub: progs ? `${drafts} in draft` : undefined, href: "/admin/programs?show=published", tone: 0, rot: 0.9 },
+    { label: "Programs live", n: na(progs ? published.length : null), href: "/admin/programs?show=published", tone: 0, rot: 0.9 },
     { label: "Tool leads, 7 days", n: na(leadsBlocked ? null : leads7), href: "/admin/tools", tone: 2, rot: -0.7 },
     { label: "Subscribers", n: na(subscribers ? subscribers.length : null), tone: 0, rot: 1.1 },
-    { label: "Missing description", n: na(progs ? needInfo : null), href: "/admin/programs", tone: 1, rot: -0.9 },
+    { label: "Drafts to publish", n: na(progs ? drafts : null), href: "/admin/programs?show=unpublished", tone: 1, rot: -0.9 },
   ];
 
   return (
