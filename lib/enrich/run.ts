@@ -70,6 +70,9 @@ async function harvest(src: Source, programs: Map<string, number>): Promise<{ fo
   const page = await safeGet(src.url);
   if (!page.ok) return { found: 0, added: 0, note: `error: ${page.error}` };
   const ex = extract(page.html, page.url, 5000);
+  // Parked, for-sale and empty sites are not companies. Without real text the model would invent a description from the name.
+  if (PARKED.test(`${ex.title} ${ex.description} ${ex.text.slice(0, 1500)}`)) { await mark(row, "skipped", "parked or for-sale domain"); return "skipped"; }
+  if (ex.text.length < 400) { await mark(row, "skipped", "site has too little content"); return "skipped"; }
   const srcHost = hostOf(page.url);
   const linkSet = new Set(ex.links.map((l) => l.href));
   const linksTxt = ex.links.map((l) => `${l.text} | ${l.href}`).join("\n").slice(0, 30_000);
@@ -102,7 +105,7 @@ async function harvest(src: Source, programs: Map<string, number>): Promise<{ fo
 // ---------- Stage 2: open each company's own website and classify it ----------
 const RESOLVE_SYS = `You are given a company profile page on a directory site and the external links on it. Return JSON {"website":"..."} with the link that is the company's own website, copied exactly from the list, or {"website":null} if none is clearly the company's own site.`;
 
-const CLASSIFY_SYS = `You classify one company from its website for a database of B2B partners. Use only the page content given. Return JSON with these keys:
+const CLASSIFY_SYS = `You classify one company from its website for a database of B2B partners. Use only the page content given. The name from the list is only a hint: never describe a company from its name alone, and if the page content does not show what the company does, set relevant to false. Return JSON with these keys:
 {"relevant":true|false,"name":"","description":"","country":"","region":"","company_kind":"","partner_types":[],"subtype":"","categories":[],"serves_sizes":[],"serves_industries":"","engages_at":[],"size_band":"","has_program":true|false|null,"program_url":null,"confidence":0}
 Rules:
 - relevant is true only for a B2B technology company or a B2B service provider (agency, consultancy, integrator, MSP, reseller, community, media) that could work with software vendors as a partner or run its own partner program. Consumer brands, shops, individuals, and unrelated businesses are false.
@@ -123,6 +126,7 @@ type Classified = { relevant?: boolean; name?: string; description?: string; cou
 
 const nameKey = (n: string) => n.toLowerCase().replace(/\b(inc|llc|ltd|gmbh|corp|corporation|co|company|the)\b/g, "").replace(/[^a-z0-9]+/g, "");
 const AI_VENDOR_CATS = new Set(ALL_CATEGORIES.filter((c) => c !== "AI integrators and consultancies" && !/consult/i.test(c)));
+const PARKED = /domain (name )?(is )?for sale|buy this domain|this domain (is|may be) for sale|domain (is )?(parked|available)|parked (free|domain)|hugedomains|afternic|sedo\.com|dan\.com|godaddy|namecheap|under construction|coming soon|account suspended|default web page|website expired/i;
 const PARTNER_LINK = /partner|reseller|channel|alliance|affiliate|integrat|ecosystem|marketplace|referral/i;
 
 async function mark(row: QRow, status: "queued" | "done" | "failed" | "skipped", note: string, extra: Record<string, unknown> = {}) {
