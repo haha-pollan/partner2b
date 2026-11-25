@@ -19,7 +19,7 @@ export async function review(f: FormData) {
   const status = verb === "approve" ? "approved" : "rejected";
   await db(`companies?id=in.(${ids.join(",")})`, { method: "PATCH", headers: { Prefer: "return=minimal" }, body: JSON.stringify({ status }) });
   await logAction(staff, `companies_${status}`, String(ids.length), ids.slice(0, 20).join(","));
-  go({ tab: String(f.get("tab") || "review"), msg: `${ids.length} ${status}` });
+  go({ tab: String(f.get("tab") || "review"), show: String(f.get("show") || "approved"), q: String(f.get("q") || ""), msg: `${ids.length} ${status}` });
 }
 
 export async function approveConfident() {
