@@ -42,7 +42,7 @@ export default async function SubmissionPage({ params, searchParams }: { params:
 
   return (
     <div className="adm-card cut">
-      <p style={{ margin: "0 0 14px" }}><Link href="/admin" style={{ textDecoration: "underline", textUnderlineOffset: 3 }}>Back to submissions</Link></p>
+      <p style={{ margin: "0 0 14px" }}><Link href="/admin/submissions" style={{ textDecoration: "underline", textUnderlineOffset: 3 }}>Back to submissions</Link></p>
       <h1>{s.company || s.listing || "Submission"}</h1>
       <p className="adm-sub">{KIND[s.kind] ?? s.kind} · #{s.id}{s.handled_by ? ` · last handled by ${s.handled_by}` : ""}</p>
       {saved && <div className="adm-ok">Saved</div>}

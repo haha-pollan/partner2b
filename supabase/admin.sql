@@ -42,3 +42,7 @@ grant usage, select on sequence public.admin_log_id_seq to service_role;
 -- select id, email, 'Elena', 'super_admin' from auth.users where email = 'REPLACE@EXAMPLE.COM';
 -- insert into public.staff (user_id, email, name, role)
 -- select id, email, 'Colleague name', 'staff' from auth.users where email = 'REPLACE@EXAMPLE.COM';
+
+-- Dashboard and leads screens: let the server role read the lead tables.
+-- Run once in the Supabase SQL editor (safe to run again).
+grant select on public.assessment_leads, public.calculator_leads, public.builder_leads, public.playbook_downloads, public.newsletter_subscribers to service_role;
