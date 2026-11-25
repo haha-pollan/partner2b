@@ -112,15 +112,17 @@ Rules:
 - company_kind: "vendor" if it sells its own software or platform, "partner_side" if it is a services firm, reseller, agency, community or media.
 - partner_types: from ${JSON.stringify(PARTNER_TYPES)}. A software vendor is usually "Technology Partner". Add "AI and Automation Partner" only if AI or automation is its product or service. Agencies, consultancies and integrators are "Agency Partner". Resellers, distributors and referral firms are "Channel Partner". Communities, associations, newsletters and media are "Community Partner". "Strategic Partner" only for large platform ecosystems.
 - subtype: one of ${JSON.stringify(SUBTYPES)} or "".
-- categories: up to 3 from ${JSON.stringify(ALL_CATEGORIES)}, the product space the company works in or serves.
+- categories: up to 3 from ${JSON.stringify(ALL_CATEGORIES)}. For a vendor, the product space it sells in. For a services firm (company_kind "partner_side"), the category of software it implements, resells or advises on. A firm that delivers AI or automation projects for clients gets "AI integrators and consultancies" first. Never give a services firm a vendor product category such as "Foundation models and APIs" or "AI agents" unless it also sells that product itself.
 - serves_sizes: from ${JSON.stringify(SIZES)}. serves_industries: at most 120 characters or "".
 - engages_at: where the company meets its customers around a software purchase: from ${JSON.stringify(STAGES)} (Pre-use is advice and selection, In use is implementation and daily operation, Post-use is support, optimisation and renewal).
 - size_band: one of ${JSON.stringify(SIZE_BANDS)} or "" if the page does not say.
-- has_program: true if the links show the company runs a partner, reseller, channel or affiliate program that other companies can join. false if there is clearly none. null if unclear. program_url: copy exactly from PARTNER LINKS, or null.
+- has_program: true only if the links show the company runs a program that OTHER companies can apply to join (become a partner, reseller, channel, referral or affiliate program). A page that only lists the technology vendors or clients the company works with, a "Our partners" page, or a partner badge is NOT a program: set false. false if there is clearly none. null if unclear. For agencies and consultancies the answer is usually false. program_url: copy exactly from PARTNER LINKS, or null.
 - confidence: 0 to 100, how sure you are that every field above is right.`;
 
 type Classified = { relevant?: boolean; name?: string; description?: string; country?: string; region?: string; company_kind?: string; partner_types?: unknown; subtype?: string; categories?: unknown; serves_sizes?: unknown; serves_industries?: string; engages_at?: unknown; size_band?: string; has_program?: boolean | null; program_url?: string | null; confidence?: number };
 
+const nameKey = (n: string) => n.toLowerCase().replace(/\b(inc|llc|ltd|gmbh|corp|corporation|co|company|the)\b/g, "").replace(/[^a-z0-9]+/g, "");
+const AI_VENDOR_CATS = new Set(ALL_CATEGORIES.filter((c) => c !== "AI integrators and consultancies" && !/consult/i.test(c)));
 const PARTNER_LINK = /partner|reseller|channel|alliance|affiliate|integrat|ecosystem|marketplace|referral/i;
 
 async function mark(row: QRow, status: "queued" | "done" | "failed" | "skipped", note: string, extra: Record<string, unknown> = {}) {
@@ -155,8 +157,15 @@ async function enrichOne(row: QRow, programs: Map<string, number>): Promise<"add
   const hints = [row.partner_type_hint && `Hint from the source list: partner type ${row.partner_type_hint}.`, row.category_hint && `Hint from the source list: category ${row.category_hint}.`].filter(Boolean).join(" ");
   const c = await askJson<Classified>(CLASSIFY_SYS, `WEBSITE: ${home}\nNAME FROM LIST: ${row.name ?? ""}\n${hints}\nTITLE: ${ex.title}\nDESCRIPTION: ${ex.description}\nPAGE TEXT:\n${ex.text}\n\nPARTNER LINKS (text | url):\n${pl.map((l) => `${l.text} | ${l.href}`).join("\n")}`);
   if (!c) { await mark(row, row.attempts >= 1 ? "failed" : "queued", "model gave no answer"); return row.attempts >= 1 ? "failed" : "retry"; }
-  const types = pick(c.partner_types, PARTNER_TYPES), cats = pick(c.categories, ALL_CATEGORIES).slice(0, 3);
+  const types = pick(c.partner_types, PARTNER_TYPES);
+  let cats = pick(c.categories, ALL_CATEGORIES).slice(0, 3);
+  // Services firms that deliver AI or automation always carry the integrators category, and never a vendor product category by mistake.
+  if (c.company_kind === "partner_side" && (types.includes("AI and Automation Partner") || c.subtype === "AI and automation builder")) {
+    cats = ["AI integrators and consultancies", ...cats.filter((x) => !AI_VENDOR_CATS.has(x))].slice(0, 3);
+  }
   if (c.relevant === false || !types.length) { await mark(row, "skipped", "not a fit"); return "skipped"; }
+  // The same company can use another web address than the directory has (anthropic.com and claude.com), so compare names too.
+  if (programs.has(`name:${nameKey(c.name || row.name || "")}`)) { await mark(row, "skipped", "already in the directory (same name)"); return "skipped"; }
   const progOk = c.program_url && pl.some((l) => l.href === c.program_url) ? String(c.program_url) : null;
   const hasProgram = c.has_program === true || c.has_program === false ? c.has_program : null;
   let conf = Math.max(0, Math.min(100, Math.round(Number(c.confidence) || 0)));
@@ -201,7 +210,10 @@ export async function runEnrichment(opts: { maxSeconds: number; autoFind?: boole
   if (state.paused) return save("paused, nothing run");
 
   const programs = new Map<string, number>();
-  for (const p of await fetchAll<{ id: number; domain: string | null }>("programs?select=id,domain&order=id.asc")) if (p.domain) programs.set(String(p.domain).toLowerCase().replace(/^www\./, ""), p.id);
+  for (const p of await fetchAll<{ id: number; domain: string | null; company: string | null }>("programs?select=id,domain,company&order=id.asc")) {
+    if (p.domain) programs.set(String(p.domain).toLowerCase().replace(/^www\./, ""), p.id);
+    if (p.company && nameKey(p.company).length >= 3) programs.set(`name:${nameKey(p.company)}`, p.id);
+  }
 
   const stale = new Date(Date.now() - 14 * DAY).toISOString();
   const dr = await db(`enrich_sources?active=eq.true&or=(last_run_at.is.null,last_run_at.lt.${stale})&order=last_run_at.asc.nullsfirst&limit=8&select=*`);
