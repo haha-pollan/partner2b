@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { adminConfigured, db, requireStaff } from "@/lib/admin/session";
+import { Toby } from "@/components/Toby";
 
 export const dynamic = "force-dynamic";
 
@@ -58,7 +59,7 @@ export default async function Dashboard() {
   const subscribers = leadTools.find((x) => x.t === "newsletter_subscribers")?.data ?? null;
   const allLeads = leadSources.flatMap((x) => (x.data ?? []).map((l) => ({ ...l, label: x.label })));
   const leads7 = allLeads.filter((l) => now - new Date(l.created_at).getTime() < 7 * DAY).length;
-  const latest = [...allLeads].sort((a, b) => b.created_at.localeCompare(a.created_at)).slice(0, 8);
+  const latest = [...allLeads].sort((a, b) => b.created_at.localeCompare(a.created_at)).slice(0, 6);
   const leadsBlocked = leadSources.some((x) => x.data === null);
 
   const days = Array.from({ length: 30 }, (_, i) => {
@@ -68,49 +69,84 @@ export default async function Dashboard() {
   const max = Math.max(1, ...days.map((x) => x.n));
   const total30 = days.reduce((a, x) => a + x.n, 0);
 
-  const hello = `Hello, ${staff.name.split(" ")[0]}`;
+  const hour = Number(new Date().toLocaleString("en-GB", { hour: "numeric", hour12: false, timeZone: "Europe/Warsaw" })) % 24;
+  const greet = hour < 12 ? "Good morning" : hour < 18 ? "Good afternoon" : "Good evening";
+  const first = staff.name.split(" ")[0];
   const na = (v: number | null | undefined) => (v === null || v === undefined ? "-" : v);
+  const oldest = waiting[0];
+  const say = !subs
+    ? "I could not load the inbox. Check the connection and reload."
+    : waiting.length > 0
+    ? `${waiting.length === 1 ? "One new submission is" : `${waiting.length} new submissions are`} waiting. Start with ${oldest.company || oldest.listing || "the oldest one"}.`
+    : needInfo > 0
+    ? `The inbox is clear. ${needInfo} ${needInfo === 1 ? "listing needs" : "listings need"} a description.`
+    : "The inbox is clear and the directory looks tidy.";
+
+  const kpis: { label: string; n: number | string; sub?: string; href?: string; tone: number; rot: number }[] = [
+    { label: "New submissions", n: na(subs ? waiting.length : null), href: "/admin/submissions", tone: 1, rot: -1.2 },
+    { label: "Programs live", n: na(progs ? published.length : null), sub: progs ? `${drafts} in draft` : undefined, href: "/admin/programs?show=published", tone: 0, rot: 0.9 },
+    { label: "Leads, 7 days", n: na(leadsBlocked ? null : leads7), tone: 2, rot: -0.7 },
+    { label: "Subscribers", n: na(subscribers ? subscribers.length : null), tone: 0, rot: 1.1 },
+    { label: "Missing description", n: na(progs ? needInfo : null), href: "/admin/programs", tone: 1, rot: -0.9 },
+  ];
 
   return (
     <>
-      <div className="adm-pagehead">
-        <h1>{hello}</h1>
-        <p className="adm-sub">What needs you today.</p>
+      <div className="adm-hero">
+        <div>
+          <h1>{greet}, <span className="hl">{first}</span></h1>
+          <p className="adm-tapes ptapes" aria-label="Today in numbers">
+            <span className="pt pt1">{na(subs ? waiting.length : null)} to review</span>
+            <span className="pt pt2">{na(leadsBlocked ? null : leads7)} new leads this week</span>
+          </p>
+        </div>
+        <div className="adm-toby" aria-hidden="false">
+          <div className="adm-bubble">{say}</div>
+          <div className="adm-slot cut" aria-hidden="true"><Toby height={150} rows={26} glasses animate={false} /></div>
+        </div>
       </div>
 
       <div className="adm-kpis">
-        <Link href="/admin/submissions" className="adm-kpi cut"><span className="adm-kpi-n">{na(subs ? waiting.length : null)}</span><span className="adm-kpi-l">New submissions waiting</span></Link>
-        <Link href="/admin/programs?show=published" className="adm-kpi cut"><span className="adm-kpi-n">{na(progs ? published.length : null)}</span><span className="adm-kpi-l">Programs published{progs ? `, ${drafts} in draft` : ""}</span></Link>
-        <div className="adm-kpi cut"><span className="adm-kpi-n">{na(leadsBlocked ? null : leads7)}</span><span className="adm-kpi-l">Leads in the last 7 days</span></div>
-        <div className="adm-kpi cut"><span className="adm-kpi-n">{na(subscribers ? subscribers.length : null)}</span><span className="adm-kpi-l">Newsletter subscribers</span></div>
-        <div className="adm-kpi cut"><span className="adm-kpi-n">{na(progs ? needInfo : null)}</span><span className="adm-kpi-l">Programs missing a description</span></div>
+        {kpis.map((k) => {
+          const inner = (
+            <>
+              <span className="adm-kpi-l">{k.label}</span>
+              <span className="adm-kpi-n">{k.n}</span>
+              {k.sub && <span className="adm-kpi-s">{k.sub}</span>}
+              {k.href && <span className="adm-kpi-go" aria-hidden="true">→</span>}
+            </>
+          );
+          const st = { transform: `rotate(${k.rot}deg)` };
+          return k.href ? (
+            <Link key={k.label} href={k.href} className={`adm-kpi cut t${k.tone}`} style={st}>{inner}</Link>
+          ) : (
+            <div key={k.label} className={`adm-kpi cut t${k.tone}`} style={st}>{inner}</div>
+          );
+        })}
       </div>
 
-      {leadsBlocked && <p className="adm-note">Some lead tables cannot be read yet. Run the grants block at the end of supabase/admin.sql in the Supabase SQL editor.</p>}
+      {leadsBlocked && <p className="adm-note cut">Some lead tables cannot be read yet. Run the grants block at the end of supabase/admin.sql in the Supabase SQL editor.</p>}
 
       <div className="adm-cols">
         <section className="adm-card cut">
-          <div className="adm-card-head"><h2>Needs attention</h2><Link href="/admin/submissions">All submissions</Link></div>
+          <div className="adm-card-head"><h2>Needs attention</h2><Link href="/admin/submissions">View all</Link></div>
           {!subs ? <div className="adm-empty">Could not load submissions.</div> : waiting.length === 0 ? <div className="adm-empty">No new submissions. All caught up.</div> : (
-            <table className="adm-table">
-              <thead><tr><th>Waiting</th><th>Type</th><th>Company or listing</th><th>Person</th></tr></thead>
-              <tbody>
-                {waiting.slice(0, 8).map((s) => (
-                  <tr key={s.id}>
-                    <td>{ago(s.created_at)}</td>
-                    <td>{KIND[s.kind] ?? s.kind}</td>
-                    <td><Link href={`/admin/submissions/${s.id}`}>{s.company || s.listing || "Open"}</Link></td>
-                    <td>{s.name || "-"}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            <div className="adm-rows">
+              {waiting.slice(0, 6).map((s) => (
+                <Link key={s.id} href={`/admin/submissions/${s.id}`} className="adm-row cut">
+                  <span className="adm-row-t"><b>{s.company || s.listing || "Open"}</b><span>{KIND[s.kind] ?? s.kind}{s.name ? `, ${s.name}` : ""}</span></span>
+                  <span className="adm-row-w">{ago(s.created_at)}</span>
+                  <span className="adm-row-go" aria-hidden="true">→</span>
+                </Link>
+              ))}
+            </div>
           )}
-          {waiting.length > 8 && <p className="adm-more">and {waiting.length - 8} more, oldest first</p>}
+          {waiting.length > 6 && <p className="adm-more">and {waiting.length - 6} more, oldest first</p>}
         </section>
 
-        <section className="adm-card cut">
-          <div className="adm-card-head"><h2>Leads, last 30 days</h2><span className="adm-total">{leadsBlocked ? "-" : total30}</span></div>
+        <section className="adm-card dark cut">
+          <div className="adm-card-head"><h2>Leads, 30 days</h2></div>
+          <div className="adm-stat">{leadsBlocked ? "-" : total30}</div>
           <div className="adm-bars" role="img" aria-label="Leads per day over the last 30 days">
             {days.map((x) => (<i key={x.d} title={`${x.d}: ${x.n}`} style={{ height: `${Math.max(x.n ? 8 : 2, (x.n / max) * 100)}%` }} className={x.n ? "on" : ""} />))}
           </div>
@@ -129,26 +165,26 @@ export default async function Dashboard() {
           )}
         </section>
 
-        <section className="adm-card cut">
+        <section className="adm-card lime cut">
           <div className="adm-card-head"><h2>Directory to-do</h2><Link href="/admin/programs">Programs</Link></div>
           {!progs ? <div className="adm-empty">Could not load programs.</div> : (
             <ul className="adm-todo">
-              <li><b>{noDesc.length}</b> published programs have no or a very short description</li>
-              <li><b>{noCompany.length}</b> have no company description</li>
-              <li><b>{noCommission.length}</b> do not show commission details</li>
-              <li><b>{drafts}</b> are drafts that are not on the site</li>
+              <li><b>{noDesc.length}</b> without a description</li>
+              <li><b>{noCompany.length}</b> without a company description</li>
+              <li><b>{noCommission.length}</b> without commission details</li>
+              <li><b>{drafts}</b> drafts, not on the site</li>
             </ul>
           )}
+          <Link href="/admin/programs" className="adm-cta">Open programs</Link>
         </section>
       </div>
 
-      <section className="adm-card cut">
-        <div className="adm-card-head"><h2>{isSuper ? "Recent activity" : "Your recent activity"}</h2></div>
+      <section className="adm-card dark cut">
+        <div className="adm-card-head"><h2>{isSuper ? "Recent activity" : "Your activity"}</h2></div>
         {!log ? <div className="adm-empty">Activity could not be loaded.</div> : log.length === 0 ? <div className="adm-empty">Nothing yet.</div> : (
-          <table className="adm-table">
-            <thead><tr><th>When</th><th>Who</th><th>Action</th><th>Item</th></tr></thead>
-            <tbody>{log.map((l, i) => (<tr key={i}><td>{ago(l.at)}</td><td>{l.staff_email}</td><td>{l.action}</td><td>{l.target || "-"}</td></tr>))}</tbody>
-          </table>
+          <ul className="adm-log">
+            {log.map((l, i) => (<li key={i}><span className="w">{ago(l.at)}</span><span>{l.staff_email}</span><span>{l.action}</span><span>{l.target || "-"}</span></li>))}
+          </ul>
         )}
       </section>
     </>
