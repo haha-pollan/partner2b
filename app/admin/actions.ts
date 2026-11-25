@@ -20,7 +20,11 @@ export async function login(_prev: LoginState, f: FormData): Promise<LoginState>
   if (!r.ok) return { error: "Wrong email or password." };
   const d = await r.json();
   const sr = await db(`staff?user_id=eq.${encodeURIComponent(d.user.id)}&active=eq.true&select=role&limit=1`);
-  const rows = sr.ok ? await sr.json() : [];
+  if (!sr.ok) {
+    console.error("admin login: staff lookup failed", sr.status);
+    return { error: "Setup problem: the server key is not accepted. Check SUPABASE_SERVICE_ROLE_KEY in Vercel." };
+  }
+  const rows = await sr.json();
   if (!rows[0]) return { error: "This account does not have access to the admin." };
   const jar = await cookies();
   jar.set(AT, d.access_token, cookieOpts(60 * 60 * 24 * 14));
