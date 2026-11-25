@@ -228,7 +228,7 @@ export async function runEnrichment(opts: { maxSeconds: number; autoFind?: boole
   }
 
   const stale = new Date(Date.now() - 14 * DAY).toISOString();
-  const dr = await db(`enrich_sources?active=eq.true&or=(last_run_at.is.null,last_run_at.lt.${stale})&order=last_run_at.asc.nullsfirst&limit=8&select=*`);
+  const dr = await db(`enrich_sources?active=eq.true&or=(last_run_at.is.null,last_run_at.lt.${stale})&order=last_run_at.asc.nullsfirst,id.desc&limit=8&select=*`);
   const due: Source[] = dr.ok ? await dr.json() : [];
   for (const src of due) {
     if (left() < 90_000) break;
