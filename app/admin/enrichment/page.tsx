@@ -115,7 +115,7 @@ export default async function Enrichment({ searchParams }: { searchParams: Promi
           {tab === "review" && isSuper && pending > 0 ? <form action={approveConfident} style={{ marginBottom: 14 }}><Submit label="Approve everything with confidence 80 or more" busy="Approving" cls="btn-s" /></form> : null}
           {rows.length === 0 ? <div className="adm-empty">{tab === "review" ? "Nothing to review. Run a batch, or add sources." : "Nothing found."}</div> : (
             <form action={review}>
-              <input type="hidden" name="tab" value={tab} />
+              <input type="hidden" name="tab" value={tab} /><input type="hidden" name="show" value={show} /><input type="hidden" name="q" value={q} />
               <div style={{ overflowX: "auto" }}><table className="adm-table">
                 <thead><tr>{tab === "review" ? <th><SelectAll /></th> : null}<th>Action</th><th>Company</th><th>Partner type</th><th>Categories</th><th>Serves</th><th>Partner program</th><th>Conf.</th><th>{tab === "review" ? "Source" : "Status"}</th></tr></thead>
                 <tbody>{rows.map((c) => (
