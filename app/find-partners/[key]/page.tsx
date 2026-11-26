@@ -16,5 +16,5 @@ export default async function Page({ params }: { params: Promise<{ key: string }
   const rows = r.ok ? await r.json() : [];
   if (!rows[0]) notFound();
   const preview = await previewFor(rows[0]);
-  return <View preview={preview} strategyId={key} />;
+  return <View preview={preview} strategyId={key} company={rows[0].company_name ?? null} />;
 }
