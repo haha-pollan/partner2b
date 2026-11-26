@@ -7,7 +7,7 @@ import type { Strategy } from "./strategy";
 
 export type Open = { name: string; website: string; reason: string; subtype: string | null; directory: string | null };
 export type PType = { type: string; role: string; pool: number; shown: Open[]; moreLocked: number };
-export const PREVIEW_V = 4;
+export const PREVIEW_V = 5;
 export type Preview = { partial?: boolean; v?: number; total: number; week: number; opened: number; types: PType[]; made_at: string };
 
 async function weekCount(types: string[]): Promise<number> {
@@ -33,7 +33,7 @@ export async function buildPreview(s: Strategy): Promise<Preview> {
     }));
     return { type: t.type, role: t.role, pool: t.poolSize, shown, moreLocked: Math.max(0, t.poolSize - shown.length) };
   });
-  const partial = llmConfigured() && results.some((t) => t.matches.slice(0, 5).some((m) => !m.ranked));
+  const partial = llmConfigured() && results.some((t) => t.matches.length > 0 && !t.matches.some((m) => m.ranked));
   return { partial, v: PREVIEW_V, total: types.reduce((n, t) => n + t.pool, 0), week: await weekCount(results.map((t) => t.type)), opened: types.reduce((n, t) => n + t.shown.length, 0), types, made_at: new Date().toISOString() };
 }
 
