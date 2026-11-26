@@ -1,15 +1,13 @@
 // The free preview: one open company per partner type, locked hints for the rest, and the real counts.
 // Locked companies are never sent to the visitor: only a region and size hint leave the server.
 import { db } from "@/lib/admin/session";
-import { matchStrategy, type Match } from "./match";
+import { matchStrategy } from "./match";
 import type { Strategy } from "./strategy";
 
 export type Open = { name: string; website: string; reason: string; subtype: string | null; directory: string | null };
-export type PType = { type: string; role: string; pool: number; open: Open | null; locked: { hint: string; subtype: string | null }[]; moreLocked: number };
-export const PREVIEW_V = 2;
+export type PType = { type: string; role: string; pool: number; shown: Open[]; moreLocked: number };
+export const PREVIEW_V = 3;
 export type Preview = { v?: number; total: number; week: number; opened: number; types: PType[]; made_at: string };
-
-const hint = (m: Match) => [m.region ?? "Region not listed", m.size_band ? `${m.size_band} staff` : null].filter(Boolean).join(", ");
 
 async function weekCount(types: string[]): Promise<number> {
   if (!types.length) return 0;
@@ -27,17 +25,14 @@ export async function buildPreview(s: Strategy): Promise<Preview> {
     for (const p of r.ok ? ((await r.json()) as { id: number; slug: string }[]) : []) slugs.set(p.id, p.slug);
   }
   const types: PType[] = results.map((t) => {
-    // The open card prefers a directory company, so it has a real partner program page to link to.
-    const open = t.matches.find((m) => m.program_id && slugs.has(m.program_id)) ?? t.matches[0] ?? null;
-    const rest = t.matches.filter((m) => m !== open);
-    return {
-      type: t.type, role: t.role, pool: t.poolSize,
-      open: open ? { name: open.name, website: open.website, reason: open.reason || (open.description ?? "").slice(0, 140), subtype: open.subtype, directory: open.program_id && slugs.get(open.program_id) ? `/directory/${slugs.get(open.program_id)}` : null } : null,
-      locked: rest.slice(0, 4).map((m) => ({ hint: hint(m), subtype: m.subtype })),
-      moreLocked: Math.max(0, t.poolSize - (open ? 1 : 0) - Math.min(4, rest.length)),
-    };
+    // The first five matches are shown in full. Everything else in the pool stays behind the paywall.
+    const shown: Open[] = t.matches.slice(0, 5).map((m) => ({
+      name: m.name, website: m.website, reason: m.reason || (m.description ?? "").slice(0, 140), subtype: m.subtype,
+      directory: m.program_id && slugs.get(m.program_id) ? `/directory/${slugs.get(m.program_id)}` : null,
+    }));
+    return { type: t.type, role: t.role, pool: t.poolSize, shown, moreLocked: Math.max(0, t.poolSize - shown.length) };
   });
-  return { v: PREVIEW_V, total: types.reduce((n, t) => n + t.pool, 0), week: await weekCount(results.map((t) => t.type)), opened: types.filter((t) => t.open).length, types, made_at: new Date().toISOString() };
+  return { v: PREVIEW_V, total: types.reduce((n, t) => n + t.pool, 0), week: await weekCount(results.map((t) => t.type)), opened: types.reduce((n, t) => n + t.shown.length, 0), types, made_at: new Date().toISOString() };
 }
 
 // Reads the saved preview, or builds and saves it the first time.

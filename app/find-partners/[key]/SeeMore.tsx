@@ -4,7 +4,7 @@ import RequestForm from "./RequestForm";
 
 // "See more" opens the paywall. For now it holds the access request form; where it leads
 // (checkout or account) will be decided later.
-export default function SeeMore({ type, total, strategyId }: { type: string; total: string; strategyId: string }) {
+export default function SeeMore({ type, total, strategyId, violet }: { type: string; total: string; strategyId: string; violet?: boolean }) {
   const [open, setOpen] = useState(false);
   useEffect(() => {
     if (!open) return;
@@ -14,7 +14,7 @@ export default function SeeMore({ type, total, strategyId }: { type: string; tot
   }, [open]);
   return (
     <>
-      <button type="button" className="btn btn-p btn-sm" onClick={() => setOpen(true)}>See more {type}s</button>
+      <button type="button" className={violet ? "btn btn-s btn-sm" : "btn btn-p btn-sm"} onClick={() => setOpen(true)}>See more {type}s</button>
       {open ? (
         <div role="dialog" aria-modal="true" aria-label={`Unlock all ${type}s`} onClick={(e) => { if (e.target === e.currentTarget) setOpen(false); }} style={{ position: "fixed", inset: 0, zIndex: 100, background: "rgba(10,10,11,.82)", display: "flex", alignItems: "center", justifyContent: "center", padding: 20, overflowY: "auto" }}>
           <div className="cut" style={{ background: "#A8FF5C", color: "#0A0A0B", maxWidth: 640, width: "100%", padding: "34px 36px 40px", position: "relative", ["--c" as string]: "26px" }}>
