@@ -3,6 +3,7 @@ import { tidy } from "@/lib/builder2/parse";
 import { normaliseUrl } from "@/lib/builder2/intake";
 import { allowedByRobots, extract, hostOf, safeGet, skipHost } from "./fetch";
 import { askJson, askWithSearch, jsonFrom } from "./llm";
+import { fillDetails } from "./details";
 import { ALL_CATEGORIES, KINDS, PARTNER_TYPES, REGIONS, SIZES, SIZE_BANDS, STAGES, SUBTYPES, TYPE_WORDS, pick, pickOne } from "./vocab";
 
 type Source = { id: number; url: string; label: string | null; kind: string; partner_type_hint: string | null; category_hint: string | null; found_count: number };
@@ -255,9 +256,16 @@ export async function runEnrichment(opts: { maxSeconds: number; autoFind?: boole
     capLeft -= rows.length;
   }
 
+  // Spare time goes to filling region, size and stage for approved companies that miss them.
+  let detailNote = "";
+  if (left() > 60_000) {
+    try { const d = await fillDetails(Math.min(left() - 20_000, 150_000)); if (d.checked) detailNote = `; details checked for ${d.checked} companies (${d.filled} filled)`; }
+    catch (e) { detailNote = `; details stopped: ${e instanceof Error ? e.message : "error"}`; }
+  }
+
   let found = "";
   if (opts.autoFind && !moreQueued && !due.length && left() > 60_000) {
     try { found = `; ${(await findSources()).note}`; } catch { found = "; source search failed"; }
   }
-  return save(`${s.sources} source page${s.sources === 1 ? "" : "s"} read, ${s.queued} queued, ${s.added} added for review, ${s.skipped} skipped, ${s.failed} failed${capLeft <= 0 ? ", daily cap reached" : ""}${found}`);
+  return save(`${s.sources} source page${s.sources === 1 ? "" : "s"} read, ${s.queued} queued, ${s.added} added for review, ${s.skipped} skipped, ${s.failed} failed${capLeft <= 0 ? ", daily cap reached" : ""}${detailNote}${found}`);
 }
