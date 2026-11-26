@@ -68,7 +68,7 @@ export default function View({ preview, strategyId, company }: { preview: Previe
         </div>
       </div>
 
-      <section className="wrap" style={{ padding: "0 var(--margin) clamp(26px,4vw,40px)" }}>
+      <section className="wrap" style={{ padding: "0 var(--margin) clamp(50px,7vw,90px)" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
           <span style={{ fontSize: 15, color: "#B9BABD", marginRight: 4 }}>Your 90-day plan</span>
           {STAGES.map((st) => <span key={st} className="chip" style={{ background: "#2A2B30", color: "#ECECEE", fontSize: 14, padding: "6px 12px" }}><Lock size={12} /> {st}</span>)}
@@ -76,7 +76,7 @@ export default function View({ preview, strategyId, company }: { preview: Previe
         </div>
       </section>
 
-      <section className="wrap" style={{ padding: "clamp(20px,4vw,40px) var(--margin) 0" }}>
+      <section className="wrap" style={{ padding: "clamp(30px,5vw,60px) var(--margin) 0" }}>
         <h2 style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, letterSpacing: 0, WebkitTextStroke: "1.5px currentColor", fontSize: "clamp(22px,2.6vw,34px)" }}>Your {nf(total)} matches{company ? ` for ${company}` : ""}</h2>
         <p style={{ margin: "14px 0 0", maxWidth: 660, fontSize: 18, lineHeight: 1.5, color: "#ECECEE" }}>Grouped by partner type. The top five of each type are open. The rest unlock with full access.</p>
       </section>
@@ -88,13 +88,13 @@ export default function View({ preview, strategyId, company }: { preview: Previe
         </div>
       </nav>
 
-      <section className="wrap" style={{ padding: "clamp(24px,4vw,40px) var(--margin) clamp(30px,6vw,60px)" }}>
+      <section className="wrap" style={{ padding: "clamp(50px,7vw,90px) var(--margin) clamp(70px,9vw,130px)" }}>
         {types.map((t, ti) => {
           const ai = ti % 2 === 1;
           const accent = ai ? "#7C5CFF" : "#A8FF5C";
           const shown = t.shown.length;
           return (
-            <div key={t.type} id={`type-${ti}`} style={{ marginBottom: 72, scrollMarginTop: 70 }}>
+            <div key={t.type} id={`type-${ti}`} style={{ marginTop: ti === 0 ? 0 : "clamp(60px,8vw,100px)", paddingTop: ti === 0 ? 0 : "clamp(60px,8vw,100px)", borderTop: ti === 0 ? 0 : "1px solid #2A2B30", scrollMarginTop: 70 }}>
               <div style={{ display: "flex", alignItems: "center", gap: 18, flexWrap: "wrap" }}>
                 <div style={{ fontFamily: "'Michroma',sans-serif", fontSize: "clamp(46px,6.4vw,84px)", lineHeight: 1, letterSpacing: 0, color: accent, WebkitTextStroke: "2px currentColor" }}>{nf(t.pool)}</div>
                 <span className="pill" style={{ background: accent, color: ai ? "#fff" : "#0A0A0B", fontSize: 16, padding: "7px 16px" }}>{t.type}s</span>
@@ -128,10 +128,10 @@ export default function View({ preview, strategyId, company }: { preview: Previe
             </div>
           );
         })}
-        {week > 0 ? <p style={{ fontSize: 18, color: "#ECECEE" }}>{nf(week)} new companies of these types were added to our database this week.</p> : null}
+        {week > 0 ? <p style={{ marginTop: "clamp(60px,8vw,100px)", fontSize: 18, color: "#ECECEE" }}>{nf(week)} new companies of these types were added to our database this week.</p> : null}
       </section>
 
-      <section className="wrap" style={{ padding: "0 var(--margin) clamp(40px,6vw,64px)" }}>
+      <section className="wrap" style={{ padding: "0 var(--margin) clamp(70px,9vw,130px)" }}>
         <h2 style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, letterSpacing: 0, WebkitTextStroke: "1.5px currentColor", fontSize: "clamp(22px,2.6vw,34px)" }}>Track your first 90 days</h2>
         <p style={{ margin: "14px 0 0", maxWidth: 620, fontSize: 18, lineHeight: 1.5, color: "#ECECEE" }}>Your plan board follows every match from first contact to first deal, so no partner goes quiet.</p>
         <div style={{ marginTop: 26, display: "flex", gap: 8, flexWrap: "wrap" }}>
@@ -142,7 +142,7 @@ export default function View({ preview, strategyId, company }: { preview: Previe
         <p style={{ margin: "10px 0 0", fontSize: 15, color: "#B9BABD" }}>{opened} of {nf(total)} matches shown. Unlock all to start your plan.</p>
       </section>
 
-      <section className="wrap" style={{ padding: "0 var(--margin) clamp(50px,8vw,90px)" }}>
+      <section className="wrap" style={{ padding: "0 var(--margin) clamp(80px,10vw,140px)" }}>
         <h2 style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: "clamp(22px,2.6vw,34px)", letterSpacing: 0, WebkitTextStroke: "1.5px currentColor" }}>Free tools while you wait</h2>
         <p style={{ margin: "14px 0 0", maxWidth: 620, fontSize: 18, lineHeight: 1.5, color: "#ECECEE" }}>Use these while you review your matches. Size your outreach, check your program and learn the terms. All free, no sign up.</p>
         <div className="fptools" style={{ marginTop: 30 }}>
