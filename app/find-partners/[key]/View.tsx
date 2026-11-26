@@ -41,6 +41,18 @@ function Lock({ size = 16 }: { size?: number }) {
     </svg>
   );
 }
+function Progress({ total, opened }: { total: number; opened: number }) {
+  return (
+    <div>
+      <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+        <span className="chip">Matches {nf(total)}</span>
+        {STAGES.map((st) => <span key={st} className="chip" style={{ background: "#2A2B30", color: "#ECECEE" }}><Lock size={13} /> {st}</span>)}
+      </div>
+      <div style={{ marginTop: 22, background: "#2A2B30", height: 10, maxWidth: 760 }}><div style={{ background: "#A8FF5C", height: 10, width: `${Math.max(2, Math.round((opened / Math.max(1, total)) * 100))}%` }} /></div>
+      <p style={{ margin: "10px 0 0", fontSize: 15, color: "#B9BABD" }}>{opened} of {nf(total)} matches shown. Unlock all to start your plan.</p>
+    </div>
+  );
+}
 function Initial({ name }: { name: string }) {
   return <div style={{ flex: "0 0 40px", width: 40, height: 40, borderRadius: 14, background: "#fff", color: "#0A0A0B", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18 }}>{name.trim().charAt(0).toUpperCase()}</div>;
 }
@@ -68,11 +80,7 @@ export default function View({ preview, strategyId, company }: { preview: Previe
       </div>
 
       <section className="wrap" style={{ padding: "0 var(--margin) clamp(50px,7vw,90px)" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
-          <span style={{ fontSize: 15, color: "#B9BABD", marginRight: 4 }}>Your 90-day plan</span>
-          {STAGES.map((st) => <span key={st} className="chip" style={{ background: "#2A2B30", color: "#ECECEE", fontSize: 14, padding: "6px 12px" }}><Lock size={12} /> {st}</span>)}
-          <span style={{ fontSize: 15, color: "#B9BABD", marginLeft: 4 }}>Day 0 of 90</span>
-        </div>
+        <Progress total={total} opened={opened} />
       </section>
 
       <section className="wrap" style={{ padding: "clamp(30px,5vw,60px) var(--margin) 0" }}>
@@ -133,12 +141,7 @@ export default function View({ preview, strategyId, company }: { preview: Previe
       <section className="wrap" style={{ padding: "0 var(--margin) clamp(70px,9vw,130px)" }}>
         <h2 style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, letterSpacing: 0, WebkitTextStroke: "1.5px currentColor", fontSize: "clamp(22px,2.6vw,34px)" }}>Track your first 90 days</h2>
         <p style={{ margin: "14px 0 0", maxWidth: 620, fontSize: 18, lineHeight: 1.5, color: "#ECECEE" }}>Your plan board follows every match from first contact to first deal, so no partner goes quiet.</p>
-        <div style={{ marginTop: 26, display: "flex", gap: 8, flexWrap: "wrap" }}>
-          <span className="chip">Matches {nf(total)}</span>
-          {STAGES.map((st) => <span key={st} className="chip" style={{ background: "#2A2B30", color: "#ECECEE" }}><Lock size={13} /> {st}</span>)}
-        </div>
-        <div style={{ marginTop: 22, background: "#2A2B30", height: 10, maxWidth: 760 }}><div style={{ background: "#A8FF5C", height: 10, width: `${Math.max(2, Math.round((opened / Math.max(1, total)) * 100))}%` }} /></div>
-        <p style={{ margin: "10px 0 0", fontSize: 15, color: "#B9BABD" }}>{opened} of {nf(total)} matches shown. Unlock all to start your plan.</p>
+        <div style={{ marginTop: 26 }}><Progress total={total} opened={opened} /></div>
       </section>
 
       <section className="wrap" style={{ padding: "0 var(--margin) clamp(80px,10vw,140px)" }}>
@@ -160,11 +163,13 @@ export default function View({ preview, strategyId, company }: { preview: Previe
         </div>
       </section>
 
-      <section className="wrap" style={{ padding: "0 var(--margin) clamp(60px,9vw,110px)" }}>
-        <div id="unlock" className="cut" style={{ background: "#A8FF5C", color: "#0A0A0B", padding: "clamp(26px,4vw,44px) clamp(24px,4vw,48px) clamp(32px,4vw,52px)", ["--c" as string]: "30px" }}>
-          <h2 style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: "clamp(22px,2.8vw,38px)", lineHeight: 1.15, letterSpacing: 0, WebkitTextStroke: "1.5px currentColor" }}>Open all {nf(total)} matches</h2>
-          <p style={{ margin: "14px 0 0", maxWidth: 640, fontSize: 18, lineHeight: 1.5 }}>Ten companies per partner type, why each fits, when to approach, the plan board, weekly new matches, PDF and CSV.</p>
-          <RequestForm strategyId={strategyId} />
+      <section className="wrap" style={{ padding: "0 var(--margin) clamp(70px,9vw,120px)" }}>
+        <div id="unlock" className="cut fpcta" style={{ background: "#1C1D20", color: "#fff", boxShadow: "inset 0 5px 0 #A8FF5C", padding: "clamp(34px,4.5vw,56px) clamp(24px,4vw,56px)", ["--c" as string]: "30px" }}>
+          <div>
+            <h2 style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: "clamp(22px,2.6vw,34px)", lineHeight: 1.2, letterSpacing: 0, WebkitTextStroke: "1.5px currentColor" }}>Open all <span style={{ color: "#A8FF5C" }}>{nf(total)}</span> matches</h2>
+            <p style={{ margin: "16px 0 0", maxWidth: 520, fontSize: 18, lineHeight: 1.5, color: "#ECECEE" }}>Every match, why each fits, when to approach, the plan board, weekly new matches, PDF and CSV.</p>
+          </div>
+          <RequestForm strategyId={strategyId} inline />
         </div>
       </section>
       <Footer />
