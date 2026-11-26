@@ -1,22 +1,23 @@
-import Link from "next/link";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { Toby } from "@/components/Toby";
 import type { Preview } from "@/lib/discovery/preview";
 import RequestForm from "./RequestForm";
+import FactBubble from "./FactBubble";
+import { LogoTile } from "@/components/LogoTile";
 
 const TONES = [
   { bg: "#ECECEE", fg: "#0A0A0B", sub: "#3A3B40", ar: "#0A0A0B", arf: "#A8FF5C" },
   { bg: "#2A2B30", fg: "#ECECEE", sub: "#B9BABD", ar: "#A8FF5C", arf: "#0A0A0B" },
 ];
 const ROT = [-1.4, 1.1, -0.8, 1.3, -1.1, 0.9];
-const FACTS = [
-  { n: "53%", t: "more likely to close when a partner is in the deal" },
-  { n: "37%", t: "of partnership leaders say finding the right partners is a top challenge" },
-  { n: "3 to 4x", t: "more likely to stay active after a year when the first deal lands in 90 days" },
-];
 const STAGES = ["Shortlist", "Outreach", "In talks", "Signed", "First deal"];
 const nf = (n: number) => n.toLocaleString("en-US");
+const host = (u: string) => { try { return new URL(u).host.replace(/^www\./, ""); } catch { return ""; } };
+const clamp = (n: number) => ({ display: "-webkit-box", WebkitLineClamp: n, WebkitBoxOrient: "vertical" as const, overflow: "hidden" });
+function Initial({ name }: { name: string }) {
+  return <div style={{ flex: "0 0 46px", width: 46, height: 46, borderRadius: 16, background: "#fff", color: "#0A0A0B", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20 }}>{name.trim().charAt(0).toUpperCase()}</div>;
+}
 
 export default function View({ preview, strategyId }: { preview: Preview; strategyId: string }) {
   const { total, week, opened, types } = preview;
@@ -30,26 +31,13 @@ export default function View({ preview, strategyId }: { preview: Preview; strate
               <span className="pt pt1">Your strategy is written</span>
               <span className="pt pt2">Now find the partners</span>
             </h1>
-            <p className="bubble herosub" style={{ marginTop: 44 }}>
-              I found {nf(total)} companies that fit the partner types in your strategy. You can open {opened} of them today.
-            </p>
+            <FactBubble total={nf(total)} />
           </div>
           <div className="herotoby" aria-hidden="true">
             <Toby height={580} rows={38} glasses style={{ width: "100%", height: "100%" }} />
           </div>
         </div>
       </div>
-
-      <section className="wrap" style={{ padding: "10px var(--margin) clamp(40px,8vw,80px)" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "30px 40px" }}>
-          {FACTS.map((f) => (
-            <div key={f.n} style={{ borderTop: "3px solid #A8FF5C", paddingTop: 16 }}>
-              <div style={{ fontFamily: "'Michroma',sans-serif", fontSize: "clamp(34px,4vw,56px)", lineHeight: 1.05, color: "#A8FF5C", WebkitTextStroke: "1.5px currentColor" }}>{f.n}</div>
-              <p style={{ margin: "12px 0 0", fontSize: 18, lineHeight: 1.45, color: "#ECECEE", maxWidth: 340 }}>{f.t}</p>
-            </div>
-          ))}
-        </div>
-      </section>
 
       <section className="wrap" style={{ padding: "0 var(--margin) clamp(30px,6vw,60px)" }}>
         {types.map((t, ti) => {
@@ -60,28 +48,35 @@ export default function View({ preview, strategyId }: { preview: Preview; strate
                 <span className="pill" style={{ background: ai ? "#7C5CFF" : "#A8FF5C", color: ai ? "#fff" : "#0A0A0B" }}>{t.type}s</span>
                 <span style={{ fontSize: 16, color: "#B9BABD" }}>{nf(t.pool)} companies{t.open ? ", 1 open" : ""}</span>
               </div>
-              <div style={{ marginTop: 28, display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(290px, 1fr))", gap: 26 }}>
+              <div style={{ marginTop: 28, display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gap: 22 }}>
                 {t.open ? (
-                  <div className="cut gcard" style={{ background: "#A8FF5C", color: "#0A0A0B", transform: `rotate(${ROT[ti % 6]}deg)`, padding: "24px 26px 30px", display: "flex", flexDirection: "column" }}>
-                    <h3 style={{ fontWeight: 400, fontSize: 17, letterSpacing: 0, lineHeight: 1.25, minHeight: 44 }}>{t.open.name}</h3>
-                    <p style={{ margin: "12px 0 0", minHeight: 96, fontSize: 15, lineHeight: 1.5, color: "#1C1D20" }}>{t.open.reason}</p>
-                    {t.open.directory ? (
-                      <Link href={t.open.directory} aria-label={`${t.open.name} in the directory`} style={{ marginTop: 18, alignSelf: "flex-start", width: 40, height: 40, borderRadius: "50%", background: "#0A0A0B", color: "#A8FF5C", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20 }}>→</Link>
-                    ) : (
-                      <a href={t.open.website} target="_blank" rel="noopener noreferrer" aria-label={`${t.open.name} website`} style={{ marginTop: 18, alignSelf: "flex-start", width: 40, height: 40, borderRadius: "50%", background: "#0A0A0B", color: "#A8FF5C", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20 }}>→</a>
-                    )}
+                  <div className="cut gcard" style={{ background: "#A8FF5C", color: "#0A0A0B", transform: `rotate(${ROT[ti % 6]}deg)`, padding: "20px 22px 24px", display: "flex", flexDirection: "column", ["--c" as string]: "20px" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+                      <LogoTile domain={host(t.open.website)} size={46} fallback={<Initial name={t.open.name} />} />
+                      <h3 style={{ fontWeight: 400, fontSize: 17, letterSpacing: 0, lineHeight: 1.25, ...clamp(2) }}>{t.open.name}</h3>
+                    </div>
+                    <p style={{ margin: "14px 0 0", fontSize: 15, lineHeight: 1.5, color: "#1C1D20", minHeight: 68, ...clamp(3) }}>{t.open.reason}</p>
+                    <div style={{ marginTop: 12, display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10 }}>
+                      <span style={{ fontSize: 14, color: "#1C1D20" }}>{t.open.subtype ?? "Open"}</span>
+                      <a href={t.open.directory ?? t.open.website} {...(t.open.directory ? {} : { target: "_blank", rel: "noopener noreferrer" })} aria-label={`${t.open.name}`} style={{ width: 36, height: 36, borderRadius: "50%", background: "#0A0A0B", color: "#A8FF5C", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18 }}>→</a>
+                    </div>
                   </div>
                 ) : null}
                 {t.locked.map((l, i) => {
                   const T = TONES[(i + ti) % 2];
                   return (
-                    <div key={i} className="cut gcard" style={{ background: T.bg, color: T.fg, transform: `rotate(${ROT[(i + ti + 2) % 6]}deg)`, padding: "24px 26px 30px", display: "flex", flexDirection: "column" }}>
+                    <div key={i} className="cut gcard" style={{ background: T.bg, color: T.fg, transform: `rotate(${ROT[(i + ti + 2) % 6]}deg)`, padding: "20px 22px 24px", display: "flex", flexDirection: "column", ["--c" as string]: "20px" }}>
                       <div aria-hidden="true" style={{ filter: "blur(7px)", userSelect: "none" }}>
-                        <h3 style={{ fontWeight: 400, fontSize: 17, letterSpacing: 0, lineHeight: 1.25, minHeight: 44 }}>Company name hidden</h3>
-                        <p style={{ margin: "12px 0 0", minHeight: 72, fontSize: 15, lineHeight: 1.5, color: T.sub }}>One line on why this company fits your strategy is shown after you unlock it.</p>
+                        <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+                          <div style={{ flex: "0 0 46px", width: 46, height: 46, borderRadius: 16, background: T.fg === "#0A0A0B" ? "#fff" : "#fff" }} />
+                          <h3 style={{ fontWeight: 400, fontSize: 17, letterSpacing: 0, lineHeight: 1.25 }}>Company name hidden</h3>
+                        </div>
+                        <p style={{ margin: "14px 0 0", fontSize: 15, lineHeight: 1.5, color: T.sub, minHeight: 68 }}>One line on why this company fits your strategy is shown after you unlock it.</p>
                       </div>
-                      <p style={{ margin: "10px 0 0", fontSize: 14, color: T.sub, minHeight: 24 }}>{l.hint}</p>
-                      <span aria-hidden="true" style={{ marginTop: 10, alignSelf: "flex-start", width: 40, height: 40, borderRadius: "50%", background: T.ar, color: T.arf, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18 }}>&#128274;</span>
+                      <div style={{ marginTop: 12, display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10 }}>
+                        <span style={{ fontSize: 14, color: T.sub }}>{l.hint}</span>
+                        <span aria-hidden="true" style={{ width: 36, height: 36, borderRadius: "50%", background: T.ar, color: T.arf, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16 }}>&#128274;</span>
+                      </div>
                     </div>
                   );
                 })}
