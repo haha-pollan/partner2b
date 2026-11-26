@@ -75,8 +75,14 @@ export function BuilderClient() {
   useEffect(() => { if (!busy) return; setSecs(0); const t = setInterval(() => setSecs((s) => s + 1), 1000); return () => clearInterval(t); }, [busy]);
   const scroll = () => setTimeout(() => top.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 30);
 
+  function validSite(raw: string) {
+    const t = raw.trim();
+    if (!t) return false;
+    try { const u = new URL(/^https?:\/\//i.test(t) ? t : `https://${t}`); return u.hostname.includes(".") && !/\s/.test(t); } catch { return false; }
+  }
   function missing(i: number) {
     if (REQUIRED[i]?.some((k) => !v[k].trim())) return "Please fill in the fields marked with a star.";
+    if (i === 0 && !validSite(v.website)) return "Please enter your company website, for example yourcompany.com.";
     if (i === 1 && !(Number(v.acvHigh) >= Number(v.acvLow) && Number(v.acvLow) > 0)) return "Please enter the contract value range from a lower to a higher number.";
     if (i === 2 && goals.length < 1) return "Please choose at least one goal.";
     if (i === 2 && !(Number(v.partnerRevenueSharePercent) > 0 && Number(v.partnerRevenueSharePercent) <= 100)) return "The share of revenue from partners must be between 1 and 100.";
@@ -105,7 +111,11 @@ export function BuilderClient() {
     try {
       const res = await fetch("/api/program-builder", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ action: "generate", input: { ...v, programGoals: goals, contactName: `${first.trim()} ${last.trim()}` }, brand, email, consent, website_confirm: trap }) });
       const j = await res.json().catch(() => null);
-      if (!j || !j.ok) setErr(j?.error ?? "This took longer than expected. Please try again.");
+      if (!j || !j.ok) {
+        const msg = j?.error ?? "This took longer than expected. Please try again.";
+        setErr(msg);
+        if (/website/i.test(msg)) { setStep(0); scroll(); }
+      }
       else { setDone({ pdf: j.pdf, company: j.company, key: j.strategyKey }); scroll(); }
     } catch { setErr("We could not reach the server. Please try again."); }
     setBusy(false);
