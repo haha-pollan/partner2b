@@ -7,7 +7,7 @@ import type { Strategy } from "./strategy";
 
 export type Open = { name: string; website: string; reason: string; subtype: string | null; directory: string | null };
 export type PType = { type: string; role: string; pool: number; shown: Open[]; moreLocked: number };
-export const PREVIEW_V = 4;
+export const PREVIEW_V = 5;
 export type Preview = { partial?: boolean; v?: number; total: number; week: number; opened: number; types: PType[]; made_at: string };
 
 async function weekCount(types: string[]): Promise<number> {
