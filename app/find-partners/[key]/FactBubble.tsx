@@ -25,7 +25,7 @@ export default function FactBubble({ total }: { total: string }) {
   }, []);
   const f = FACTS[i ?? 0];
   return (
-    <p className="bubble herosub" style={{ marginTop: 44, minHeight: 130, visibility: i === null ? "hidden" : "visible" }}>
+    <p className="bubble herosub" style={{ margin: 0, minHeight: 130, visibility: i === null ? "hidden" : "visible" }}>
       {f.pre}<span style={chip}>{f.n}</span>{f.post} I found <span style={chip}>{total}</span> companies for you today.
     </p>
   );

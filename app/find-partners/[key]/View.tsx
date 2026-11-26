@@ -39,10 +39,12 @@ export default function View({ preview, strategyId }: { preview: Preview; strate
               <span className="pt pt1">Your strategy is written</span>
               <span className="pt pt2">Now find the partners</span>
             </h1>
-            <FactBubble total={nf(total)} />
-          </div>
-          <div className="herotoby" aria-hidden="true" style={{ width: "clamp(190px,19vw,360px)", top: 10 }}>
-            <Toby height={580} rows={38} glasses style={{ width: "100%", height: "100%" }} />
+            <div className="fprow">
+              <FactBubble total={nf(total)} />
+              <div className="fptoby" aria-hidden="true">
+                <Toby height={580} rows={38} glasses style={{ width: "100%", height: "100%" }} />
+              </div>
+            </div>
           </div>
         </div>
       </div>
