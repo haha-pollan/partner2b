@@ -40,7 +40,7 @@ export default async function Requests() {
   const ev = (days: number, name: string) => events.filter((e) => e.event === name && now - new Date(e.created_at).getTime() < days * DAY).length;
   const rq = (days: number) => reqs.filter((r) => now - new Date(r.created_at).getTime() < days * DAY).length;
   const pct = (a: number, b: number) => (b ? `${Math.round((a / b) * 100)}%` : "n/a");
-  const steps: [string, number, number][] = [["Page opened", ev(7, "page_view"), ev(30, "page_view")], ["Clicked See more", ev(7, "see_more"), ev(30, "see_more")], ["Started the form", ev(7, "form_start"), ev(30, "form_start")], ["Sent a request", rq(7), rq(30)]];
+  const steps: [string, number, number][] = [["Page opened", ev(7, "page_view"), ev(30, "page_view")], ["Started with four questions (new strategies)", ev(7, "quick_start"), ev(30, "quick_start")], ["Clicked See more", ev(7, "see_more"), ev(30, "see_more")], ["Started the form", ev(7, "form_start"), ev(30, "form_start")], ["Sent a request", rq(7), rq(30)]];
   const clicks = new Map<string, number>();
   for (const e of events) if (e.event === "card_click" && e.detail) { const t = e.detail.split(":")[0]; clicks.set(t, (clicks.get(t) ?? 0) + 1); }
   const pay = (v: string) => reqs.filter((r) => r.would_pay === v).length;

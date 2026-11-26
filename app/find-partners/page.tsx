@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { adminConfigured, db } from "@/lib/admin/session";
 import OpenMine from "./OpenMine";
+import Doors from "./Doors";
+import { AUDIENCES, BUILDER_CATEGORIES, REGIONS } from "@/lib/builder2/intake";
 
 export const revalidate = 3600;
 export const metadata: Metadata = {
@@ -29,7 +30,7 @@ async function load(): Promise<{ total: number; sample: C[] }> {
 }
 
 const STEPS = [
-  { t: "Build your strategy", d: "Answer a few questions about your company in the free Program builder." },
+  { t: "Tell us who you want", d: "Answer four questions, or build a strategy in the free Program builder." },
   { t: "We match real companies", d: "Your partner types are matched against our database, ranked by fit." },
   { t: "Start with the best five", d: "See the top companies for each partner type, with why each one fits." },
 ];
@@ -46,9 +47,16 @@ export default async function Page() {
           <h1 style={{ marginTop: 22 }}>Find the companies to build your partner program with</h1>
           <p style={{ marginTop: 22, fontSize: 20, lineHeight: 1.5, maxWidth: 720 }}>Get a ranked list of real companies for each partner type in your strategy. {n} companies are in our database and it grows every week.</p>
           <div style={{ marginTop: 34, display: "flex", gap: 14, flexWrap: "wrap" }}>
-            <Link href="/program-builder" className="btn btn-p">Start with the Program builder</Link>
+            <a href="#start" className="btn btn-p">Find my partners</a>
             <OpenMine />
           </div>
+        </div>
+      </section>
+
+      <section style={{ padding: "150px 0 0" }}>
+        <div className="wrap">
+          <h2 className="sectitle">Choose how to start</h2>
+          <div style={{ marginTop: 44 }}><Doors opts={{ categories: BUILDER_CATEGORIES, audiences: AUDIENCES, regions: REGIONS }} /></div>
         </div>
       </section>
 
@@ -89,9 +97,9 @@ export default async function Page() {
         <div className="wrap">
           <div className="cut" style={{ background: "#1C1D20", color: "#ECECEE", padding: "52px clamp(24px,5vw,64px)", boxShadow: "inset 0 5px 0 #A8FF5C" }}>
             <h2 className="sectitle" style={{ color: "#fff" }}>Ready to see your own matches?</h2>
-            <p style={{ marginTop: 14, fontSize: 18, lineHeight: 1.5, color: "#B9BABD" }}>It starts with your strategy. The Program builder is free and takes a few minutes.</p>
+            <p style={{ marginTop: 14, fontSize: 18, lineHeight: 1.5, color: "#B9BABD" }}>Answer four questions, or build a full strategy first. Both are free.</p>
             <div style={{ marginTop: 30, display: "flex", gap: 14, flexWrap: "wrap" }}>
-              <Link href="/program-builder" className="btn btn-s">Start with the Program builder</Link>
+              <a href="#start" className="btn btn-s">Find my partners</a>
               <OpenMine />
             </div>
           </div>
