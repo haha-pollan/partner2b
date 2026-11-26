@@ -188,6 +188,10 @@ button{font-family:inherit}
 .tape-w{background:#fff}.tape-l{background:var(--lime)}
 .herobody{position:relative;z-index:3;padding-top:330px;padding-bottom:0}
 .herosub{max-width:620px}
+.homesub{max-width:none;width:calc(100% - 26vw - 100px);background:#1C1D20;color:#ECECEE;box-shadow:inset 5px 0 0 #A8FF5C}
+.homesub::after{border-color:transparent transparent transparent #1C1D20!important}
+@media (min-width:701px){.homehero .pt{font-size:clamp(26px,calc(3.9vw - 9px),62px)}}
+@media (max-width:700px){.homehero .pt{font-size:clamp(17px,5.3vw,28px)}}
 .herosub::after{content:"";position:absolute;right:-30px;top:34px;border-style:solid;border-width:15px 0 15px 30px;border-color:transparent transparent transparent #fff}
 .herobtns{display:flex;gap:18px;margin-top:34px;flex-wrap:wrap}
 .herobtns .btn{min-width:310px;text-align:center}
@@ -240,6 +244,7 @@ button{font-family:inherit}
 @media (max-width:1100px){
   .row{flex-wrap:wrap}.rowmeta{display:none}
   .herotoby{display:none}
+  .homesub{width:auto;max-width:620px}
   .hero .tapes{height:330px}
   .herobody{padding-top:270px}
   .bldpages{display:none}
