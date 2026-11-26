@@ -39,7 +39,7 @@ function score(c: Co, s: Strategy, p: Profile): number {
 async function ask(s: Strategy, p: Profile, list: (Co & { score: number })[], limit: number): Promise<Map<number, string>> {
   const out = new Map<number, string>();
   if (!llmConfigured() || !list.length) return out;
-  const sys = "You match companies to a partner profile for a vendor building a partner program. Use only the facts given. Pick the best fits and give each a reason of at most 18 words that names the specific fit. A Technology Partner must sit next to the vendor's product in the customer's workflow and integrate with it; skip any company that competes with the vendor or sells the same kind of product. Agencies, resellers and communities should work with the vendor's category and buyers. Never invent facts about a company. Answer with JSON only: {\"picks\":[{\"id\":number,\"reason\":string}]} ordered best first.";
+  const sys = "You match companies to a partner profile for a vendor building a partner program. Use only the facts given. Pick the best fits and give each a reason of at most 18 words that names the specific fit. A Technology Partner must sit next to the vendor's product in the customer's workflow and integrate with it; skip only companies that directly compete with the vendor or sell the same kind of product. Agencies, resellers and communities should work with the vendor's category and buyers. Never invent facts about a company. Return the number of picks asked for (at least 5 when 5 or more companies fit). Answer with JSON only: {\"picks\":[{\"id\":number,\"reason\":string}]} ordered best first.";
   const user = JSON.stringify({
     vendor: { name: s.company_name, category: s.category, region: s.region, sells_to: s.audience, goals: s.goals },
     wanted_partner: { type: p.type, stage: p.stage, role: p.role, examples: p.examples },
@@ -69,7 +69,9 @@ export async function matchStrategy(s: Strategy, perType = 10): Promise<TypeResu
     pool.sort((a, b) => b.score - a.score || a.id - b.id);
     const short = pool.slice(0, p.type === "Technology Partner" ? TECH_SHORTLIST : SHORTLIST);
     const picked = await ask(s, p, short, perType);
-    const ordered = picked.size ? short.filter((c) => picked.has(c.id)).sort((a, b) => [...picked.keys()].indexOf(a.id) - [...picked.keys()].indexOf(b.id)) : short;
+    const byPick = short.filter((c) => picked.has(c.id)).sort((a, b) => [...picked.keys()].indexOf(a.id) - [...picked.keys()].indexOf(b.id));
+    // If the model picked fewer than asked, fill up from the rest of the shortlist in score order, so a page never shows fewer than five cards.
+    const ordered = [...byPick, ...short.filter((c) => !picked.has(c.id))];
     const matches: Match[] = ordered.slice(0, perType).map((c) => ({ id: c.id, region: c.region, size_band: c.size_band, name: c.name, website: c.website, description: c.description, subtype: c.subtype, has_program: c.has_program, program_url: c.program_url, program_id: c.program_id, score: c.score, reason: picked.get(c.id) ?? factReason(c), ranked: picked.has(c.id) }));
     results.push({ type: p.type, stage: p.stage, role: p.role, examples: p.examples, candidates: all.length, poolSize: pool.filter((c) => c.score > 0).length, matches });
   }
