@@ -68,7 +68,7 @@ export default async function Requests() {
         {reqs.length ? (
           <div style={{ overflowX: "auto" }}>
             <table className="adm-table">
-              <thead><tr><th>Date</th><th>Email</th><th>Company</th><th>Needs partners</th><th>Would pay</th><th>Asked about</th><th>Auto email</th><th></th></tr></thead>
+              <thead><tr><th>Date</th><th>Email</th><th>Company</th><th>Needs partners</th><th>Would pay</th><th>Asked about</th><th></th></tr></thead>
               <tbody>
                 {reqs.map((r) => (
                   <tr key={r.id}>
@@ -78,7 +78,6 @@ export default async function Requests() {
                     <td>{r.when_needed || ""}</td>
                     <td>{r.would_pay || ""}</td>
                     <td>{r.partner_type || ""}</td>
-                    <td>{r.email_status || ""}</td>
                     <td style={{ whiteSpace: "nowrap" }}>
                       <a className="btn btn-sm btn-s" href={gmailLink(r.email, "Your Partner2B early access", `Hi,\n\nThank you for your interest in Partner2B partner discovery. I would love to hear what you are looking for. Do you have 15 minutes this week for a short call?\n\nBest regards,\nPartner2B team`)} target="_blank" rel="noopener noreferrer">Reply</a>{" "}
                       {r.contacted_at ? <span>Contacted {r.contacted_at.slice(0, 10)}</span> : <form action={markContacted} style={{ display: "inline" }}><input type="hidden" name="id" value={r.id} /><button className="btn btn-sm btn-p" type="submit">Mark contacted</button></form>}

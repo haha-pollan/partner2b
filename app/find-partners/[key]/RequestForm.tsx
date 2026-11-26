@@ -39,7 +39,7 @@ export default function RequestForm({ strategyId, inline, partnerType }: { strat
   if (state === "done") {
     return (
       <div style={{ marginTop: inline ? 0 : 26 }}>
-        <p style={{ fontSize: 20, lineHeight: 1.45 }}>Request received. We sent a confirmation to {email}.</p>
+        <p style={{ fontSize: 20, lineHeight: 1.45 }}>Request received. We will write to you at {email}.</p>
         <p style={{ margin: "10px 0 0", fontSize: 17, lineHeight: 1.5, color: inline ? "#B9BABD" : "#1C1D20" }}>Full access is opening soon and you will be among the first to get it. Want to tell us what you need? <a href="mailto:hello@partner2b.com?subject=Partner%20discovery%2015%20minute%20call" style={{ textDecoration: "underline" }}>Write to us for a 15 minute call</a>.</p>
       </div>
     );
