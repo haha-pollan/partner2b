@@ -41,12 +41,12 @@ export default function Doors({ opts }: { opts: Opts }) {
       <div style={{ display: "grid", gap: 20, gridTemplateColumns: "repeat(auto-fit,minmax(300px,1fr))" }}>
         <div className="cut" style={{ background: "#A8FF5C", color: "#0A0A0B", padding: "38px 34px", display: "flex", flexDirection: "column" }}>
           <h2 style={{ fontSize: 26, lineHeight: 1.2 }}>I know who I want to partner with</h2>
-          <p style={{ marginTop: 14, fontSize: 18, lineHeight: 1.5, flex: 1 }}>You have a partner program or a clear idea of the partner types. Tell us about your company and see matching companies.</p>
-          <div style={{ marginTop: 28 }}><button type="button" className="btn btn-s" onClick={() => setQuick(true)}>Tell us about your company</button></div>
+          <p style={{ marginTop: 14, fontSize: 18, lineHeight: 1.5, flex: 1 }}>Pick the partner types you want and get a ranked list of real companies in a minute.</p>
+          <div style={{ marginTop: 28 }}><button type="button" className="btn btn-s" onClick={() => setQuick(true)}>Pick my partner types</button></div>
         </div>
         <div className="cut" style={{ background: "#ECECEE", color: "#0A0A0B", padding: "38px 34px", display: "flex", flexDirection: "column" }}>
           <h2 style={{ fontSize: 26, lineHeight: 1.2 }}>I am starting from scratch</h2>
-          <p style={{ marginTop: 14, fontSize: 18, lineHeight: 1.5, flex: 1 }}>Build your partner program strategy first. It works out the partner types for you, then you see matching companies.</p>
+          <p style={{ marginTop: 14, fontSize: 18, lineHeight: 1.5, flex: 1 }}>Not sure which partners fit? Build your strategy first and we will work out the right ones for you.</p>
           <div style={{ marginTop: 28 }}><Link href="/program-builder" className="btn btn-s">Open the Program builder</Link></div>
         </div>
       </div>

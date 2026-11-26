@@ -176,8 +176,8 @@ export default function View({ preview, strategyId, company }: { preview: Previe
       <section className="wrap" style={{ padding: "0 var(--margin) clamp(70px,9vw,120px)" }}>
         <div id="unlock" className="cut fpcta" style={{ background: "#1C1D20", color: "#fff", boxShadow: "inset 0 5px 0 #A8FF5C", padding: "clamp(34px,4.5vw,56px) clamp(24px,4vw,56px)", ["--c" as string]: "30px" }}>
           <div>
-            <h2 style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: "clamp(22px,2.6vw,34px)", lineHeight: 1.2, letterSpacing: 0, WebkitTextStroke: "1.5px currentColor" }}>Open all <span style={{ color: "#A8FF5C" }}>{nf(total)}</span> matches</h2>
-            <p style={{ margin: "16px 0 0", maxWidth: 520, fontSize: 18, lineHeight: 1.5, color: "#ECECEE" }}>Every match, why each fits, when to approach, the plan board, weekly new matches, PDF and CSV.</p>
+            <h2 style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: "clamp(22px,2.6vw,34px)", lineHeight: 1.2, letterSpacing: 0, WebkitTextStroke: "1.5px currentColor", textWrap: "balance" }}>Get early access to <span style={{ color: "#A8FF5C" }}>partner discovery</span></h2>
+            <p style={{ margin: "16px 0 0", maxWidth: 560, fontSize: 18, lineHeight: 1.5, color: "#ECECEE" }}>Full access opens soon. You will get more matches for every partner type, why each one fits and when to approach. Leave your email and we will tell you the day it opens.</p>
           </div>
           <RequestForm strategyId={strategyId} inline />
         </div>
