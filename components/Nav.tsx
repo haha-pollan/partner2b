@@ -20,6 +20,7 @@ export function Nav() {
       </button>
       <nav id="navlinks" className={open ? "navlinks open" : "navlinks"}>
         <Link href="/directory" onClick={close}>Browse directory</Link>
+        <Link href="/find-partners" onClick={close}>Find partners{builderIsNew() ? <span className="newbadge" suppressHydrationWarning>New</span> : null}</Link>
         <Link href="/ai" className="ainav" onClick={close}>AI programs{aiIsNew() ? <span className="newbadge" suppressHydrationWarning>New</span> : null}</Link>
         <div className={tools ? "navdd ainav open" : "navdd ainav"}>
           <span className="navddrow"><Link href="/ai-tools" className="navddlink" onClick={close}>Free tools{builderIsNew() || calcIsNew() || assessIsNew() ? <span className="newbadge" suppressHydrationWarning>New</span> : null}</Link><button type="button" className="navddbtn" aria-label="Show free tools menu" aria-expanded={tools} onClick={() => { setTools((o) => !o); setDd(false); }}><span aria-hidden="true" className="navchev">▾</span></button></span>

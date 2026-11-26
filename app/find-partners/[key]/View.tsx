@@ -5,6 +5,7 @@ import type { Preview } from "@/lib/discovery/preview";
 import RequestForm from "./RequestForm";
 import FactBubble from "./FactBubble";
 import SeeMore from "./SeeMore";
+import { PageView, TrackedLink } from "./track";
 import { LogoTile } from "@/components/LogoTile";
 
 const TONES = [
@@ -61,6 +62,7 @@ export default function View({ preview, strategyId, company }: { preview: Previe
   const { total, week, opened, types } = preview;
   return (
     <div style={{ overflowX: "clip" }}>
+      <PageView strategyId={strategyId} />
       <div className="hero">
         <Nav />
         <div className="wrap herobody" style={{ paddingTop: 90, paddingBottom: 80 }}>
@@ -122,7 +124,7 @@ export default function View({ preview, strategyId, company }: { preview: Previe
                       <p style={{ margin: "12px 0 0", fontSize: 14.5, lineHeight: 1.45, color: T.sub, minHeight: 84, ...clamp(4) }}>{o.reason}</p>
                       <div style={{ marginTop: 10, display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8 }}>
                         <span style={{ fontSize: 13, color: T.sub, ...clamp(1) }}>{o.subtype ?? "Partner"}</span>
-                        <a href={href} {...(o.directory ? {} : { target: "_blank", rel: "noopener noreferrer" })} aria-label={o.name} style={{ flex: "0 0 32px", width: 32, height: 32, borderRadius: "50%", background: T.ar, color: T.arf, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16 }}>→</a>
+                        <TrackedLink strategyId={strategyId} detail={`${t.type}: ${o.name}`} href={href} {...(o.directory ? {} : { target: "_blank", rel: "noopener noreferrer" })} aria-label={o.name} style={{ flex: "0 0 32px", width: 32, height: 32, borderRadius: "50%", background: T.ar, color: T.arf, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16 }}>→</TrackedLink>
                       </div>
                     </div>
                   );
