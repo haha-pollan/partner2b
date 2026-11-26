@@ -18,7 +18,7 @@ type C = { id: number; name: string; website: string; description: string | null
 async function load(): Promise<{ sample: C[] }> {
   if (!adminConfigured()) return { sample: [] };
   try {
-    const b = await db(`companies?select=id,name,website,description,subtype&status=eq.approved&partner_types=cs.${encodeURIComponent('{"Services"}')}&description=not.is.null&order=id.desc&limit=40`);
+    const b = await db(`companies?select=id,name,website,description,subtype&status=eq.approved&partner_types=cs.${encodeURIComponent('{"Agency Partner"}')}&description=not.is.null&order=id.desc&limit=40`);
     const rows: C[] = b.ok ? await b.json() : [];
     const sample = rows.filter((c) => (c.description || "").length > 60 && c.website).slice(0, 5);
     return { sample };

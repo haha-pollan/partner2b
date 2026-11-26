@@ -40,7 +40,7 @@ export default async function Home() {
   let findSample: { id: number; name: string; description: string | null }[] = [];
   if (adminConfigured()) {
     try {
-      const b = await db(`companies?select=id,name,description&status=eq.approved&partner_types=cs.${encodeURIComponent('{"Services"}')}&description=not.is.null&order=id.desc&limit=40`);
+      const b = await db(`companies?select=id,name,description&status=eq.approved&partner_types=cs.${encodeURIComponent('{"Agency Partner"}')}&description=not.is.null&order=id.desc&limit=40`);
       const rows: { id: number; name: string; description: string | null }[] = b.ok ? await b.json() : [];
       findSample = rows.filter((c) => (c.description || "").length > 60).slice(0, 5);
     } catch { /* section shows without the sample */ }
@@ -118,7 +118,7 @@ export default async function Home() {
       <section aria-labelledby="hm-find" style={{ padding: "0 0 170px" }}>
         <div className="wrap">
           <span className="kick">Find partners<span className="newbadge" suppressHydrationWarning>New</span></span>
-          <h2 id="hm-find" className="sectitle" style={{ marginTop: 18 }}>Then find who to work with</h2>
+          <h2 id="hm-find" className="sectitle" style={{ marginTop: 18 }}>Then find who to partner with</h2>
           <p style={{ marginTop: 14, fontSize: 18, lineHeight: 1.5 }}>Your strategy names the partner types. We match the right companies to each one, ranked by fit.</p>
           <div style={{ marginTop: 44, display: "grid", gap: 16, gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))" }}>
             {findSample.map((c, i) => (
@@ -156,7 +156,7 @@ export default async function Home() {
       <section style={{ padding: "0 0 170px" }}>
         <div className="wrap">
           <h2 className="sectitle">AI partner programs{aiIsNew() && <span className="newbadge" suppressHydrationWarning style={{ fontSize: 13, padding: "4px 12px", marginLeft: 14 }}>New</span>}</h2>
-          <p style={{ margin: "16px 0 0", maxWidth: 680, fontSize: 20, lineHeight: 1.5, fontWeight: 400 }}>Official programs from AI vendors, agent platforms and AI integrators, with their own categories and filters.</p>
+          <p style={{ margin: "16px 0 0", fontSize: 20, lineHeight: 1.5, fontWeight: 400 }}>Official programs from AI vendors, agent platforms and AI integrators, with their own categories and filters.</p>
           <div style={{ marginTop: 34, display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))", gap: 16 }}>
             {AI_CATEGORIES.map((c) => (
               <Link key={c.slug} href={`/ai/${c.slug}`} className="aicard cut" style={{ ["--c" as string]: "24px" }}>
