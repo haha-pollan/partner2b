@@ -61,13 +61,13 @@ export default async function Home() {
       {/* Hero */}
       <div className="hero">
         <Nav />
-        <div className="wrap herobody" style={{ paddingTop: 36, paddingBottom: 150 }}>
+        <div className="wrap herobody" style={{ paddingTop: 110, paddingBottom: 120 }}>
           <div className="tapewrap">
             <h1 className="ptapes">
               <span className="pt pt1">Plan your partner program</span>
               <span className="pt pt2">then find who to partner with</span>
             </h1>
-            <p className="bubble herosub homesub" style={{ marginTop: 100 }}>{`Plan your strategy with free tools, then get a ranked list of real companies to partner with. Or compare ${all.length} partner programs in the directory`}</p>
+            <p className="bubble herosub homesub" style={{ marginTop: 56 }}>{`Plan your strategy with free tools, then get a ranked list of real companies to partner with. Or compare ${all.length} partner programs in the directory`}</p>
           </div>
           <div className="herotoby">
             <Toby height={580} rows={38} glasses style={{ width: "100%", height: "100%" }} />
