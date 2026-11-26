@@ -9,7 +9,7 @@ import { Glyph } from "@/components/Tile";
 import { getPrograms } from "@/lib/programs";
 import { adminConfigured, db } from "@/lib/admin/session";
 import { AI_CATEGORIES, inCat, aiOnly, aiIsNew } from "@/lib/ai";
-import { assessIsNew, builderIsNew, calcIsNew } from "@/lib/launch";
+import { builderIsNew } from "@/lib/launch";
 
 export const revalidate = 600;
 export const metadata: Metadata = {
@@ -64,14 +64,10 @@ export default async function Home() {
         <div className="wrap herobody" style={{ paddingTop: 36, paddingBottom: 150 }}>
           <div className="tapewrap">
             <h1 className="ptapes">
-              <span className="pt pt1">Find a B2B partner program</span>
-              <span className="pt pt2">or build your own</span>
+              <span className="pt pt1">Plan your partner program</span>
+              <span className="pt pt2">then find who to work with</span>
             </h1>
-            <p className="bubble herosub" style={{ marginTop: 44 }}>{`Compare commissions, tiers and requirements across ${all.length} programs, or use our free tools to make your own partner program more efficient`}</p>
-            <div className="herobtns">
-              <Link href="/directory" className="btn btn-p">Find partner programs →</Link>
-              <Link href="/ai-tools" className="btn btn-s">Explore free tools →{(builderIsNew() || calcIsNew() || assessIsNew()) && <span className="newbadge" suppressHydrationWarning style={{ background: "#fff", color: "#7C5CFF" }}>New</span>}</Link>
-            </div>
+            <p className="bubble herosub" style={{ marginTop: 44 }}>{`Free tools to build your strategy, then a ranked list of real companies to partner with. Or compare ${all.length} partner programs in the directory`}</p>
           </div>
           <div className="herotoby">
             <Toby height={580} rows={38} glasses style={{ width: "100%", height: "100%" }} />
