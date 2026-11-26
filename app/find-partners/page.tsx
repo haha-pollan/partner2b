@@ -40,7 +40,7 @@ export default async function Page() {
         <div className="wrap">
           <span className="kick">Find partners<span className="newbadge" suppressHydrationWarning>New</span></span>
           <h1 style={{ marginTop: 22 }}>Find the right companies to partner with</h1>
-          <p style={{ marginTop: 22, fontSize: 20, lineHeight: 1.5, maxWidth: 720 }}>A ranked list of real companies for every partner type you need, with new ones added every week.</p>
+          <p style={{ marginTop: 22, fontSize: 20, lineHeight: 1.5 }}>A ranked list of real companies for every partner type you need, with new ones added every week.</p>
           <div style={{ marginTop: 34, display: "flex", gap: 14, flexWrap: "wrap" }}>
             <a href="#start" className="btn btn-p">Find my partners</a>
             <OpenMine />
