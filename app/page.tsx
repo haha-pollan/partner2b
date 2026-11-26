@@ -40,7 +40,7 @@ export default async function Home() {
   let findSample: { id: number; name: string; description: string | null }[] = [];
   if (adminConfigured()) {
     try {
-      const b = await db(`companies?select=id,name,description&status=eq.approved&partner_types=cs.${encodeURIComponent('{"Services"}')}&description=not.is.null&order=id.desc&limit=40`);
+      const b = await db(`companies?select=id,name,description&status=eq.approved&partner_types=cs.${encodeURIComponent('{"Agency Partner"}')}&description=not.is.null&order=id.desc&limit=40`);
       const rows: { id: number; name: string; description: string | null }[] = b.ok ? await b.json() : [];
       findSample = rows.filter((c) => (c.description || "").length > 60).slice(0, 5);
     } catch { /* section shows without the sample */ }
@@ -118,8 +118,8 @@ export default async function Home() {
       <section aria-labelledby="hm-find" style={{ padding: "0 0 170px" }}>
         <div className="wrap">
           <span className="kick">Find partners<span className="newbadge" suppressHydrationWarning>New</span></span>
-          <h2 id="hm-find" className="sectitle" style={{ marginTop: 18 }}>Then find who to work with</h2>
-          <p style={{ marginTop: 14, fontSize: 18, lineHeight: 1.5, maxWidth: 760 }}>Your strategy names the partner types. We match the right companies to each one, ranked by fit.</p>
+          <h2 id="hm-find" className="sectitle" style={{ marginTop: 18 }}>Then find who to partner with</h2>
+          <p style={{ marginTop: 14, fontSize: 18, lineHeight: 1.5 }}>Your strategy names the partner types. We match the right companies to each one, ranked by fit.</p>
           <div style={{ marginTop: 44, display: "grid", gap: 16, gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))" }}>
             {findSample.map((c, i) => (
               <div key={c.id} className="cut" style={{ background: i === 0 ? "#A8FF5C" : "#ECECEE", color: "#0A0A0B", padding: "22px 20px" }}>
@@ -156,7 +156,7 @@ export default async function Home() {
       <section style={{ padding: "0 0 170px" }}>
         <div className="wrap">
           <h2 className="sectitle">AI partner programs{aiIsNew() && <span className="newbadge" suppressHydrationWarning style={{ fontSize: 13, padding: "4px 12px", marginLeft: 14 }}>New</span>}</h2>
-          <p style={{ margin: "16px 0 0", maxWidth: 680, fontSize: 20, lineHeight: 1.5, fontWeight: 400 }}>Official programs from AI vendors, agent platforms and AI integrators, with their own categories and filters.</p>
+          <p style={{ margin: "16px 0 0", fontSize: 20, lineHeight: 1.5, fontWeight: 400 }}>Official programs from AI vendors, agent platforms and AI integrators, with their own categories and filters.</p>
           <div style={{ marginTop: 34, display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))", gap: 16 }}>
             {AI_CATEGORIES.map((c) => (
               <Link key={c.slug} href={`/ai/${c.slug}`} className="aicard cut" style={{ ["--c" as string]: "24px" }}>
@@ -207,12 +207,12 @@ export default async function Home() {
       <section className="splitwrap">
         <div className="splitL" style={{ flex: "1 1 520px", background: "#A8FF5C", padding: "96px 80px 96px 40px", clipPath: "polygon(0 0,100% 0,92% 50%,100% 100%,0 100%)" }}>
           <h2 style={{ fontSize: 44, lineHeight: 1.05 }}>For partners</h2>
-          <p style={{ margin: "20px 0 0", maxWidth: 420, fontSize: 19, lineHeight: 1.5, fontWeight: 400 }}>Compare programs and find the ones that fit your business.</p>
+          <p style={{ margin: "20px 0 0", fontSize: 19, lineHeight: 1.5, fontWeight: 400 }}>Compare programs and find the ones that fit your business.</p>
           <Link href="/directory" className="btn btn-s" style={{ marginTop: 28 }}>Browse programs</Link>
         </div>
         <div className="splitR" style={{ flex: "1 1 520px", padding: "96px 40px 96px 80px", color: "#fff" }}>
           <h2 style={{ fontSize: 44, lineHeight: 1.05 }}>For vendors</h2>
-          <p style={{ margin: "20px 0 0", maxWidth: 420, fontSize: 19, lineHeight: 1.5, fontWeight: 400, color: "#ECECEE" }}>Claim your listing for free and keep your terms accurate.</p>
+          <p style={{ margin: "20px 0 0", fontSize: 19, lineHeight: 1.5, fontWeight: 400, color: "#ECECEE" }}>Claim your listing for free and keep your terms accurate.</p>
           <Link href="/claim" className="btn btn-p" style={{ marginTop: 28 }}>Claim a listing</Link>
         </div>
       </section>
@@ -225,7 +225,7 @@ export default async function Home() {
               <span style={{ display: "block" }}>Run a partner program?</span>
               <span style={{ display: "block", color: "#A8FF5C" }}>Claim your listing</span>
             </h2>
-            <p style={{ margin: "22px 0 0", maxWidth: 440, fontSize: 19, lineHeight: 1.5, fontWeight: 400, color: "#ECECEE" }}>Claiming is free. Correct your terms and keep them current</p>
+            <p style={{ margin: "22px 0 0", fontSize: 19, lineHeight: 1.5, fontWeight: 400, color: "#ECECEE" }}>Claiming is free. Correct your terms and keep them current</p>
           </div>
           <Link href="/claim" className="claimcard cut">
             {["Company name", "Program page URL", "Work email"].map((k) => (

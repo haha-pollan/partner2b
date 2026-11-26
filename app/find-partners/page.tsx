@@ -18,7 +18,7 @@ type C = { id: number; name: string; website: string; description: string | null
 async function load(): Promise<{ sample: C[] }> {
   if (!adminConfigured()) return { sample: [] };
   try {
-    const b = await db(`companies?select=id,name,website,description,subtype&status=eq.approved&partner_types=cs.${encodeURIComponent('{"Services"}')}&description=not.is.null&order=id.desc&limit=40`);
+    const b = await db(`companies?select=id,name,website,description,subtype&status=eq.approved&partner_types=cs.${encodeURIComponent('{"Agency Partner"}')}&description=not.is.null&order=id.desc&limit=40`);
     const rows: C[] = b.ok ? await b.json() : [];
     const sample = rows.filter((c) => (c.description || "").length > 60 && c.website).slice(0, 5);
     return { sample };
@@ -40,7 +40,7 @@ export default async function Page() {
         <div className="wrap">
           <span className="kick">Find partners<span className="newbadge" suppressHydrationWarning>New</span></span>
           <h1 style={{ marginTop: 22 }}>Find the right companies to partner with</h1>
-          <p style={{ marginTop: 22, fontSize: 20, lineHeight: 1.5, maxWidth: 720 }}>A ranked list of real companies for every partner type you need, with new ones added every week.</p>
+          <p style={{ marginTop: 22, fontSize: 20, lineHeight: 1.5 }}>A ranked list of real companies for every partner type you need, with new ones added every week.</p>
           <div style={{ marginTop: 34, display: "flex", gap: 14, flexWrap: "wrap" }}>
             <a href="#start" className="btn btn-p">Find my partners</a>
             <OpenMine />

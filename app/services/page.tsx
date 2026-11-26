@@ -148,7 +148,7 @@ export default function Services() {
           <h2 style={{ margin: "18px 0 0", fontWeight: 400, fontSize: "clamp(26px,3.4vw,44px)", letterSpacing: 0, lineHeight: 1.15 }}>
             We Know Your <span style={{ color: "#A8FF5C" }}>Category</span>
           </h2>
-          <p style={{ margin: "18px 0 0", maxWidth: 620, fontSize: 18, lineHeight: 1.5, color: "#B9BABD" }}>
+          <p style={{ margin: "18px 0 0", fontSize: 18, lineHeight: 1.5, color: "#B9BABD" }}>
             From positioning and messaging to partner recruitment and co-selling. One senior team runs your go-to-market end to end.
           </p>
           <div style={{ marginTop: 52, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))", gap: 28 }}>
@@ -185,7 +185,7 @@ export default function Services() {
               <span className="bignum" style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 94, lineHeight: 0.8, letterSpacing: 0, color: THEMES[i].num }}>{s.n}</span>
               <div style={{ flex: "1 1 420px" }}>
                 <h2 style={{ fontWeight: 400, fontSize: "clamp(25px,3.2vw,44px)", letterSpacing: 0, lineHeight: 1.05 }}>{s.title}</h2>
-                <p style={{ margin: "14px 0 0", maxWidth: 620, fontSize: 19, lineHeight: 1.5, color: THEMES[i].sub }}>{s.lead}</p>
+                <p style={{ margin: "14px 0 0", fontSize: 19, lineHeight: 1.5, color: THEMES[i].sub }}>{s.lead}</p>
               </div>
             </div>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 24, marginTop: 56 }}>
@@ -253,7 +253,7 @@ export default function Services() {
               <span style={{ display: "block" }}>Ready to grow</span>
               <span style={{ display: "block", color: "#A8FF5C" }}>through partners?</span>
             </h2>
-            <p style={{ margin: "22px 0 0", maxWidth: 440, fontSize: 19, lineHeight: 1.5, color: "#B9BABD" }}>Tell us where your B2B growth is stuck. We will tell you which step to start with.</p>
+            <p style={{ margin: "22px 0 0", fontSize: 19, lineHeight: 1.5, color: "#B9BABD" }}>Tell us where your B2B growth is stuck. We will tell you which step to start with.</p>
           </div>
           <a href={MAIL} className="cut" style={{ flex: "0 0 400px", maxWidth: "100%", transform: "rotate(3deg)", background: "#fff", color: "#0A0A0B", padding: "28px 30px 32px", display: "block" }}>
             {["Company name", "Work email", "Where growth is stuck"].map((k) => (

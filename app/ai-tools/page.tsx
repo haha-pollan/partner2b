@@ -35,7 +35,7 @@ const VS = [
 const ROT = [-1.6, 1.2, -0.8, 1.4, -1.2, 1.6];
 const michroma: React.CSSProperties = { fontFamily: "'Michroma',sans-serif", fontWeight: 400, WebkitTextStroke: "1px currentColor" };
 const section: React.CSSProperties = { marginTop: "clamp(64px,8vw,110px)" };
-const lead: React.CSSProperties = { margin: "14px 0 0", fontSize: 19, lineHeight: 1.6, maxWidth: 760, color: "rgba(255,255,255,.88)" };
+const lead: React.CSSProperties = { margin: "14px 0 0", fontSize: 19, lineHeight: 1.6, color: "rgba(255,255,255,.88)" };
 const balance = { textWrap: "balance" as React.CSSProperties["textWrap"] };
 const GRID: React.CSSProperties = { marginTop: 32, display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))", gap: 28 };
 const bar = (w: string, h: number): React.CSSProperties => ({ width: w, height: h, borderRadius: 999, background: "currentColor", opacity: 0.55, marginTop: 12 });
