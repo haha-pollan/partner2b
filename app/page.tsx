@@ -123,7 +123,7 @@ export default async function Home() {
         <div className="wrap">
           <span className="kick">Find partners<span className="newbadge" suppressHydrationWarning>New</span></span>
           <h2 id="hm-find" className="sectitle" style={{ marginTop: 18 }}>Then find who to work with</h2>
-          <p style={{ marginTop: 14, fontSize: 18, lineHeight: 1.5, maxWidth: 760 }}>Your strategy names the partner types. We match real companies to each one, ranked by fit{dbTotal ? `, from a database of ${Math.floor(dbTotal / 100) * 100}+ companies` : ""}.</p>
+          <p style={{ marginTop: 14, fontSize: 18, lineHeight: 1.5, maxWidth: 760 }}>Your strategy names the partner types. We match the right companies to each one, ranked by fit{dbTotal ? `, from ${Math.floor(dbTotal / 100) * 100}+ companies and growing` : ""}.</p>
           <div style={{ marginTop: 44, display: "grid", gap: 16, gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))" }}>
             {findSample.map((c, i) => (
               <div key={c.id} className="cut" style={{ background: i === 0 ? "#A8FF5C" : "#ECECEE", color: "#0A0A0B", padding: "22px 20px" }}>

@@ -31,7 +31,7 @@ async function load(): Promise<{ total: number; sample: C[] }> {
 
 const STEPS = [
   { t: "Tell us who you want", d: "Tell us what you are looking for, or build a strategy in the free Program builder." },
-  { t: "We match real companies", d: "Your partner types are matched against our database, ranked by fit." },
+  { t: "We match real companies", d: "Each partner type is matched with the right companies, ranked by fit." },
   { t: "Start with the best five", d: "See the top companies for each partner type, with why each one fits." },
 ];
 
@@ -45,7 +45,7 @@ export default async function Page() {
         <div className="wrap">
           <span className="kick">Find partners<span className="newbadge" suppressHydrationWarning>New</span></span>
           <h1 style={{ marginTop: 22 }}>Find the companies to build your partner program with</h1>
-          <p style={{ marginTop: 22, fontSize: 20, lineHeight: 1.5, maxWidth: 720 }}>Get a ranked list of real companies for each partner type in your strategy. {n} companies are in our database and it grows every week.</p>
+          <p style={{ marginTop: 22, fontSize: 20, lineHeight: 1.5, maxWidth: 720 }}>Get a ranked list of real companies for each partner type in your strategy. {n} companies and growing every week.</p>
           <div style={{ marginTop: 34, display: "flex", gap: 14, flexWrap: "wrap" }}>
             <a href="#start" className="btn btn-p">Find my partners</a>
             <OpenMine />
@@ -78,7 +78,7 @@ export default async function Page() {
         <section style={{ padding: "170px 0 0" }}>
           <div className="wrap">
             <h2 className="sectitle">A sample result: agency partners</h2>
-            <p style={{ marginTop: 14, fontSize: 18, lineHeight: 1.5 }}>Five real companies from our database. Your own list is ranked for your product and your buyers.</p>
+            <p style={{ marginTop: 14, fontSize: 18, lineHeight: 1.5 }}>Five real agency partners. Your own list is ranked for your product and your buyers.</p>
             <div style={{ marginTop: 44, display: "grid", gap: 16, gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))" }}>
               {sample.map((c, i) => (
                 <a key={c.id} href={c.website} target="_blank" rel="noopener noreferrer" className="cut" style={{ background: i === 0 ? "#A8FF5C" : "#ECECEE", color: "#0A0A0B", padding: "22px 20px", display: "block", textDecoration: "none" }}>
