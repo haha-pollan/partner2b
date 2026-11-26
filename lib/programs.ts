@@ -29,13 +29,20 @@ export const KEY = process.env.NEXT_PUBLIC_SUPABASE_KEY ?? "sb_publishable_jKho5
 const COLS =
   "id,slug,company,product_note,product_category,program_types,primary_type,commission_models,feature_tags,region,program_url,domain,description,tiers,benefits,verification_status,verified_at,company_description,requirements,how_it_works";
 
+// Supabase returns at most 1000 rows per request, so read the programs in pages of 1000 until a page is short.
 export async function getPrograms(): Promise<Program[]> {
-  const res = await fetch(`${URL}/rest/v1/programs?select=${COLS}&published=eq.true&order=company.asc&limit=1002`, {
-    headers: { apikey: KEY },
-    next: { revalidate: 600 },
-  });
-  if (!res.ok) throw new Error(`Supabase error ${res.status}`);
-  return (await res.json()) as Program[];
+  const out: Program[] = [];
+  for (let off = 0; off < 20_000; off += 1000) {
+    const res = await fetch(`${URL}/rest/v1/programs?select=${COLS}&published=eq.true&order=company.asc,id.asc&limit=1000&offset=${off}`, {
+      headers: { apikey: KEY },
+      next: { revalidate: 600 },
+    });
+    if (!res.ok) throw new Error(`Supabase error ${res.status}`);
+    const rows = (await res.json()) as Program[];
+    out.push(...rows);
+    if (rows.length < 1000) break;
+  }
+  return out;
 }
 
 export async function getProgram(slug: string): Promise<Program | undefined> {

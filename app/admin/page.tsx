@@ -2,6 +2,7 @@ import Link from "next/link";
 import { adminConfigured, db, requireStaff } from "@/lib/admin/session";
 import { Toby } from "@/components/Toby";
 import { TOOLS as TOOL_DEFS } from "@/lib/admin/tools";
+import { fetchAll } from "@/lib/enrich/run";
 
 export const dynamic = "force-dynamic";
 
@@ -49,7 +50,7 @@ export default async function Dashboard() {
   const [toolCounts, subs, progs, log, ...leadSets] = await Promise.all([
     Promise.all(TOOL_DEFS.map((t) => count(t.table))),
     rows<Sub>("submissions?select=id,created_at,kind,status,company,listing,name&order=created_at.asc&limit=5000"),
-    rows<Prog>("programs?select=id,slug,company,product_category,description,company_description,commission_models,published&limit=2000"),
+    fetchAll<Prog>("programs?select=id,slug,company,product_category,description,company_description,commission_models,published&order=id.asc").catch(() => null),
     rows<Log>(`admin_log?select=at,staff_email,action,target&order=at.desc&limit=8${isSuper ? "" : `&staff_email=eq.${encodeURIComponent(staff.email)}`}`),
     ...TOOLS.map(([t]) => rows<Lead>(`${t}?select=created_at,email&order=created_at.desc&limit=1000`)),
   ]);
