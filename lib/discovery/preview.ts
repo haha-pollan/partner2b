@@ -6,7 +6,8 @@ import type { Strategy } from "./strategy";
 
 export type Open = { name: string; website: string; reason: string; subtype: string | null; directory: string | null };
 export type PType = { type: string; role: string; pool: number; open: Open | null; locked: { hint: string; subtype: string | null }[]; moreLocked: number };
-export type Preview = { total: number; week: number; opened: number; types: PType[]; made_at: string };
+export const PREVIEW_V = 2;
+export type Preview = { v?: number; total: number; week: number; opened: number; types: PType[]; made_at: string };
 
 const hint = (m: Match) => [m.region ?? "Region not listed", m.size_band ? `${m.size_band} staff` : null].filter(Boolean).join(", ");
 
@@ -32,16 +33,16 @@ export async function buildPreview(s: Strategy): Promise<Preview> {
     return {
       type: t.type, role: t.role, pool: t.poolSize,
       open: open ? { name: open.name, website: open.website, reason: open.reason || (open.description ?? "").slice(0, 140), subtype: open.subtype, directory: open.program_id && slugs.get(open.program_id) ? `/directory/${slugs.get(open.program_id)}` : null } : null,
-      locked: rest.slice(0, 2).map((m) => ({ hint: hint(m), subtype: m.subtype })),
-      moreLocked: Math.max(0, t.poolSize - (open ? 1 : 0) - Math.min(2, rest.length)),
+      locked: rest.slice(0, 4).map((m) => ({ hint: hint(m), subtype: m.subtype })),
+      moreLocked: Math.max(0, t.poolSize - (open ? 1 : 0) - Math.min(4, rest.length)),
     };
   });
-  return { total: types.reduce((n, t) => n + t.pool, 0), week: await weekCount(results.map((t) => t.type)), opened: types.filter((t) => t.open).length, types, made_at: new Date().toISOString() };
+  return { v: PREVIEW_V, total: types.reduce((n, t) => n + t.pool, 0), week: await weekCount(results.map((t) => t.type)), opened: types.filter((t) => t.open).length, types, made_at: new Date().toISOString() };
 }
 
 // Reads the saved preview, or builds and saves it the first time.
 export async function previewFor(s: Strategy & { preview?: Preview | null }): Promise<Preview> {
-  if (s.preview && s.preview.types) return s.preview;
+  if (s.preview && s.preview.types && s.preview.v === PREVIEW_V) return s.preview;
   const p = await buildPreview(s);
   await db(`builder_strategies?id=eq.${s.id}`, { method: "PATCH", headers: { Prefer: "return=minimal" }, body: JSON.stringify({ preview: p, preview_at: p.made_at }) });
   return p;

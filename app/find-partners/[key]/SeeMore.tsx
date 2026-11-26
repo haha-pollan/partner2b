@@ -1,0 +1,30 @@
+"use client";
+import { useEffect, useState } from "react";
+import RequestForm from "./RequestForm";
+
+// "See more" opens the paywall. For now it holds the access request form; where it leads
+// (checkout or account) will be decided later.
+export default function SeeMore({ type, total, strategyId }: { type: string; total: string; strategyId: string }) {
+  const [open, setOpen] = useState(false);
+  useEffect(() => {
+    if (!open) return;
+    const k = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
+    document.addEventListener("keydown", k);
+    return () => document.removeEventListener("keydown", k);
+  }, [open]);
+  return (
+    <>
+      <button type="button" className="btn btn-p btn-sm" onClick={() => setOpen(true)}>See more {type}s</button>
+      {open ? (
+        <div role="dialog" aria-modal="true" aria-label={`Unlock all ${type}s`} onClick={(e) => { if (e.target === e.currentTarget) setOpen(false); }} style={{ position: "fixed", inset: 0, zIndex: 100, background: "rgba(10,10,11,.82)", display: "flex", alignItems: "center", justifyContent: "center", padding: 20, overflowY: "auto" }}>
+          <div className="cut" style={{ background: "#A8FF5C", color: "#0A0A0B", maxWidth: 640, width: "100%", padding: "34px 36px 40px", position: "relative", ["--c" as string]: "26px" }}>
+            <button type="button" onClick={() => setOpen(false)} aria-label="Close" style={{ position: "absolute", top: 14, right: 18, background: "none", border: 0, fontSize: 28, lineHeight: 1, cursor: "pointer", color: "#0A0A0B" }}>×</button>
+            <h2 style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: "clamp(20px,2.4vw,30px)", lineHeight: 1.2, letterSpacing: 0, WebkitTextStroke: "1.5px currentColor" }}>Unlock all {total} {type}s</h2>
+            <p style={{ margin: "14px 0 0", fontSize: 18, lineHeight: 1.5 }}>Names, why each one fits, when to approach, and your plan board. Leave your email and we will send you full access.</p>
+            <RequestForm strategyId={strategyId} />
+          </div>
+        </div>
+      ) : null}
+    </>
+  );
+}
