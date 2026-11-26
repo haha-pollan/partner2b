@@ -60,7 +60,7 @@ export function BuilderClient() {
   const [busy, setBusy] = useState(false);
   const [secs, setSecs] = useState(0);
   const [err, setErr] = useState("");
-  const [done, setDone] = useState<{ pdf: string; company: string } | null>(null);
+  const [done, setDone] = useState<{ pdf: string; company: string; key?: string } | null>(null);
   const top = useRef<HTMLDivElement>(null);
   const set = (k: string, x: string) => setV((p) => ({ ...p, [k]: x }));
 
@@ -106,7 +106,7 @@ export function BuilderClient() {
       const res = await fetch("/api/program-builder", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ action: "generate", input: { ...v, programGoals: goals, contactName: `${first.trim()} ${last.trim()}` }, brand, email, consent, website_confirm: trap }) });
       const j = await res.json().catch(() => null);
       if (!j || !j.ok) setErr(j?.error ?? "This took longer than expected. Please try again.");
-      else { setDone({ pdf: j.pdf, company: j.company }); scroll(); }
+      else { setDone({ pdf: j.pdf, company: j.company, key: j.strategyKey }); scroll(); }
     } catch { setErr("We could not reach the server. Please try again."); }
     setBusy(false);
   }
@@ -131,7 +131,7 @@ export function BuilderClient() {
         <div style={{ fontSize: 14, color: "#A8FF5C", fontWeight: 400 }}>Your strategy is ready</div>
         <h2 style={{ fontWeight: 400, fontSize: 26, letterSpacing: 0, color: "#fff", marginTop: 6 }}>{done.company}: partner program strategy</h2>
         <p style={{ marginTop: 14, fontSize: 17, lineHeight: 1.6, color: "#C9CACE" }}>Your PDF covers positioning, partner types, value propositions, tiers, the commercial model, year 1 KPIs and a 90-day plan.</p>
-        <div style={{ marginTop: 22 }}><button type="button" onClick={download} style={btn}>Download the PDF</button></div>
+        <div style={{ marginTop: 22, display: "flex", gap: 14, flexWrap: "wrap" }}><button type="button" onClick={download} style={btn}>Download the PDF</button>{done.key ? <a href={`/find-partners/${done.key}`} style={{ ...btn, display: "inline-block", textDecoration: "none" }}>Find my partners</a> : null}</div>
         <div style={{ marginTop: 30 }}><button type="button" onClick={() => { setDone(null); setStep(0); }} style={ghost}>Start again with different answers</button></div>
       </div>
     );

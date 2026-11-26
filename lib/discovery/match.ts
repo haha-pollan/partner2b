@@ -3,11 +3,11 @@ import { db } from "@/lib/admin/session";
 import { askJson, llmConfigured } from "@/lib/enrich/llm";
 import type { Profile, Strategy } from "./strategy";
 
-type Co = { id: number; name: string; website: string; description: string | null; region: string | null; company_kind: string; partner_types: string[]; subtype: string | null; categories: string[]; serves_sizes: string[]; engages_at: string[]; has_program: boolean | null; program_url: string | null; program_id: number | null };
-export type Match = { id: number; name: string; website: string; description: string | null; subtype: string | null; has_program: boolean | null; program_url: string | null; program_id: number | null; score: number; reason: string };
-export type TypeResult = { type: string; stage: string | null; role: string; examples: string[]; candidates: number; matches: Match[] };
+type Co = { id: number; size_band: string | null; name: string; website: string; description: string | null; region: string | null; company_kind: string; partner_types: string[]; subtype: string | null; categories: string[]; serves_sizes: string[]; engages_at: string[]; has_program: boolean | null; program_url: string | null; program_id: number | null };
+export type Match = { id: number; region: string | null; size_band: string | null; name: string; website: string; description: string | null; subtype: string | null; has_program: boolean | null; program_url: string | null; program_id: number | null; score: number; reason: string };
+export type TypeResult = { type: string; stage: string | null; role: string; examples: string[]; candidates: number; poolSize: number; matches: Match[] };
 
-const COLS = "id,name,website,description,region,company_kind,partner_types,subtype,categories,serves_sizes,engages_at,has_program,program_url,program_id";
+const COLS = "id,size_band,name,website,description,region,company_kind,partner_types,subtype,categories,serves_sizes,engages_at,has_program,program_url,program_id";
 const SHORTLIST = 25, TECH_SHORTLIST = 40;
 
 // Cheap, explainable score used to shortlist before the model ranks.
@@ -56,8 +56,8 @@ export async function matchStrategy(s: Strategy, perType = 10): Promise<TypeResu
     const short = pool.slice(0, p.type === "Technology Partner" ? TECH_SHORTLIST : SHORTLIST);
     const picked = await ask(s, p, short, perType);
     const ordered = picked.size ? short.filter((c) => picked.has(c.id)).sort((a, b) => [...picked.keys()].indexOf(a.id) - [...picked.keys()].indexOf(b.id)) : short;
-    const matches: Match[] = ordered.slice(0, perType).map((c) => ({ id: c.id, name: c.name, website: c.website, description: c.description, subtype: c.subtype, has_program: c.has_program, program_url: c.program_url, program_id: c.program_id, score: c.score, reason: picked.get(c.id) ?? "" }));
-    results.push({ type: p.type, stage: p.stage, role: p.role, examples: p.examples, candidates: all.length, matches });
+    const matches: Match[] = ordered.slice(0, perType).map((c) => ({ id: c.id, region: c.region, size_band: c.size_band, name: c.name, website: c.website, description: c.description, subtype: c.subtype, has_program: c.has_program, program_url: c.program_url, program_id: c.program_id, score: c.score, reason: picked.get(c.id) ?? "" }));
+    results.push({ type: p.type, stage: p.stage, role: p.role, examples: p.examples, candidates: all.length, poolSize: pool.filter((c) => c.score > 0).length, matches });
   }
   return results;
 }
