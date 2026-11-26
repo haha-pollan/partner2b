@@ -65,9 +65,9 @@ export default async function Home() {
           <div className="tapewrap">
             <h1 className="ptapes">
               <span className="pt pt1">Plan your partner program</span>
-              <span className="pt pt2">then find who to work with</span>
+              <span className="pt pt2">then find who to partner with</span>
             </h1>
-            <p className="bubble herosub" style={{ marginTop: 44 }}>{`Free tools to build your strategy, then a ranked list of real companies to partner with. Or compare ${all.length} partner programs in the directory`}</p>
+            <p className="bubble herosub homesub" style={{ marginTop: 44 }}>{`Plan your strategy with free tools, then get a ranked list of real companies to partner with. Or compare ${all.length} partner programs in the directory`}</p>
           </div>
           <div className="herotoby">
             <Toby height={580} rows={38} glasses style={{ width: "100%", height: "100%" }} />

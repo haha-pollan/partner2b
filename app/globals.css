@@ -188,6 +188,7 @@ button{font-family:inherit}
 .tape-w{background:#fff}.tape-l{background:var(--lime)}
 .herobody{position:relative;z-index:3;padding-top:330px;padding-bottom:0}
 .herosub{max-width:620px}
+.homesub{max-width:none;width:calc(100% - 26vw - 100px)}
 .herosub::after{content:"";position:absolute;right:-30px;top:34px;border-style:solid;border-width:15px 0 15px 30px;border-color:transparent transparent transparent #fff}
 .herobtns{display:flex;gap:18px;margin-top:34px;flex-wrap:wrap}
 .herobtns .btn{min-width:310px;text-align:center}
@@ -240,6 +241,7 @@ button{font-family:inherit}
 @media (max-width:1100px){
   .row{flex-wrap:wrap}.rowmeta{display:none}
   .herotoby{display:none}
+  .homesub{width:auto;max-width:620px}
   .hero .tapes{height:330px}
   .herobody{padding-top:270px}
   .bldpages{display:none}
