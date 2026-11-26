@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { adminConfigured, db, requireStaff } from "@/lib/admin/session";
 import { getState, processedToday } from "@/lib/enrich/run";
+import { countMissing } from "@/lib/enrich/details";
 import { ALL_CATEGORIES, PARTNER_TYPES } from "@/lib/enrich/vocab";
 import { hostOf } from "@/lib/enrich/fetch";
 import { addSource, approveConfident, findNow, importDirectory, reviewMany, reviewOne, runNow, setCap, toggleSource, togglePause } from "./actions";
@@ -29,9 +30,9 @@ export default async function Enrichment({ searchParams }: { searchParams: Promi
   const isSuper = staff.role === "super_admin";
   const page = Math.max(1, Number(p) || 1);
 
-  const [pending, approved, rejected, queued, sources, today, state, withProg, noProg, unclearProg, mine, live] = await Promise.all([
+  const [pending, approved, rejected, queued, sources, today, state, withProg, noProg, unclearProg, mine, live, detailsLeft] = await Promise.all([
     count("companies?status=eq.pending"), count("companies?status=eq.approved"), count("companies?status=eq.rejected"),
-    count("enrich_queue?status=eq.queued"), count("enrich_sources?active=eq.true"), processedToday(), getState(), count("companies?status=eq.approved&added_by=eq.enrichment&has_program=eq.true"), count("companies?status=eq.approved&added_by=eq.enrichment&has_program=eq.false"), count("companies?status=eq.approved&added_by=eq.enrichment&has_program=is.null"), count("companies?status=eq.approved&added_by=eq.enrichment"), count("programs?published=eq.true"),
+    count("enrich_queue?status=eq.queued"), count("enrich_sources?active=eq.true"), processedToday(), getState(), count("companies?status=eq.approved&added_by=eq.enrichment&has_program=eq.true"), count("companies?status=eq.approved&added_by=eq.enrichment&has_program=eq.false"), count("companies?status=eq.approved&added_by=eq.enrichment&has_program=is.null"), count("companies?status=eq.approved&added_by=eq.enrichment"), count("programs?published=eq.true"), countMissing(),
   ]);
 
   let rows: Co[] = []; let total = 0; let srcs: Src[] = [];
@@ -71,7 +72,7 @@ export default async function Enrichment({ searchParams }: { searchParams: Promi
       </div>
       <div className="adm-sub" style={{ textTransform: "uppercase", letterSpacing: 1 }}>The job</div>
       <div style={{ display: "flex", gap: 28, flexWrap: "wrap", margin: "8px 0 18px" }}>
-        {[["Queued", queued], ["Active sources", sources], ["Checked today", `${today} of ${state.daily_cap}`]].map(([l, n]) => (
+        {[["Queued", queued], ["Active sources", sources], ["Checked today", `${today} of ${state.daily_cap}`], ["Details still to fill (region, size, stage)", detailsLeft]].map(([l, n]) => (
           <div key={String(l)}><div className="adm-stat">{n}</div><div className="adm-sub">{l}</div></div>
         ))}
       </div>
