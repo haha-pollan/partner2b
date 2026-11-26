@@ -4,11 +4,20 @@ import { askJson, llmConfigured } from "@/lib/enrich/llm";
 import type { Profile, Strategy } from "./strategy";
 
 type Co = { id: number; size_band: string | null; name: string; website: string; description: string | null; region: string | null; company_kind: string; partner_types: string[]; subtype: string | null; categories: string[]; serves_sizes: string[]; engages_at: string[]; has_program: boolean | null; program_url: string | null; program_id: number | null };
-export type Match = { id: number; region: string | null; size_band: string | null; name: string; website: string; description: string | null; subtype: string | null; has_program: boolean | null; program_url: string | null; program_id: number | null; score: number; reason: string };
+export type Match = { id: number; region: string | null; size_band: string | null; name: string; website: string; description: string | null; subtype: string | null; has_program: boolean | null; program_url: string | null; program_id: number | null; score: number; reason: string; ranked: boolean };
 export type TypeResult = { type: string; stage: string | null; role: string; examples: string[]; candidates: number; poolSize: number; matches: Match[] };
 
 const COLS = "id,size_band,name,website,description,region,company_kind,partner_types,subtype,categories,serves_sizes,engages_at,has_program,program_url,program_id";
-const SHORTLIST = 25, TECH_SHORTLIST = 40;
+const SHORTLIST = 25, TECH_SHORTLIST = 30;
+
+// Used when the model gave no reason: only facts we hold, never invented.
+function factReason(c: Co): string {
+  const d = (c.description ?? "").trim();
+  if (d) return d.length > 140 ? d.slice(0, 137).replace(/\s+\S*$/, "") + "..." : d;
+  const what = c.subtype || (c.company_kind === "partner_side" ? "Partner company" : "Software company");
+  const cats = c.categories.slice(0, 2).join(" and ");
+  return `${what}${cats ? ` working in ${cats}` : ""}${c.region ? `, ${c.region}` : ""}.`;
+}
 
 // Cheap, explainable score used to shortlist before the model ranks.
 // A technology partner is adjacent to the vendor, never a competitor, so a company in the vendor's own category scores lower, not higher.
@@ -23,6 +32,7 @@ function score(c: Co, s: Strategy, p: Profile): number {
   if (p.stage && c.engages_at.includes(p.stage)) n += 1;
   if (p.type !== "Technology Partner" && c.company_kind === "partner_side") n += 2;
   if (c.has_program) n += 1;
+  if ((c.description ?? "").length > 40) n += 1; // a card needs something to say
   return n;
 }
 
@@ -36,10 +46,14 @@ async function ask(s: Strategy, p: Profile, list: (Co & { score: number })[], li
     pick: limit,
     companies: list.map((c) => ({ id: c.id, name: c.name, what: (c.description || "").slice(0, 220), subtype: c.subtype, categories: c.categories.slice(0, 4), serves: c.serves_sizes, region: c.region })),
   });
-  try {
-    const r = await askJson<{ picks?: { id: number; reason: string }[] }>(sys, user);
-    for (const x of r?.picks ?? []) if (typeof x.id === "number" && typeof x.reason === "string") out.set(x.id, x.reason.replace(/\s*[—–]\s*/g, ", ").slice(0, 160));
-  } catch { /* fall back to the score order */ }
+  // One retry: a busy moment or a timeout on the first call should not leave a card without a reason.
+  for (let attempt = 0; attempt < 2 && !out.size; attempt++) {
+    if (attempt) await new Promise((r) => setTimeout(r, 2000));
+    try {
+      const r = await askJson<{ picks?: { id: number; reason: string }[] }>(sys, user);
+      for (const x of r?.picks ?? []) if (typeof x.id === "number" && typeof x.reason === "string") out.set(x.id, x.reason.replace(/\s*[—–]\s*/g, ", ").slice(0, 160));
+    } catch { /* retry once, then fall back to the score order */ }
+  }
   return out;
 }
 
@@ -56,7 +70,7 @@ export async function matchStrategy(s: Strategy, perType = 10): Promise<TypeResu
     const short = pool.slice(0, p.type === "Technology Partner" ? TECH_SHORTLIST : SHORTLIST);
     const picked = await ask(s, p, short, perType);
     const ordered = picked.size ? short.filter((c) => picked.has(c.id)).sort((a, b) => [...picked.keys()].indexOf(a.id) - [...picked.keys()].indexOf(b.id)) : short;
-    const matches: Match[] = ordered.slice(0, perType).map((c) => ({ id: c.id, region: c.region, size_band: c.size_band, name: c.name, website: c.website, description: c.description, subtype: c.subtype, has_program: c.has_program, program_url: c.program_url, program_id: c.program_id, score: c.score, reason: picked.get(c.id) ?? "" }));
+    const matches: Match[] = ordered.slice(0, perType).map((c) => ({ id: c.id, region: c.region, size_band: c.size_band, name: c.name, website: c.website, description: c.description, subtype: c.subtype, has_program: c.has_program, program_url: c.program_url, program_id: c.program_id, score: c.score, reason: picked.get(c.id) ?? factReason(c), ranked: picked.has(c.id) }));
     results.push({ type: p.type, stage: p.stage, role: p.role, examples: p.examples, candidates: all.length, poolSize: pool.filter((c) => c.score > 0).length, matches });
   }
   return results;

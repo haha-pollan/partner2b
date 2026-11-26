@@ -5,7 +5,6 @@ import type { Preview } from "@/lib/discovery/preview";
 import RequestForm from "./RequestForm";
 import FactBubble from "./FactBubble";
 import SeeMore from "./SeeMore";
-import StickyCta from "./StickyCta";
 import { LogoTile } from "@/components/LogoTile";
 
 const TONES = [
@@ -168,7 +167,6 @@ export default function View({ preview, strategyId, company }: { preview: Previe
           <RequestForm strategyId={strategyId} />
         </div>
       </section>
-      <StickyCta total={nf(total)} strategyId={strategyId} />
       <Footer />
     </div>
   );
