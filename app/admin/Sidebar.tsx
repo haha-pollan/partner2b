@@ -15,7 +15,7 @@ export default function Sidebar({ isSuper, newSubmissions, name, role, logout }:
     { title: "Overview", items: [{ label: "Dashboard", href: "/admin" }] },
     { title: "Inbox", items: [{ label: "Submissions", href: "/admin/submissions", badge: newSubmissions }] },
     { title: "Tools", items: [{ label: "Overview", href: "/admin/tools", exact: true }, { label: "Assessment", href: "/admin/tools/assessment" }, { label: "Calculator", href: "/admin/tools/calculator" }, { label: "Program builder", href: "/admin/tools/builder" }, { label: "Playbook", href: "/admin/tools/playbook" }] },
-    { title: "Directory", items: [{ label: "Programs", href: "/admin/programs" }, { label: "Enrichment", href: "/admin/enrichment" }, { label: "Data quality", soon: true }] },
+    { title: "Directory", items: [{ label: "Programs", href: "/admin/programs" }, { label: "Enrichment", href: "/admin/enrichment" }, { label: "Discovery (test)", href: "/admin/discovery" }, { label: "Data quality", soon: true }] },
     { title: "Content", items: [{ label: "Blog articles", soon: true }, { label: "Subscribers", soon: true }] },
     { title: "Vendors", items: [{ label: "Vendor accounts", soon: true }, { label: "Claims", soon: true }] },
     { title: "Admin", superOnly: true, items: [{ label: "Team and roles", soon: true }, { label: "Activity log", soon: true }, { label: "Import, export", soon: true }, { label: "Settings", soon: true }] },
