@@ -220,7 +220,7 @@ export default function Page() {
       {/* CLOSING CTA */}
       <section style={{ background: "#A8FF5C", padding: "clamp(36px,8vw,72px) 0" }}>
         <div className="wrap" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 28, flexWrap: "wrap" }}>
-          <h2 style={{ fontSize: "clamp(22px,2.6vw,36px)", lineHeight: 1.2, maxWidth: 720 }}>Your ecosystem is part of your value proposition. Make it impossible to ignore.</h2>
+          <h2 style={{ fontSize: "clamp(22px,2.6vw,36px)", lineHeight: 1.2 }}>Your ecosystem is part of your value proposition. Make it impossible to ignore.</h2>
           <a href="#download" className="btn btn-s">Get the free playbook</a>
         </div>
       </section>

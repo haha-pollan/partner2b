@@ -99,7 +99,7 @@ export default function Page() {
         {/* Eight reasons */}
         <section aria-labelledby="why" style={section}>
           <h2 id="why" className="sectitle">Why a partner program does not perform</h2>
-          <p style={{ margin: "14px 0 0", fontSize: 19, lineHeight: 1.55, maxWidth: 760, color: "rgba(255,255,255,.85)" }}>Eight places to look, in the order a partner meets your program. The assessment checks each one</p>
+          <p style={{ margin: "14px 0 0", fontSize: 19, lineHeight: 1.55, color: "rgba(255,255,255,.85)" }}>Eight places to look, in the order a partner meets your program. The assessment checks each one</p>
           <div style={{ display: "flex", gap: 22, flexWrap: "wrap", marginTop: 36, alignItems: "flex-start" }}>
             <div style={{ flex: "1 1 420px", minWidth: 0, display: "flex", flexDirection: "column", gap: 22 }}>{left.map(reasonCard)}</div>
             <div style={{ flex: "1 1 420px", minWidth: 0, display: "flex", flexDirection: "column", gap: 22, paddingTop: 44 }}>{right.map(reasonCard)}</div>

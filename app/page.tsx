@@ -207,12 +207,12 @@ export default async function Home() {
       <section className="splitwrap">
         <div className="splitL" style={{ flex: "1 1 520px", background: "#A8FF5C", padding: "96px 80px 96px 40px", clipPath: "polygon(0 0,100% 0,92% 50%,100% 100%,0 100%)" }}>
           <h2 style={{ fontSize: 44, lineHeight: 1.05 }}>For partners</h2>
-          <p style={{ margin: "20px 0 0", maxWidth: 420, fontSize: 19, lineHeight: 1.5, fontWeight: 400 }}>Compare programs and find the ones that fit your business.</p>
+          <p style={{ margin: "20px 0 0", fontSize: 19, lineHeight: 1.5, fontWeight: 400 }}>Compare programs and find the ones that fit your business.</p>
           <Link href="/directory" className="btn btn-s" style={{ marginTop: 28 }}>Browse programs</Link>
         </div>
         <div className="splitR" style={{ flex: "1 1 520px", padding: "96px 40px 96px 80px", color: "#fff" }}>
           <h2 style={{ fontSize: 44, lineHeight: 1.05 }}>For vendors</h2>
-          <p style={{ margin: "20px 0 0", maxWidth: 420, fontSize: 19, lineHeight: 1.5, fontWeight: 400, color: "#ECECEE" }}>Claim your listing for free and keep your terms accurate.</p>
+          <p style={{ margin: "20px 0 0", fontSize: 19, lineHeight: 1.5, fontWeight: 400, color: "#ECECEE" }}>Claim your listing for free and keep your terms accurate.</p>
           <Link href="/claim" className="btn btn-p" style={{ marginTop: 28 }}>Claim a listing</Link>
         </div>
       </section>
@@ -225,7 +225,7 @@ export default async function Home() {
               <span style={{ display: "block" }}>Run a partner program?</span>
               <span style={{ display: "block", color: "#A8FF5C" }}>Claim your listing</span>
             </h2>
-            <p style={{ margin: "22px 0 0", maxWidth: 440, fontSize: 19, lineHeight: 1.5, fontWeight: 400, color: "#ECECEE" }}>Claiming is free. Correct your terms and keep them current</p>
+            <p style={{ margin: "22px 0 0", fontSize: 19, lineHeight: 1.5, fontWeight: 400, color: "#ECECEE" }}>Claiming is free. Correct your terms and keep them current</p>
           </div>
           <Link href="/claim" className="claimcard cut">
             {["Company name", "Program page URL", "Work email"].map((k) => (
