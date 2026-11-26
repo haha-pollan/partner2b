@@ -59,7 +59,7 @@ export default async function Home() {
   return (
     <>
       {/* Hero */}
-      <div className="hero">
+      <div className="hero homehero">
         <Nav />
         <div className="wrap herobody" style={{ paddingTop: 110, paddingBottom: 120 }}>
           <div className="tapewrap">
