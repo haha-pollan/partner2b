@@ -85,7 +85,7 @@ export default function View({ preview, strategyId, company }: { preview: Previe
 
       <section className="wrap" style={{ padding: "clamp(30px,5vw,60px) var(--margin) 0" }}>
         <h2 style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, letterSpacing: 0, WebkitTextStroke: "1.5px currentColor", fontSize: "clamp(22px,2.6vw,34px)" }}>Your {nf(total)} matches{company ? ` for ${company}` : ""}</h2>
-        <p style={{ margin: "14px 0 0", maxWidth: 660, fontSize: 18, lineHeight: 1.5, color: "#ECECEE" }}>Grouped by partner type. The top five of each type are open. The rest unlock with full access.</p>
+        <p style={{ margin: "14px 0 0", fontSize: 18, lineHeight: 1.5, color: "#ECECEE" }}>Grouped by partner type. The top five of each type are open. The rest unlock with full access.</p>
       </section>
       <nav aria-label="Partner types" className="fpnav">
         <div className="wrap fpnavin" style={{ display: "flex", gap: 10, flexWrap: "wrap", padding: "12px var(--margin)" }}>
@@ -106,7 +106,7 @@ export default function View({ preview, strategyId, company }: { preview: Previe
                 <div style={{ fontFamily: "'Michroma',sans-serif", fontSize: "clamp(46px,6.4vw,84px)", lineHeight: 1, letterSpacing: 0, color: accent, WebkitTextStroke: "2px currentColor" }}>{nf(t.pool)}</div>
                 <span className="pill" style={{ background: accent, color: ai ? "#fff" : "#0A0A0B", fontSize: 16, padding: "7px 16px" }}>{t.type}s</span>
               </div>
-              <p style={{ margin: "12px 0 0", fontSize: 19, lineHeight: 1.45, color: "#ECECEE", maxWidth: 760 }}>companies found. {roleText(t.type)}</p>
+              <p style={{ margin: "12px 0 0", fontSize: 19, lineHeight: 1.45, color: "#ECECEE" }}>companies found. {roleText(t.type)}</p>
               <div className="fpgrid" style={{ marginTop: 30 }}>
                 {t.shown.map((o, i) => {
                   const first = i === 0;
@@ -130,7 +130,7 @@ export default function View({ preview, strategyId, company }: { preview: Previe
               </div>
               <div style={{ marginTop: 26, display: "flex", alignItems: "center", gap: 20, flexWrap: "wrap" }}>
                 <SeeMore type={t.type} total={nf(t.pool)} strategyId={strategyId} violet={ai} />
-                <span style={{ fontSize: 16, color: "#B9BABD", maxWidth: 560 }}>Top {shown} of <span style={{ color: accent }}>{nf(t.pool)}</span>.{t.moreLocked > 0 ? ` Unlock ${nf(t.moreLocked)} more, with why each fits and when to approach.` : ""}</span>
+                <span style={{ fontSize: 16, color: "#B9BABD" }}>Top {shown} of <span style={{ color: accent }}>{nf(t.pool)}</span>.{t.moreLocked > 0 ? ` Unlock ${nf(t.moreLocked)} more, with why each fits and when to approach.` : ""}</span>
               </div>
             </div>
           );
@@ -140,13 +140,13 @@ export default function View({ preview, strategyId, company }: { preview: Previe
 
       <section className="wrap" style={{ padding: "0 var(--margin) clamp(70px,9vw,130px)" }}>
         <h2 style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, letterSpacing: 0, WebkitTextStroke: "1.5px currentColor", fontSize: "clamp(22px,2.6vw,34px)" }}>Track your first 90 days</h2>
-        <p style={{ margin: "14px 0 0", maxWidth: 620, fontSize: 18, lineHeight: 1.5, color: "#ECECEE" }}>Your plan board follows every match from first contact to first deal, so no partner goes quiet.</p>
+        <p style={{ margin: "14px 0 0", fontSize: 18, lineHeight: 1.5, color: "#ECECEE" }}>Your plan board follows every match from first contact to first deal, so no partner goes quiet.</p>
         <div style={{ marginTop: 26 }}><Progress total={total} opened={opened} /></div>
       </section>
 
       <section className="wrap" style={{ padding: "0 var(--margin) clamp(80px,10vw,140px)" }}>
         <h2 style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: "clamp(22px,2.6vw,34px)", letterSpacing: 0, WebkitTextStroke: "1.5px currentColor" }}>Free tools while you wait</h2>
-        <p style={{ margin: "14px 0 0", maxWidth: 620, fontSize: 18, lineHeight: 1.5, color: "#ECECEE" }}>Use these while you review your matches. Size your outreach, check your program and learn the terms. All free, no sign up.</p>
+        <p style={{ margin: "14px 0 0", fontSize: 18, lineHeight: 1.5, color: "#ECECEE" }}>Use these while you review your matches. Size your outreach, check your program and learn the terms. All free, no sign up.</p>
         <div className="fptools" style={{ marginTop: 30 }}>
           {TOOLS.map((tl, i) => {
             const T = TONES[i % 2];
