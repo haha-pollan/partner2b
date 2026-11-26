@@ -23,7 +23,7 @@ export default function Doors({ opts }: { opts: Opts }) {
 
   async function go(e: React.FormEvent) {
     e.preventDefault(); setErr("");
-    if (!website.trim() || !category || !audience || !region) { setErr("Please answer all four questions."); return; }
+    if (!website.trim() || !category || !audience || !region) { setErr("Please answer all the questions."); return; }
     if (!types.length) { setErr("Please choose at least one partner type."); return; }
     setBusy(true);
     try {
@@ -36,11 +36,13 @@ export default function Doors({ opts }: { opts: Opts }) {
 
   if (!quick) {
     return (
-      <div id="start" style={{ display: "grid", gap: 20, gridTemplateColumns: "repeat(auto-fit,minmax(300px,1fr))" }}>
+      <div id="start">
+      <h2 className="sectitle" style={{ marginBottom: 44 }}>Where are you starting from?</h2>
+      <div style={{ display: "grid", gap: 20, gridTemplateColumns: "repeat(auto-fit,minmax(300px,1fr))" }}>
         <div className="cut" style={{ background: "#A8FF5C", color: "#0A0A0B", padding: "38px 34px", display: "flex", flexDirection: "column" }}>
           <h2 style={{ fontSize: 26, lineHeight: 1.2 }}>I know who I want to partner with</h2>
-          <p style={{ marginTop: 14, fontSize: 18, lineHeight: 1.5, flex: 1 }}>You have a partner program or a clear idea of the partner types. Answer four questions and see matching companies.</p>
-          <div style={{ marginTop: 28 }}><button type="button" className="btn btn-s" onClick={() => setQuick(true)}>Answer four questions</button></div>
+          <p style={{ marginTop: 14, fontSize: 18, lineHeight: 1.5, flex: 1 }}>You have a partner program or a clear idea of the partner types. Tell us about your company and see matching companies.</p>
+          <div style={{ marginTop: 28 }}><button type="button" className="btn btn-s" onClick={() => setQuick(true)}>Tell us about your company</button></div>
         </div>
         <div className="cut" style={{ background: "#ECECEE", color: "#0A0A0B", padding: "38px 34px", display: "flex", flexDirection: "column" }}>
           <h2 style={{ fontSize: 26, lineHeight: 1.2 }}>I am starting from scratch</h2>
@@ -48,13 +50,14 @@ export default function Doors({ opts }: { opts: Opts }) {
           <div style={{ marginTop: 28 }}><Link href="/program-builder" className="btn btn-s">Open the Program builder</Link></div>
         </div>
       </div>
+      </div>
     );
   }
 
   return (
     <form id="start" onSubmit={go} className="cut" style={{ background: "#1C1D20", color: "#ECECEE", padding: "44px clamp(24px,5vw,56px)", boxShadow: "inset 0 5px 0 #A8FF5C", display: "grid", gap: 26 }}>
       <input value={trap} onChange={(e) => setTrap(e.target.value)} tabIndex={-1} autoComplete="off" aria-hidden="true" style={{ position: "absolute", left: "-9999px", height: 0, width: 0, opacity: 0 }} name="website_confirm" />
-      <h2 style={{ fontSize: 26, lineHeight: 1.2, color: "#fff" }}>Four questions</h2>
+      <h2 style={{ fontSize: 26, lineHeight: 1.2, color: "#fff" }}>Tell us what you are looking for</h2>
       <div><label style={label} htmlFor="q-site">1. Your company website</label><input id="q-site" style={field} value={website} onChange={(e) => setWebsite(e.target.value)} placeholder="yourcompany.com" /></div>
       <div><label style={label} htmlFor="q-cat">2. What you sell</label>
         <select id="q-cat" style={field} value={category} onChange={(e) => setCategory(e.target.value)}><option value="">Choose a category</option>{opts.categories.map((c) => <option key={c}>{c}</option>)}</select></div>
