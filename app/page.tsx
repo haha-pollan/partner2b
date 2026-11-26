@@ -7,6 +7,7 @@ import { Toby } from "@/components/Toby";
 import CountUp from "@/components/CountUp";
 import { Glyph } from "@/components/Tile";
 import { getPrograms } from "@/lib/programs";
+import { adminConfigured, db } from "@/lib/admin/session";
 import { AI_CATEGORIES, inCat, aiOnly, aiIsNew } from "@/lib/ai";
 import { assessIsNew, builderIsNew, calcIsNew } from "@/lib/launch";
 
@@ -36,6 +37,18 @@ const STEPS = [
 
 export default async function Home() {
   const all = await getPrograms();
+  let dbTotal = 0; let findSample: { id: number; name: string; description: string | null }[] = [];
+  if (adminConfigured()) {
+    try {
+      const [a, b] = await Promise.all([
+        db("companies?select=id&status=eq.approved&limit=1", { headers: { Prefer: "count=exact" } }),
+        db(`companies?select=id,name,description&status=eq.approved&partner_types=cs.${encodeURIComponent('{"Services"}')}&description=not.is.null&order=id.desc&limit=40`),
+      ]);
+      dbTotal = Number((a.headers.get("content-range") || "").split("/")[1]) || 0;
+      const rows: { id: number; name: string; description: string | null }[] = b.ok ? await b.json() : [];
+      findSample = rows.filter((c) => (c.description || "").length > 60).slice(0, 5);
+    } catch { /* section shows without the sample */ }
+  }
   const aiCount = aiOnly(all).length;
   const stats = [
     { n: all.length, l: "partner programs", bg: "#FFFFFF", fg: "#0A0A0B", num: "#0A0A0B", rot: 1.5, ml: 40 },
@@ -106,6 +119,24 @@ export default async function Home() {
               <Image src="/builder/sample-cover.jpg" alt="" width={728} height={1029} sizes="270px" className="bldpg bldpg1" />
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Find partners */}
+      <section aria-labelledby="hm-find" style={{ padding: "0 0 170px" }}>
+        <div className="wrap">
+          <span className="kick">Find partners<span className="newbadge" suppressHydrationWarning>New</span></span>
+          <h2 id="hm-find" className="sectitle" style={{ marginTop: 18 }}>Then find who to work with</h2>
+          <p style={{ marginTop: 14, fontSize: 18, lineHeight: 1.5, maxWidth: 760 }}>Your strategy names the partner types. We match real companies to each one, ranked by fit{dbTotal ? `, from a database of ${Math.floor(dbTotal / 100) * 100}+ companies` : ""}.</p>
+          <div style={{ marginTop: 44, display: "grid", gap: 16, gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))" }}>
+            {findSample.map((c, i) => (
+              <div key={c.id} className="cut" style={{ background: i === 0 ? "#A8FF5C" : "#ECECEE", color: "#0A0A0B", padding: "22px 20px" }}>
+                <b style={{ fontSize: 18 }}>{c.name}</b>
+                <span style={{ display: "-webkit-box", WebkitLineClamp: 4, WebkitBoxOrient: "vertical", overflow: "hidden", marginTop: 10, fontSize: 15, lineHeight: 1.45 }}>{c.description}</span>
+              </div>
+            ))}
+          </div>
+          <Link href="/find-partners" className="btn btn-p" style={{ marginTop: 36 }}>See how it works</Link>
         </div>
       </section>
 
