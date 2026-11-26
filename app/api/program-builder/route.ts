@@ -6,6 +6,7 @@ import { fetchBrand, cleanBrand } from "@/lib/builder2/brand";
 import { generateStrategy } from "@/lib/builder2/ai";
 import { parse, looksComplete } from "@/lib/builder2/parse";
 import { savePdf } from "@/lib/builder2/store";
+import { extractStrategy, saveStrategy } from "@/lib/discovery/strategy";
 import { randomUUID } from "crypto";
 
 export const runtime = "nodejs";
@@ -68,6 +69,7 @@ export async function POST(req: Request) {
     const { renderPlan } = await import("@/lib/builder2/PlanPdf");
     const pdf = await renderPlan({ title: `${intake.companyName} partner program strategy`, company: intake.companyName, accent: brand.color || "#5B3FE0", logo: brand.logo, blocks, econ: buildEconomics(intake, vertical, acvAverage).chart, sharePercent: intake.partnerRevenueSharePercent, contactName: intake.contactName, website: intake.website, goals: intake.programGoals, category: intake.category, region: intake.region, audience: intake.audience });
     await savePdf(pdfKey, pdf);
+    await saveStrategy(extractStrategy(pdfKey, intake, blocks));
     const kinds: Record<string, number> = {}; for (const b of blocks) kinds[b.kind] = (kinds[b.kind] ?? 0) + 1;
     const eco = blocks.find((b) => b.kind === "ecosystem");
     return NextResponse.json({ ok: true, company: intake.companyName, pdf: pdf.toString("base64"), info: { blocks: kinds, ecosystemNodes: eco && eco.kind === "ecosystem" ? eco.nodes.map((n) => `${n.type} | ${n.stage}`) : [] } });
