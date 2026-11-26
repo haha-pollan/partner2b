@@ -8,16 +8,20 @@ export type Match = { id: number; name: string; website: string; description: st
 export type TypeResult = { type: string; stage: string | null; role: string; examples: string[]; candidates: number; matches: Match[] };
 
 const COLS = "id,name,website,description,region,company_kind,partner_types,subtype,categories,serves_sizes,engages_at,has_program,program_url,program_id";
-const SHORTLIST = 25;
+const SHORTLIST = 25, TECH_SHORTLIST = 40;
 
 // Cheap, explainable score used to shortlist before the model ranks.
+// A technology partner is adjacent to the vendor, never a competitor, so a company in the vendor's own category scores lower, not higher.
+// For agencies, resellers and communities the category is their specialty, so a match scores higher.
+// Region, size and stage are empty for most directory vendors, so a missing value is neutral and only a real match adds points.
 function score(c: Co, s: Strategy, p: Profile): number {
   let n = 0;
-  if (s.category && c.categories.includes(s.category)) n += 3;
+  const same = !!s.category && c.categories.includes(s.category);
+  if (p.type === "Technology Partner") n += same ? -4 : 1; else if (same) n += 3;
   if (s.region && (c.region === s.region || c.region === "Global")) n += 2;
-  else if (!c.region) n += 1;
   if (s.audience && s.audience !== "A mix of sizes" && c.serves_sizes.includes(s.audience)) n += 2;
   if (p.stage && c.engages_at.includes(p.stage)) n += 1;
+  if (p.type !== "Technology Partner" && c.company_kind === "partner_side") n += 2;
   if (c.has_program) n += 1;
   return n;
 }
@@ -25,7 +29,7 @@ function score(c: Co, s: Strategy, p: Profile): number {
 async function ask(s: Strategy, p: Profile, list: (Co & { score: number })[], limit: number): Promise<Map<number, string>> {
   const out = new Map<number, string>();
   if (!llmConfigured() || !list.length) return out;
-  const sys = "You match companies to a partner profile for a vendor building a partner program. Use only the facts given. Pick the best fits and give each a reason of at most 18 words that names the specific fit. Never invent facts about a company. Answer with JSON only: {\"picks\":[{\"id\":number,\"reason\":string}]} ordered best first.";
+  const sys = "You match companies to a partner profile for a vendor building a partner program. Use only the facts given. Pick the best fits and give each a reason of at most 18 words that names the specific fit. A Technology Partner must sit next to the vendor's product in the customer's workflow and integrate with it; skip any company that competes with the vendor or sells the same kind of product. Agencies, resellers and communities should work with the vendor's category and buyers. Never invent facts about a company. Answer with JSON only: {\"picks\":[{\"id\":number,\"reason\":string}]} ordered best first.";
   const user = JSON.stringify({
     vendor: { name: s.company_name, category: s.category, region: s.region, sells_to: s.audience, goals: s.goals },
     wanted_partner: { type: p.type, stage: p.stage, role: p.role, examples: p.examples },
@@ -49,7 +53,7 @@ export async function matchStrategy(s: Strategy, perType = 10): Promise<TypeResu
     const host = (s.website || "").replace(/^https?:\/\/(www\.)?/, "").split("/")[0].toLowerCase();
     const pool = all.filter((c) => !host || !c.website.toLowerCase().includes(host)).map((c) => ({ ...c, score: score(c, s, p) }));
     pool.sort((a, b) => b.score - a.score || a.id - b.id);
-    const short = pool.slice(0, SHORTLIST);
+    const short = pool.slice(0, p.type === "Technology Partner" ? TECH_SHORTLIST : SHORTLIST);
     const picked = await ask(s, p, short, perType);
     const ordered = picked.size ? short.filter((c) => picked.has(c.id)).sort((a, b) => [...picked.keys()].indexOf(a.id) - [...picked.keys()].indexOf(b.id)) : short;
     const matches: Match[] = ordered.slice(0, perType).map((c) => ({ id: c.id, name: c.name, website: c.website, description: c.description, subtype: c.subtype, has_program: c.has_program, program_url: c.program_url, program_id: c.program_id, score: c.score, reason: picked.get(c.id) ?? "" }));
