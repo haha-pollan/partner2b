@@ -141,7 +141,7 @@ export default function View({ preview, strategyId, company }: { preview: Previe
           <div className="cut" style={{ marginTop: "clamp(60px,8vw,100px)", background: "#1C1D20", boxShadow: "inset 5px 0 0 #A8FF5C", padding: "clamp(26px,3.5vw,40px) clamp(26px,4vw,48px)", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 24, flexWrap: "wrap", ["--c" as string]: "26px" }}>
             <div>
               <div style={{ fontFamily: "'Michroma',sans-serif", fontSize: "clamp(34px,4.6vw,60px)", lineHeight: 1, letterSpacing: 0, color: "#A8FF5C", WebkitTextStroke: "1.5px currentColor" }}>{nf(week)}</div>
-              <p style={{ margin: "12px 0 0", fontSize: 19, color: "#ECECEE" }}>new companies of these types were added to our database this week.</p>
+              <p style={{ margin: "12px 0 0", fontSize: 19, color: "#ECECEE" }}>new companies of these types were added this week.</p>
             </div>
             <span className="pill" style={{ background: "#2A2B30", color: "#ECECEE", fontSize: 15, padding: "8px 16px", display: "inline-flex", alignItems: "center", gap: 10 }}><span className="fplive" aria-hidden="true" />Updated weekly</span>
           </div>
