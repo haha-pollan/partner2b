@@ -15,37 +15,32 @@ export const metadata: Metadata = {
 
 type C = { id: number; name: string; website: string; description: string | null; subtype: string | null };
 
-async function load(): Promise<{ total: number; sample: C[] }> {
-  if (!adminConfigured()) return { total: 0, sample: [] };
+async function load(): Promise<{ sample: C[] }> {
+  if (!adminConfigured()) return { sample: [] };
   try {
-    const [a, b] = await Promise.all([
-      db("companies?select=id&status=eq.approved&limit=1", { headers: { Prefer: "count=exact" } }),
-      db(`companies?select=id,name,website,description,subtype&status=eq.approved&partner_types=cs.${encodeURIComponent('{"Services"}')}&description=not.is.null&order=id.desc&limit=40`),
-    ]);
-    const total = Number((a.headers.get("content-range") || "").split("/")[1]) || 0;
+    const b = await db(`companies?select=id,name,website,description,subtype&status=eq.approved&partner_types=cs.${encodeURIComponent('{"Services"}')}&description=not.is.null&order=id.desc&limit=40`);
     const rows: C[] = b.ok ? await b.json() : [];
     const sample = rows.filter((c) => (c.description || "").length > 60 && c.website).slice(0, 5);
-    return { total, sample };
-  } catch { return { total: 0, sample: [] }; }
+    return { sample };
+  } catch { return { sample: [] }; }
 }
 
 const STEPS = [
-  { t: "Tell us who you want", d: "Tell us what you are looking for, or build a strategy in the free Program builder." },
+  { t: "Share what you need", d: "Pick the partner types you want, or build a strategy in the free Program builder." },
   { t: "We match real companies", d: "Each partner type is matched with the right companies, ranked by fit." },
   { t: "Start with the best five", d: "See the top companies for each partner type, with why each one fits." },
 ];
 
 export default async function Page() {
-  const { total, sample } = await load();
-  const n = total ? `${Math.floor(total / 100) * 100}+` : "Thousands of";
+  const { sample } = await load();
   return (
     <>
       <Nav />
       <section className="hero" style={{ padding: "150px 0 120px", position: "relative" }}>
         <div className="wrap">
           <span className="kick">Find partners<span className="newbadge" suppressHydrationWarning>New</span></span>
-          <h1 style={{ marginTop: 22 }}>Find the companies to build your partner program with</h1>
-          <p style={{ marginTop: 22, fontSize: 20, lineHeight: 1.5, maxWidth: 720 }}>Get a ranked list of real companies for each partner type in your strategy. {n} companies and growing every week.</p>
+          <h1 style={{ marginTop: 22 }}>Find the right companies to partner with</h1>
+          <p style={{ marginTop: 22, fontSize: 20, lineHeight: 1.5, maxWidth: 720 }}>A ranked list of real companies for every partner type you need, with new ones added every week.</p>
           <div style={{ marginTop: 34, display: "flex", gap: 14, flexWrap: "wrap" }}>
             <a href="#start" className="btn btn-p">Find my partners</a>
             <OpenMine />
@@ -96,7 +91,7 @@ export default async function Page() {
         <div className="wrap">
           <div className="cut" style={{ background: "#1C1D20", color: "#ECECEE", padding: "52px clamp(24px,5vw,64px)", boxShadow: "inset 0 5px 0 #A8FF5C" }}>
             <h2 className="sectitle" style={{ color: "#fff" }}>Ready to see your own matches?</h2>
-            <p style={{ marginTop: 14, fontSize: 18, lineHeight: 1.5, color: "#B9BABD" }}>Tell us what you are looking for, or build a full strategy first. Both are free.</p>
+            <p style={{ marginTop: 14, fontSize: 18, lineHeight: 1.5, color: "#B9BABD" }}>Pick your partner types, or build a full strategy first. Both are free.</p>
             <div style={{ marginTop: 30, display: "flex", gap: 14, flexWrap: "wrap" }}>
               <a href="#start" className="btn btn-s">Find my partners</a>
               <OpenMine />
