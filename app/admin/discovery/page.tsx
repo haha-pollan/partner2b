@@ -38,6 +38,7 @@ export default async function Discovery({ searchParams }: { searchParams: Promis
       ) : null}
       {strategy ? (
         <>
+          <p style={{ margin: "0 0 14px" }}><a className="btn btn-sm btn-p" href={`/find-partners/${strategy.id}`} target="_blank" rel="noopener noreferrer">Open the visitor page</a></p>
           <p className="adm-sub"><b>{strategy.company_name}</b>, {strategy.category}, {strategy.region}, sells to {strategy.audience}. Partner types: {strategy.partner_types.join(", ") || "none found"}.</p>
           {results.map((t) => (
             <div key={t.type} className="adm-card cut" style={{ marginBottom: 16 }}>
