@@ -1,20 +1,20 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { Nav } from "@/components/Nav";
+import { PageHero } from "@/components/PageHero";
 import { Footer } from "@/components/Footer";
 import { BuilderCta } from "@/components/BuilderCta";
 import { TERMS, GROUPS, termHref } from "@/lib/glossary";
 import { BLURBS } from "@/lib/glossary/blurbs";
 
 const TONES = [
-  { bg: "#ECECEE", fg: "#0A0A0B", sub: "#3A3B40", ar: "#0A0A0B", arf: "#A8FF5C" },
+  { bg: "#FFFFFF", fg: "#0A0A0B", sub: "#3A3B40", ar: "#0A0A0B", arf: "#A8FF5C" },
   { bg: "#A8FF5C", fg: "#0A0A0B", sub: "#1C1D20", ar: "#0A0A0B", arf: "#A8FF5C" },
-  { bg: "#2A2B30", fg: "#ECECEE", sub: "#B9BABD", ar: "#A8FF5C", arf: "#0A0A0B" },
+  { bg: "#7C5CFF", fg: "#FFFFFF", sub: "#FFFFFF", ar: "#FFFFFF", arf: "#7C5CFF" },
 ];
 const AI_TONES = [
   { bg: "#7C5CFF", fg: "#fff", sub: "#F1EEFF", ar: "#fff", arf: "#5B3FE0" },
-  { bg: "#F1EEFF", fg: "#0A0A0B", sub: "#3A3B40", ar: "#5B3FE0", arf: "#fff" },
-  { bg: "#2A2B30", fg: "#ECECEE", sub: "#B9BABD", ar: "#C9BDFF", arf: "#0A0A0B" },
+  { bg: "#FFFFFF", fg: "#0A0A0B", sub: "#3A3B40", ar: "#5B3FE0", arf: "#fff" },
+  { bg: "#A8FF5C", fg: "#0A0A0B", sub: "#1C1D20", ar: "#0A0A0B", arf: "#A8FF5C" },
 ];
 const ROT = [-1.6, 1.2, -0.8, 1.4, -1.2, 1.6];
 
@@ -35,15 +35,7 @@ export default function Page() {
   return (
     <div>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />
-      <div style={{ overflow: "hidden" }}>
-        <Nav />
-        <div className="wrap" style={{ padding: "40px var(--margin) clamp(36px,9vw,64px)" }}>
-          <h1 className="h1big">Partner program glossary</h1>
-          <p style={{ margin: "22px 0 0", maxWidth: 900, fontSize: 20, lineHeight: 1.5, color: "#ECECEE" }}>
-            Clear definitions of the terms used in B2B partner programs, channel sales and AI partnerships, each with examples and common questions answered.
-          </p>
-        </div>
-      </div>
+      <PageHero layout="poster" title="Partner program" accent="glossary" sub="Clear definitions of the terms used in B2B partner programs, channel sales and AI partnerships, each with examples and common questions answered." />
       <section style={{ padding: "clamp(36px,9vw,72px) 0 clamp(36px,9vw,110px)", overflow: "hidden" }}>
         <div className="wrap">
           {GROUPS.map((g, gi) => {

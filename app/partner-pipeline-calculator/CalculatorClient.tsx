@@ -113,7 +113,7 @@ export function CalculatorClient() {
         </select>
         <Hint t={APPROACHES.find((a) => a.key === approach)!.hint} />
 
-        <details style={{ marginTop: 26, background: "#1C1D20", padding: "18px 22px" }}>
+        <details style={{ marginTop: 26, background: "#1C1D20", border: "2px solid #A8FF5C", padding: "18px 22px" }}>
           <summary style={{ cursor: "pointer", fontSize: 17 }}>Edit assumptions</summary>
           <p style={{ margin: "14px 0 0", fontSize: 15, lineHeight: 1.5, color: "#B9BABD" }}>These starting values come from published benchmarks and the Partner2B planning model. Change any of them to match your own data.</p>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))", gap: "6px 18px" }}>

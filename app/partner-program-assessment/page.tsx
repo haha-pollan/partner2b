@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { JsonLd, ORG, SITE, crumbs } from "@/components/JsonLd";
-import { Nav } from "@/components/Nav";
+import { PageHero } from "@/components/PageHero";
 import { Toby } from "@/components/Toby";
 import { Footer } from "@/components/Footer";
 import { AREAS } from "@/lib/assessment/model";
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 };
 
 const URL_ = `${SITE}/partner-program-assessment`;
-const TINTS = ["#fff", "var(--lav)", "#ECECEE"];
+const TINTS = ["#fff", "#A8FF5C", "#fff"];
 const michroma: React.CSSProperties = { fontFamily: "'Michroma',sans-serif", fontWeight: 400, WebkitTextStroke: "1px currentColor" };
 const section: React.CSSProperties = { marginTop: "clamp(60px,8vw,104px)" };
 const steps = ["Pick what is not working and answer four quick questions", "Answer 16 short statements: Yes, Partly or No", "See the two things holding your program back and the first fix for each"];
@@ -51,26 +51,7 @@ export default function Page() {
           crumbs([["Partner2B", SITE], ["Partner program assessment", URL_]]),
         ],
       }} />
-      <div className="hero">
-        <Nav />
-        <div className="wrap herobody" style={{ paddingTop: 36, paddingBottom: 110 }}>
-          <div className="tapewrap">
-            <h1 className="ptapes">
-              <span className="pt pt1">Partner program assessment</span>
-              <span className="pt pt2">Why it does not perform</span>
-            </h1>
-            <p className="bubble herosub" style={{ marginTop: 44 }}>Partners joined, but the revenue did not follow? Answer 16 short statements and see which two things hold your program back, and what to fix first</p>
-            <div className="herobtns"><StartLink className="btn btn-p">Start the assessment</StartLink></div>
-          </div>
-          <div className="herotoby" aria-hidden="true">
-            <Toby height={580} rows={38} glasses style={{ width: "100%", height: "100%" }} />
-          </div>
-          <div className="cut freecard">
-            <div style={{ fontFamily: "'Michroma',sans-serif", fontSize: 40, lineHeight: 1, WebkitTextStroke: "1.5px currentColor" }}>Free</div>
-            <div style={{ marginTop: 8, fontSize: 18 }}>3 minutes, no company name</div>
-          </div>
-        </div>
-      </div>
+      <PageHero layout="poster" title="Partner program assessment" accent="Why it does not perform" sub="Partners joined, but the revenue did not follow? Answer 16 short statements and see which two things hold your program back, and what to fix first" buttons={<StartLink className="btn btn-p">Start the assessment</StartLink>} />
 
       <Suspense fallback={null}><AssessmentClient /></Suspense>
 
@@ -131,7 +112,7 @@ export default function Page() {
 
         {/* How it works and start */}
         <section aria-labelledby="how" style={{ ...section, display: "flex", gap: 28, flexWrap: "wrap", alignItems: "stretch" }}>
-          <div className="cut" style={{ flex: "1 1 460px", minWidth: 0, background: "#ECECEE", color: "#0A0A0B", padding: "28px 32px 34px" }}>
+          <div className="cut" style={{ flex: "1 1 460px", minWidth: 0, background: "#FFFFFF", color: "#0A0A0B", padding: "28px 32px 34px" }}>
             <h2 id="how" style={{ fontWeight: 400, fontSize: 20, letterSpacing: 0, paddingBottom: 12, borderBottom: "2px solid #0A0A0B" }}>How the assessment works</h2>
             {steps.map((t, i) => (
               <div key={t} style={{ display: "flex", gap: 18, alignItems: "flex-start", padding: "18px 0", borderBottom: i < 2 ? "2px solid #0A0A0B" : 0 }}>
@@ -140,7 +121,7 @@ export default function Page() {
               </div>
             ))}
           </div>
-          <div className="cut" style={{ flex: "1 1 400px", minWidth: 0, background: "#0A0A0B", color: "#fff", padding: "36px 38px 44px", display: "flex", flexDirection: "column", justifyContent: "center", ["--c" as string]: "26px" }}>
+          <div className="" style={{ flex: "1 1 400px", minWidth: 0, background: "#0A0A0B", border: "2px solid #A8FF5C", color: "#fff", padding: "36px 38px 44px", display: "flex", flexDirection: "column", justifyContent: "center", ["--c" as string]: "26px" }}>
             <div style={{ ...michroma, fontSize: 26, lineHeight: 1.3 }}>Find your two bottlenecks</div>
             <p style={{ margin: "16px 0 0", fontSize: 18, lineHeight: 1.55 }}>You see the first one right away. Leave your email to get the full result and a PDF</p>
             <div style={{ marginTop: 28 }}><StartLink className="btn btn-p">Start the assessment</StartLink></div>

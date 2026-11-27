@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { Nav } from "@/components/Nav";
+import { PageHero } from "@/components/PageHero";
 import { Footer } from "@/components/Footer";
 import { BuilderCta } from "@/components/BuilderCta";
 import { PlaybookForm } from "./PlaybookForm";
@@ -89,26 +89,13 @@ export default function Page() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />
 
       {/* HERO */}
-      <div style={{ overflow: "hidden" }}>
-        <Nav />
-        <div className="wrap" style={{ padding: "24px var(--margin) clamp(40px,8vw,90px)", display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 48, flexWrap: "wrap" }}>
-          <div style={{ flex: "1 1 520px", maxWidth: 640 }}>
-            <span className="pill">Free playbook 2026</span>
-            <h1 className="h1big" style={{ marginTop: 20, fontSize: "clamp(28px,3.8vw,58px)" }}>The <span style={{ whiteSpace: "nowrap" }}>Ecosystem-Led</span> Growth Playbook</h1>
-            <p style={{ margin: "22px 0 0", maxWidth: 560, fontSize: 21, lineHeight: 1.5, fontWeight: 400 }}>
-              How B2B marketers can drive scalable revenue through partnerships, with the KPIs that prove partner ROI.
-            </p>
-            <ul style={{ margin: "26px 0 0", padding: 0, listStyle: "none", display: "grid", gap: 10, fontSize: 17, fontWeight: 400 }}>
-              {["Why buyers now check your ecosystem before they talk to sales", "Which partner types to build, and in what order", "A five-stage journey from first partner to measurable revenue"].map((t) => (
-                <li key={t} style={{ display: "flex", gap: 12, alignItems: "flex-start" }}><span aria-hidden="true" style={{ flex: "0 0 10px", height: 10, background: "#A8FF5C", marginTop: 8, clipPath: "polygon(0 0,100% 0,100% 60%,60% 100%,0 100%)" }} />{t}</li>
-              ))}
-            </ul>
-          </div>
-          <div style={{ flex: "0 1 420px", width: "100%", position: "relative" }}>
-            <PlaybookForm id="download" />
-          </div>
-        </div>
-      </div>
+      <PageHero layout="form" title={<>The <span style={{ whiteSpace: "nowrap" }}>Ecosystem-Led</span> Growth Playbook</>} accent="" sub="How B2B marketers can drive scalable revenue through partnerships, with the KPIs that prove partner ROI."
+        extra={<ul style={{ margin: "26px 0 0", padding: 0, listStyle: "none", display: "grid", gap: 10, fontSize: 17, fontWeight: 400 }}>
+          {["Why buyers now check your ecosystem before they talk to sales", "Which partner types to build, and in what order", "A five-stage journey from first partner to measurable revenue"].map((t) => (
+            <li key={t} style={{ display: "flex", gap: 12, alignItems: "flex-start" }}><span aria-hidden="true" style={{ flex: "0 0 10px", height: 10, background: "#A8FF5C", marginTop: 8, clipPath: "polygon(0 0,100% 0,100% 60%,60% 100%,0 100%)" }} />{t}</li>
+          ))}
+        </ul>}
+        slot={<PlaybookForm id="download" />} />
 
       {/* ANSWER-FIRST SUMMARY + STATS */}
       <section style={{ padding: "clamp(40px,9vw,84px) 0" }}>
@@ -119,7 +106,7 @@ export default function Page() {
           </p>
           <div style={{ marginTop: 40, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(230px, 1fr))", gap: 22 }}>
             {STATS.map(([n, t], i) => (
-              <div key={n} className="cut" style={{ background: i % 2 ? "#ECECEE" : "#A8FF5C", color: "#0A0A0B", padding: "26px 26px 34px" }}>
+              <div key={n} className="cut" style={{ background: i % 2 ? "#FFFFFF" : "#A8FF5C", color: "#0A0A0B", padding: "26px 26px 34px" }}>
                 <div style={{ fontFamily: "'Michroma',sans-serif", fontSize: 40, lineHeight: 1 }}>{n}</div>
                 <p style={{ margin: "14px 0 0", fontSize: 16, lineHeight: 1.5 }}>{t}</p>
               </div>
@@ -137,8 +124,8 @@ export default function Page() {
           <ol style={{ margin: "36px 0 0", padding: 0, listStyle: "none", display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))", gap: 22 }}>
             {CHAPTERS.flatMap(([t, d], i) => {
               const card = (
-                <li key={t} className="cut" style={{ background: "#ECECEE", padding: "24px 26px 34px", display: "flex", gap: 18, alignItems: "flex-start" }}>
-                  <span style={{ flex: "0 0 44px", height: 44, borderRadius: "50%", background: "#2A2B30", color: "#A8FF5C", fontFamily: "'Michroma',sans-serif", fontSize: 13, display: "flex", alignItems: "center", justifyContent: "center" }}>{String(i + 1).padStart(2, "0")}</span>
+                <li key={t} className="cut" style={{ background: "#FFFFFF", padding: "24px 26px 34px", display: "flex", gap: 18, alignItems: "flex-start" }}>
+                  <span style={{ flex: "0 0 44px", height: 44, borderRadius: "50%", background: "#7C5CFF", color: "#FFFFFF", fontFamily: "'Michroma',sans-serif", fontSize: 13, display: "flex", alignItems: "center", justifyContent: "center" }}>{String(i + 1).padStart(2, "0")}</span>
                   <div>
                     <h3 style={{ fontSize: 16, lineHeight: 1.35 }}>{t}</h3>
                     <p style={{ margin: "8px 0 0", fontSize: 15, lineHeight: 1.55, color: "#3A3B40" }}>{d}</p>
@@ -147,7 +134,7 @@ export default function Page() {
               );
               if (i !== 3) return [card];
               return [card, (
-                <li key="title-card" className="cut" style={{ background: "#2A2B30", padding: "26px 28px 36px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                <li key="title-card" className="cut" style={{ background: "#7C5CFF", padding: "26px 28px 36px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
                   <span className="pill" style={{ alignSelf: "flex-start", background: "#A8FF5C", color: "#0A0A0B" }}>Partner2B 2026</span>
                   <h3 style={{ marginTop: 16, fontSize: 19, lineHeight: 1.3, color: "#A8FF5C" }}>The Ecosystem-Led Growth Playbook</h3>
                   <p style={{ margin: "10px 0 0", fontSize: 15, lineHeight: 1.55, color: "#B9BABD" }}>A practical guide to growing revenue through partnerships.</p>
@@ -189,7 +176,7 @@ export default function Page() {
               {WHO.map((w) => (<li key={w} style={{ display: "flex", gap: 14, alignItems: "flex-start" }}><span aria-hidden="true" style={{ flex: "0 0 12px", height: 12, background: "#A8FF5C", border: "1.5px solid #0A0A0B", marginTop: 8 }} />{w}</li>))}
             </ul>
           </div>
-          <div className="cut" style={{ flex: "1 1 420px", background: "#ECECEE", padding: "30px 32px 40px" }}>
+          <div className="cut" style={{ flex: "1 1 420px", background: "#FFFFFF", padding: "30px 32px 40px" }}>
             <h2 style={{ fontSize: 20, lineHeight: 1.3 }}>Written by Elena Zap</h2>
             <p style={{ margin: "14px 0 0", fontSize: 17, lineHeight: 1.65, color: "#2A2B2F" }}>
               Elena is the founder of Partner2B and has spent more than 17 years in B2B sales, marketing and partnerships. She wrote the playbook after seeing the same gap again and again: most companies hide their partner ecosystems behind generic partners pages that do nothing for discovery.
@@ -200,7 +187,7 @@ export default function Page() {
       </section>
 
       {/* FAQ */}
-      <section style={{ background: "#ECECEE", padding: "clamp(40px,9vw,84px) 0" }}>
+      <section style={{ background: "#FFFFFF", padding: "clamp(40px,9vw,84px) 0" }}>
         <div className="wrap">
           <h2 style={{ fontSize: "clamp(22px,2.6vw,36px)", lineHeight: 1.2 }}>Common questions</h2>
           <div style={{ marginTop: 32, maxWidth: 880 }}>

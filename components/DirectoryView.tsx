@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Nav } from "@/components/Nav";
+import { PageHero } from "@/components/PageHero";
 import { Footer } from "@/components/Footer";
 import { BuilderCta } from "@/components/BuilderCta";
 import { Tile } from "@/components/Tile";
@@ -99,25 +99,20 @@ export async function DirectoryView({ sp, pool, base, ai = false, h1, sub, befor
 
   return (
     <div className={ai ? "aiscope" : undefined}>
-      <div style={{ position: "relative" }}>
-        <Nav />
-        <div className="wrap" style={{ padding: "30px var(--margin) clamp(36px,9vw,80px)", display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 40, flexWrap: "wrap" }}>
-          <div style={{ flex: ai ? "1 1 480px" : "0 0 auto", maxWidth: "100%" }}>
-            <h1 className="ptapes"><span className="pt pt1">{h1[0]}</span><span className="pt pt2">{h1[1]}</span></h1>
-            <p style={{ margin: "40px 0 0", maxWidth: ai ? 560 : 720, fontSize: 21, lineHeight: 1.5, fontWeight: 400 }}>
-              {sub}
-            </p>
-            <form method="get" action={base} className="search" role="search">
-              <label htmlFor="q" style={{ position: "absolute", left: -9999 }}>Search programs or companies</label>
-              <input id="q" name="q" type="search" defaultValue={f.q} placeholder="Search programs or companies" />
-              <button type="submit">Search</button>
-            </form>
-          </div>
-          {heroRight ? <div style={{ flex: "0 1 400px", maxWidth: "100%", marginTop: 0 }}>{heroRight}</div> : <div className="cut card stat" style={{ flex: "0 0 auto", maxWidth: "100%", margin: "30px 0 0 0", transform: "rotate(-2deg)", ["--c" as string]: "22px" }}>
-            <span className="statn"><CountUp to={all.length} /></span>
-            <span className="statl">{ai ? "AI programs, free to browse" : "programs, free to browse"}</span>
-          </div>}
-        </div>
+      <PageHero
+        layout={ai ? "banner" : "fan"}
+        title={h1.join(" ")}
+        accent=""
+        sub={sub}
+        companies={ai ? undefined : pool.filter((p) => p.description).slice(0, 5).map((p) => ({ name: p.company, description: p.description, subtype: p.primary_type }))}
+      />
+      <div className="wrap" style={{ padding: "56px var(--margin) 10px", display: "flex", flexDirection: "column", alignItems: "center", gap: 28 }}>
+        <form method="get" action={base} className="search" role="search" style={{ margin: 0 }}>
+          <label htmlFor="q" style={{ position: "absolute", left: -9999 }}>Search programs or companies</label>
+          <input id="q" name="q" type="search" defaultValue={f.q} placeholder="Search programs or companies" />
+          <button type="submit">Search</button>
+        </form>
+        {heroRight}
       </div>
 
       <div style={{ position: "relative", padding: "20px 0 clamp(36px,9vw,80px)" }}>

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
-import { Nav } from "@/components/Nav";
+import { PageHero } from "@/components/PageHero";
 import { Footer } from "@/components/Footer";
 import { Toby } from "@/components/Toby";
 import CountUp from "@/components/CountUp";
@@ -22,12 +22,12 @@ const TYPES = ["Reseller", "Referral", "Technology", "Services", "MSP", "OEM or 
 const KIND: Record<string, string> = { Reseller: "bars", Referral: "diamond", Technology: "grid", Services: "slants", MSP: "hex", "OEM or white label": "stairs" };
 // background, text, indent
 const ROWS: [string, string, number][] = [
-  ["#ECECEE", "#0A0A0B", 0],
-  ["#B9BABD", "#0A0A0B", 4],
-  ["#A8FF5C", "#0A0A0B", 8],
-  ["#85868B", "#0A0A0B", 12],
-  ["#4A4B51", "#fff", 16],
-  ["#2A2B30", "#A8FF5C", 20],
+  ["#FFFFFF", "#0A0A0B", 0],
+  ["#A8FF5C", "#0A0A0B", 4],
+  ["#7C5CFF", "#FFFFFF", 8],
+  ["#FFFFFF", "#0A0A0B", 12],
+  ["#A8FF5C", "#0A0A0B", 16],
+  ["#7C5CFF", "#FFFFFF", 20],
 ];
 const STEPS = [
   { t: "Answer a few questions", d: "Your product, customers and goals" },
@@ -49,26 +49,21 @@ export default async function Home() {
   const stats = [
     { n: all.length, l: "partner programs", bg: "#FFFFFF", fg: "#0A0A0B", num: "#0A0A0B", rot: 1.5, ml: 40 },
     { n: aiCount, l: "AI partner programs", bg: "#A8FF5C", fg: "#0A0A0B", num: "#0A0A0B", rot: -2, ml: 0 },
-    { n: TYPES.length, l: "program types", bg: "#3A3B40", fg: "#fff", num: "#A8FF5C", rot: 1.5, ml: 40 },
+    { n: TYPES.length, l: "program types", bg: "#7C5CFF", fg: "#fff", num: "#FFFFFF", rot: 1.5, ml: 40 },
   ];
 
   return (
     <>
       {/* Hero */}
-      <div className="hero homehero">
-        <Nav />
-        <div className="wrap herobody" style={{ paddingTop: 110, paddingBottom: 120 }}>
-          <div className="tapewrap">
-            <h1 className="ptapes">
-              <span className="pt pt1">Plan your partner program</span>
-              <span className="pt pt2">then find who to partner with</span>
-            </h1>
-            <p className="bubble herosub homesub" style={{ marginTop: 56 }}>{`Plan your strategy with free tools, then get a ranked list of real companies to partner with. Or compare ${all.length} partner programs in the directory`}</p>
+      <PageHero layout="toby-center" title="Plan your partner program" accent="then find who to partner with" sub={`Plan your strategy with free tools, then get a ranked list of real companies to partner with. Or compare ${all.length} partner programs in the directory`} buttons={<><Link href="/find-partners" className="btn btn-p">Find partners</Link><Link href="/directory" className="btn btn-o">Browse the directory</Link></>} />
+
+      {/* Crossing straps */}
+      <div aria-hidden="true" style={{ position: "relative", height: 150, overflow: "hidden" }}>
+        {[{ bg: "#FFFFFF", fg: "#0A0A0B", rot: 2, top: 34 }, { bg: "#A8FF5C", fg: "#0A0A0B", rot: -2, top: 44 }].map((b, i) => (
+          <div key={i} style={{ position: "absolute", left: -40, right: -40, top: b.top, transform: `rotate(${b.rot}deg)`, background: b.bg, color: b.fg, padding: "14px 0", whiteSpace: "nowrap", overflow: "hidden", fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 20, letterSpacing: 0, textTransform: "uppercase" }}>
+            {Array.from({ length: 3 }).map(() => TYPES.map((t) => `${t} ◆ `).join("")).join("")}
           </div>
-          <div className="herotoby">
-            <Toby height={580} rows={38} glasses style={{ width: "100%", height: "100%" }} />
-          </div>
-        </div>
+        ))}
       </div>
 
       {/* Directory */}
@@ -122,7 +117,7 @@ export default async function Home() {
           <p style={{ marginTop: 14, fontSize: 18, lineHeight: 1.5 }}>Your strategy names the partner types. We match the right companies to each one, ranked by fit.</p>
           <div style={{ marginTop: 44, display: "grid", gap: 16, gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))" }}>
             {findSample.map((c, i) => (
-              <div key={c.id} className="cut" style={{ background: i === 0 ? "#A8FF5C" : "#ECECEE", color: "#0A0A0B", padding: "22px 20px" }}>
+              <div key={c.id} className="cut" style={{ background: ["#A8FF5C", "#FFFFFF", "#7C5CFF"][i % 3], color: i % 3 === 2 ? "#FFFFFF" : "#0A0A0B", padding: "22px 20px" }}>
                 <b style={{ fontSize: 18 }}>{c.name}</b>
                 <span style={{ display: "-webkit-box", WebkitLineClamp: 4, WebkitBoxOrient: "vertical", overflow: "hidden", marginTop: 10, fontSize: 15, lineHeight: 1.45 }}>{c.description}</span>
               </div>

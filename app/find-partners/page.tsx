@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Nav } from "@/components/Nav";
+import { PageHero } from "@/components/PageHero";
 import { Footer } from "@/components/Footer";
 import { adminConfigured, db } from "@/lib/admin/session";
 import OpenMine from "./OpenMine";
@@ -26,80 +26,106 @@ async function load(): Promise<{ sample: C[] }> {
 }
 
 const STEPS = [
-  { t: "Share what you need", d: "Pick the partner types you want, or build a strategy in the free Program builder." },
-  { t: "We match real companies", d: "Each partner type is matched with the right companies, ranked by fit." },
-  { t: "Start with the best five", d: "See the top companies for each partner type, with why each one fits." },
+  { t: "Share what you need", d: "Pick the partner types you want, or build a strategy in the free Program builder.", kind: "diamond" },
+  { t: "We match real companies", d: "Each partner type is matched with the right companies, ranked by fit.", kind: "bars" },
+  { t: "Start with the best five", d: "See the top companies for each partner type, with why each one fits.", kind: "grid" },
 ];
+const WORDS = ["Technology", "Channel", "Agency", "Strategic", "Community", "AI and automation"];
+const CARDS = [
+  { bg: "#FFFFFF", fg: "#0A0A0B", sub: "#3A3B40", gl: "#0A0A0B", num: "#85868B", rot: -1.6 },
+  { bg: "#A8FF5C", fg: "#0A0A0B", sub: "#1C1D20", gl: "#0A0A0B", num: "#3F7A12", rot: 1.2 },
+  { bg: "#7C5CFF", fg: "#FFFFFF", sub: "#FFFFFF", gl: "#FFFFFF", num: "#D9D0FF", rot: -0.8 },
+];
+const ROT = [-1.6, 1.2, -0.8, 1.4, -1.2];
 
 export default async function Page() {
   const { sample } = await load();
   return (
-    <>
-      <Nav />
-      <section className="hero" style={{ padding: "150px 0 120px", position: "relative" }}>
+    <div style={{ overflow: "hidden" }}>
+      <PageHero
+        layout="toby-strap"
+        title="Find the right companies"
+        accent="to partner with"
+        sub="A ranked list of real companies for every partner type you need, with new ones added every week."
+        buttons={<><a href="#start" className="btn btn-p">Find my partners</a><OpenMine outline /></>}
+        words={WORDS}
+      />
+
+      <section style={{ padding: "clamp(36px,9vw,72px) 0 0" }}>
+        <div className="wrap"><Doors opts={{ categories: BUILDER_CATEGORIES, audiences: AUDIENCES, regions: REGIONS }} /></div>
+      </section>
+
+      <section style={{ padding: "clamp(36px,9vw,110px) 0 clamp(36px,9vw,60px)" }}>
         <div className="wrap">
-          <span className="kick">Find partners<span className="newbadge" suppressHydrationWarning>New</span></span>
-          <h1 style={{ marginTop: 22 }}>Find the right companies to partner with</h1>
-          <p style={{ marginTop: 22, fontSize: 20, lineHeight: 1.5 }}>A ranked list of real companies for every partner type you need, with new ones added every week.</p>
-          <div style={{ marginTop: 34, display: "flex", gap: 14, flexWrap: "wrap" }}>
-            <a href="#start" className="btn btn-p">Find my partners</a>
-            <OpenMine />
+          <h2 className="sectitle">How it <span style={{ color: "#A8FF5C" }}>works</span></h2>
+          <div style={{ marginTop: 52, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 28 }}>
+            {STEPS.map((s, i) => {
+              const T = CARDS[i];
+              return (
+                <div key={s.t} className="cut" style={{ background: T.bg, color: T.fg, transform: `rotate(${T.rot}deg)`, padding: "26px 28px 30px" }}>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+                    <span style={{ fontFamily: "'Michroma',sans-serif", fontSize: 29, color: T.num }}>{String(i + 1).padStart(2, "0")}</span>
+                    <h3 style={{ fontSize: 18, lineHeight: 1.3, flex: 1 }}>{s.t}</h3>
+                  </div>
+                  <p style={{ margin: "20px 0 0", minHeight: 78, fontSize: 16, lineHeight: 1.55, color: T.sub }}>{s.d}</p>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      <section style={{ padding: "150px 0 0" }}>
-        <div className="wrap">
-          <div><Doors opts={{ categories: BUILDER_CATEGORIES, audiences: AUDIENCES, regions: REGIONS }} /></div>
-        </div>
-      </section>
-
-      <section style={{ padding: "150px 0 0" }}>
-        <div className="wrap">
-          <h2 className="sectitle">How it works</h2>
-          <ol style={{ listStyle: "none", padding: 0, margin: "48px 0 0", display: "grid", gap: 20, gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))" }}>
-            {STEPS.map((s, i) => (
-              <li key={s.t} className="cut" style={{ background: i === 1 ? "#A8FF5C" : "#ECECEE", color: "#0A0A0B", padding: "30px 28px" }}>
-                <div style={{ fontFamily: "'Michroma',sans-serif", fontSize: 26 }}>{i + 1}</div>
-                <b style={{ display: "block", marginTop: 16, fontSize: 20 }}>{s.t}</b>
-                <span style={{ display: "block", marginTop: 8, fontSize: 17, lineHeight: 1.5 }}>{s.d}</span>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
+      <div aria-hidden="true" style={{ position: "relative", height: 150, overflow: "hidden", background: "linear-gradient(transparent 50%, #A8FF5C 50%)" }}>
+        {[{ bg: "#fff", fg: "#0A0A0B", rot: 2, top: 34 }, { bg: "#7C5CFF", fg: "#fff", rot: -2, top: 44 }].map((b, i) => (
+          <div key={i} style={{ position: "absolute", left: -40, right: -40, top: b.top, transform: `rotate(${b.rot}deg)`, background: b.bg, color: b.fg, padding: "14px 0", whiteSpace: "nowrap", overflow: "hidden", fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 20, letterSpacing: 0, textTransform: "uppercase" }}>
+            {Array.from({ length: 3 }).map(() => WORDS.map((t) => `${t} ◆ `).join("")).join("")}
+          </div>
+        ))}
+      </div>
 
       {sample.length ? (
-        <section style={{ padding: "170px 0 0" }}>
+        <section style={{ background: "#A8FF5C", color: "#0A0A0B", padding: "clamp(36px,9vw,80px) 0 clamp(36px,9vw,110px)" }}>
           <div className="wrap">
             <h2 className="sectitle">A sample result: agency partners</h2>
-            <p style={{ marginTop: 14, fontSize: 18, lineHeight: 1.5 }}>Five real agency partners. Your own list is ranked for your product and your buyers.</p>
-            <div style={{ marginTop: 44, display: "grid", gap: 16, gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))" }}>
-              {sample.map((c, i) => (
-                <a key={c.id} href={c.website} target="_blank" rel="noopener noreferrer" className="cut" style={{ background: i === 0 ? "#A8FF5C" : "#ECECEE", color: "#0A0A0B", padding: "22px 20px", display: "block", textDecoration: "none" }}>
-                  <b style={{ fontSize: 18 }}>{c.name}</b>
-                  <span style={{ display: "-webkit-box", WebkitLineClamp: 4, WebkitBoxOrient: "vertical", overflow: "hidden", marginTop: 10, fontSize: 15, lineHeight: 1.45 }}>{c.description}</span>
-                  {c.subtype ? <span style={{ display: "block", marginTop: 12, fontSize: 14, opacity: 0.75 }}>{c.subtype}</span> : null}
-                </a>
-              ))}
+            <p style={{ margin: "14px 0 0", fontSize: 19, lineHeight: 1.5, color: "#1C1D20" }}>Five real agency partners. Your own list is ranked for your product and your buyers.</p>
+            <div className="fpgrid" style={{ marginTop: 52, gap: 24 }}>
+              {sample.map((c, i) => {
+                const tone = [["#FFFFFF","#3A3B40","#0A0A0B","#A8FF5C"],["#A8FF5C","#1C1D20","#0A0A0B","#A8FF5C"],["#7C5CFF","#FFFFFF","#FFFFFF","#0A0A0B"]][i % 3];
+                return (
+                  <a key={c.id} href={c.website} target="_blank" rel="noopener noreferrer" className="cut" style={{ background: tone[0], color: tone[2], transform: `rotate(${ROT[i]}deg)`, padding: "24px 22px 28px", display: "flex", flexDirection: "column", textDecoration: "none" }}>
+                    <h3 style={{ fontSize: 16, lineHeight: 1.3 }}>{c.name}</h3>
+                    <span style={{ display: "-webkit-box", WebkitLineClamp: 4, WebkitBoxOrient: "vertical", overflow: "hidden", marginTop: 12, fontSize: 15, lineHeight: 1.5, color: tone[1] }}>{c.description}</span>
+                    {c.subtype ? <span style={{ alignSelf: "flex-start", marginTop: 16, fontSize: 13, padding: "5px 12px", borderRadius: 999, background: tone[3] === "#0A0A0B" ? "#FFFFFF" : "#0A0A0B", color: tone[3] === "#0A0A0B" ? "#0A0A0B" : "#A8FF5C", border: 0 }}>{c.subtype}</span> : null}
+                  </a>
+                );
+              })}
             </div>
           </div>
         </section>
       ) : null}
 
-      <section style={{ padding: "170px 0 170px" }}>
-        <div className="wrap">
-          <div className="cut" style={{ background: "#1C1D20", color: "#ECECEE", padding: "52px clamp(24px,5vw,64px)", boxShadow: "inset 0 5px 0 #A8FF5C" }}>
-            <h2 className="sectitle" style={{ color: "#fff" }}>Ready to see your own matches?</h2>
-            <p style={{ marginTop: 14, fontSize: 18, lineHeight: 1.5, color: "#B9BABD" }}>Pick your partner types, or build a full strategy first. Both are free.</p>
-            <div style={{ marginTop: 30, display: "flex", gap: 14, flexWrap: "wrap" }}>
-              <a href="#start" className="btn btn-s">Find my partners</a>
-              <OpenMine />
-            </div>
+      <section style={{ padding: "clamp(36px,9vw,120px) 0 clamp(36px,9vw,140px)", color: "#ECECEE" }}>
+        <div className="wrap" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 48, flexWrap: "wrap" }}>
+          <div style={{ flex: "1 1 460px" }}>
+            <h2 style={{ fontSize: "clamp(29px,3.6vw,44px)", lineHeight: 1.05 }}>
+              <span style={{ display: "block" }}>Ready to see</span>
+              <span style={{ display: "block", color: "#A8FF5C" }}>your own matches?</span>
+            </h2>
+            <p style={{ margin: "22px 0 0", fontSize: 19, lineHeight: 1.5, color: "#B9BABD" }}>Pick your partner types, or build a full strategy first. Both are free.</p>
+            <div style={{ marginTop: 26 }}><OpenMine link /></div>
           </div>
+          <a href="#start" className="cut" style={{ flex: "0 0 400px", maxWidth: "100%", transform: "rotate(3deg)", background: "#fff", color: "#0A0A0B", padding: "28px 30px 32px", display: "block" }}>
+            {["Your company website", "What you sell", "Partner types"].map((k) => (
+              <div key={k} style={{ marginBottom: 14 }}>
+                <div style={{ fontSize: 14 }}>{k}</div>
+                <div style={{ marginTop: 6, background: "#ECECEE", borderRadius: 10, height: 46 }} />
+              </div>
+            ))}
+            <div className="btn btn-s" style={{ marginTop: 22, textAlign: "center" }}>Find my partners</div>
+          </a>
         </div>
       </section>
       <Footer />
-    </>
+    </div>
   );
 }

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
+import { Icon, type IconName } from "@/components/Icon";
 import Link from "next/link";
 import { JsonLd, ORG, SITE, crumbs } from "@/components/JsonLd";
-import { Nav } from "@/components/Nav";
+import { PageHero } from "@/components/PageHero";
 import { Toby } from "@/components/Toby";
 import { Footer } from "@/components/Footer";
 import { assessIsNew, builderIsNew, calcIsNew } from "@/lib/launch";
@@ -18,10 +19,11 @@ export const metadata: Metadata = {
 };
 
 const URL_ = `${SITE}/ai-tools`;
+const TOOL_ICON: Record<string, IconName> = { "/partner-pipeline-calculator": "calculator", "/partner-program-assessment": "assessment", "/program-builder": "builder", "/playbook": "playbook", "/find-partners": "find" };
 const TONES = [
-  { bg: "#ECECEE", fg: "#0A0A0B", sub: "#3A3B40", ar: "#0A0A0B", arf: "#A8FF5C" },
+  { bg: "#FFFFFF", fg: "#0A0A0B", sub: "#3A3B40", ar: "#0A0A0B", arf: "#A8FF5C" },
   { bg: "#A8FF5C", fg: "#0A0A0B", sub: "#1C1D20", ar: "#0A0A0B", arf: "#A8FF5C" },
-  { bg: "#2A2B30", fg: "#ECECEE", sub: "#B9BABD", ar: "#A8FF5C", arf: "#0A0A0B" },
+  { bg: "#7C5CFF", fg: "#FFFFFF", sub: "#FFFFFF", ar: "#FFFFFF", arf: "#7C5CFF" },
 ];
 const STRAPS = [
   { bg: "#fff", fg: "#0A0A0B", rot: -1.4, ml: 0 },
@@ -66,26 +68,7 @@ export default function Page() {
         ],
       }} />
 
-      <div className="hero">
-        <Nav />
-        <div className="wrap herobody" style={{ paddingTop: 36, paddingBottom: 110 }}>
-          <div className="tapewrap">
-            <h1 className="ptapes">
-              <span className="pt pt1">Free partner program tools</span>
-              <span className="pt pt2">Built for B2B tech and AI</span>
-            </h1>
-            <p className="bubble herosub" style={{ marginTop: 44 }}>Free tools that help B2B tech and AI companies make their partner program more efficient, from the first plan to the next fix</p>
-            <div className="herobtns"><a href="#tools" className="btn btn-p">Explore the tools ↓</a></div>
-          </div>
-          <div className="herotoby" aria-hidden="true">
-            <Toby height={580} rows={38} glasses style={{ width: "100%", height: "100%" }} />
-          </div>
-          <div className="cut freecard">
-            <div style={{ fontFamily: "'Michroma',sans-serif", fontSize: 40, lineHeight: 1, WebkitTextStroke: "1.5px currentColor" }}>Free</div>
-            <div style={{ marginTop: 8, fontSize: 18 }}>to start, no card</div>
-          </div>
-        </div>
-      </div>
+      <PageHero layout="diagonal" title="Free partner program tools" accent="Built for B2B tech and AI" sub="Free tools that help B2B tech and AI companies make their partner program more efficient, from the first plan to the next fix" buttons={<a href="#tools" className="btn btn-p">Explore the tools ↓</a>} />
 
       <main className="wrap" style={{ padding: "clamp(48px,7vw,84px) var(--margin) clamp(36px,9vw,120px)" }}>
         {/* Tools */}
@@ -97,10 +80,11 @@ export default function Page() {
               const T = TONES[i % 3];
               return (
                 <Link key={t.href} href={t.href} className="cut gcard" style={{ background: T.bg, color: T.fg, transform: `rotate(${ROT[i % 6]}deg)`, padding: "26px 28px 32px", display: "flex", flexDirection: "column" }}>
+                  {TOOL_ICON[t.href] && <div style={{ marginBottom: 14 }}><Icon name={TOOL_ICON[t.href]} color={T.bg === "#7C5CFF" ? "#FFFFFF" : "#0A0A0B"} size={48} /></div>}
                   <h3 style={{ ...michroma, fontSize: 18, lineHeight: 1.35, minHeight: 50, ...balance }}>{t.name}</h3>
                   <div style={{ display: "flex", alignItems: "center", gap: 8, minHeight: 30, marginTop: 6, flexWrap: "wrap" }}>
-                    {isNew[t.href] && <span className="pill" suppressHydrationWarning style={{ background: "#7C5CFF", color: "#fff" }}>New</span>}
-                    {t.ai && <span className="pill" style={{ background: "#7C5CFF", color: "#fff" }}>Uses AI</span>}
+                    {isNew[t.href] && <span className="pill" suppressHydrationWarning style={{ background: T.bg === "#7C5CFF" ? "#FFFFFF" : "#7C5CFF", color: T.bg === "#7C5CFF" ? "#0A0A0B" : "#fff" }}>New</span>}
+                    {t.ai && <span className="pill" style={{ background: T.bg === "#7C5CFF" ? "#FFFFFF" : "#7C5CFF", color: T.bg === "#7C5CFF" ? "#0A0A0B" : "#fff" }}>Uses AI</span>}
                   </div>
                   <p style={{ margin: "10px 0 0", minHeight: 78, fontSize: 16, lineHeight: 1.5, color: T.sub }}>{t.promise}</p>
                   <span style={{ marginTop: 20, alignSelf: "flex-start", width: 44, height: 44, borderRadius: "50%", background: T.ar, color: T.arf, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 22, fontWeight: 400 }} aria-hidden="true">→</span>
@@ -212,7 +196,7 @@ export default function Page() {
 
         {/* Toby band */}
         <section aria-labelledby="start" style={section}>
-          <div className="cut" style={{ background: "#ECECEE", color: "#0A0A0B", padding: "clamp(28px,4vw,44px) clamp(26px,4vw,52px) clamp(34px,4vw,52px)", display: "flex", gap: 32, flexWrap: "wrap", alignItems: "center", ["--c" as string]: "28px", border: "0" }}>
+          <div className="cut" style={{ background: "#FFFFFF", color: "#0A0A0B", padding: "clamp(28px,4vw,44px) clamp(26px,4vw,52px) clamp(34px,4vw,52px)", display: "flex", gap: 32, flexWrap: "wrap", alignItems: "center", ["--c" as string]: "28px", border: "0" }}>
             <div style={{ flex: "1 1 420px", minWidth: 0 }}>
               <h2 id="start" style={{ ...michroma, fontSize: "clamp(22px,2.6vw,30px)", lineHeight: 1.3, ...balance }}>Not sure where to start?</h2>
               <p style={{ margin: "16px 0 0", fontSize: 18, lineHeight: 1.55, maxWidth: 520 }}>If you already have a program, start with the assessment. If you do not, start with the program builder. Both take minutes</p>

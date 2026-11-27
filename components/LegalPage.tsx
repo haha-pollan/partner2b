@@ -1,18 +1,11 @@
-import { Nav } from "./Nav";
+import { PageHero } from "./PageHero";
 import { Footer } from "./Footer";
 import { LEGAL, type Section } from "@/lib/legal";
 
 export function LegalPage({ title, intro, sections }: { title: string; intro: string; sections: Section[] }) {
   return (
     <div>
-      <div style={{ overflow: "hidden" }}>
-        <Nav />
-        <div className="wrap" style={{ padding: "40px var(--margin) clamp(36px,9vw,64px)" }}>
-          <h1 className="h1big">{title}</h1>
-          <p style={{ margin: "22px 0 0", maxWidth: 900, fontSize: 20, lineHeight: 1.5, color: "#ECECEE" }}>{intro}</p>
-          <p style={{ margin: "14px 0 0", fontSize: 15, color: "#2A2B2F", fontWeight: 400 }}>Last updated {LEGAL.updated}</p>
-        </div>
-      </div>
+      <PageHero layout="banner" title={title} accent="" sub={intro} extra={<p style={{ margin: "14px 0 0", fontSize: 15, color: "#B9BABD", fontWeight: 400 }}>Last updated {LEGAL.updated}</p>} />
       <main className="wrap" style={{ padding: "clamp(36px,9vw,64px) var(--margin) clamp(36px,9vw,96px)" }}>
         <div style={{ maxWidth: 760 }}>
           {sections.map((s, i) => (

@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { JsonLd, ORG, SITE, crumbs } from "@/components/JsonLd";
-import { Nav } from "@/components/Nav";
+import { PageHero } from "@/components/PageHero";
 import { Footer } from "@/components/Footer";
 import { BuilderCta } from "@/components/BuilderCta";
 import { Glyph } from "@/components/Tile";
@@ -69,16 +69,16 @@ const STEPS: Step[] = [
 ];
 
 const WHY = [
-  { t: "Diagnostic range", p: "Unbiased advice. We fix your real constraint, not what an agency sells.", kind: "hex", bg: "#2A2B30", fg: "#ECECEE", rot: -2 },
-  { t: "Senior execution", p: "Led by operators who have run B2B revenue and operations at executive level.", kind: "bars", bg: "#ECECEE", fg: "#0A0A0B", rot: 2 },
-  { t: "One accountable team", p: "Growth and engineering run under one plan, with no agency handoffs.", kind: "diamond", bg: "#A8FF5C", fg: "#0A0A0B", rot: -2 },
+  { t: "Diagnostic range", p: "Unbiased advice. We fix your real constraint, not what an agency sells.", kind: "hex", bg: "#A8FF5C", fg: "#0A0A0B", rot: -2 },
+  { t: "Senior execution", p: "Led by operators who have run B2B revenue and operations at executive level.", kind: "bars", bg: "#FFFFFF", fg: "#0A0A0B", rot: 2 },
+  { t: "One accountable team", p: "Growth and engineering run under one plan, with no agency handoffs.", kind: "diamond", bg: "#7C5CFF", fg: "#FFFFFF", rot: -2 },
 ];
 
 type Theme = { bg: string; tx: string; sub: string; num: string; card: string; ctx: string; csub: string; ctag: string; ctagTx: string; line: string; gl: string; hot: string; hotTx: string };
 const THEMES: Theme[] = [
-  { bg: "transparent", tx: "#fff", sub: "#ECECEE", num: "#A8FF5C", card: "#2A2B30", ctx: "#ECECEE", csub: "#B9BABD", ctag: "#2A2B2F", ctagTx: "#B9BABD", line: "#3A3B40", gl: "#A8FF5C", hot: "#A8FF5C", hotTx: "#0A0A0B" },
-  { bg: "transparent", tx: "#fff", sub: "#ECECEE", num: "#A8FF5C", card: "#ECECEE", ctx: "#0A0A0B", csub: "#3A3B40", ctag: "#0A0A0B", ctagTx: "#A8FF5C", line: "#B9BABD", gl: "#0A0A0B", hot: "#A8FF5C", hotTx: "#0A0A0B" },
-  { bg: "#A8FF5C", tx: "#0A0A0B", sub: "#1C1D20", num: "#0A0A0B", card: "#2A2B30", ctx: "#ECECEE", csub: "#B9BABD", ctag: "#2A2B2F", ctagTx: "#B9BABD", line: "#3A3B40", gl: "#A8FF5C", hot: "#ECECEE", hotTx: "#0A0A0B" },
+  { bg: "transparent", tx: "#fff", sub: "#ECECEE", num: "#A8FF5C", card: "#FFFFFF", ctx: "#0A0A0B", csub: "#3A3B40", ctag: "#0A0A0B", ctagTx: "#A8FF5C", line: "#B9BABD", gl: "#0A0A0B", hot: "#A8FF5C", hotTx: "#0A0A0B" },
+  { bg: "transparent", tx: "#fff", sub: "#ECECEE", num: "#A8FF5C", card: "#7C5CFF", ctx: "#FFFFFF", csub: "#FFFFFF", ctag: "#FFFFFF", ctagTx: "#0A0A0B", line: "#B9A8FF", gl: "#FFFFFF", hot: "#A8FF5C", hotTx: "#0A0A0B" },
+  { bg: "#A8FF5C", tx: "#0A0A0B", sub: "#1C1D20", num: "#0A0A0B", card: "#FFFFFF", ctx: "#0A0A0B", csub: "#3A3B40", ctag: "#0A0A0B", ctagTx: "#A8FF5C", line: "#B9BABD", gl: "#0A0A0B", hot: "#7C5CFF", hotTx: "#FFFFFF" },
 ];
 
 const WORDS = ["Go-to-market", "Partner ecosystems", "Demand generation", "Automation", "AI development"];
@@ -102,37 +102,17 @@ export default function Services() {
       <div style={{ overflow: "hidden" }}>
         {/* Hero */}
         <div style={{ position: "relative" }}>
-          <Nav />
-          <div className="wrap" style={{ padding: "24px var(--margin) clamp(36px,9vw,110px)", display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 40, flexWrap: "wrap" }}>
-            <div style={{ flex: "0 0 auto", maxWidth: "min(100%, 800px)" }}>
-              <span className="pill">For B2B companies</span>
-              <h1 style={{ margin: "20px 0 0", fontWeight: 400, fontSize: "clamp(26px,3.4vw,47px)", lineHeight: 1, letterSpacing: 0 }}>
-                <span style={{ display: "block" }}>Want to grow</span>
-                <span style={{ display: "block" }}>through partners?</span>
-                <span style={{ display: "block" }}>Start with your GTM</span>
-              </h1>
-              <p style={{ margin: "24px 0 0", maxWidth: 560, fontSize: 21, lineHeight: 1.5, fontWeight: 400 }}>
-                B2B partner programs work when the offer, the pipeline and the operations behind them are ready. We help with all three, in that order.
-              </p>
-              <div style={{ display: "flex", gap: 14, flexWrap: "wrap", marginTop: 32 }}>
-                <a href={MAIL} style={btnA}>Talk to us</a>
-                <Link href="/directory" style={btnB}>Browse partner programs</Link>
-              </div>
-            </div>
-            <div style={{ flex: "0 0 380px", maxWidth: "100%", display: "flex", flexDirection: "column", gap: 22, marginTop: 20 }}>
+          <PageHero layout="poster" title="Want to grow through partners?" accent="Start with your GTM" sub="B2B partner programs work when the offer, the pipeline and the operations behind them are ready. We help with all three, in that order." buttons={<><a href={MAIL} className="btn btn-p">Talk to us</a><Link href="/directory" className="btn btn-o">Browse partner programs</Link></>} />
+          <div className="wrap" style={{ padding: "0 var(--margin) clamp(36px,9vw,90px)", display: "flex", justifyContent: "center", gap: 28, flexWrap: "wrap" }}>
+            <div style={{ display: "flex", gap: 28, flexWrap: "wrap", justifyContent: "center", width: "100%" }}>
               {[
-                { s: STEPS[0], bg: "#2A2B30", fg: "#ECECEE", gl: "#A8FF5C", rot: -5, ml: 0 },
-                { s: STEPS[1], bg: "#ECECEE", fg: "#0A0A0B", gl: "#0A0A0B", rot: 3, ml: 36 },
-                { s: STEPS[2], bg: "#A8FF5C", fg: "#0A0A0B", gl: "#0A0A0B", rot: -3, ml: 12 },
+                { s: STEPS[0], bg: "#A8FF5C", fg: "#0A0A0B", gl: "#0A0A0B", rot: -5, ml: 0 },
+                { s: STEPS[1], bg: "#FFFFFF", fg: "#0A0A0B", gl: "#0A0A0B", rot: 3, ml: 36 },
+                { s: STEPS[2], bg: "#7C5CFF", fg: "#FFFFFF", gl: "#FFFFFF", rot: -3, ml: 12 },
               ].map(({ s, bg, fg, gl, rot, ml }) => (
-                <a key={s.id} href={`#${s.id}`} className="cut hcard" style={{ marginLeft: ml, transform: `rotate(${rot}deg)`, background: bg, color: fg, padding: "22px 26px", display: "flex", alignItems: "center", gap: 18 }}>
-                  <div style={{ flex: "0 0 64px", width: 64, height: 64, borderRadius: 16, border: `2px solid ${gl}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                    <Glyph kind={s.kind} fg={gl} size={38} />
-                  </div>
-                  <div style={{ minWidth: 0 }}>
-                    <div style={{ fontSize: 14, fontWeight: 400, opacity: 0.8 }}>Step {s.n}</div>
-                    <div style={{ marginTop: 4, fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 18, letterSpacing: 0, lineHeight: 1.1 }}>{s.title}</div>
-                  </div>
+                <a key={s.id} href={`#${s.id}`} className="cut hcard" style={{ flex: "0 1 340px", transform: `rotate(${rot}deg)`, background: bg, color: fg, padding: "22px 26px", display: "flex", alignItems: "center", gap: 18 }}>
+                  <span style={{ fontFamily: "'Michroma',sans-serif", fontSize: 40, lineHeight: 1, color: gl }}>{s.n}</span>
+                  <div style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 18, letterSpacing: 0, lineHeight: 1.2 }}>{s.title}</div>
                 </a>
               ))}
             </div>
@@ -154,17 +134,14 @@ export default function Services() {
           <div style={{ marginTop: 52, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))", gap: 28 }}>
             {SEGMENTS.map((g, i) => {
               const T = [
-                { bg: "#ECECEE", fg: "#0A0A0B", sub: "#3A3B40", gl: "#0A0A0B", num: "#85868B" },
+                { bg: "#FFFFFF", fg: "#0A0A0B", sub: "#3A3B40", gl: "#0A0A0B", num: "#85868B" },
                 { bg: "#A8FF5C", fg: "#0A0A0B", sub: "#1C1D20", gl: "#0A0A0B", num: "#3F7A12" },
-                { bg: "#2A2B30", fg: "#ECECEE", sub: "#B9BABD", gl: "#A8FF5C", num: "#55565B" },
+                { bg: "#7C5CFF", fg: "#FFFFFF", sub: "#FFFFFF", gl: "#FFFFFF", num: "#D9D0FF" },
               ][(i + Math.floor(i / 3)) % 3];
               const rot = [-1.6, 1.2, -0.8, 1.4, -1.2, 1.6][i];
               return (
                 <div key={g.t} className="cut" style={{ background: T.bg, color: T.fg, transform: `rotate(${rot}deg)`, padding: "26px 28px 30px", position: "relative" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-                    <div style={{ flex: "0 0 56px", width: 56, height: 56, borderRadius: 16, border: `2px solid ${T.gl}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                      <Glyph kind={g.kind} fg={T.gl} size={32} />
-                    </div>
                     <h3 style={{ fontWeight: 400, fontSize: 18, letterSpacing: 0, lineHeight: 1.3, flex: 1 }}>{g.t}</h3>
                     <span style={{ fontFamily: "'Michroma',sans-serif", fontSize: 29, color: T.num }}>{String(i + 1).padStart(2, "0")}</span>
                   </div>
@@ -234,10 +211,7 @@ export default function Services() {
           <div style={{ display: "flex", flexWrap: "wrap", gap: 36, marginTop: 64, justifyContent: "center" }}>
             {WHY.map((w) => (
               <div key={w.t} className="cut" style={{ flex: "1 1 300px", maxWidth: 400, transform: `rotate(${w.rot}deg)`, background: w.bg, color: w.fg, padding: "28px 28px 40px" }}>
-                <div style={{ width: 64, height: 64, borderRadius: 16, border: `2px solid ${w.fg}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <Glyph kind={w.kind} fg={w.fg} size={38} />
-                </div>
-                <h3 style={{ margin: "22px 0 0", fontWeight: 400, fontSize: 22, letterSpacing: 0, lineHeight: 1.1 }}>{w.t}</h3>
+                <h3 style={{ margin: 0, fontWeight: 400, fontSize: 22, letterSpacing: 0, lineHeight: 1.1 }}>{w.t}</h3>
                 <p style={{ margin: "10px 0 0", fontSize: 17, lineHeight: 1.45, fontWeight: 400, opacity: 0.85 }}>{w.p}</p>
               </div>
             ))}

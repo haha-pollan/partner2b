@@ -91,7 +91,7 @@ function Flow() {
           </div>
         </div>
         <div style={{ flex: "0 0 300px", display: "flex", flexDirection: "column", gap: 20 }}>
-          <div className="cut" style={{ background: "#ECECEE", color: "#0A0A0B", padding: "26px 26px 32px", ["--c" as string]: "24px" }}>
+          <div className="cut" style={{ background: "#FFFFFF", color: "#0A0A0B", padding: "26px 26px 32px", ["--c" as string]: "24px" }}>
             <div style={{ ...michroma, fontSize: 18 }}>Private</div>
             <p style={{ margin: "10px 0 0", fontSize: 16, lineHeight: 1.5 }}>No company name. Your answers are never published or shared with other companies</p>
           </div>

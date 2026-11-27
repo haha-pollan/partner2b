@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { Nav } from "@/components/Nav";
+import { PageHero } from "@/components/PageHero";
 import { Footer } from "@/components/Footer";
 import { BuilderCta } from "@/components/BuilderCta";
 import { Cover } from "@/components/Cover";
@@ -17,17 +17,7 @@ export default async function PostIndex() {
   const all = await getArticles();
   return (
     <div style={{ overflow: "hidden" }}>
-      <div style={{ overflow: "hidden" }}>
-        <div style={{ position: "relative" }}>
-          <Nav />
-          <div className="wrap" style={{ padding: "24px var(--margin) clamp(36px,9vw,120px)" }}>
-            <h1 className="h1big">Blog</h1>
-            <p style={{ margin: "24px 0 0", maxWidth: 900, fontSize: 21, lineHeight: 1.5, fontWeight: 400 }}>
-              Practical articles on B2B partner programs, ecosystems and co-selling
-            </p>
-          </div>
-        </div>
-      </div>
+      <PageHero layout="banner" title="Blog" accent="" sub="Practical articles on B2B partner programs, ecosystems and co-selling" />
       <section style={{ padding: "clamp(36px,9vw,90px) 0 clamp(36px,9vw,120px)" }}>
         <div className="wrap" style={{ display: "flex", flexWrap: "wrap", gap: 36 }}>
           {all.map((a, i) => (
