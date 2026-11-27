@@ -1,12 +1,12 @@
 import { LogoTile } from "./LogoTile";
 
 const TYPES: Record<string, { kind: string; bg: string; fg: string }> = {
-  Reseller: { kind: "bars", bg: "#0A0A0B", fg: "#A8FF5C" },
-  Referral: { kind: "diamond", bg: "#55565B", fg: "#FFFFFF" },
+  Reseller: { kind: "bars", bg: "#7C5CFF", fg: "#FFFFFF" },
+  Referral: { kind: "diamond", bg: "#FFFFFF", fg: "#0A0A0B" },
   Technology: { kind: "grid", bg: "#A8FF5C", fg: "#0A0A0B" },
-  Services: { kind: "slants", bg: "#B9BABD", fg: "#0A0A0B" },
-  MSP: { kind: "hex", bg: "#1C1D20", fg: "#ECECEE" },
-  "OEM or white label": { kind: "stairs", bg: "#3A3B40", fg: "#A8FF5C" },
+  Services: { kind: "slants", bg: "#7C5CFF", fg: "#FFFFFF" },
+  MSP: { kind: "hex", bg: "#FFFFFF", fg: "#0A0A0B" },
+  "OEM or white label": { kind: "stairs", bg: "#A8FF5C", fg: "#0A0A0B" },
 };
 
 export function Glyph({ kind, fg, size }: { kind: string; fg: string; size: number }) {

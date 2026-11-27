@@ -70,8 +70,8 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
       </div>
       <main className="wrap" style={{ padding: "clamp(28px,6vw,48px) var(--margin) clamp(36px,9vw,80px)" }}>
         <div style={{ maxWidth: 760 }}>
-          <div className="cut" style={{ background: "#2A2B30", padding: "28px 32px 36px" }}>
-            <div style={{ fontFamily: "'Michroma',sans-serif", fontSize: 12, color: ai ? "#C9BDFF" : "#A8FF5C" }}>Short answer</div>
+          <div className="cut" style={{ background: ai ? "#A8FF5C" : "#7C5CFF", color: ai ? "#0A0A0B" : "#FFFFFF", padding: "28px 32px 36px" }}>
+            <div style={{ fontFamily: "'Michroma',sans-serif", fontSize: 12, color: ai ? "#0A0A0B" : "#FFFFFF" }}>Short answer</div>
             <p style={{ margin: "14px 0 0", fontSize: 20, lineHeight: 1.55 }}>{t.short}</p>
           </div>
           {t.body.map((p, i) => (

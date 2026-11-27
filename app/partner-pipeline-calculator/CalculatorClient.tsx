@@ -9,10 +9,10 @@ import { defaultsFor, fromQuery, num, presetFor, toQuery } from "@/lib/pipeline/
 import { track } from "@/lib/track";
 
 const inputS: React.CSSProperties = { width: "100%", background: "#ECECEE", color: "#0A0A0B", border: 0, borderRadius: 10, padding: "14px 16px", font: "inherit", fontSize: 17 };
-const Lbl = ({ t, req }: { t: string; req?: boolean }) => (<label style={{ display: "block", fontSize: 15, fontWeight: 400, margin: "22px 0 8px" }}>{t}{req && <span style={{ color: "#A8FF5C" }}> *</span>}</label>);
-const Hint = ({ t }: { t: string }) => <div style={{ marginTop: 8, fontSize: 14, color: "#85868B" }}>{t}</div>;
+const Lbl = ({ t, req }: { t: string; req?: boolean }) => (<label style={{ display: "block", fontSize: 15, fontWeight: 400, margin: "22px 0 8px" }}>{t}{req && <span style={{ color: "#FFFFFF" }}> *</span>}</label>);
+const Hint = ({ t }: { t: string }) => <div style={{ marginTop: 8, fontSize: 14, color: "#FFFFFF" }}>{t}</div>;
 const btn: React.CSSProperties = { background: "#A8FF5C", color: "#0A0A0B", fontFamily: "'IBM Plex Sans',sans-serif", fontWeight: 400, fontSize: 19, padding: "18px 34px", border: 0, cursor: "pointer", display: "inline-block", clipPath: "polygon(0 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%)" };
-const ghost: React.CSSProperties = { background: "transparent", border: 0, color: "#A8FF5C", cursor: "pointer", font: "inherit", fontSize: 15, textDecoration: "underline", padding: 0 };
+const ghost: React.CSSProperties = { background: "transparent", border: 0, color: "#FFFFFF", cursor: "pointer", font: "inherit", fontSize: 15, textDecoration: "underline", padding: 0 };
 
 const ASSUMPTIONS: { k: string; label: string; unit: string; hint: string }[] = [
   { k: "winRate", label: "Win rate", unit: "%", hint: "Share of qualified partner opportunities you win" },
@@ -113,9 +113,9 @@ export function CalculatorClient() {
         </select>
         <Hint t={APPROACHES.find((a) => a.key === approach)!.hint} />
 
-        <details style={{ marginTop: 26, background: "#1C1D20", padding: "18px 22px" }}>
+        <details style={{ marginTop: 26, background: "#FFFFFF", color: "#0A0A0B", padding: "18px 22px" }}>
           <summary style={{ cursor: "pointer", fontSize: 17 }}>Edit assumptions</summary>
-          <p style={{ margin: "14px 0 0", fontSize: 15, lineHeight: 1.5, color: "#B9BABD" }}>These starting values come from published benchmarks and the Partner2B planning model. Change any of them to match your own data.</p>
+          <p style={{ margin: "14px 0 0", fontSize: 15, lineHeight: 1.5, color: "#0A0A0B" }}>These starting values come from published benchmarks and the Partner2B planning model. Change any of them to match your own data.</p>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))", gap: "6px 18px" }}>
             {ASSUMPTIONS.map((a) => (
               <div key={a.k}>
@@ -128,7 +128,7 @@ export function CalculatorClient() {
           <div style={{ marginTop: 18 }}><button type="button" onClick={() => setOv({})} style={ghost}>Reset assumptions to the starting values</button></div>
         </details>
 
-        {err && <div role="alert" style={{ marginTop: 18, fontSize: 15, color: "#A8FF5C" }}>{err}</div>}
+        {err && <div role="alert" style={{ marginTop: 18, fontSize: 15, color: "#FFFFFF" }}>{err}</div>}
         <div style={{ marginTop: 30 }}>
           <button type="submit" disabled={busy} style={{ ...btn, opacity: busy ? 0.6 : 1 }}>{busy ? "One moment" : "Calculate my pipeline"}</button>
         </div>

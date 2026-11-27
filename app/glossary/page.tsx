@@ -7,14 +7,14 @@ import { TERMS, GROUPS, termHref } from "@/lib/glossary";
 import { BLURBS } from "@/lib/glossary/blurbs";
 
 const TONES = [
-  { bg: "#ECECEE", fg: "#0A0A0B", sub: "#3A3B40", ar: "#0A0A0B", arf: "#A8FF5C" },
+  { bg: "#FFFFFF", fg: "#0A0A0B", sub: "#3A3B40", ar: "#0A0A0B", arf: "#A8FF5C" },
   { bg: "#A8FF5C", fg: "#0A0A0B", sub: "#1C1D20", ar: "#0A0A0B", arf: "#A8FF5C" },
-  { bg: "#2A2B30", fg: "#ECECEE", sub: "#B9BABD", ar: "#A8FF5C", arf: "#0A0A0B" },
+  { bg: "#7C5CFF", fg: "#FFFFFF", sub: "#FFFFFF", ar: "#FFFFFF", arf: "#7C5CFF" },
 ];
 const AI_TONES = [
   { bg: "#7C5CFF", fg: "#fff", sub: "#F1EEFF", ar: "#fff", arf: "#5B3FE0" },
-  { bg: "#F1EEFF", fg: "#0A0A0B", sub: "#3A3B40", ar: "#5B3FE0", arf: "#fff" },
-  { bg: "#2A2B30", fg: "#ECECEE", sub: "#B9BABD", ar: "#C9BDFF", arf: "#0A0A0B" },
+  { bg: "#FFFFFF", fg: "#0A0A0B", sub: "#3A3B40", ar: "#5B3FE0", arf: "#fff" },
+  { bg: "#A8FF5C", fg: "#0A0A0B", sub: "#1C1D20", ar: "#0A0A0B", arf: "#A8FF5C" },
 ];
 const ROT = [-1.6, 1.2, -0.8, 1.4, -1.2, 1.6];
 

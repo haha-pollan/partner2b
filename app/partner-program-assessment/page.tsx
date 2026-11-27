@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 };
 
 const URL_ = `${SITE}/partner-program-assessment`;
-const TINTS = ["#fff", "var(--lav)", "#ECECEE"];
+const TINTS = ["#fff", "#A8FF5C", "#fff"];
 const michroma: React.CSSProperties = { fontFamily: "'Michroma',sans-serif", fontWeight: 400, WebkitTextStroke: "1px currentColor" };
 const section: React.CSSProperties = { marginTop: "clamp(60px,8vw,104px)" };
 const steps = ["Pick what is not working and answer four quick questions", "Answer 16 short statements: Yes, Partly or No", "See the two things holding your program back and the first fix for each"];
@@ -131,7 +131,7 @@ export default function Page() {
 
         {/* How it works and start */}
         <section aria-labelledby="how" style={{ ...section, display: "flex", gap: 28, flexWrap: "wrap", alignItems: "stretch" }}>
-          <div className="cut" style={{ flex: "1 1 460px", minWidth: 0, background: "#ECECEE", color: "#0A0A0B", padding: "28px 32px 34px" }}>
+          <div className="cut" style={{ flex: "1 1 460px", minWidth: 0, background: "#FFFFFF", color: "#0A0A0B", padding: "28px 32px 34px" }}>
             <h2 id="how" style={{ fontWeight: 400, fontSize: 20, letterSpacing: 0, paddingBottom: 12, borderBottom: "2px solid #0A0A0B" }}>How the assessment works</h2>
             {steps.map((t, i) => (
               <div key={t} style={{ display: "flex", gap: 18, alignItems: "flex-start", padding: "18px 0", borderBottom: i < 2 ? "2px solid #0A0A0B" : 0 }}>
@@ -140,7 +140,7 @@ export default function Page() {
               </div>
             ))}
           </div>
-          <div className="cut" style={{ flex: "1 1 400px", minWidth: 0, background: "#0A0A0B", color: "#fff", padding: "36px 38px 44px", display: "flex", flexDirection: "column", justifyContent: "center", ["--c" as string]: "26px" }}>
+          <div className="cut" style={{ flex: "1 1 400px", minWidth: 0, background: "#7C5CFF", color: "#fff", padding: "36px 38px 44px", display: "flex", flexDirection: "column", justifyContent: "center", ["--c" as string]: "26px" }}>
             <div style={{ ...michroma, fontSize: 26, lineHeight: 1.3 }}>Find your two bottlenecks</div>
             <p style={{ margin: "16px 0 0", fontSize: 18, lineHeight: 1.55 }}>You see the first one right away. Leave your email to get the full result and a PDF</p>
             <div style={{ marginTop: 28 }}><StartLink className="btn btn-p">Start the assessment</StartLink></div>

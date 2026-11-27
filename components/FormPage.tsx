@@ -46,7 +46,7 @@ export function FormPage({ kind, listings, defaultListing }: { kind: Kind; listi
             <h2 style={{ fontWeight: 400, fontSize: 23, letterSpacing: 0 }}>{c.card}</h2>
             <SubmissionForm kind={kind} listings={listings} defaultListing={defaultListing} />
           </div>
-          <div className="cut" style={{ flex: "0 0 340px", background: "#ECECEE", color: "#0A0A0B", padding: "28px 28px 34px" }}>
+          <div className="cut" style={{ flex: "0 0 340px", background: "#FFFFFF", color: "#0A0A0B", padding: "28px 28px 34px" }}>
             <h3 style={{ fontWeight: 400, fontSize: 18, letterSpacing: 0, paddingBottom: 12, borderBottom: "2px solid #0A0A0B" }}>What happens next</h3>
             {c.steps.map((t, i) => (
               <div key={i} style={{ display: "flex", gap: 18, alignItems: "flex-start", padding: "16px 0", borderBottom: i < 2 ? "2px solid #0A0A0B" : 0 }}>

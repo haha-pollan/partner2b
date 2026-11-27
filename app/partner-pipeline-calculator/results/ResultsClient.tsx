@@ -127,16 +127,16 @@ export function ResultsClient({ nav, footer }: { nav: React.ReactNode; footer: R
 
   // background, text, indent, glyph
   const stages: [string, string, number, string, string, string, string][] = [
-    ["Find", fmt(r.list), 0, "#ECECEE", "#0A0A0B", "bars", `Build a list of partner companies that match your ideal partner profile and reach out to every one. About ${fmt(r.perWeek)} a week over the first ${trim(inputs.recruitMonths)} months.`],
+    ["Find", fmt(r.list), 0, "#FFFFFF", "#0A0A0B", "bars", `Build a list of partner companies that match your ideal partner profile and reach out to every one. About ${fmt(r.perWeek)} a week over the first ${trim(inputs.recruitMonths)} months.`],
     ["Sign", fmt(r.signed), 4, "#A8FF5C", "#0A0A0B", "diamond", "Partners that reply and agree to work with you."],
-    ["Activate", fmt(r.activePartners), 8, "#85868B", "#0A0A0B", "grid", `Signed partners that start bringing you deals. Each one closes about ${perTxt} ${perTxt === "1" ? "deal" : "deals"} in your window.`],
-    ["Close", fmt(r.deals), 12, "#4A4B51", "#fff", "stairs", `Deals closed, enough to reach ${usd(inputs.goal)} in ${win} months.`],
+    ["Activate", fmt(r.activePartners), 8, "#7C5CFF", "#fff", "grid", `Signed partners that start bringing you deals. Each one closes about ${perTxt} ${perTxt === "1" ? "deal" : "deals"} in your window.`],
+    ["Close", fmt(r.deals), 12, "#A8FF5C", "#0A0A0B", "stairs", `Deals closed, enough to reach ${usd(inputs.goal)} in ${win} months.`],
   ];
   const units = ["partner companies", r.signed === 1 ? "partner" : "partners", r.activePartners === 1 ? "active partner" : "active partners", r.deals === 1 ? "deal" : "deals"];
   const stats: [string, string, string, string, string, number, number][] = [
     [trim(firstDeal), firstDeal === 1 ? "month to your first deal" : "months to your first deal", "#FFFFFF", "#0A0A0B", "#0A0A0B", 1.5, 40],
     [perTxt, "deals per active partner", "#A8FF5C", "#0A0A0B", "#0A0A0B", -2, 0],
-    [fmt(r.perWeek), "outreach messages a week", "#3A3B40", "#fff", "#A8FF5C", 1.5, 40],
+    [fmt(r.perWeek), "outreach messages a week", "#7C5CFF", "#fff", "#FFFFFF", 1.5, 40],
   ];
   const plan: [string, string, string][] = [
     ["Month 0", `Build a list of ${fmt(r.list)} partner companies`, "Companies that match your ideal partner profile, each with a verified contact"],

@@ -22,12 +22,12 @@ const TYPES = ["Reseller", "Referral", "Technology", "Services", "MSP", "OEM or 
 const KIND: Record<string, string> = { Reseller: "bars", Referral: "diamond", Technology: "grid", Services: "slants", MSP: "hex", "OEM or white label": "stairs" };
 // background, text, indent
 const ROWS: [string, string, number][] = [
-  ["#ECECEE", "#0A0A0B", 0],
-  ["#B9BABD", "#0A0A0B", 4],
-  ["#A8FF5C", "#0A0A0B", 8],
-  ["#85868B", "#0A0A0B", 12],
-  ["#4A4B51", "#fff", 16],
-  ["#2A2B30", "#A8FF5C", 20],
+  ["#FFFFFF", "#0A0A0B", 0],
+  ["#A8FF5C", "#0A0A0B", 4],
+  ["#7C5CFF", "#FFFFFF", 8],
+  ["#FFFFFF", "#0A0A0B", 12],
+  ["#A8FF5C", "#0A0A0B", 16],
+  ["#7C5CFF", "#FFFFFF", 20],
 ];
 const STEPS = [
   { t: "Answer a few questions", d: "Your product, customers and goals" },
@@ -49,7 +49,7 @@ export default async function Home() {
   const stats = [
     { n: all.length, l: "partner programs", bg: "#FFFFFF", fg: "#0A0A0B", num: "#0A0A0B", rot: 1.5, ml: 40 },
     { n: aiCount, l: "AI partner programs", bg: "#A8FF5C", fg: "#0A0A0B", num: "#0A0A0B", rot: -2, ml: 0 },
-    { n: TYPES.length, l: "program types", bg: "#3A3B40", fg: "#fff", num: "#A8FF5C", rot: 1.5, ml: 40 },
+    { n: TYPES.length, l: "program types", bg: "#7C5CFF", fg: "#fff", num: "#FFFFFF", rot: 1.5, ml: 40 },
   ];
 
   return (
@@ -108,7 +108,7 @@ export default async function Home() {
           <p style={{ marginTop: 14, fontSize: 18, lineHeight: 1.5 }}>Your strategy names the partner types. We match the right companies to each one, ranked by fit.</p>
           <div style={{ marginTop: 44, display: "grid", gap: 16, gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))" }}>
             {findSample.map((c, i) => (
-              <div key={c.id} className="cut" style={{ background: i === 0 ? "#A8FF5C" : "#ECECEE", color: "#0A0A0B", padding: "22px 20px" }}>
+              <div key={c.id} className="cut" style={{ background: ["#A8FF5C", "#FFFFFF", "#7C5CFF"][i % 3], color: i % 3 === 2 ? "#FFFFFF" : "#0A0A0B", padding: "22px 20px" }}>
                 <b style={{ fontSize: 18 }}>{c.name}</b>
                 <span style={{ display: "-webkit-box", WebkitLineClamp: 4, WebkitBoxOrient: "vertical", overflow: "hidden", marginTop: 10, fontSize: 15, lineHeight: 1.45 }}>{c.description}</span>
               </div>

@@ -19,7 +19,7 @@ function ToolBlock({ k }: { k: AreaKey }) {
   const t = areaOf(k).tool;
   if (!t.live) {
     return (
-      <div className="cut" style={{ background: "#ECECEE", padding: "26px 28px 34px", ["--c" as string]: "22px" }}>
+      <div className="cut" style={{ background: "#FFFFFF", padding: "26px 28px 34px", ["--c" as string]: "22px" }}>
         <div style={{ ...michroma, fontSize: 19, lineHeight: 1.35 }}>{t.name}, coming soon</div>
         <p style={{ margin: "10px 0 0", fontSize: 17, lineHeight: 1.5, color: "#3A3B40" }}>{t.line}</p>
       </div>
@@ -27,12 +27,12 @@ function ToolBlock({ k }: { k: AreaKey }) {
   }
   const calc = k === "D";
   return (
-    <div className="cut" style={{ background: "#ECE8FF", padding: "26px 28px 34px", display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 18, ["--c" as string]: "22px" }}>
+    <div className="cut" style={{ background: "#FFFFFF", padding: "26px 28px 34px", display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 18, ["--c" as string]: "22px" }}>
       <div>
         <div style={{ ...michroma, fontSize: 19, lineHeight: 1.35 }}>{calc ? "Free partner pipeline calculator" : t.name}</div>
         <p style={{ margin: "10px 0 0", fontSize: 17, lineHeight: 1.5 }}>{t.line}</p>
       </div>
-      <Link href={t.href ?? "/contact"} className="btn btn-s" style={{ background: "#0A0A0B", color: "#fff" }}>{calc ? "Open the free calculator" : "Talk to us"}</Link>
+      <Link href={t.href ?? "/contact"} className="btn btn-s">{calc ? "Open the free calculator" : "Talk to us"}</Link>
     </div>
   );
 }
@@ -246,13 +246,13 @@ export function ResultsClient({ nav, footer }: { nav: React.ReactNode; footer: R
               <div className="cut plnext" style={{ ["--c" as string]: "44px", padding: "48px 52px 54px", display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 22, overflow: "visible" }}>
                 <h2 style={{ fontSize: "clamp(24px,2.6vw,32px)", lineHeight: 1.3 }}>Want help fixing {secondKey ? "these two" : "this"}?</h2>
                 <p style={{ margin: 0, fontSize: 19, lineHeight: 1.55 }}>A partnership strategy session turns this result into a plan: which partners to go after, what to offer them and what to do in the first 90 days</p>
-                <Link href="/contact" className="btn btn-s" style={{ background: "#0A0A0B", color: "#fff" }}>Book a strategy call</Link>
+                <Link href="/contact" className="btn btn-s">Book a strategy call</Link>
               </div>
               {firstKey !== "D" && secondKey !== "D" && (
-                <div className="cut" style={{ background: "#ECE8FF", color: "#0A0A0B", padding: "40px 40px 48px", display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 20, ["--c" as string]: "28px" }}>
+                <div className="cut" style={{ background: "#FFFFFF", color: "#0A0A0B", padding: "40px 40px 48px", display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 20, ["--c" as string]: "28px" }}>
                   <div style={{ ...michroma, fontSize: 22 }}>Free partner pipeline calculator</div>
                   <p style={{ margin: 0, fontSize: 18, lineHeight: 1.5 }}>Whatever you fix first, see how many partner conversations you need each month to reach your revenue goal</p>
-                  <Link href="/partner-pipeline-calculator" className="btn btn-s" style={{ background: "#0A0A0B", color: "#fff" }}>Open the free calculator</Link>
+                  <Link href="/partner-pipeline-calculator" className="btn btn-s">Open the free calculator</Link>
                 </div>
               )}
               <div className="cut" style={{ background: "#fff", color: "#0A0A0B", padding: "40px 40px 48px", display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 20, ["--c" as string]: "28px" }}>

@@ -25,18 +25,18 @@ export default function Page() {
               <h1 className="h1big" style={{ fontSize: "clamp(28px,4vw,64px)" }}>Partner program builder</h1>
               <p style={{ margin: "22px 0 0", maxWidth: 560, fontSize: 21, lineHeight: 1.5, fontWeight: 400 }}>Not sure which partners fit your product? Answer a few questions and get a full partner program strategy</p>
             </div>
-            <div className="cut statcard" style={{ flex: "0 0 320px", margin: "20px 40px 0 0", transform: "rotate(-4deg)", background: "#0A0A0B", padding: "28px 32px" }}>
-              <div style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 49, letterSpacing: 0, lineHeight: 1, color: "#A8FF5C" }}>Free</div>
+            <div className="cut statcard" style={{ flex: "0 0 320px", margin: "20px 40px 0 0", transform: "rotate(-4deg)", background: "#A8FF5C", color: "#0A0A0B", padding: "28px 32px" }}>
+              <div style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 49, letterSpacing: 0, lineHeight: 1, color: "#0A0A0B" }}>Free</div>
               <div style={{ marginTop: 8, fontSize: 18 }}>strategy in 3 minutes</div>
             </div>
           </div>
         </div>
         <div className="wrap" style={{ padding: "40px var(--margin) clamp(36px,9vw,120px)", display: "flex", gap: 32, alignItems: "flex-start", flexWrap: "wrap" }}>
-          <div className="cut" style={{ flex: "1 1 640px", minWidth: 0, background: "#0A0A0B", padding: "36px 40px 44px", position: "relative" }}>
+          <div className="cut" style={{ flex: "1 1 640px", minWidth: 0, background: "#7C5CFF", padding: "36px 40px 44px", position: "relative" }}>
             <h2 style={{ fontWeight: 400, fontSize: 23, letterSpacing: 0 }}>Your company</h2>
             <BuilderClient />
           </div>
-          <div className="cut" style={{ flex: "0 0 340px", background: "#ECECEE", color: "#0A0A0B", padding: "28px 28px 34px" }}>
+          <div className="cut" style={{ flex: "0 0 340px", background: "#FFFFFF", color: "#0A0A0B", padding: "28px 28px 34px" }}>
             <h3 style={{ fontWeight: 400, fontSize: 18, letterSpacing: 0, paddingBottom: 12, borderBottom: "2px solid #0A0A0B" }}>How it works</h3>
             {steps.map((t, i) => (
               <div key={i} style={{ display: "flex", gap: 18, alignItems: "flex-start", padding: "16px 0", borderBottom: i < 2 ? "2px solid #0A0A0B" : 0 }}>

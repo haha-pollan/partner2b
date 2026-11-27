@@ -39,12 +39,12 @@ export default function Page() {
           </div>
         </div>
         <div className="wrap" style={{ padding: "40px var(--margin) clamp(36px,9vw,120px)", display: "flex", gap: 32, alignItems: "flex-start", flexWrap: "wrap" }}>
-          <div className="cut" style={{ flex: "1 1 640px", minWidth: 0, background: "#0A0A0B", padding: "36px 40px 44px", position: "relative" }}>
+          <div className="cut" style={{ flex: "1 1 640px", minWidth: 0, background: "#7C5CFF", padding: "36px 40px 44px", position: "relative" }}>
             <h2 style={{ fontWeight: 400, fontSize: 23, letterSpacing: 0 }}>Your goal</h2>
             <Suspense fallback={null}><CalculatorClient /></Suspense>
           </div>
           <div style={{ flex: "0 0 340px", display: "flex", flexDirection: "column", gap: 16 }}>
-          <div className="cut" style={{ background: "#ECECEE", color: "#0A0A0B", padding: "28px 28px 34px" }}>
+          <div className="cut" style={{ background: "#FFFFFF", color: "#0A0A0B", padding: "28px 28px 34px" }}>
             <h3 style={{ fontWeight: 400, fontSize: 18, letterSpacing: 0, paddingBottom: 12, borderBottom: "2px solid #0A0A0B" }}>How it works</h3>
             {steps.map((t, i) => (
               <div key={i} style={{ display: "flex", gap: 18, alignItems: "flex-start", padding: "16px 0", borderBottom: i < 2 ? "2px solid #0A0A0B" : 0 }}>

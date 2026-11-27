@@ -9,8 +9,8 @@ import { PageView, TrackedLink } from "./track";
 import { LogoTile } from "@/components/LogoTile";
 
 const TONES = [
-  { bg: "#ECECEE", fg: "#0A0A0B", sub: "#3A3B40", ar: "#0A0A0B", arf: "#A8FF5C" },
-  { bg: "#2A2B30", fg: "#ECECEE", sub: "#B9BABD", ar: "#A8FF5C", arf: "#0A0A0B" },
+  { bg: "#FFFFFF", fg: "#0A0A0B", sub: "#3A3B40", ar: "#0A0A0B", arf: "#A8FF5C" },
+  { bg: "#7C5CFF", fg: "#FFFFFF", sub: "#FFFFFF", ar: "#FFFFFF", arf: "#7C5CFF" },
 ];
 const ROT = [-1.4, 1.1, -0.8, 1.3, -1.1, 0.9];
 const ROT_SMALL = [-0.5, 0.4, -0.3, 0.5, -0.4, 0.3];
@@ -47,9 +47,9 @@ function Progress({ total, opened }: { total: number; opened: number }) {
     <div>
       <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
         <span className="chip">Matches {nf(total)}</span>
-        {STAGES.map((st) => <span key={st} className="chip" style={{ background: "#2A2B30", color: "#ECECEE" }}><Lock size={13} /> {st}</span>)}
+        {STAGES.map((st) => <span key={st} className="chip" style={{ background: "#7C5CFF", color: "#FFFFFF" }}><Lock size={13} /> {st}</span>)}
       </div>
-      <div style={{ marginTop: 22, background: "#2A2B30", height: 10, maxWidth: 760 }}><div style={{ background: "#A8FF5C", height: 10, width: `${Math.max(2, Math.round((opened / Math.max(1, total)) * 100))}%` }} /></div>
+      <div style={{ marginTop: 22, background: "#7C5CFF", height: 10, maxWidth: 760 }}><div style={{ background: "#A8FF5C", height: 10, width: `${Math.max(2, Math.round((opened / Math.max(1, total)) * 100))}%` }} /></div>
       <p style={{ margin: "10px 0 0", fontSize: 15, color: "#B9BABD" }}>{opened} of {nf(total)} matches shown. Unlock all to start your plan.</p>
     </div>
   );
@@ -112,7 +112,7 @@ export default function View({ preview, strategyId, company }: { preview: Previe
               <div className="fpgrid" style={{ marginTop: 30 }}>
                 {t.shown.map((o, i) => {
                   const first = i === 0;
-                  const T = first ? (ai ? { bg: "#7C5CFF", fg: "#fff", sub: "#EDE8FF", ar: "#fff", arf: "#7C5CFF" } : { bg: "#A8FF5C", fg: "#0A0A0B", sub: "#1C1D20", ar: "#0A0A0B", arf: "#A8FF5C" }) : { bg: "#ECECEE", fg: "#0A0A0B", sub: "#3A3B40", ar: "#0A0A0B", arf: "#A8FF5C" };
+                  const T = first ? (ai ? { bg: "#7C5CFF", fg: "#fff", sub: "#EDE8FF", ar: "#fff", arf: "#7C5CFF" } : { bg: "#A8FF5C", fg: "#0A0A0B", sub: "#1C1D20", ar: "#0A0A0B", arf: "#A8FF5C" }) : { bg: "#FFFFFF", fg: "#0A0A0B", sub: "#3A3B40", ar: "#0A0A0B", arf: "#A8FF5C" };
                   const href = o.directory ?? o.website;
                   return (
                     <div key={o.name + i} className="cut gcard" style={{ background: T.bg, color: T.fg, transform: `rotate(${ROT_SMALL[(i + ti) % 6]}deg)`, padding: "16px 16px 18px", display: "flex", flexDirection: "column", ["--c" as string]: "16px" }}>
@@ -138,12 +138,12 @@ export default function View({ preview, strategyId, company }: { preview: Previe
           );
         })}
         {week > 0 ? (
-          <div className="cut" style={{ marginTop: "clamp(60px,8vw,100px)", background: "#1C1D20", boxShadow: "inset 5px 0 0 #A8FF5C", padding: "clamp(26px,3.5vw,40px) clamp(26px,4vw,48px)", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 24, flexWrap: "wrap", ["--c" as string]: "26px" }}>
+          <div className="cut" style={{ marginTop: "clamp(60px,8vw,100px)", background: "#7C5CFF", boxShadow: "inset 5px 0 0 #A8FF5C", padding: "clamp(26px,3.5vw,40px) clamp(26px,4vw,48px)", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 24, flexWrap: "wrap", ["--c" as string]: "26px" }}>
             <div>
-              <div style={{ fontFamily: "'Michroma',sans-serif", fontSize: "clamp(34px,4.6vw,60px)", lineHeight: 1, letterSpacing: 0, color: "#A8FF5C", WebkitTextStroke: "1.5px currentColor" }}>{nf(week)}</div>
+              <div style={{ fontFamily: "'Michroma',sans-serif", fontSize: "clamp(34px,4.6vw,60px)", lineHeight: 1, letterSpacing: 0, color: "#FFFFFF", WebkitTextStroke: "1.5px currentColor" }}>{nf(week)}</div>
               <p style={{ margin: "12px 0 0", fontSize: 19, color: "#ECECEE" }}>new companies of these types were added this week.</p>
             </div>
-            <span className="pill" style={{ background: "#2A2B30", color: "#ECECEE", fontSize: 15, padding: "8px 16px", display: "inline-flex", alignItems: "center", gap: 10 }}><span className="fplive" aria-hidden="true" />Updated weekly</span>
+            <span className="pill" style={{ background: "#FFFFFF", color: "#0A0A0B", fontSize: 15, padding: "8px 16px", display: "inline-flex", alignItems: "center", gap: 10 }}><span className="fplive" aria-hidden="true" />Updated weekly</span>
           </div>
         ) : null}
       </section>
@@ -174,7 +174,7 @@ export default function View({ preview, strategyId, company }: { preview: Previe
       </section>
 
       <section className="wrap" style={{ padding: "0 var(--margin) clamp(70px,9vw,120px)" }}>
-        <div id="unlock" className="cut fpcta" style={{ background: "#1C1D20", color: "#fff", boxShadow: "inset 0 5px 0 #A8FF5C", padding: "clamp(34px,4.5vw,56px) clamp(24px,4vw,56px)", ["--c" as string]: "30px" }}>
+        <div id="unlock" className="cut fpcta" style={{ background: "#7C5CFF", color: "#fff", boxShadow: "inset 0 5px 0 #A8FF5C", padding: "clamp(34px,4.5vw,56px) clamp(24px,4vw,56px)", ["--c" as string]: "30px" }}>
           <div>
             <h2 style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: "clamp(22px,2.6vw,34px)", lineHeight: 1.2, letterSpacing: 0, WebkitTextStroke: "1.5px currentColor", textWrap: "balance" }}>Get early access to <span style={{ color: "#A8FF5C" }}>partner discovery</span></h2>
             <p style={{ margin: "16px 0 0", maxWidth: 560, fontSize: 18, lineHeight: 1.5, color: "#ECECEE" }}>Full access opens soon. You will get more matches for every partner type, why each one fits and when to approach. Leave your email and we will tell you the day it opens.</p>
