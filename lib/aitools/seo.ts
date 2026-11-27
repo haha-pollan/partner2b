@@ -5,7 +5,7 @@ export const UPDATED_ISO = "2026-11-24";
 export const UPDATED_LABEL = "24 November 2026";
 
 export const SHORT_ANSWER =
-  "Free partner program tools help a B2B tech or AI company decide what to build, how many partners to approach and what to fix when a program stalls. Partner2B has three live tools: a program builder that writes your partner program strategy, a pipeline calculator that shows how many partners to reach out to for a revenue goal, and an assessment that finds the two things holding your program back. All three are free to start.";
+  "Free partner program tools help a B2B tech or AI company decide what to build, how many partners to approach and what to fix when a program stalls. Partner2B has four live tools: a program builder that writes your partner program strategy, a pipeline calculator that shows how many partners to reach out to for a revenue goal, an ROI calculator that shows what your program returns and when it pays back, and an assessment that finds the two things holding your program back. All four are free to start.";
 
 export type Tool = {
   n: string;
@@ -55,6 +55,19 @@ export const TOOLS: Tool[] = [
   },
 ];
 
+export const ROI_TOOL: Tool = {
+  n: "04",
+  name: "Partner ROI calculator",
+  href: "/partner-roi-calculator",
+  promise: "Find out what your partner program returns and when it pays back",
+  best: "You run a partner program and need to know whether it pays off, or you need to make the case for it",
+  enter: "Deal size, active partners, commission and monthly program cost",
+  get: "Your return on investment, the month the program pays back, the cost of each customer and a chart of cost against return",
+  ai: false,
+  cta: "Open the calculator",
+};
+TOOLS.push(ROI_TOOL);
+
 export const WHAT_IS = [
   "Partner program tools are small, focused tools that help you plan, size and fix a partner program before you spend money on software or hire a team. They answer one question each, for example what to build, how many partners you need to approach, or why partners are not selling.",
   "They are different from partner relationship management (PRM) software. PRM software runs a program you already have: portals, deal registration, payouts. The tools on this page work earlier and alongside it. They help you decide what the program should be, how big the outreach has to be and where it leaks, so the software you pick later has something worth running.",
@@ -81,7 +94,7 @@ export const AUDIENCE: { t: string; d: string }[] = [
 ];
 
 export const TRUST: { t: string; d: string }[] = [
-  { t: "Free to start", d: "All three tools are free to start. The pipeline calculator shows the headline numbers without an email, and the assessment shows your first bottleneck right away. To see the full result and download the PDF, you leave your name and email." },
+  { t: "Free to start", d: "All four tools are free to start. The pipeline and ROI calculators show the headline numbers without an email, and the assessment shows your first bottleneck right away. To see the full result and download the PDF, you leave your name and email." },
   { t: "Private by design", d: "The assessment never asks for a company name, so you can answer honestly about a program that is not working. The calculator and the assessment are rule based and do not use AI." },
   { t: "AI only in the builder", d: "The program builder is the one tool that uses AI. It sends the company details you enter to OpenAI so that it can write your report. You can read how we handle your data in the privacy policy." },
 ];
@@ -89,6 +102,7 @@ export const TRUST: { t: string; d: string }[] = [
 export const WANTS: { label: string; tool: string; href: string }[] = [
   { label: "I am starting a partner program", tool: "Program builder", href: "/program-builder" },
   { label: "I need a number for my plan", tool: "Partner pipeline calculator", href: "/partner-pipeline-calculator" },
+  { label: "I want to know if my program pays off", tool: "Partner ROI calculator", href: "/partner-roi-calculator" },
   { label: "My partner program is not performing", tool: "Partner program assessment", href: "/partner-program-assessment" },
 ];
 
@@ -97,7 +111,7 @@ export const COMING = "Six more tools are in development, and we build them one 
 export const FAQ: { q: string; a: string }[] = [
   {
     q: "What free tools can I use to plan a partner program?",
-    a: "Partner2B offers three free tools: a program builder that writes a partner program strategy, a pipeline calculator that shows how many partners to reach out to for a revenue goal, and an assessment that finds why a program is not performing. Each one answers a single question and takes minutes.",
+    a: "Partner2B offers four free tools: a program builder that writes a partner program strategy, a pipeline calculator that shows how many partners to reach out to for a revenue goal, an ROI calculator that shows what a program returns and when it pays back, and an assessment that finds why a program is not performing. Each one answers a single question and takes minutes.",
   },
   {
     q: "How many partners do I need to reach my revenue goal?",
@@ -125,7 +139,7 @@ export const FAQ: { q: string; a: string }[] = [
   },
   {
     q: "Which tool should I start with?",
-    a: "If you have no program, start with the program builder. If you have a program that is not performing, start with the assessment. If you need a number for a plan, start with the pipeline calculator.",
+    a: "If you have no program, start with the program builder. If you have a program that is not performing, start with the assessment. If you need a number for a plan, start with the pipeline calculator. If you want to know whether your program pays off, start with the ROI calculator.",
   },
 ];
 
