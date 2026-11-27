@@ -336,12 +336,12 @@ button{font-family:inherit}
 .fplink:hover{color:#A8FF5C}
 .phero{padding-top:70px;padding-bottom:80px}
 .phtitle{font-size:clamp(18px,2.5vw,36px);line-height:1.2;color:#fff}
-.phsub{margin:26px 0 0;font-size:19px;line-height:1.55;color:#B9BABD;max-width:640px}
+.phsub{text-wrap:balance;margin:26px 0 0;font-size:19px;line-height:1.55;color:#B9BABD;max-width:640px}
 .phbtns{margin-top:32px;display:flex;gap:20px;align-items:center;flex-wrap:wrap}
 .phsplit{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:48px;align-items:center}
 .phsplit .phtitle{text-wrap:balance}
 .phcenter{text-align:center}
-.phcenter .phsub{margin-left:auto;margin-right:auto}
+.phcenter .phsub{margin-left:auto;margin-right:auto;max-width:780px}
 .phcenter .phbtns{justify-content:center}
 .phcenter .phtitle{margin-top:0}
 .phtoby{aspect-ratio:490/580}

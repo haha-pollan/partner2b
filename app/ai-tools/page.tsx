@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Icon, type IconName } from "@/components/Icon";
 import Link from "next/link";
 import { JsonLd, ORG, SITE, crumbs } from "@/components/JsonLd";
-import { Nav } from "@/components/Nav";
+import { PageHero } from "@/components/PageHero";
 import { Toby } from "@/components/Toby";
 import { Footer } from "@/components/Footer";
 import { assessIsNew, builderIsNew, calcIsNew } from "@/lib/launch";
@@ -68,26 +68,7 @@ export default function Page() {
         ],
       }} />
 
-      <div className="hero">
-        <Nav />
-        <div className="wrap herobody" style={{ paddingTop: 36, paddingBottom: 110 }}>
-          <div className="tapewrap">
-            <h1 className="ptapes">
-              <span className="pt pt1">Free partner program tools</span>
-              <span className="pt pt2">Built for B2B tech and AI</span>
-            </h1>
-            <p className="bubble herosub" style={{ marginTop: 44 }}>Free tools that help B2B tech and AI companies make their partner program more efficient, from the first plan to the next fix</p>
-            <div className="herobtns"><a href="#tools" className="btn btn-p">Explore the tools ↓</a></div>
-          </div>
-          <div className="herotoby" aria-hidden="true">
-            <Toby height={580} rows={38} glasses style={{ width: "100%", height: "100%" }} />
-          </div>
-          <div className="cut freecard">
-            <div style={{ fontFamily: "'Michroma',sans-serif", fontSize: 40, lineHeight: 1, WebkitTextStroke: "1.5px currentColor" }}>Free</div>
-            <div style={{ marginTop: 8, fontSize: 18 }}>to start, no card</div>
-          </div>
-        </div>
-      </div>
+      <PageHero layout="diagonal" title="Free partner program tools" accent="Built for B2B tech and AI" sub="Free tools that help B2B tech and AI companies make their partner program more efficient, from the first plan to the next fix" buttons={<a href="#tools" className="btn btn-p">Explore the tools ↓</a>} />
 
       <main className="wrap" style={{ padding: "clamp(48px,7vw,84px) var(--margin) clamp(36px,9vw,120px)" }}>
         {/* Tools */}
