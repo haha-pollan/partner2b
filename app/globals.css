@@ -346,7 +346,7 @@ button{font-family:inherit}
 .phcenter .phtitle{margin-top:0}
 .phtoby{aspect-ratio:490/580}
 .phsmall{width:150px;margin:0 auto 26px;-webkit-mask-image:linear-gradient(180deg,#000 0,#000 70%,transparent 98%);mask-image:linear-gradient(180deg,#000 0,#000 70%,transparent 98%)}
-.phposter .phhuge{font-size:clamp(26px,4.1vw,60px);line-height:1.1}
+.phposter .phhuge{font-size:clamp(24px,3.5vw,52px);line-height:1.12}
 .phposter .phline{height:3px;background:var(--lime);margin:38px 0 30px}
 .phposter .phrow{display:flex;justify-content:space-between;align-items:center;gap:40px}
 .phposter .phsub{margin:0}.phposter .phbtns{margin:0}
@@ -358,7 +358,7 @@ button{font-family:inherit}
 .phmid{font-size:clamp(20px,2.5vw,36px);text-wrap:balance}
 .phbannerwrap{padding-top:60px}
 .phband{background:var(--lime);transform:rotate(-1.2deg);margin:0 -40px;padding:26px 0;text-align:center;overflow:hidden}
-.phband .phtitle{color:var(--ink);font-size:clamp(18px,2.7vw,40px);white-space:nowrap}
+.phband .phtitle{color:var(--ink);font-size:clamp(18px,2.7vw,40px);text-wrap:balance;padding:0 40px}
 .phbannerwrap .phcenter{margin-top:46px}
 .phfanwrap{padding-bottom:0;overflow:hidden}
 .phfan{display:flex;justify-content:center;margin-top:56px;height:230px;overflow:hidden;padding-top:30px}
