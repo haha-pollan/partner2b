@@ -13,3 +13,7 @@ export const assessIsNew = () => Date.now() - ASSESS_LAUNCH < 60 * 86400000;
 // Launch date of the Partner ROI calculator. The "New" badge shows for 60 days.
 export const ROI_LAUNCH = Date.UTC(2026, 10, 27);
 export const roiIsNew = () => Date.now() - ROI_LAUNCH < 60 * 86400000;
+
+// Launch date of the Partner compensation budget calculator. The "New" badge shows for 60 days.
+export const COMP_LAUNCH = Date.UTC(2026, 10, 27);
+export const compIsNew = () => Date.now() - COMP_LAUNCH < 60 * 86400000;

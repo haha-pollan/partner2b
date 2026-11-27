@@ -5,7 +5,7 @@ import { JsonLd, ORG, SITE, crumbs } from "@/components/JsonLd";
 import { PageHero } from "@/components/PageHero";
 import { Toby } from "@/components/Toby";
 import { Footer } from "@/components/Footer";
-import { assessIsNew, roiIsNew, builderIsNew, calcIsNew } from "@/lib/launch";
+import { assessIsNew, roiIsNew, compIsNew, builderIsNew, calcIsNew } from "@/lib/launch";
 import { AUDIENCE, COMING, FAQ, LEVERS, RELATED, SHORT_ANSWER, TOOLS, TOGETHER, TRUST, UPDATED_ISO, UPDATED_LABEL, WANTS, WHAT_IS } from "@/lib/aitools/seo";
 
 const TITLE = "Free partner program tools for B2B tech | Partner2B";
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 };
 
 const URL_ = `${SITE}/ai-tools`;
-const TOOL_ICON: Record<string, IconName> = { "/partner-pipeline-calculator": "calculator", "/partner-roi-calculator": "calculator", "/partner-program-assessment": "assessment", "/program-builder": "builder", "/playbook": "playbook", "/find-partners": "find" };
+const TOOL_ICON: Record<string, IconName> = { "/partner-pipeline-calculator": "calculator", "/partner-roi-calculator": "calculator", "/partner-compensation-calculator": "calculator", "/partner-program-assessment": "assessment", "/program-builder": "builder", "/playbook": "playbook", "/find-partners": "find" };
 const TONES = [
   { bg: "#FFFFFF", fg: "#0A0A0B", sub: "#3A3B40", ar: "#0A0A0B", arf: "#A8FF5C" },
   { bg: "#A8FF5C", fg: "#0A0A0B", sub: "#1C1D20", ar: "#0A0A0B", arf: "#A8FF5C" },
@@ -30,6 +30,7 @@ const STRAPS = [
   { bg: "#A8FF5C", fg: "#0A0A0B", rot: 1.1, ml: "clamp(18px,5vw,64px)" },
   { bg: "#7C5CFF", fg: "#fff", rot: -0.9, ml: "clamp(6px,2vw,24px)" },
   { bg: "#fff", fg: "#0A0A0B", rot: 1.2, ml: "clamp(12px,3vw,40px)" },
+  { bg: "#A8FF5C", fg: "#0A0A0B", rot: -1, ml: "clamp(24px,6vw,80px)" },
 ];
 const VS = [
   { t: "Partner program tools", d: "Decide, size and diagnose" },
@@ -44,7 +45,7 @@ const GRID: React.CSSProperties = { marginTop: 32, display: "grid", gridTemplate
 const bar = (w: string, h: number): React.CSSProperties => ({ width: w, height: h, borderRadius: 999, background: "currentColor", opacity: 0.55, marginTop: 12 });
 
 export default function Page() {
-  const isNew: Record<string, boolean> = { "/program-builder": builderIsNew(), "/partner-pipeline-calculator": calcIsNew(), "/partner-roi-calculator": roiIsNew(), "/partner-program-assessment": assessIsNew() };
+  const isNew: Record<string, boolean> = { "/program-builder": builderIsNew(), "/partner-pipeline-calculator": calcIsNew(), "/partner-roi-calculator": roiIsNew(), "/partner-compensation-calculator": compIsNew(), "/partner-program-assessment": assessIsNew() };
   const soon = [["58%", "92%", "70%"], ["64%", "86%", "56%"], ["52%", "94%", "74%"], ["60%", "88%", "66%"], ["68%", "82%", "54%"], ["56%", "90%", "72%"]];
   const textCard = (t: string, d: string, i: number, n?: string) => {
     const T = TONES[(i + Math.floor(i / 3)) % 3];
