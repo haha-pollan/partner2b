@@ -142,9 +142,6 @@ export default function Services() {
               return (
                 <div key={g.t} className="cut" style={{ background: T.bg, color: T.fg, transform: `rotate(${rot}deg)`, padding: "26px 28px 30px", position: "relative" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-                    <div style={{ flex: "0 0 56px", width: 56, height: 56, borderRadius: 16, border: `2px solid ${T.gl}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                      <Glyph kind={g.kind} fg={T.gl} size={32} />
-                    </div>
                     <h3 style={{ fontWeight: 400, fontSize: 18, letterSpacing: 0, lineHeight: 1.3, flex: 1 }}>{g.t}</h3>
                     <span style={{ fontFamily: "'Michroma',sans-serif", fontSize: 29, color: T.num }}>{String(i + 1).padStart(2, "0")}</span>
                   </div>
@@ -214,10 +211,7 @@ export default function Services() {
           <div style={{ display: "flex", flexWrap: "wrap", gap: 36, marginTop: 64, justifyContent: "center" }}>
             {WHY.map((w) => (
               <div key={w.t} className="cut" style={{ flex: "1 1 300px", maxWidth: 400, transform: `rotate(${w.rot}deg)`, background: w.bg, color: w.fg, padding: "28px 28px 40px" }}>
-                <div style={{ width: 64, height: 64, borderRadius: 16, border: `2px solid ${w.fg}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <Glyph kind={w.kind} fg={w.fg} size={38} />
-                </div>
-                <h3 style={{ margin: "22px 0 0", fontWeight: 400, fontSize: 22, letterSpacing: 0, lineHeight: 1.1 }}>{w.t}</h3>
+                <h3 style={{ margin: 0, fontWeight: 400, fontSize: 22, letterSpacing: 0, lineHeight: 1.1 }}>{w.t}</h3>
                 <p style={{ margin: "10px 0 0", fontSize: 17, lineHeight: 1.45, fontWeight: 400, opacity: 0.85 }}>{w.p}</p>
               </div>
             ))}

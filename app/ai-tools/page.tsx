@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Icon, type IconName } from "@/components/Icon";
 import Link from "next/link";
 import { JsonLd, ORG, SITE, crumbs } from "@/components/JsonLd";
 import { Nav } from "@/components/Nav";
@@ -18,6 +19,7 @@ export const metadata: Metadata = {
 };
 
 const URL_ = `${SITE}/ai-tools`;
+const TOOL_ICON: Record<string, IconName> = { "/partner-pipeline-calculator": "calculator", "/partner-program-assessment": "assessment", "/program-builder": "builder", "/playbook": "playbook", "/find-partners": "find" };
 const TONES = [
   { bg: "#ECECEE", fg: "#0A0A0B", sub: "#3A3B40", ar: "#0A0A0B", arf: "#A8FF5C" },
   { bg: "#A8FF5C", fg: "#0A0A0B", sub: "#1C1D20", ar: "#0A0A0B", arf: "#A8FF5C" },
@@ -97,6 +99,7 @@ export default function Page() {
               const T = TONES[i % 3];
               return (
                 <Link key={t.href} href={t.href} className="cut gcard" style={{ background: T.bg, color: T.fg, transform: `rotate(${ROT[i % 6]}deg)`, padding: "26px 28px 32px", display: "flex", flexDirection: "column" }}>
+                  {TOOL_ICON[t.href] && <div style={{ marginBottom: 14 }}><Icon name={TOOL_ICON[t.href]} color={T.bg === "#2A2B30" ? "#A8FF5C" : "#0A0A0B"} size={48} /></div>}
                   <h3 style={{ ...michroma, fontSize: 18, lineHeight: 1.35, minHeight: 50, ...balance }}>{t.name}</h3>
                   <div style={{ display: "flex", alignItems: "center", gap: 8, minHeight: 30, marginTop: 6, flexWrap: "wrap" }}>
                     {isNew[t.href] && <span className="pill" suppressHydrationWarning style={{ background: "#7C5CFF", color: "#fff" }}>New</span>}
