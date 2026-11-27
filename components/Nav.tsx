@@ -32,6 +32,7 @@ export function Nav() {
             <Link href="/program-builder" onClick={close}>Program builder</Link>
             <Link href="/partner-pipeline-calculator" onClick={close}>Partner pipeline calculator</Link>
             <Link href="/partner-roi-calculator" onClick={close}>Partner ROI calculator</Link>
+            <Link href="/partner-compensation-calculator" onClick={close}>Partner compensation budget calculator</Link>
             <Link href="/partner-program-assessment" onClick={close}>Partner program assessment</Link>
           </div>
         </div>
