@@ -27,7 +27,7 @@ export default function Page() {
             hello@partner2b.com
           </a>
           <p style={{ margin: "36px 0 0", fontSize: 18, lineHeight: 1.65, color: "#ECECEE" }}>
-            To add your program, use the <Link href="/submit" style={{ borderBottom: "1.5px solid #A8FF5C" }}>submission form</Link>. To take over a listing, <Link href="/claim" style={{ borderBottom: "1.5px solid #A8FF5C" }}>claim it</Link>. If something on a listing is wrong, <Link href="/report" style={{ borderBottom: "1.5px solid #A8FF5C" }}>report a correction</Link>.
+            To add your program, use the <Link href="/submit" style={{ borderBottom: "1.5px solid #A8FF5C" }}>submission form</Link>. To take over a listing and correct its terms, <Link href="/claim" style={{ borderBottom: "1.5px solid #A8FF5C" }}>claim it</Link>.
           </p>
         </div>
       </main>

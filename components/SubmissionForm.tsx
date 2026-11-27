@@ -104,32 +104,10 @@ export function SubmissionForm({ kind, listings, defaultListing }: { kind: Kind;
         </>
       )}
 
-      {kind === "report" && (
-        <>
-          {listingSelect}
-          <Lbl t="What is wrong" req />
-          <select name="issue" required defaultValue="" style={inputS}>
-            <option value="" disabled>Choose one</option>
-            {ISSUES.map((c) => (<option key={c} value={c}>{c}</option>))}
-          </select>
-          <Lbl t="The correct information" req />
-          <textarea name="details" required maxLength={4000} rows={4} style={{ ...inputS, resize: "vertical" }} />
-          <Lbl t="Link to a source" />
-          <input name="source_url" type="url" maxLength={500} placeholder="https://" style={inputS} />
-          <Hint t="The official page that shows the correct information" />
-          <NameFields />
-          <Lbl t="Your email" />
-          <input name="email" type="email" maxLength={320} placeholder="name@company.com" style={inputS} />
-          <Hint t="Name and email only if you want a reply" />
-        </>
-      )}
-
-      {kind !== "report" && (
-        <label style={{ display: "flex", alignItems: "center", gap: 12, marginTop: 26, fontSize: 16 }}>
+      <label style={{ display: "flex", alignItems: "center", gap: 12, marginTop: 26, fontSize: 16 }}>
           <input type="checkbox" name="confirmed" required style={{ width: 20, height: 20, accentColor: "#A8FF5C" }} />
           {kind === "submit" ? "This link is the official partner page of the company" : "I am authorized to speak for this company"}
         </label>
-      )}
 
       {state.error && <div role="alert" style={{ marginTop: 22, color: "#FF9B9B", fontSize: 16, fontWeight: 400 }}>{state.error}</div>}
       <button type="submit" disabled={pending} className="btn btn-p" style={{ marginTop: 28, cursor: "pointer", opacity: pending ? 0.6 : 1 }}>

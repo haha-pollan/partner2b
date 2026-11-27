@@ -30,7 +30,7 @@ export default function Page() {
             Partner2B is a free directory of B2B partner programs. It brings commissions, tiers, requirements and benefits for reseller, referral, technology, services, MSP and OEM programs into one place, so you can compare programs and join the ones that fit.
           </p>
           <p style={{ margin: "22px 0 0" }}>
-            Every listing is compiled from open sources and links to the official program page. Companies can submit or claim their program, and anyone can report a correction.
+            Every listing is compiled from open sources and links to the official program page. Companies can submit or claim their program, and only the company itself can change its terms.
           </p>
           <p style={{ margin: "22px 0 0" }}>
             Explore the <Link href="/directory" style={{ borderBottom: "1.5px solid #A8FF5C" }}>directory</Link>, read the <Link href="/glossary" style={{ borderBottom: "1.5px solid #A8FF5C" }}>glossary</Link>, or <Link href="/contact" style={{ borderBottom: "1.5px solid #A8FF5C" }}>get in touch</Link>.
