@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { Glyph } from "@/components/Tile";
 
 const TYPES: [string, string][] = [
   ["Channel Partner", "Resellers and distributors that sell your product"],
@@ -45,12 +44,9 @@ export default function Doors({ opts }: { opts: Opts }) {
           { t: "I am starting from scratch", p: "Not sure which partners fit? Build your strategy first and we will work out the right ones for you.", bg: "#ECECEE", sub: "#3A3B40", num: "#85868B", kind: "bars", rot: 1.2 },
         ].map((c, i) => (
           <div key={c.t} className="cut" style={{ background: c.bg, color: "#0A0A0B", transform: `rotate(${c.rot}deg)`, padding: "26px 28px 30px", display: "flex", flexDirection: "column" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-              <div style={{ flex: "0 0 56px", width: 56, height: 56, borderRadius: 16, border: "2px solid #0A0A0B", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <Glyph kind={c.kind} fg="#0A0A0B" size={32} />
-              </div>
-              <h3 style={{ fontSize: 18, lineHeight: 1.3, flex: 1 }}>{c.t}</h3>
+            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
               <span style={{ fontFamily: "'Michroma',sans-serif", fontSize: 29, color: c.num }}>{String(i + 1).padStart(2, "0")}</span>
+              <h3 style={{ fontSize: 18, lineHeight: 1.3, flex: 1 }}>{c.t}</h3>
             </div>
             <p style={{ margin: "20px 0 0", minHeight: 72, fontSize: 16, lineHeight: 1.55, color: c.sub, flex: 1 }}>{c.p}</p>
             <div style={{ marginTop: 24 }}>

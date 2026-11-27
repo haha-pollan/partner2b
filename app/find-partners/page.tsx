@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/PageHero";
-import { Glyph } from "@/components/Tile";
 import { Footer } from "@/components/Footer";
 import { adminConfigured, db } from "@/lib/admin/session";
 import OpenMine from "./OpenMine";
@@ -64,12 +63,9 @@ export default async function Page() {
               const T = CARDS[i];
               return (
                 <div key={s.t} className="cut" style={{ background: T.bg, color: T.fg, transform: `rotate(${T.rot}deg)`, padding: "26px 28px 30px" }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-                    <div style={{ flex: "0 0 56px", width: 56, height: 56, borderRadius: 16, border: `2px solid ${T.gl}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                      <Glyph kind={s.kind} fg={T.gl} size={32} />
-                    </div>
-                    <h3 style={{ fontSize: 18, lineHeight: 1.3, flex: 1 }}>{s.t}</h3>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
                     <span style={{ fontFamily: "'Michroma',sans-serif", fontSize: 29, color: T.num }}>{String(i + 1).padStart(2, "0")}</span>
+                    <h3 style={{ fontSize: 18, lineHeight: 1.3, flex: 1 }}>{s.t}</h3>
                   </div>
                   <p style={{ margin: "20px 0 0", minHeight: 78, fontSize: 16, lineHeight: 1.55, color: T.sub }}>{s.d}</p>
                 </div>

@@ -111,13 +111,8 @@ export default function Services() {
                 { s: STEPS[2], bg: "#A8FF5C", fg: "#0A0A0B", gl: "#0A0A0B", rot: -3, ml: 12 },
               ].map(({ s, bg, fg, gl, rot, ml }) => (
                 <a key={s.id} href={`#${s.id}`} className="cut hcard" style={{ flex: "0 1 340px", transform: `rotate(${rot}deg)`, background: bg, color: fg, padding: "22px 26px", display: "flex", alignItems: "center", gap: 18 }}>
-                  <div style={{ flex: "0 0 64px", width: 64, height: 64, borderRadius: 16, border: `2px solid ${gl}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                    <Glyph kind={s.kind} fg={gl} size={38} />
-                  </div>
-                  <div style={{ minWidth: 0 }}>
-                    <div style={{ fontSize: 14, fontWeight: 400, opacity: 0.8 }}>Step {s.n}</div>
-                    <div style={{ marginTop: 4, fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 18, letterSpacing: 0, lineHeight: 1.1 }}>{s.title}</div>
-                  </div>
+                  <span style={{ fontFamily: "'Michroma',sans-serif", fontSize: 40, lineHeight: 1, color: gl }}>{s.n}</span>
+                  <div style={{ fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 18, letterSpacing: 0, lineHeight: 1.2 }}>{s.title}</div>
                 </a>
               ))}
             </div>
