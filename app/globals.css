@@ -56,15 +56,15 @@ button{font-family:inherit}
 .navddlink:hover{color:var(--lime)}
 .navdd{position:relative}
 .navmenu{display:none;position:absolute;left:-18px;top:100%;padding-top:14px;z-index:40;min-width:190px}
-.navmenu a.navitem{display:flex;align-items:center;gap:18px;width:560px;max-width:calc(100vw - 48px);white-space:normal;background:#FFFFFF;color:var(--ink);padding:22px 26px;font-weight:400}
+.navmenu a.navitem{display:flex;align-items:center;gap:14px;width:450px;max-width:calc(100vw - 48px);white-space:normal;background:#FFFFFF;color:var(--ink);padding:13px 18px;font-weight:400}
 .navmenu a.navitem+a.navitem{border-top:1.5px solid #E4E4E7}
 .navmenu a.navitem:hover{background:#F3EFFF;color:var(--ink)}
 .navmenu a.navitem:last-child{clip-path:polygon(0 0,100% 0,100% calc(100% - 14px),calc(100% - 14px) 100%,0 100%)}
-.navtile{flex:0 0 52px;height:52px;display:flex;align-items:center;justify-content:center;background:var(--violet)}
+.navtile{flex:0 0 40px;height:40px;display:flex;align-items:center;justify-content:center;background:var(--violet)}
 .navtxt{flex:1;min-width:0}
-.navtxt b{display:block;font-family:'Michroma',sans-serif;font-weight:400;font-size:14px;line-height:1.3}
-.navtxt span{text-wrap:balance;display:block;margin-top:6px;font-family:'IBM Plex Sans',sans-serif;letter-spacing:0;font-size:15px;line-height:1.4;color:#3A3B40}
-.navarrow{flex:0 0 auto;font-size:18px}
+.navtxt b{display:block;font-family:'Michroma',sans-serif;font-weight:400;font-size:12.5px;line-height:1.3}
+.navtxt span{text-wrap:balance;display:block;margin-top:3px;font-family:'IBM Plex Sans',sans-serif;letter-spacing:0;font-size:13.5px;line-height:1.4;color:#3A3B40}
+.navarrow{flex:0 0 auto;font-size:15px}
 .navdd.navddr .navmenu{left:auto;right:-18px}
 .navdd:hover .navmenu,.navdd:focus-within .navmenu,.navdd.open .navmenu{display:block}
 .navtoggle{display:none}
