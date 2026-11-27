@@ -36,19 +36,35 @@ export default async function Page() {
   return (
     <>
       <Nav />
-      <section className="hero" style={{ padding: "150px 0 120px", position: "relative" }}>
+      <section className="hero" style={{ padding: "130px 0 0", position: "relative" }}>
         <div className="wrap">
-          <span className="kick">Find partners<span className="newbadge" suppressHydrationWarning>New</span></span>
-          <h1 style={{ marginTop: 22 }}>Find the right companies to partner with</h1>
-          <p style={{ marginTop: 22, fontSize: 20, lineHeight: 1.5 }}>A ranked list of real companies for every partner type you need, with new ones added every week.</p>
-          <div style={{ marginTop: 34, display: "flex", gap: 14, flexWrap: "wrap" }}>
-            <a href="#start" className="btn btn-p">Find my partners</a>
-            <OpenMine />
+          <div className="fphero">
+            <div>
+              <span className="kick">Find partners<span className="newbadge" suppressHydrationWarning>New</span></span>
+              <h1 style={{ marginTop: 22 }}>Find the right companies to partner with</h1>
+              <p style={{ marginTop: 22, fontSize: 18, lineHeight: 1.5 }}>A ranked list of real companies for every partner type you need, with new ones added every week.</p>
+              <div style={{ marginTop: 34, display: "flex", gap: 22, flexWrap: "wrap", alignItems: "center" }}>
+                <a href="#start" className="btn btn-p">Find my partners</a>
+                <OpenMine link />
+              </div>
+            </div>
+            {sample.length >= 3 ? (
+              <div className="fpstack" aria-hidden="true">
+                {sample.slice(0, 3).map((c, i) => (
+                  <div key={c.id} className={`fpcard fpcard${i}`}>
+                    <span className="fprank">#{i + 1}</span>
+                    <b>{c.name}</b>
+                    <span className="fpdesc">{c.description}</span>
+                    <span className="fptag">Agency Partner</span>
+                  </div>
+                ))}
+              </div>
+            ) : null}
           </div>
         </div>
       </section>
 
-      <section style={{ padding: "150px 0 0" }}>
+      <section style={{ padding: "90px 0 0" }}>
         <div className="wrap">
           <div><Doors opts={{ categories: BUILDER_CATEGORIES, audiences: AUDIENCES, regions: REGIONS }} /></div>
         </div>
@@ -57,10 +73,10 @@ export default async function Page() {
       <section style={{ padding: "150px 0 0" }}>
         <div className="wrap">
           <h2 className="sectitle">How it works</h2>
-          <ol style={{ listStyle: "none", padding: 0, margin: "48px 0 0", display: "grid", gap: 20, gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))" }}>
+          <ol className="fpsteps">
             {STEPS.map((s, i) => (
               <li key={s.t} className="cut" style={{ background: i === 1 ? "#A8FF5C" : "#ECECEE", color: "#0A0A0B", padding: "30px 28px" }}>
-                <div style={{ fontFamily: "'Michroma',sans-serif", fontSize: 26 }}>{i + 1}</div>
+                <div className="fpnum">{i + 1}</div>
                 <b style={{ display: "block", marginTop: 16, fontSize: 20 }}>{s.t}</b>
                 <span style={{ display: "block", marginTop: 8, fontSize: 17, lineHeight: 1.5 }}>{s.d}</span>
               </li>
