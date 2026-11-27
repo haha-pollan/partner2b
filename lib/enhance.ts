@@ -15,7 +15,7 @@ const text = (h: string) =>
 
 const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
-const GENERIC = /^(conclusion|final thoughts?|faq|frequently asked|key takeaways?|summary|what.?s next|ready to|about|wrapping up|bottom line|tl;?dr)/i;
+const GENERIC = /^(conclusion|final thoughts?|faq|frequently asked|key takeaways?|key findings|summary|what.?s next|ready to|about|wrapping up|bottom line|tl;?dr)/i;
 
 function firstSentence(s: string, max = 118): string {
   const m = s.match(/^.*?[.!?](\s|$)/);
