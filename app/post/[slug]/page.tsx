@@ -95,7 +95,7 @@ export default async function Article({ params }: { params: Promise<{ slug: stri
             {more.map((m) => (
               <Link key={m.slug} href={`/post/${m.slug}`} style={{ flex: "1 1 300px", maxWidth: 400, display: "flex", flexDirection: "column", gap: 14 }}>
                 <Cover slug={m.slug} title={m.title} i={m.i} />
-                <h3 style={{ fontWeight: 400, fontSize: 16, letterSpacing: 0, lineHeight: 1.2 }}>{m.title}</h3>
+                <h3 className="cardtitle">{m.title}</h3>
               </Link>
             ))}
           </div>

@@ -21,10 +21,10 @@ export default async function PostIndex() {
       <section style={{ padding: "clamp(36px,9vw,90px) 0 clamp(36px,9vw,120px)" }}>
         <div className="wrap" style={{ display: "flex", flexWrap: "wrap", gap: 36 }}>
           {all.map((a, i) => (
-            <Link key={a.slug} href={`/post/${a.slug}`} style={{ flex: "1 1 340px", maxWidth: 420, display: "flex", flexDirection: "column", gap: 18 }}>
+            <Link key={a.slug} href={`/post/${a.slug}`} style={{ flex: "1 1 340px", maxWidth: 420, display: "flex", flexDirection: "column", gap: 20 }}>
               <Cover slug={a.slug} title={a.title} i={i} />
               <div style={{ fontSize: 14, fontWeight: 400, color: "#85868B" }}>{dateLabel(a.published_at)}</div>
-              <h2 style={{ fontWeight: 400, fontSize: 19, letterSpacing: 0, lineHeight: 1.3 }}>{a.title}</h2>
+              <h2 className="cardtitle">{a.title}</h2>
             </Link>
           ))}
         </div>
