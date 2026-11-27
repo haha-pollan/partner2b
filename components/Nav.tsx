@@ -2,6 +2,17 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Logo } from "./Logo";
+import { Icon, type IconName } from "./Icon";
+
+function Item({ href, icon, title, desc, onClick }: { href: string; icon: IconName; title: string; desc: string; onClick: () => void }) {
+  return (
+    <Link href={href} onClick={onClick} className="navitem">
+      <span className="navtile"><Icon name={icon} color="#FFFFFF" size={30} /></span>
+      <span className="navtxt"><b>{title}</b><span>{desc}</span></span>
+      <span className="navarrow" aria-hidden="true">→</span>
+    </Link>
+  );
+}
 
 export function Nav() {
   const [open, setOpen] = useState(false);
@@ -21,28 +32,28 @@ export function Nav() {
         <div className={dir ? "navdd ainav open" : "navdd ainav"}>
           <span className="navddrow"><Link href="/directory" className="navddlink" onClick={close}>Directory</Link><button type="button" className="navddbtn" aria-label="Show directory menu" aria-expanded={dir} onClick={() => { setDir((o) => !o); setTools(false); setDd(false); }}><span aria-hidden="true" className="navchev">▾</span></button></span>
           <div className="navmenu">
-            <Link href="/directory" onClick={close}>All programs</Link>
-            <Link href="/ai" onClick={close}>AI programs</Link>
+            <Item href="/directory" icon="directory" title="All programs" desc="Compare B2B partner programs side by side" onClick={close} />
+            <Item href="/ai" icon="ai" title="AI programs" desc="Partner programs from AI companies" onClick={close} />
           </div>
         </div>
         <Link href="/find-partners" className="ainav" onClick={close}>Find partners</Link>
         <div className={tools ? "navdd ainav open" : "navdd ainav"}>
           <span className="navddrow"><Link href="/ai-tools" className="navddlink" onClick={close}>Free tools</Link><button type="button" className="navddbtn" aria-label="Show free tools menu" aria-expanded={tools} onClick={() => { setTools((o) => !o); setDd(false); setDir(false); }}><span aria-hidden="true" className="navchev">▾</span></button></span>
           <div className="navmenu">
-            <Link href="/program-builder" onClick={close}>Program builder</Link>
-            <Link href="/partner-pipeline-calculator" onClick={close}>Partner pipeline calculator</Link>
-            <Link href="/partner-roi-calculator" onClick={close}>Partner ROI calculator</Link>
-            <Link href="/partner-compensation-calculator" onClick={close}>Partner compensation budget calculator</Link>
-            <Link href="/partner-program-assessment" onClick={close}>Partner program assessment</Link>
+            <Item href="/program-builder" icon="builder" title="Program builder" desc="Get a partner program strategy in 3 minutes" onClick={close} />
+            <Item href="/partner-pipeline-calculator" icon="calculator" title="Partner pipeline calculator" desc="See how many partners you need for your goal" onClick={close} />
+            <Item href="/partner-roi-calculator" icon="pipeline" title="Partner ROI calculator" desc="See what your partner program returns on its cost" onClick={close} />
+            <Item href="/partner-compensation-calculator" icon="calculator" title="Partner compensation budget calculator" desc="Set a commission budget for each partner type" onClick={close} />
+            <Item href="/partner-program-assessment" icon="assessment" title="Partner program assessment" desc="Find the two things holding your program back" onClick={close} />
           </div>
         </div>
         <Link href="/services" onClick={close}>Services</Link>
-        <div className={dd ? "navdd open" : "navdd"}>
+        <div className={dd ? "navdd navddr open" : "navdd navddr"}>
           <button type="button" className="navddbtn" aria-expanded={dd} onClick={() => { setDd((o) => !o); setTools(false); setDir(false); }}>Resources<span aria-hidden="true" className="navchev">▾</span></button>
           <div className="navmenu">
-            <Link href="/playbook" onClick={close}>Playbook</Link>
-            <Link href="/post" onClick={close}>Blog</Link>
-            <Link href="/glossary" onClick={close}>Glossary</Link>
+            <Item href="/playbook" icon="playbook" title="Playbook" desc="A free guide to ecosystem-led growth" onClick={close} />
+            <Item href="/post" icon="blog" title="Blog" desc="Practical articles on partner programs" onClick={close} />
+            <Item href="/glossary" icon="glossary" title="Glossary" desc="Plain definitions of partner program terms" onClick={close} />
           </div>
         </div>
         <Link href="/submit" className="btn btn-o btn-sm" onClick={close}>Submit a program</Link>
