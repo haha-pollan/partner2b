@@ -12,7 +12,7 @@ export async function sendSubmission(_prev: FormState, f: FormData): Promise<For
   // Honeypot: real people leave this empty
   if (s(f, "website_confirm")) return { ok: true };
   const kind = s(f, "kind") as Kind;
-  if (!["submit", "claim", "report"].includes(kind)) return { ok: false, error: "Something went wrong. Please try again." };
+  if (!["submit", "claim"].includes(kind)) return { ok: false, error: "Something went wrong. Please try again." };
 
   const row: Record<string, unknown> = { kind };
   const first = s(f, "first_name").slice(0, 100), last = s(f, "last_name").slice(0, 100);

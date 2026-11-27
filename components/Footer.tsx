@@ -51,7 +51,6 @@ export function Footer() {
               <Link href="/contact">Contact</Link>
               <Link href="/submit">Submit a program</Link>
               <Link href="/claim">Claim a listing</Link>
-              <Link href="/report">Report a correction</Link>
             </div>
           </div>
         </div>

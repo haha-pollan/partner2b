@@ -133,7 +133,7 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
             <a href={p.program_url} target="_blank" rel="noopener noreferrer" className="btn btn-p" style={{ display: "block", marginTop: 28, textAlign: "center" }}>Explore partner program</a>
             <div style={{ marginTop: 24, paddingTop: 16, borderTop: "1px solid #3A3B40", fontSize: 13, lineHeight: 1.5, color: "#85868B" }}>
               <div>Information is compiled from open sources. <a href={p.program_url} target="_blank" rel="noopener noreferrer" style={{ color: "#B9BABD", textDecoration: "underline" }}>Official page</a></div>
-              <div style={{ marginTop: 8 }}>See something wrong? <Link href={`/report?listing=${p.slug}`} style={{ color: "#B9BABD", textDecoration: "underline" }}>Report a correction</Link></div>
+              <div style={{ marginTop: 8 }}>Is this your program? <Link href={`/claim?listing=${p.slug}`} style={{ color: "#B9BABD", textDecoration: "underline" }}>Claim this listing</Link></div>
             </div>
           </aside>
         </div>
