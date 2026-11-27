@@ -7,7 +7,7 @@ import { Icon, type IconName } from "./Icon";
 function Item({ href, icon, title, desc, onClick }: { href: string; icon: IconName; title: string; desc: string; onClick: () => void }) {
   return (
     <Link href={href} onClick={onClick} className="navitem">
-      <span className="navtile"><Icon name={icon} color="#FFFFFF" size={30} /></span>
+      <span className="navtile"><Icon name={icon} color="#FFFFFF" size={24} /></span>
       <span className="navtxt"><b>{title}</b><span>{desc}</span></span>
       <span className="navarrow" aria-hidden="true">→</span>
     </Link>
