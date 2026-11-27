@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { JsonLd, ORG, SITE, crumbs } from "@/components/JsonLd";
-import { Nav } from "@/components/Nav";
+import { PageHero } from "@/components/PageHero";
 import { Toby } from "@/components/Toby";
 import { Footer } from "@/components/Footer";
 import { AREAS } from "@/lib/assessment/model";
@@ -51,26 +51,7 @@ export default function Page() {
           crumbs([["Partner2B", SITE], ["Partner program assessment", URL_]]),
         ],
       }} />
-      <div className="hero">
-        <Nav />
-        <div className="wrap herobody" style={{ paddingTop: 36, paddingBottom: 110 }}>
-          <div className="tapewrap">
-            <h1 className="ptapes">
-              <span className="pt pt1">Partner program assessment</span>
-              <span className="pt pt2">Why it does not perform</span>
-            </h1>
-            <p className="bubble herosub" style={{ marginTop: 44 }}>Partners joined, but the revenue did not follow? Answer 16 short statements and see which two things hold your program back, and what to fix first</p>
-            <div className="herobtns"><StartLink className="btn btn-p">Start the assessment</StartLink></div>
-          </div>
-          <div className="herotoby" aria-hidden="true">
-            <Toby height={580} rows={38} glasses style={{ width: "100%", height: "100%" }} />
-          </div>
-          <div className="cut freecard">
-            <div style={{ fontFamily: "'Michroma',sans-serif", fontSize: 40, lineHeight: 1, WebkitTextStroke: "1.5px currentColor" }}>Free</div>
-            <div style={{ marginTop: 8, fontSize: 18 }}>3 minutes, no company name</div>
-          </div>
-        </div>
-      </div>
+      <PageHero layout="poster" title="Partner program assessment" accent="Why it does not perform" sub="Partners joined, but the revenue did not follow? Answer 16 short statements and see which two things hold your program back, and what to fix first" buttons={<StartLink className="btn btn-p">Start the assessment</StartLink>} />
 
       <Suspense fallback={null}><AssessmentClient /></Suspense>
 

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { Nav } from "@/components/Nav";
+import { PageHero } from "@/components/PageHero";
 import { Footer } from "@/components/Footer";
 import { BuilderCta } from "@/components/BuilderCta";
 import { TERMS, GROUPS, termHref } from "@/lib/glossary";
@@ -35,15 +35,7 @@ export default function Page() {
   return (
     <div>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />
-      <div style={{ overflow: "hidden" }}>
-        <Nav />
-        <div className="wrap" style={{ padding: "40px var(--margin) clamp(36px,9vw,64px)" }}>
-          <h1 className="h1big">Partner program glossary</h1>
-          <p style={{ margin: "22px 0 0", maxWidth: 900, fontSize: 20, lineHeight: 1.5, color: "#ECECEE" }}>
-            Clear definitions of the terms used in B2B partner programs, channel sales and AI partnerships, each with examples and common questions answered.
-          </p>
-        </div>
-      </div>
+      <PageHero layout="poster" title="Partner program" accent="glossary" sub="Clear definitions of the terms used in B2B partner programs, channel sales and AI partnerships, each with examples and common questions answered." />
       <section style={{ padding: "clamp(36px,9vw,72px) 0 clamp(36px,9vw,110px)", overflow: "hidden" }}>
         <div className="wrap">
           {GROUPS.map((g, gi) => {

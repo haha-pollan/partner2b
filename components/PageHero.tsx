@@ -7,11 +7,11 @@ export type HeroCompany = { name: string; description: string | null; subtype: s
 
 // One hero for the whole site. One style (two-tone one-line title, plain text, lime main button, bordered lime secondary);
 // only the layout changes. `buttons` holds the main (btn btn-p) and optional secondary (btn btn-o) button.
-export function PageHero({ layout, title, accent, sub, buttons, slot, words, companies }: { layout: HeroLayout; title: string; accent: string; sub: string; buttons?: ReactNode; slot?: ReactNode; words?: string[]; companies?: HeroCompany[] }) {
+export function PageHero({ layout, title, accent, sub, buttons, slot, words, companies, extra }: { layout: HeroLayout; title: ReactNode; accent: string; sub: string; buttons?: ReactNode; slot?: ReactNode; words?: string[]; companies?: HeroCompany[]; extra?: ReactNode }) {
   const strap = words ? Array.from({ length: 3 }).map(() => words.map((t) => `${t} ◆ `).join("")).join("") : "";
   const h1 = <h1 className="phtitle">{title}{accent ? " " : ""}{accent ? <span style={{ color: "#A8FF5C" }}>{accent}</span> : null}</h1>;
   const btns = buttons ? <div className="phbtns">{buttons}</div> : null;
-  const text = (<><p className="phsub">{sub}</p>{btns}</>);
+  const text = (<>{sub ? <p className="phsub">{sub}</p> : null}{btns}{extra}</>);
   const toby = (cls: string) => <div className={`phtoby ${cls}`} aria-hidden="true"><Toby height={520} rows={38} glasses style={{ width: "100%", height: "100%" }} /></div>;
   const strapEl = words ? <div className="phstrapwrap" aria-hidden="true"><div className="phstrap">{strap}</div></div> : null;
 

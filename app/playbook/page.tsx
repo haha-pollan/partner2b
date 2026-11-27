@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { Nav } from "@/components/Nav";
+import { PageHero } from "@/components/PageHero";
 import { Footer } from "@/components/Footer";
 import { BuilderCta } from "@/components/BuilderCta";
 import { PlaybookForm } from "./PlaybookForm";
@@ -89,26 +89,13 @@ export default function Page() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />
 
       {/* HERO */}
-      <div style={{ overflow: "hidden" }}>
-        <Nav />
-        <div className="wrap" style={{ padding: "24px var(--margin) clamp(40px,8vw,90px)", display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 48, flexWrap: "wrap" }}>
-          <div style={{ flex: "1 1 520px", maxWidth: 640 }}>
-            <span className="pill">Free playbook 2026</span>
-            <h1 className="h1big" style={{ marginTop: 20, fontSize: "clamp(28px,3.8vw,58px)" }}>The <span style={{ whiteSpace: "nowrap" }}>Ecosystem-Led</span> Growth Playbook</h1>
-            <p style={{ margin: "22px 0 0", maxWidth: 560, fontSize: 21, lineHeight: 1.5, fontWeight: 400 }}>
-              How B2B marketers can drive scalable revenue through partnerships, with the KPIs that prove partner ROI.
-            </p>
-            <ul style={{ margin: "26px 0 0", padding: 0, listStyle: "none", display: "grid", gap: 10, fontSize: 17, fontWeight: 400 }}>
-              {["Why buyers now check your ecosystem before they talk to sales", "Which partner types to build, and in what order", "A five-stage journey from first partner to measurable revenue"].map((t) => (
-                <li key={t} style={{ display: "flex", gap: 12, alignItems: "flex-start" }}><span aria-hidden="true" style={{ flex: "0 0 10px", height: 10, background: "#A8FF5C", marginTop: 8, clipPath: "polygon(0 0,100% 0,100% 60%,60% 100%,0 100%)" }} />{t}</li>
-              ))}
-            </ul>
-          </div>
-          <div style={{ flex: "0 1 420px", width: "100%", position: "relative" }}>
-            <PlaybookForm id="download" />
-          </div>
-        </div>
-      </div>
+      <PageHero layout="form" title={<>The <span style={{ whiteSpace: "nowrap" }}>Ecosystem-Led</span> Growth Playbook</>} accent="" sub="How B2B marketers can drive scalable revenue through partnerships, with the KPIs that prove partner ROI."
+        extra={<ul style={{ margin: "26px 0 0", padding: 0, listStyle: "none", display: "grid", gap: 10, fontSize: 17, fontWeight: 400 }}>
+          {["Why buyers now check your ecosystem before they talk to sales", "Which partner types to build, and in what order", "A five-stage journey from first partner to measurable revenue"].map((t) => (
+            <li key={t} style={{ display: "flex", gap: 12, alignItems: "flex-start" }}><span aria-hidden="true" style={{ flex: "0 0 10px", height: 10, background: "#A8FF5C", marginTop: 8, clipPath: "polygon(0 0,100% 0,100% 60%,60% 100%,0 100%)" }} />{t}</li>
+          ))}
+        </ul>}
+        slot={<PlaybookForm id="download" />} />
 
       {/* ANSWER-FIRST SUMMARY + STATS */}
       <section style={{ padding: "clamp(40px,9vw,84px) 0" }}>
