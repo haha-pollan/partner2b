@@ -339,19 +339,38 @@ button{font-family:inherit}
 .phsub{margin:26px 0 0;font-size:19px;line-height:1.55;color:#B9BABD;max-width:640px}
 .phbtns{margin-top:32px;display:flex;gap:20px;align-items:center;flex-wrap:wrap}
 .phsplit{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:48px;align-items:center}
-.phsplit .phtitle{max-width:760px;text-wrap:balance}
-.phwide .phtitle{white-space:nowrap}
-.phwide .phrow{display:flex;justify-content:space-between;align-items:center;gap:40px;margin-top:30px}
-.phwide .phsub{margin-top:0}
+.phsplit .phtitle{text-wrap:balance}
 .phcenter{text-align:center}
 .phcenter .phsub{margin-left:auto;margin-right:auto}
 .phcenter .phbtns{justify-content:center}
-.phcenter .phtitle{margin-top:22px}
-.phtiles{margin-top:44px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-.phtoby{aspect-ratio:490/580;-webkit-mask-image:linear-gradient(180deg,#000 0,#000 70%,transparent 98%);mask-image:linear-gradient(180deg,#000 0,#000 70%,transparent 98%)}
-.phbig{width:clamp(220px,25vw,400px)}
-.phsmall{width:150px;margin:0 auto}
-.phrise{width:clamp(150px,15vw,230px);margin-bottom:-60px;position:relative;z-index:1}
+.phcenter .phtitle{margin-top:0}
+.phtoby{aspect-ratio:490/580}
+.phsmall{width:150px;margin:0 auto 26px;-webkit-mask-image:linear-gradient(180deg,#000 0,#000 70%,transparent 98%);mask-image:linear-gradient(180deg,#000 0,#000 70%,transparent 98%)}
+.phposter .phhuge{font-size:clamp(26px,4.1vw,60px);line-height:1.1}
+.phposter .phline{height:3px;background:var(--lime);margin:38px 0 30px}
+.phposter .phrow{display:flex;justify-content:space-between;align-items:center;gap:40px}
+.phposter .phsub{margin:0}.phposter .phbtns{margin:0}
+.phdiag{position:relative;overflow:hidden;min-height:560px;display:flex;align-items:center}
+.phwedge{position:absolute;right:0;top:0;bottom:0;width:46%;background:var(--lime);clip-path:polygon(34% 0,100% 0,100% 100%,0 100%)}
+.phdiagtoby{position:absolute;right:clamp(40px,7vw,120px);bottom:-30px;width:clamp(240px,27vw,420px);z-index:2}
+.phdiagtext{position:relative;z-index:3;padding-top:60px;padding-bottom:60px;width:100%}
+.phdiagtext>*{max-width:min(54%,660px)}
+.phmid{font-size:clamp(20px,2.5vw,36px);text-wrap:balance}
+.phbannerwrap{padding-top:60px}
+.phband{background:var(--lime);transform:rotate(-1.2deg);margin:0 -40px;padding:26px 0;text-align:center;overflow:hidden}
+.phband .phtitle{color:var(--ink);font-size:clamp(18px,2.7vw,40px);white-space:nowrap}
+.phbannerwrap .phcenter{margin-top:46px}
+.phfanwrap{padding-bottom:0;overflow:hidden}
+.phfan{display:flex;justify-content:center;margin-top:56px;height:230px;overflow:hidden;padding-top:30px}
+.phfancard{width:230px;height:300px;flex:0 0 230px;margin-right:-34px;padding:22px 20px;display:flex;flex-direction:column}
+.phfancard:last-child{margin-right:0}
+.phfandesc{display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;margin-top:12px;font-size:14px;line-height:1.5}
+.phfantag{align-self:flex-start;margin-top:14px;font-size:12px;padding:4px 11px;border-radius:999px}
+.phwide .phtitle{white-space:nowrap}
+.phnobottom{padding-bottom:0}
+.phriserow{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;margin-top:30px}
+.phriseleft{padding-bottom:64px}.phriseleft .phsub{margin-top:0}
+.phrise{width:clamp(170px,16vw,250px);margin-bottom:-52px;position:relative;z-index:1}
 .phstrapwrap{overflow:hidden;padding:0 0 46px;position:relative;z-index:2}
 .phstrap{background:#fff;color:var(--ink);transform:rotate(-1.6deg);margin:0 -40px;padding:14px 0 14px 70px;white-space:nowrap;overflow:hidden;font-family:'Michroma',sans-serif;font-size:18px;text-transform:uppercase}
-@media (max-width:900px){.phero{padding-top:44px;padding-bottom:50px}.phsplit{grid-template-columns:1fr}.phbig,.phrise{display:none}.phwide .phtitle{white-space:normal;font-size:clamp(22px,6.4vw,30px);text-wrap:balance}.phwide .phrow{flex-direction:column;align-items:flex-start}.phstrap{font-size:14px;padding-left:30px}}
+@media (max-width:900px){.phero{padding-top:44px;padding-bottom:50px}.phsplit{grid-template-columns:1fr}.phrise,.phdiagtoby,.phwedge{display:none}.phwide .phtitle{white-space:normal;font-size:clamp(22px,6.4vw,30px);text-wrap:balance}.phband .phtitle{white-space:normal;font-size:clamp(17px,5vw,24px)}.phposter .phrow,.phriserow{flex-direction:column;align-items:flex-start}.phdiagtext>*{max-width:none}.phdiag{min-height:0}.phfan{height:190px}.phstrap{font-size:14px;padding-left:30px}}

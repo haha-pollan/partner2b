@@ -44,11 +44,12 @@ export default async function Page() {
   return (
     <div style={{ overflow: "hidden" }}>
       <PageHero
-        layout="toby-split"
+        layout="toby-strap"
         title="Find the right companies"
         accent="to partner with"
         sub="A ranked list of real companies for every partner type you need, with new ones added every week."
         buttons={<><a href="#start" className="btn btn-p">Find my partners</a><OpenMine outline /></>}
+        words={WORDS}
       />
 
       <section style={{ padding: "clamp(36px,9vw,72px) 0 0" }}>
