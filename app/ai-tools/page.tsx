@@ -29,6 +29,7 @@ const STRAPS = [
   { bg: "#fff", fg: "#0A0A0B", rot: -1.4, ml: 0 },
   { bg: "#A8FF5C", fg: "#0A0A0B", rot: 1.1, ml: "clamp(18px,5vw,64px)" },
   { bg: "#7C5CFF", fg: "#fff", rot: -0.9, ml: "clamp(6px,2vw,24px)" },
+  { bg: "#fff", fg: "#0A0A0B", rot: 1.2, ml: "clamp(12px,3vw,40px)" },
 ];
 const VS = [
   { t: "Partner program tools", d: "Decide, size and diagnose" },
