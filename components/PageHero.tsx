@@ -40,7 +40,7 @@ export function PageHero({ layout, title, accent, sub, buttons, slot, words, com
       </div>
     );
   } else if (layout === "fan") {
-    const tones = [{ bg: "#2A2B30", fg: "#ECECEE", sub: "#B9BABD", tag: "#2A2B2F", tagfg: "#B9BABD", rot: -11, y: 26 }, { bg: "#ECECEE", fg: "#0A0A0B", sub: "#3A3B40", tag: "#0A0A0B", tagfg: "#A8FF5C", rot: -5.5, y: 8 }, { bg: "#A8FF5C", fg: "#0A0A0B", sub: "#1C1D20", tag: "#0A0A0B", tagfg: "#A8FF5C", rot: 0, y: 0 }, { bg: "#ECECEE", fg: "#0A0A0B", sub: "#3A3B40", tag: "#0A0A0B", tagfg: "#A8FF5C", rot: 5.5, y: 8 }, { bg: "#2A2B30", fg: "#ECECEE", sub: "#B9BABD", tag: "#2A2B2F", tagfg: "#B9BABD", rot: 11, y: 26 }];
+    const tones = [{ bg: "#A8FF5C", fg: "#0A0A0B", sub: "#1C1D20", tag: "#0A0A0B", tagfg: "#A8FF5C", rot: -11, y: 26 }, { bg: "#ECECEE", fg: "#0A0A0B", sub: "#3A3B40", tag: "#0A0A0B", tagfg: "#A8FF5C", rot: -5.5, y: 8 }, { bg: "#A8FF5C", fg: "#0A0A0B", sub: "#1C1D20", tag: "#0A0A0B", tagfg: "#A8FF5C", rot: 0, y: 0 }, { bg: "#ECECEE", fg: "#0A0A0B", sub: "#3A3B40", tag: "#0A0A0B", tagfg: "#A8FF5C", rot: 5.5, y: 8 }, { bg: "#A8FF5C", fg: "#0A0A0B", sub: "#1C1D20", tag: "#0A0A0B", tagfg: "#A8FF5C", rot: 11, y: 26 }];
     body = (
       <div className="phero phfanwrap">
         <div className="wrap phcenter">{h1}{text}</div>

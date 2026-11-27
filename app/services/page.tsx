@@ -69,14 +69,14 @@ const STEPS: Step[] = [
 ];
 
 const WHY = [
-  { t: "Diagnostic range", p: "Unbiased advice. We fix your real constraint, not what an agency sells.", kind: "hex", bg: "#2A2B30", fg: "#ECECEE", rot: -2 },
+  { t: "Diagnostic range", p: "Unbiased advice. We fix your real constraint, not what an agency sells.", kind: "hex", bg: "#A8FF5C", fg: "#0A0A0B", rot: -2 },
   { t: "Senior execution", p: "Led by operators who have run B2B revenue and operations at executive level.", kind: "bars", bg: "#ECECEE", fg: "#0A0A0B", rot: 2 },
   { t: "One accountable team", p: "Growth and engineering run under one plan, with no agency handoffs.", kind: "diamond", bg: "#A8FF5C", fg: "#0A0A0B", rot: -2 },
 ];
 
 type Theme = { bg: string; tx: string; sub: string; num: string; card: string; ctx: string; csub: string; ctag: string; ctagTx: string; line: string; gl: string; hot: string; hotTx: string };
 const THEMES: Theme[] = [
-  { bg: "transparent", tx: "#fff", sub: "#ECECEE", num: "#A8FF5C", card: "#2A2B30", ctx: "#ECECEE", csub: "#B9BABD", ctag: "#2A2B2F", ctagTx: "#B9BABD", line: "#3A3B40", gl: "#A8FF5C", hot: "#A8FF5C", hotTx: "#0A0A0B" },
+  { bg: "transparent", tx: "#fff", sub: "#ECECEE", num: "#A8FF5C", card: "#ECECEE", ctx: "#0A0A0B", csub: "#3A3B40", ctag: "#0A0A0B", ctagTx: "#A8FF5C", line: "#B9BABD", gl: "#0A0A0B", hot: "#A8FF5C", hotTx: "#0A0A0B" },
   { bg: "transparent", tx: "#fff", sub: "#ECECEE", num: "#A8FF5C", card: "#ECECEE", ctx: "#0A0A0B", csub: "#3A3B40", ctag: "#0A0A0B", ctagTx: "#A8FF5C", line: "#B9BABD", gl: "#0A0A0B", hot: "#A8FF5C", hotTx: "#0A0A0B" },
   { bg: "#A8FF5C", tx: "#0A0A0B", sub: "#1C1D20", num: "#0A0A0B", card: "#2A2B30", ctx: "#ECECEE", csub: "#B9BABD", ctag: "#2A2B2F", ctagTx: "#B9BABD", line: "#3A3B40", gl: "#A8FF5C", hot: "#ECECEE", hotTx: "#0A0A0B" },
 ];
@@ -106,9 +106,9 @@ export default function Services() {
           <div className="wrap" style={{ padding: "0 var(--margin) clamp(36px,9vw,90px)", display: "flex", justifyContent: "center", gap: 28, flexWrap: "wrap" }}>
             <div style={{ display: "flex", gap: 28, flexWrap: "wrap", justifyContent: "center", width: "100%" }}>
               {[
-                { s: STEPS[0], bg: "#2A2B30", fg: "#ECECEE", gl: "#A8FF5C", rot: -5, ml: 0 },
-                { s: STEPS[1], bg: "#ECECEE", fg: "#0A0A0B", gl: "#0A0A0B", rot: 3, ml: 36 },
-                { s: STEPS[2], bg: "#A8FF5C", fg: "#0A0A0B", gl: "#0A0A0B", rot: -3, ml: 12 },
+                { s: STEPS[0], bg: "#ECECEE", fg: "#0A0A0B", gl: "#0A0A0B", rot: -5, ml: 0 },
+                { s: STEPS[1], bg: "#A8FF5C", fg: "#0A0A0B", gl: "#0A0A0B", rot: 3, ml: 36 },
+                { s: STEPS[2], bg: "#ECECEE", fg: "#0A0A0B", gl: "#0A0A0B", rot: -3, ml: 12 },
               ].map(({ s, bg, fg, gl, rot, ml }) => (
                 <a key={s.id} href={`#${s.id}`} className="cut hcard" style={{ flex: "0 1 340px", transform: `rotate(${rot}deg)`, background: bg, color: fg, padding: "22px 26px", display: "flex", alignItems: "center", gap: 18 }}>
                   <span style={{ fontFamily: "'Michroma',sans-serif", fontSize: 40, lineHeight: 1, color: gl }}>{s.n}</span>
@@ -136,8 +136,7 @@ export default function Services() {
               const T = [
                 { bg: "#ECECEE", fg: "#0A0A0B", sub: "#3A3B40", gl: "#0A0A0B", num: "#85868B" },
                 { bg: "#A8FF5C", fg: "#0A0A0B", sub: "#1C1D20", gl: "#0A0A0B", num: "#3F7A12" },
-                { bg: "#2A2B30", fg: "#ECECEE", sub: "#B9BABD", gl: "#A8FF5C", num: "#55565B" },
-              ][(i + Math.floor(i / 3)) % 3];
+              ][(i + Math.floor(i / 3)) % 2];
               const rot = [-1.6, 1.2, -0.8, 1.4, -1.2, 1.6][i];
               return (
                 <div key={g.t} className="cut" style={{ background: T.bg, color: T.fg, transform: `rotate(${rot}deg)`, padding: "26px 28px 30px", position: "relative" }}>

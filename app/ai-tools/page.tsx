@@ -23,7 +23,6 @@ const TOOL_ICON: Record<string, IconName> = { "/partner-pipeline-calculator": "c
 const TONES = [
   { bg: "#ECECEE", fg: "#0A0A0B", sub: "#3A3B40", ar: "#0A0A0B", arf: "#A8FF5C" },
   { bg: "#A8FF5C", fg: "#0A0A0B", sub: "#1C1D20", ar: "#0A0A0B", arf: "#A8FF5C" },
-  { bg: "#2A2B30", fg: "#ECECEE", sub: "#B9BABD", ar: "#A8FF5C", arf: "#0A0A0B" },
 ];
 const STRAPS = [
   { bg: "#fff", fg: "#0A0A0B", rot: -1.4, ml: 0 },
@@ -46,7 +45,7 @@ export default function Page() {
   const isNew: Record<string, boolean> = { "/program-builder": builderIsNew(), "/partner-pipeline-calculator": calcIsNew(), "/partner-program-assessment": assessIsNew() };
   const soon = [["58%", "92%", "70%"], ["64%", "86%", "56%"], ["52%", "94%", "74%"], ["60%", "88%", "66%"], ["68%", "82%", "54%"], ["56%", "90%", "72%"]];
   const textCard = (t: string, d: string, i: number, n?: string) => {
-    const T = TONES[(i + Math.floor(i / 3)) % 3];
+    const T = TONES[(i + Math.floor(i / 3)) % 2];
     return (
       <div key={t} className="cut" style={{ background: T.bg, color: T.fg, transform: `rotate(${ROT[i % 6]}deg)`, padding: "26px 28px 36px" }}>
         {n && <span style={{ ...michroma, fontSize: 26, lineHeight: 1 }}>{n}</span>}
@@ -77,10 +76,10 @@ export default function Page() {
           <p style={lead}>Each tool answers one question and takes minutes. Start with the one that matches where you are</p>
           <div style={GRID}>
             {TOOLS.map((t, i) => {
-              const T = TONES[i % 3];
+              const T = TONES[i % 2];
               return (
                 <Link key={t.href} href={t.href} className="cut gcard" style={{ background: T.bg, color: T.fg, transform: `rotate(${ROT[i % 6]}deg)`, padding: "26px 28px 32px", display: "flex", flexDirection: "column" }}>
-                  {TOOL_ICON[t.href] && <div style={{ marginBottom: 14 }}><Icon name={TOOL_ICON[t.href]} color={T.bg === "#2A2B30" ? "#A8FF5C" : "#0A0A0B"} size={48} /></div>}
+                  {TOOL_ICON[t.href] && <div style={{ marginBottom: 14 }}><Icon name={TOOL_ICON[t.href]} color={"#0A0A0B"} size={48} /></div>}
                   <h3 style={{ ...michroma, fontSize: 18, lineHeight: 1.35, minHeight: 50, ...balance }}>{t.name}</h3>
                   <div style={{ display: "flex", alignItems: "center", gap: 8, minHeight: 30, marginTop: 6, flexWrap: "wrap" }}>
                     {isNew[t.href] && <span className="pill" suppressHydrationWarning style={{ background: "#7C5CFF", color: "#fff" }}>New</span>}
@@ -96,7 +95,7 @@ export default function Page() {
           <h3 style={{ ...michroma, fontSize: 20, lineHeight: 1.4, margin: "64px 0 0" }}>Coming soon</h3>
           <div style={GRID} aria-hidden="true">
             {soon.map((w, i) => {
-              const T = TONES[(i + 1 + Math.floor(i / 3)) % 3];
+              const T = TONES[(i + 1 + Math.floor(i / 3)) % 2];
               return (
                 <div key={i} className="cut gcard" style={{ position: "relative", background: T.bg, color: T.fg, transform: `rotate(${ROT[(i + 3) % 6]}deg)`, padding: "26px 28px 32px", display: "flex", flexDirection: "column", overflow: "hidden", userSelect: "none" }}>
                   <div style={{ filter: "blur(9px)" }}>

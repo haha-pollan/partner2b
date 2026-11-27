@@ -34,7 +34,7 @@ const WORDS = ["Technology", "Channel", "Agency", "Strategic", "Community", "AI 
 const CARDS = [
   { bg: "#ECECEE", fg: "#0A0A0B", sub: "#3A3B40", gl: "#0A0A0B", num: "#85868B", rot: -1.6 },
   { bg: "#A8FF5C", fg: "#0A0A0B", sub: "#1C1D20", gl: "#0A0A0B", num: "#3F7A12", rot: 1.2 },
-  { bg: "#2A2B30", fg: "#ECECEE", sub: "#B9BABD", gl: "#A8FF5C", num: "#55565B", rot: -0.8 },
+  { bg: "#ECECEE", fg: "#0A0A0B", sub: "#3A3B40", gl: "#0A0A0B", num: "#85868B", rot: -0.8 },
 ];
 const ROT = [-1.6, 1.2, -0.8, 1.4, -1.2];
 
@@ -90,12 +90,12 @@ export default async function Page() {
             <p style={{ margin: "14px 0 0", fontSize: 19, lineHeight: 1.5, color: "#1C1D20" }}>Five real agency partners. Your own list is ranked for your product and your buyers.</p>
             <div className="fpgrid" style={{ marginTop: 52, gap: 24 }}>
               {sample.map((c, i) => {
-                const hot = i === 0;
+                const hot = i % 2 === 0;
                 return (
-                  <a key={c.id} href={c.website} target="_blank" rel="noopener noreferrer" className="cut" style={{ background: hot ? "#ECECEE" : "#2A2B30", color: hot ? "#0A0A0B" : "#ECECEE", transform: `rotate(${ROT[i]}deg)`, padding: "24px 22px 28px", display: "flex", flexDirection: "column", textDecoration: "none" }}>
+                  <a key={c.id} href={c.website} target="_blank" rel="noopener noreferrer" className="cut" style={{ background: hot ? "#ECECEE" : "#A8FF5C", color: "#0A0A0B", transform: `rotate(${ROT[i]}deg)`, padding: "24px 22px 28px", display: "flex", flexDirection: "column", textDecoration: "none" }}>
                     <h3 style={{ fontSize: 16, lineHeight: 1.3 }}>{c.name}</h3>
-                    <span style={{ display: "-webkit-box", WebkitLineClamp: 4, WebkitBoxOrient: "vertical", overflow: "hidden", marginTop: 12, fontSize: 15, lineHeight: 1.5, color: hot ? "#3A3B40" : "#B9BABD" }}>{c.description}</span>
-                    {c.subtype ? <span style={{ alignSelf: "flex-start", marginTop: 16, fontSize: 13, padding: "5px 12px", borderRadius: 999, background: hot ? "#0A0A0B" : "#2A2B2F", color: hot ? "#A8FF5C" : "#B9BABD", border: hot ? 0 : "1px solid #3A3B40" }}>{c.subtype}</span> : null}
+                    <span style={{ display: "-webkit-box", WebkitLineClamp: 4, WebkitBoxOrient: "vertical", overflow: "hidden", marginTop: 12, fontSize: 15, lineHeight: 1.5, color: hot ? "#3A3B40" : "#1C1D20" }}>{c.description}</span>
+                    {c.subtype ? <span style={{ alignSelf: "flex-start", marginTop: 16, fontSize: 13, padding: "5px 12px", borderRadius: 999, background: "#0A0A0B", color: "#A8FF5C", border: 0 }}>{c.subtype}</span> : null}
                   </a>
                 );
               })}
