@@ -138,6 +138,9 @@ button{font-family:inherit}
 .prose a{color:var(--lime);text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}
 .prose a:hover{color:#fff}
 .prose img{max-width:100%;height:auto;margin:30px 0;display:block;clip-path:polygon(0 0,100% 0,100% calc(100% - 22px),calc(100% - 22px) 100%,0 100%)}
+.prose mark{background:var(--lime);color:var(--ink);padding:1px 10px;border-radius:999px;white-space:nowrap;font-weight:400;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.prose mark.nm{background:#fff}
+.prose table mark.nm{background:var(--lav)}
 .prose blockquote{margin:34px 0;padding:24px 28px;background:var(--violet);color:#fff;font-size:20px;font-weight:400;clip-path:polygon(0 0,100% 0,100% calc(100% - 18px),calc(100% - 18px) 100%,0 100%)}
 .prose blockquote p{margin:0 0 12px}.prose blockquote p:last-child{margin:0}
 .prose table{display:block;overflow-x:auto;border-collapse:separate;border-spacing:0;width:100%;margin:34px 0;font-size:17px;line-height:1.5;background:#fff;color:var(--ink)}

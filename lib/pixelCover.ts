@@ -168,6 +168,19 @@ const PINNED: Record<string, { tpl: Tpl; accent: string }> = {
       },
     },
   },
+  "partner-program-tiers-how-many-and-what-to-name-them": {
+    accent: "#4FD6E8",
+    tpl: { // three steps up, one partner on the top step
+      tag: "Partner tiers",
+      layers: (_r, a) => [
+        [mix(BG, "#85868B", 0.3), blk(2, 14, 22, 1)],
+        [mix(BG, "#85868B", 0.5), blk(4, 10, 6, 4)],
+        [mix(BG, a, 0.55), blk(10, 7, 6, 7)],
+        [a, blk(16, 4, 6, 10)],
+        [LIME, blk(18, 1, 2, 2)],
+      ],
+    },
+  },
 };
 
 export function buildCover(slug: string, title: string, i: number) {
