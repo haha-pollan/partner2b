@@ -392,3 +392,5 @@ button{font-family:inherit}
 .phstrap{background:#fff;color:var(--ink);transform:rotate(-1.6deg);margin:0 -40px;padding:14px 0 14px 70px;white-space:nowrap;overflow:hidden;font-family:'Michroma',sans-serif;font-size:18px;text-transform:uppercase}
 @media (max-width:900px){.phero{padding-top:44px;padding-bottom:50px}.phsplit{grid-template-columns:1fr}.phrise,.phdiagtoby,.phwedge{display:none}.phwide .phtitle{white-space:normal;font-size:clamp(22px,6.4vw,30px);text-wrap:balance}.phband .phtitle{white-space:normal;font-size:clamp(17px,5vw,24px)}.phposter .phrow,.phriserow{flex-direction:column;align-items:flex-start}.phdiagtext>*{max-width:none}.phdiag{min-height:0}.phfan{height:190px}.phstrap{font-size:14px;padding-left:30px}}
 .aicard:nth-child(even){background:var(--lime)}
+
+.cardtitle{font-weight:400;font-size:17px;line-height:1.55;letter-spacing:.03em;-webkit-text-stroke:.5px currentColor;text-wrap:balance}
