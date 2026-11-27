@@ -39,7 +39,7 @@ export default function Page() {
           </div>
         </div>
         <div className="wrap" style={{ padding: "40px var(--margin) clamp(36px,9vw,120px)", display: "flex", gap: 32, alignItems: "flex-start", flexWrap: "wrap" }}>
-          <div className="cut" style={{ flex: "1 1 640px", minWidth: 0, background: "#7C5CFF", padding: "36px 40px 44px", position: "relative" }}>
+          <div className="" style={{ flex: "1 1 640px", minWidth: 0, background: "#0A0A0B", border: "2px solid #A8FF5C", padding: "36px 40px 44px", position: "relative" }}>
             <h2 style={{ fontWeight: 400, fontSize: 23, letterSpacing: 0 }}>Your goal</h2>
             <Suspense fallback={null}><CalculatorClient /></Suspense>
           </div>

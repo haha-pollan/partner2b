@@ -6,10 +6,10 @@ import { BUILDER_CATEGORIES, DELIVERY, AUDIENCES, REGIONS, STAGES, CURRENCIES, G
 import { DEMOS } from "./demos";
 
 const inputS: React.CSSProperties = { width: "100%", background: "#ECECEE", color: "#0A0A0B", border: 0, borderRadius: 10, padding: "14px 16px", font: "inherit", fontSize: 17 };
-const Lbl = ({ t, req }: { t: string; req?: boolean }) => (<label style={{ display: "block", fontSize: 15, fontWeight: 400, margin: "22px 0 8px" }}>{t}{req && <span style={{ color: "#FFFFFF" }}> *</span>}</label>);
-const Hint = ({ t }: { t: string }) => <div style={{ marginTop: 8, fontSize: 14, color: "#FFFFFF" }}>{t}</div>;
+const Lbl = ({ t, req }: { t: string; req?: boolean }) => (<label style={{ display: "block", fontSize: 15, fontWeight: 400, margin: "22px 0 8px" }}>{t}{req && <span style={{ color: "#A8FF5C" }}> *</span>}</label>);
+const Hint = ({ t }: { t: string }) => <div style={{ marginTop: 8, fontSize: 14, color: "#85868B" }}>{t}</div>;
 const btn: React.CSSProperties = { background: "#A8FF5C", color: "#0A0A0B", fontFamily: "'IBM Plex Sans',sans-serif", fontWeight: 400, fontSize: 19, padding: "18px 34px", border: 0, cursor: "pointer", display: "inline-block", clipPath: "polygon(0 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%)" };
-const ghost: React.CSSProperties = { background: "transparent", border: 0, color: "#FFFFFF", cursor: "pointer", font: "inherit", fontSize: 15, textDecoration: "underline", padding: 0 };
+const ghost: React.CSSProperties = { background: "transparent", border: 0, color: "#A8FF5C", cursor: "pointer", font: "inherit", fontSize: 15, textDecoration: "underline", padding: 0 };
 
 type Vals = Record<string, string>;
 const empty: Vals = { website: "", companyName: "", category: "", offeringSummary: "", keyFeatures: "", differentiators: "", deliveryModel: "", competitors: "", endUser: "", primaryBuyer: "", audience: "", industriesServed: "", region: "", pricing: "", acvLow: "", acvHigh: "", currency: "USD", stage: "", year1PartnerRevenueTarget: "", partnerRevenueSharePercent: "" };
@@ -138,7 +138,7 @@ export function BuilderClient() {
   if (done) {
     return (
       <div ref={top}>
-        <div style={{ fontSize: 14, color: "#FFFFFF", fontWeight: 400 }}>Your strategy is ready</div>
+        <div style={{ fontSize: 14, color: "#A8FF5C", fontWeight: 400 }}>Your strategy is ready</div>
         <h2 style={{ fontWeight: 400, fontSize: 26, letterSpacing: 0, color: "#fff", marginTop: 6 }}>{done.company}: partner program strategy</h2>
         <p style={{ marginTop: 14, fontSize: 17, lineHeight: 1.6, color: "#C9CACE" }}>Your PDF covers positioning, partner types, value propositions, tiers, the commercial model, year 1 KPIs and a 90-day plan.</p>
         <div style={{ marginTop: 22, display: "flex", gap: 14, flexWrap: "wrap" }}><button type="button" onClick={download} style={btn}>Download the PDF</button>{done.key ? <a href={`/find-partners/${done.key}`} style={{ ...btn, display: "inline-block", textDecoration: "none" }}>Find my partners</a> : null}</div>
@@ -152,8 +152,8 @@ export function BuilderClient() {
       <div ref={top} role="status">
         <h2 style={{ fontWeight: 400, fontSize: 24, letterSpacing: 0, color: "#fff" }}>Writing your strategy</h2>
         <p style={{ marginTop: 14, fontSize: 17, lineHeight: 1.6, color: "#C9CACE" }}>This takes two to three minutes. Please keep this tab open, your PDF appears here when it is ready.</p>
-        <div style={{ marginTop: 22, height: 8, borderRadius: 999, background: "#5B3FE0", overflow: "hidden" }}><div style={{ width: `${Math.min(95, secs / 1.8)}%`, height: "100%", background: "#A8FF5C", transition: "width 1s linear" }} /></div>
-        <div style={{ marginTop: 10, fontSize: 14, color: "#FFFFFF" }}>{Math.floor(secs / 60)}:{String(secs % 60).padStart(2, "0")}</div>
+        <div style={{ marginTop: 22, height: 8, borderRadius: 999, background: "#1C1D20", overflow: "hidden" }}><div style={{ width: `${Math.min(95, secs / 1.8)}%`, height: "100%", background: "#A8FF5C", transition: "width 1s linear" }} /></div>
+        <div style={{ marginTop: 10, fontSize: 14, color: "#85868B" }}>{Math.floor(secs / 60)}:{String(secs % 60).padStart(2, "0")}</div>
         <div aria-hidden="true" style={{ marginTop: 26 }}><Toby height={190} /></div>
       </div>
     );
@@ -164,7 +164,7 @@ export function BuilderClient() {
     <form onSubmit={step === 3 ? generate : next} ref={top as unknown as React.RefObject<HTMLFormElement>}>
       <div aria-hidden="true" style={{ position: "absolute", left: -9999, height: 0, overflow: "hidden" }}><label>Leave this empty<input value={trap} onChange={(e) => setTrap(e.target.value)} tabIndex={-1} autoComplete="off" /></label></div>
       <div style={{ display: "flex", gap: 8, marginTop: 14, flexWrap: "wrap" }}>
-        {STEPS.map((s, i) => (<span key={s} style={{ fontSize: 13, padding: "6px 12px", borderRadius: 999, background: i === step ? "#A8FF5C" : "#FFFFFF", color: i === step ? "#0A0A0B" : "#0A0A0B" }}>{i + 1}. {s}</span>))}
+        {STEPS.map((s, i) => (<span key={s} style={{ fontSize: 13, padding: "6px 12px", borderRadius: 999, background: i === step ? "#A8FF5C" : "#1C1D20", color: i === step ? "#0A0A0B" : "#85868B" }}>{i + 1}. {s}</span>))}
       </div>
 
       {step === 0 && (<>
@@ -203,13 +203,13 @@ export function BuilderClient() {
       </>)}
       {step === 3 && (<>
         <Lbl t="Your branding" />
-        <p style={{ margin: "0 0 14px", fontSize: 15, lineHeight: 1.5, color: "#FFFFFF" }}>The PDF uses your logo and colour. We found these on your site, change them if they are not right.</p>
+        <p style={{ margin: "0 0 14px", fontSize: 15, lineHeight: 1.5, color: "#B9BABD" }}>The PDF uses your logo and colour. We found these on your site, change them if they are not right.</p>
         <div style={{ display: "flex", gap: 20, alignItems: "center", flexWrap: "wrap" }}>
           <div style={{ width: 64, height: 64, borderRadius: 12, background: "#fff", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             {brand.logo ? <img src={brand.logo} alt="Logo preview" style={{ maxWidth: 52, maxHeight: 52 }} /> : <span style={{ color: "#0A0A0B", fontWeight: 400, fontSize: 22 }}>{(v.companyName || "?").slice(0, 1).toUpperCase()}</span>}
           </div>
-          <label style={{ fontSize: 15, color: "#FFFFFF", cursor: "pointer", textDecoration: "underline" }}>Upload a logo<input type="file" accept="image/png,image/jpeg" onChange={(e) => onLogo(e.target.files?.[0])} style={{ display: "none" }} /></label>
+          <label style={{ fontSize: 15, color: "#A8FF5C", cursor: "pointer", textDecoration: "underline" }}>Upload a logo<input type="file" accept="image/png,image/jpeg" onChange={(e) => onLogo(e.target.files?.[0])} style={{ display: "none" }} /></label>
           <label style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 15 }}>Colour
             <input type="color" value={brand.color || "#5B3FE0"} onChange={(e) => setBrand((b) => ({ ...b, color: e.target.value }))} style={{ width: 44, height: 36, border: 0, background: "transparent", padding: 0 }} /></label>
         </div>
@@ -229,7 +229,7 @@ export function BuilderClient() {
         </div>
       </>)}
 
-      {err && <div role="alert" style={{ marginTop: 18, fontSize: 15, color: "#FFFFFF" }}>{err}</div>}
+      {err && <div role="alert" style={{ marginTop: 18, fontSize: 15, color: "#A8FF5C" }}>{err}</div>}
       <div style={{ marginTop: 30, display: "flex", gap: 20, alignItems: "center", flexWrap: "wrap" }}>
         <button type="submit" disabled={busy} style={{ ...btn, opacity: busy ? 0.6 : 1 }}>{step === 3 ? "Create my strategy" : busy ? "One moment" : "Continue"}</button>
         {step > 0 && <button type="button" onClick={() => { setErr(""); setStep(step - 1); scroll(); }} style={ghost}>Back</button>}

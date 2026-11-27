@@ -140,7 +140,7 @@ export default function Page() {
               </div>
             ))}
           </div>
-          <div className="cut" style={{ flex: "1 1 400px", minWidth: 0, background: "#7C5CFF", color: "#fff", padding: "36px 38px 44px", display: "flex", flexDirection: "column", justifyContent: "center", ["--c" as string]: "26px" }}>
+          <div className="" style={{ flex: "1 1 400px", minWidth: 0, background: "#0A0A0B", border: "2px solid #A8FF5C", color: "#fff", padding: "36px 38px 44px", display: "flex", flexDirection: "column", justifyContent: "center", ["--c" as string]: "26px" }}>
             <div style={{ ...michroma, fontSize: 26, lineHeight: 1.3 }}>Find your two bottlenecks</div>
             <p style={{ margin: "16px 0 0", fontSize: 18, lineHeight: 1.55 }}>You see the first one right away. Leave your email to get the full result and a PDF</p>
             <div style={{ marginTop: 28 }}><StartLink className="btn btn-p">Start the assessment</StartLink></div>
