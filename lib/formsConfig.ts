@@ -14,4 +14,4 @@ export const ISSUES = [
   "The link is broken or wrong", "The terms are out of date", "The category or type is wrong",
   "The program no longer exists", "Something else",
 ];
-export type Kind = "submit" | "claim" | "report";
+export type Kind = "submit" | "claim";

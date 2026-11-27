@@ -179,7 +179,7 @@ export default async function Home() {
           <h2 className="sectitle">What every listing shows</h2>
           <div style={{ marginTop: 56, display: "flex", alignItems: "center", justifyContent: "center", gap: 28, flexWrap: "wrap" }}>
             <div className="lblcol" style={{ alignItems: "flex-end" }}>
-              <span className="chip">Type of program</span><span className="chip">Terms as published</span><span className="chip">Report a correction</span>
+              <span className="chip">Type of program</span><span className="chip">Terms as published</span><span className="chip">Claim this listing</span>
             </div>
             <div className="card cut" style={{ width: 620, maxWidth: "100%", padding: "28px 32px 38px", ["--c" as string]: "28px" }}>
               <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, flexWrap: "wrap" }}>
@@ -193,7 +193,7 @@ export default async function Home() {
               ))}
               <div style={{ display: "flex", gap: 12, marginTop: 14, flexWrap: "wrap" }}>
                 <span className="btn btn-p btn-sm">Go to program</span>
-                <span className="btn btn-s btn-sm">Report a correction</span>
+                <span className="btn btn-s btn-sm">Claim this listing</span>
               </div>
             </div>
             <div className="lblcol" style={{ alignItems: "flex-start" }}>

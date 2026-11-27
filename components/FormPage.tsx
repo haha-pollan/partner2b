@@ -16,16 +16,10 @@ const CFG: Record<Kind, Cfg> = {
     band: { a: "Own a listed program? ", b: "Claim it for free", sub: "Keep your terms accurate and up to date", cta: "Claim a listing", href: "/claim" },
   },
   claim: {
-    title: "Claim a listing", intro: "Part of the company behind a program? Claim its listing to keep the terms accurate. Claiming is free",
+    title: "Claim a listing", intro: "Part of the company behind a program? Claim its listing to keep the terms accurate and correct anything that is wrong. Claiming is free",
     badge: "Free", badgeSub: "to claim a listing", card: "Your details",
     steps: ["We email your work address to confirm it", "You send us the updates to your terms", "We publish them and mark the listing as claimed"],
     band: { a: "Program not listed? ", b: "Add it for free", sub: "Send the link to its official page", cta: "Submit a program", href: "/submit" },
-  },
-  report: {
-    title: "Report a correction", intro: "Spotted something wrong or out of date on a listing? Tell us and send a source if you have one",
-    badge: "Free", badgeSub: "to report a correction", card: "What needs fixing",
-    steps: ["We compare it with the official page", "We update the listing if it holds up", "You get a reply if you left an email"],
-    band: { a: "Browse the ", b: "directory", sub: "Find the program page and check its details", cta: "Open the directory", href: "/directory" },
   },
 };
 
@@ -38,7 +32,7 @@ export function FormPage({ kind, listings, defaultListing }: { kind: Kind; listi
           <Nav />
           <div className="wrap" style={{ padding: "24px var(--margin) clamp(36px,9vw,90px)", display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 40, flexWrap: "wrap" }}>
             <div style={{ maxWidth: "100%" }}>
-              <h1 className="h1big" style={{ fontSize: kind === "report" ? "clamp(26px,3.6vw,56px)" : "clamp(28px,4vw,64px)" }}>{c.title}</h1>
+              <h1 className="h1big" style={{ fontSize: "clamp(28px,4vw,64px)" }}>{c.title}</h1>
               <p style={{ margin: "22px 0 0", maxWidth: 560, fontSize: 21, lineHeight: 1.5, fontWeight: 400 }}>{c.intro}</p>
             </div>
             <div className="cut statcard" style={{ flex: "0 0 320px", margin: "20px 40px 0 0", transform: "rotate(-4deg)", background: "#26272B", padding: "28px 32px" }}>
