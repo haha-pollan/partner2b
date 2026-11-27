@@ -37,6 +37,7 @@ export function Footer() {
             <div className="footcol">
               <Link href="/program-builder">Program builder</Link>
               <Link href="/partner-pipeline-calculator">Partner pipeline calculator</Link>
+              <Link href="/partner-roi-calculator">Partner ROI calculator</Link>
               <Link href="/partner-program-assessment">Partner program assessment</Link>
             </div>
           </div>
