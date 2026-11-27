@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { JsonLd, ORG, SITE, crumbs } from "@/components/JsonLd";
 import Link from "next/link";
-import { Nav } from "@/components/Nav";
+import { PageHero } from "@/components/PageHero";
 import { Footer } from "@/components/Footer";
 import { BuilderCta } from "@/components/BuilderCta";
 
@@ -16,13 +16,7 @@ export default function Page() {
     <div>
       <JsonLd data={{ "@context": "https://schema.org", "@graph": [ { "@type": "AboutPage", name: "About Partner2B", url: `${SITE}/about-us`, about: { "@id": `${SITE}/#organization` } }, { ...ORG, founder: { "@type": "Person", name: "Elena Zap", jobTitle: "Founder, Partner2B" } }, crumbs([["Partner2B", SITE], ["About", `${SITE}/about-us`]]) ] }} />
       <div style={{ overflow: "hidden" }}>
-        <Nav />
-        <div className="wrap" style={{ padding: "40px var(--margin) clamp(36px,9vw,64px)" }}>
-          <h1 className="h1big">About Partner2B</h1>
-          <p style={{ margin: "22px 0 0", maxWidth: 900, fontSize: 20, lineHeight: 1.5, color: "#ECECEE" }}>
-            Partner2B helps businesses grow through partner ecosystems.
-          </p>
-        </div>
+        <PageHero layout="poster" title="About" accent="Partner2B" sub="Partner2B helps businesses grow through partner ecosystems." />
       </div>
       <main className="wrap" style={{ padding: "clamp(36px,9vw,64px) var(--margin) clamp(36px,9vw,96px)" }}>
         <div style={{ maxWidth: 760, fontSize: 18, lineHeight: 1.65, color: "#ECECEE" }}>

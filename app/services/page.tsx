@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { JsonLd, ORG, SITE, crumbs } from "@/components/JsonLd";
-import { Nav } from "@/components/Nav";
+import { PageHero } from "@/components/PageHero";
 import { Footer } from "@/components/Footer";
 import { BuilderCta } from "@/components/BuilderCta";
 import { Glyph } from "@/components/Tile";
@@ -102,30 +102,15 @@ export default function Services() {
       <div style={{ overflow: "hidden" }}>
         {/* Hero */}
         <div style={{ position: "relative" }}>
-          <Nav />
-          <div className="wrap" style={{ padding: "24px var(--margin) clamp(36px,9vw,110px)", display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 40, flexWrap: "wrap" }}>
-            <div style={{ flex: "0 0 auto", maxWidth: "min(100%, 800px)" }}>
-              <span className="pill">For B2B companies</span>
-              <h1 style={{ margin: "20px 0 0", fontWeight: 400, fontSize: "clamp(26px,3.4vw,47px)", lineHeight: 1, letterSpacing: 0 }}>
-                <span style={{ display: "block" }}>Want to grow</span>
-                <span style={{ display: "block" }}>through partners?</span>
-                <span style={{ display: "block" }}>Start with your GTM</span>
-              </h1>
-              <p style={{ margin: "24px 0 0", maxWidth: 560, fontSize: 21, lineHeight: 1.5, fontWeight: 400 }}>
-                B2B partner programs work when the offer, the pipeline and the operations behind them are ready. We help with all three, in that order.
-              </p>
-              <div style={{ display: "flex", gap: 14, flexWrap: "wrap", marginTop: 32 }}>
-                <a href={MAIL} style={btnA}>Talk to us</a>
-                <Link href="/directory" style={btnB}>Browse partner programs</Link>
-              </div>
-            </div>
-            <div style={{ flex: "0 0 380px", maxWidth: "100%", display: "flex", flexDirection: "column", gap: 22, marginTop: 20 }}>
+          <PageHero layout="poster" title="Want to grow through partners?" accent="Start with your GTM" sub="B2B partner programs work when the offer, the pipeline and the operations behind them are ready. We help with all three, in that order." buttons={<><a href={MAIL} className="btn btn-p">Talk to us</a><Link href="/directory" className="btn btn-o">Browse partner programs</Link></>} />
+          <div className="wrap" style={{ padding: "0 var(--margin) clamp(36px,9vw,90px)", display: "flex", justifyContent: "center", gap: 28, flexWrap: "wrap" }}>
+            <div style={{ display: "flex", gap: 28, flexWrap: "wrap", justifyContent: "center", width: "100%" }}>
               {[
                 { s: STEPS[0], bg: "#2A2B30", fg: "#ECECEE", gl: "#A8FF5C", rot: -5, ml: 0 },
                 { s: STEPS[1], bg: "#ECECEE", fg: "#0A0A0B", gl: "#0A0A0B", rot: 3, ml: 36 },
                 { s: STEPS[2], bg: "#A8FF5C", fg: "#0A0A0B", gl: "#0A0A0B", rot: -3, ml: 12 },
               ].map(({ s, bg, fg, gl, rot, ml }) => (
-                <a key={s.id} href={`#${s.id}`} className="cut hcard" style={{ marginLeft: ml, transform: `rotate(${rot}deg)`, background: bg, color: fg, padding: "22px 26px", display: "flex", alignItems: "center", gap: 18 }}>
+                <a key={s.id} href={`#${s.id}`} className="cut hcard" style={{ flex: "0 1 340px", transform: `rotate(${rot}deg)`, background: bg, color: fg, padding: "22px 26px", display: "flex", alignItems: "center", gap: 18 }}>
                   <div style={{ flex: "0 0 64px", width: 64, height: 64, borderRadius: 16, border: `2px solid ${gl}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
                     <Glyph kind={s.kind} fg={gl} size={38} />
                   </div>
