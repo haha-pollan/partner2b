@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import { Nav } from "@/components/Nav";
-import { Toby } from "@/components/Toby";
+import { PageHero } from "@/components/PageHero";
 import { Glyph } from "@/components/Tile";
 import { Footer } from "@/components/Footer";
 import { adminConfigured, db } from "@/lib/admin/session";
@@ -44,25 +43,17 @@ export default async function Page() {
   const { sample } = await load();
   return (
     <div style={{ overflow: "hidden" }}>
-      <div className="hero">
-        <Nav />
-        <div className="wrap herobody" style={{ paddingTop: 36, paddingBottom: 110 }}>
-          <div className="tapewrap">
-            <h1 className="ptapes">
-              <span className="pt pt1">Find the right companies</span>
-              <span className="pt pt2">to partner with</span>
-            </h1>
-            <p className="bubble herosub" style={{ marginTop: 44 }}>A ranked list of real companies for every partner type you need, with new ones added every week.</p>
-            <div className="herobtns" style={{ alignItems: "center" }}>
-              <a href="#start" className="btn btn-s">Find my partners</a>
-              <OpenMine link />
-            </div>
-          </div>
-          <div className="herotoby" aria-hidden="true">
-            <Toby height={580} rows={38} glasses style={{ width: "100%", height: "100%" }} />
-          </div>
-        </div>
-      </div>
+      <PageHero
+        label={<span className="kick">Find partners<span className="newbadge" suppressHydrationWarning>New</span></span>}
+        title="Find the right companies"
+        accent="to partner with"
+        sub="A ranked list of real companies for every partner type you need, with new ones added every week."
+        ghost="#1"
+        words={WORDS}
+      >
+        <a href="#start" className="btn btn-s">Find my partners</a>
+        <OpenMine link />
+      </PageHero>
 
       <section style={{ padding: "clamp(36px,9vw,72px) 0 0" }}>
         <div className="wrap"><Doors opts={{ categories: BUILDER_CATEGORIES, audiences: AUDIENCES, regions: REGIONS }} /></div>
