@@ -72,6 +72,15 @@ export default async function Home() {
         </div>
       </div>
 
+      {/* Crossing straps */}
+      <div aria-hidden="true" style={{ position: "relative", height: 150, overflow: "hidden" }}>
+        {[{ bg: "#FFFFFF", fg: "#0A0A0B", rot: 2, top: 34 }, { bg: "#A8FF5C", fg: "#0A0A0B", rot: -2, top: 44 }].map((b, i) => (
+          <div key={i} style={{ position: "absolute", left: -40, right: -40, top: b.top, transform: `rotate(${b.rot}deg)`, background: b.bg, color: b.fg, padding: "14px 0", whiteSpace: "nowrap", overflow: "hidden", fontFamily: "'Michroma',sans-serif", fontWeight: 400, fontSize: 20, letterSpacing: 0, textTransform: "uppercase" }}>
+            {Array.from({ length: 3 }).map(() => TYPES.map((t) => `${t} ◆ `).join("")).join("")}
+          </div>
+        ))}
+      </div>
+
       {/* Directory */}
       <section aria-labelledby="hm-dir" style={{ padding: "70px 0 170px" }}>
         <div className="wrap" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 56, flexWrap: "wrap" }}>
