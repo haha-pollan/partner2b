@@ -41,7 +41,7 @@ export default function Doors({ opts }: { opts: Opts }) {
       <div style={{ display: "grid", gap: 28, gridTemplateColumns: "repeat(auto-fit,minmax(340px,1fr))" }}>
         {[
           { t: "I know who I want to partner with", p: "Pick the partner types you want and get a ranked list of real companies in a minute.", bg: "#A8FF5C", sub: "#1C1D20", num: "#3F7A12", kind: "diamond", rot: -1.2 },
-          { t: "I am starting from scratch", p: "Not sure which partners fit? Build your strategy first and we will work out the right ones for you.", bg: "#ECECEE", sub: "#3A3B40", num: "#85868B", kind: "bars", rot: 1.2 },
+          { t: "I am starting from scratch", p: "Not sure which partners fit? Build your strategy first and we will work out the right ones for you.", bg: "#FFFFFF", sub: "#3A3B40", num: "#85868B", kind: "bars", rot: 1.2 },
         ].map((c, i) => (
           <div key={c.t} className="cut" style={{ background: c.bg, color: "#0A0A0B", transform: `rotate(${c.rot}deg)`, padding: "26px 28px 30px", display: "flex", flexDirection: "column" }}>
             <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>

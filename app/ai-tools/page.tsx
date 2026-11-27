@@ -21,8 +21,9 @@ export const metadata: Metadata = {
 const URL_ = `${SITE}/ai-tools`;
 const TOOL_ICON: Record<string, IconName> = { "/partner-pipeline-calculator": "calculator", "/partner-program-assessment": "assessment", "/program-builder": "builder", "/playbook": "playbook", "/find-partners": "find" };
 const TONES = [
-  { bg: "#ECECEE", fg: "#0A0A0B", sub: "#3A3B40", ar: "#0A0A0B", arf: "#A8FF5C" },
+  { bg: "#FFFFFF", fg: "#0A0A0B", sub: "#3A3B40", ar: "#0A0A0B", arf: "#A8FF5C" },
   { bg: "#A8FF5C", fg: "#0A0A0B", sub: "#1C1D20", ar: "#0A0A0B", arf: "#A8FF5C" },
+  { bg: "#7C5CFF", fg: "#FFFFFF", sub: "#FFFFFF", ar: "#FFFFFF", arf: "#7C5CFF" },
 ];
 const STRAPS = [
   { bg: "#fff", fg: "#0A0A0B", rot: -1.4, ml: 0 },
@@ -45,7 +46,7 @@ export default function Page() {
   const isNew: Record<string, boolean> = { "/program-builder": builderIsNew(), "/partner-pipeline-calculator": calcIsNew(), "/partner-program-assessment": assessIsNew() };
   const soon = [["58%", "92%", "70%"], ["64%", "86%", "56%"], ["52%", "94%", "74%"], ["60%", "88%", "66%"], ["68%", "82%", "54%"], ["56%", "90%", "72%"]];
   const textCard = (t: string, d: string, i: number, n?: string) => {
-    const T = TONES[(i + Math.floor(i / 3)) % 2];
+    const T = TONES[(i + Math.floor(i / 3)) % 3];
     return (
       <div key={t} className="cut" style={{ background: T.bg, color: T.fg, transform: `rotate(${ROT[i % 6]}deg)`, padding: "26px 28px 36px" }}>
         {n && <span style={{ ...michroma, fontSize: 26, lineHeight: 1 }}>{n}</span>}
@@ -76,14 +77,14 @@ export default function Page() {
           <p style={lead}>Each tool answers one question and takes minutes. Start with the one that matches where you are</p>
           <div style={GRID}>
             {TOOLS.map((t, i) => {
-              const T = TONES[i % 2];
+              const T = TONES[i % 3];
               return (
                 <Link key={t.href} href={t.href} className="cut gcard" style={{ background: T.bg, color: T.fg, transform: `rotate(${ROT[i % 6]}deg)`, padding: "26px 28px 32px", display: "flex", flexDirection: "column" }}>
-                  {TOOL_ICON[t.href] && <div style={{ marginBottom: 14 }}><Icon name={TOOL_ICON[t.href]} color={"#0A0A0B"} size={48} /></div>}
+                  {TOOL_ICON[t.href] && <div style={{ marginBottom: 14 }}><Icon name={TOOL_ICON[t.href]} color={T.bg === "#7C5CFF" ? "#FFFFFF" : "#0A0A0B"} size={48} /></div>}
                   <h3 style={{ ...michroma, fontSize: 18, lineHeight: 1.35, minHeight: 50, ...balance }}>{t.name}</h3>
                   <div style={{ display: "flex", alignItems: "center", gap: 8, minHeight: 30, marginTop: 6, flexWrap: "wrap" }}>
-                    {isNew[t.href] && <span className="pill" suppressHydrationWarning style={{ background: "#7C5CFF", color: "#fff" }}>New</span>}
-                    {t.ai && <span className="pill" style={{ background: "#7C5CFF", color: "#fff" }}>Uses AI</span>}
+                    {isNew[t.href] && <span className="pill" suppressHydrationWarning style={{ background: T.bg === "#7C5CFF" ? "#FFFFFF" : "#7C5CFF", color: T.bg === "#7C5CFF" ? "#0A0A0B" : "#fff" }}>New</span>}
+                    {t.ai && <span className="pill" style={{ background: T.bg === "#7C5CFF" ? "#FFFFFF" : "#7C5CFF", color: T.bg === "#7C5CFF" ? "#0A0A0B" : "#fff" }}>Uses AI</span>}
                   </div>
                   <p style={{ margin: "10px 0 0", minHeight: 78, fontSize: 16, lineHeight: 1.5, color: T.sub }}>{t.promise}</p>
                   <span style={{ marginTop: 20, alignSelf: "flex-start", width: 44, height: 44, borderRadius: "50%", background: T.ar, color: T.arf, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 22, fontWeight: 400 }} aria-hidden="true">→</span>
@@ -95,7 +96,7 @@ export default function Page() {
           <h3 style={{ ...michroma, fontSize: 20, lineHeight: 1.4, margin: "64px 0 0" }}>Coming soon</h3>
           <div style={GRID} aria-hidden="true">
             {soon.map((w, i) => {
-              const T = TONES[(i + 1 + Math.floor(i / 3)) % 2];
+              const T = TONES[(i + 1 + Math.floor(i / 3)) % 3];
               return (
                 <div key={i} className="cut gcard" style={{ position: "relative", background: T.bg, color: T.fg, transform: `rotate(${ROT[(i + 3) % 6]}deg)`, padding: "26px 28px 32px", display: "flex", flexDirection: "column", overflow: "hidden", userSelect: "none" }}>
                   <div style={{ filter: "blur(9px)" }}>
@@ -195,7 +196,7 @@ export default function Page() {
 
         {/* Toby band */}
         <section aria-labelledby="start" style={section}>
-          <div className="cut" style={{ background: "#ECECEE", color: "#0A0A0B", padding: "clamp(28px,4vw,44px) clamp(26px,4vw,52px) clamp(34px,4vw,52px)", display: "flex", gap: 32, flexWrap: "wrap", alignItems: "center", ["--c" as string]: "28px", border: "0" }}>
+          <div className="cut" style={{ background: "#FFFFFF", color: "#0A0A0B", padding: "clamp(28px,4vw,44px) clamp(26px,4vw,52px) clamp(34px,4vw,52px)", display: "flex", gap: 32, flexWrap: "wrap", alignItems: "center", ["--c" as string]: "28px", border: "0" }}>
             <div style={{ flex: "1 1 420px", minWidth: 0 }}>
               <h2 id="start" style={{ ...michroma, fontSize: "clamp(22px,2.6vw,30px)", lineHeight: 1.3, ...balance }}>Not sure where to start?</h2>
               <p style={{ margin: "16px 0 0", fontSize: 18, lineHeight: 1.55, maxWidth: 520 }}>If you already have a program, start with the assessment. If you do not, start with the program builder. Both take minutes</p>
