@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
-import { Nav } from "@/components/Nav";
+import { PageHero } from "@/components/PageHero";
 import { Footer } from "@/components/Footer";
 import { Toby } from "@/components/Toby";
 import CountUp from "@/components/CountUp";
@@ -55,22 +55,7 @@ export default async function Home() {
   return (
     <>
       {/* Hero */}
-      <div className="hero homehero">
-        <Nav />
-        <div className="wrap herobody" style={{ paddingTop: 110, paddingBottom: 120 }}>
-          <div className="tapewrap">
-            <h1 className="ptapes">
-              <span className="pt pt1">Plan your partner program</span>
-              <span className="pt pt2">then find who to partner with</span>
-            </h1>
-            <p className="bubble herosub homesub" style={{ marginTop: 56 }}>{`Plan your strategy with free tools, then get a ranked list of real companies to partner with. Or compare ${all.length} partner programs in the directory`}</p>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 14, marginTop: 28 }}><Link href="/find-partners" className="btn btn-p">Find partners</Link><Link href="/directory" className="btn btn-o">Browse the directory</Link></div>
-          </div>
-          <div className="herotoby">
-            <Toby height={580} rows={38} glasses style={{ width: "100%", height: "100%" }} />
-          </div>
-        </div>
-      </div>
+      <PageHero layout="toby-center" title="Plan your partner program" accent="then find who to partner with" sub={`Plan your strategy with free tools, then get a ranked list of real companies to partner with. Or compare ${all.length} partner programs in the directory`} buttons={<><Link href="/find-partners" className="btn btn-p">Find partners</Link><Link href="/directory" className="btn btn-o">Browse the directory</Link></>} />
 
       {/* Crossing straps */}
       <div aria-hidden="true" style={{ position: "relative", height: 150, overflow: "hidden" }}>
