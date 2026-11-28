@@ -1,9 +1,11 @@
 // The free tools that collect an email. Used by the admin Tools screens.
-export type ToolDef = { slug: string; table: string; label: string; what: string };
+export type ToolDef = { slug: string; table: string; label: string; what: string; filter?: string };
 
 export const TOOLS: ToolDef[] = [
   { slug: "assessment", table: "assessment_leads", label: "Assessment", what: "Partner program assessment" },
-  { slug: "calculator", table: "calculator_leads", label: "Pipeline calculator", what: "Partner pipeline calculator" },
+  { slug: "calculator", table: "calculator_leads", label: "Pipeline calculator", what: "Partner pipeline calculator", filter: "tool=eq.partner-pipeline-calculator" },
+  { slug: "roi-calculator", table: "calculator_leads", label: "ROI calculator", what: "Partner ROI calculator", filter: "tool=eq.partner-roi-calculator" },
+  { slug: "compensation-calculator", table: "calculator_leads", label: "Compensation calculator", what: "Partner compensation budget calculator", filter: "tool=eq.partner-compensation-calculator" },
   { slug: "builder", table: "builder_leads", label: "Program builder", what: "Program builder preview" },
   { slug: "playbook", table: "playbook_downloads", label: "Playbook", what: "Playbook download" },
 ];

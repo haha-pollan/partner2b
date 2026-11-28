@@ -10,7 +10,7 @@ const DAY = 86_400_000;
 const KIND: Record<string, string> = { submit: "Add program", claim: "Claim", report: "Report" };
 const TOOLS: [string, string][] = [
   ["assessment_leads", "Assessment"],
-  ["calculator_leads", "Pipeline calculator"],
+  ["calculator_leads", "Calculators"],
   ["builder_leads", "Program builder"],
   ["playbook_downloads", "Playbook"],
   ["newsletter_subscribers", "Newsletter"],
@@ -28,9 +28,9 @@ async function rows<T>(path: string): Promise<T[] | null> {
   } catch { return null; }
 }
 
-async function count(table: string): Promise<number | null> {
+async function count(table: string, filter?: string): Promise<number | null> {
   try {
-    const r = await db(`${table}?select=id&limit=1`, { headers: { Prefer: "count=exact" } });
+    const r = await db(`${table}?select=id&limit=1${filter ? `&${filter}` : ""}`, { headers: { Prefer: "count=exact" } });
     if (!r.ok) return null;
     const n = Number((r.headers.get("content-range") || "").split("/")[1]);
     return Number.isFinite(n) ? n : null;
@@ -48,7 +48,7 @@ export default async function Dashboard() {
   const isSuper = staff.role === "super_admin";
 
   const [toolCounts, subs, progs, log, ...leadSets] = await Promise.all([
-    Promise.all(TOOL_DEFS.map((t) => count(t.table))),
+    Promise.all(TOOL_DEFS.map((t) => count(t.table, t.filter))),
     rows<Sub>("submissions?select=id,created_at,kind,status,company,listing,name&order=created_at.asc&limit=5000"),
     fetchAll<Prog>("programs?select=id,slug,company,product_category,description,company_description,commission_models,published&order=id.asc").catch(() => null),
     rows<Log>(`admin_log?select=at,staff_email,action,target&order=at.desc&limit=8${isSuper ? "" : `&staff_email=eq.${encodeURIComponent(staff.email)}`}`),

@@ -17,7 +17,8 @@ export default async function ToolPage({ params, searchParams }: { params: Promi
   const { q = "", p = "1" } = await searchParams;
   const page = Math.max(1, Number(p) || 1);
   const term = q.trim().replace(/[%*,()]/g, "");
-  const filter = term ? `&email=ilike.*${encodeURIComponent(term)}*` : "";
+  const toolFilter = t.filter ? `&${t.filter}` : "";
+  const filter = toolFilter + (term ? `&email=ilike.*${encodeURIComponent(term)}*` : "");
   const r = await db(`${t.table}?select=*&order=created_at.desc&limit=${PAGE}&offset=${(page - 1) * PAGE}${filter}`, { headers: { Prefer: "count=exact" } });
   const rows: Row[] = r.ok ? await r.json() : [];
   const total = Number((r.headers.get("content-range") || "").split("/")[1]) || rows.length;
