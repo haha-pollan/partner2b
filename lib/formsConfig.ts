@@ -6,7 +6,7 @@ export const CATEGORIES = [
   "Customer service and contact center", "Conversational and voice AI", "Sales and CRM",
   "Cloud and infrastructure", "Cybersecurity", "Data and analytics",
   "IT management and DevOps", "Low-code and collaboration", "Content and digital experience",
-  "Ecommerce and marketing tech", "Construction, real estate and field operations", "Life sciences and healthcare",
+  "Marketing tech", "Ecommerce", "Construction, real estate and field operations", "Life sciences and healthcare",
   "Foundation models and APIs", "AI agents and automation", "AI infrastructure and MLOps",
   "Vector databases and data for AI", "AI security and governance", "AI integrators and consultancies",
 ];
