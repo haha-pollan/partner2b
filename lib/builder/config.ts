@@ -60,7 +60,7 @@ export const TYPE_ROLES: Record<string, TypeRole> = {
 
 export const GROUPS: Record<string, string[]> = {
   finance: ["Payments", "Billing and subscriptions", "Buy now, pay later", "Fraud, risk and compliance", "Identity and KYC", "Banking as a service and card issuing", "Core and digital banking", "Open banking and financial data", "Spend management and AP", "Finance and accounting software", "Payroll and HR"],
-  customer: ["Customer service and contact center", "Conversational and voice AI", "Sales and CRM", "Ecommerce and marketing tech", "Content and digital experience"],
+  customer: ["Customer service and contact center", "Conversational and voice AI", "Sales and CRM", "Marketing tech", "Ecommerce", "Content and digital experience"],
   infra: ["Cloud and infrastructure", "Cybersecurity", "Data and analytics", "IT management and DevOps", "Low-code and collaboration"],
   ai: ["Foundation models and APIs", "AI agents and automation", "AI infrastructure and MLOps", "Vector databases and data for AI", "AI security and governance", "AI integrators and consultancies"],
   vertical: ["Construction, real estate and field operations", "Life sciences and healthcare"],
@@ -88,7 +88,8 @@ export const ARCHETYPES: Record<string, string[]> = {
   "IT management and DevOps": ["Managed service providers", "DevOps and cloud consultancies", "IT resellers and distributors"],
   "Low-code and collaboration": ["Digital transformation consultancies", "Business process and workflow agencies", "Systems integrators"],
   "Content and digital experience": ["Web and digital experience agencies", "Ecommerce platform integrators", "Marketing technology consultancies"],
-  "Ecommerce and marketing tech": ["Ecommerce and growth agencies", "Platform integrators and developers", "Marketing and CRM consultancies"],
+  "Marketing tech": ["Marketing and growth agencies", "Marketing technology consultancies", "Marketing and CRM integrators"],
+  "Ecommerce": ["Ecommerce and growth agencies", "Platform integrators and developers", "Ecommerce operations consultancies"],
   "Construction, real estate and field operations": ["Industry software resellers and integrators", "Industry consultancies and advisors", "Adjacent software vendors such as accounting and project controls"],
   "Life sciences and healthcare": ["Life sciences consultancies and research organizations", "Healthcare IT integrators", "Regulated-industry software vendors"],
   "Foundation models and APIs": ["AI consultancies and systems integrators", "Software vendors that embed models in their products", "Automation agencies and developer studios"],

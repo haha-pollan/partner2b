@@ -18,7 +18,7 @@ export const BUILDER_CATEGORIES = [...CATEGORIES, "Other or not listed"];
 const FINTECH = ["Payments", "Billing and subscriptions", "Buy now, pay later", "Fraud, risk and compliance", "Identity and KYC", "Banking as a service and card issuing", "Core and digital banking", "Open banking and financial data", "Spend management and AP", "Finance and accounting software", "Payroll and HR"];
 const INFRA = ["Cloud and infrastructure", "Cybersecurity", "IT management and DevOps", "AI infrastructure and MLOps", "AI security and governance"];
 const HEALTH = ["Life sciences and healthcare"];
-const RETAIL = ["Ecommerce and marketing tech", "Content and digital experience", "Construction, real estate and field operations"];
+const RETAIL = ["Marketing tech", "Ecommerce", "Content and digital experience", "Construction, real estate and field operations"];
 export function verticalFor(category: string) {
   if (FINTECH.includes(category)) return "Fintech and Financial Services";
   if (INFRA.includes(category)) return "IT Infrastructure and Cybersecurity";
