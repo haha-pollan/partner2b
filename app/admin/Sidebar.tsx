@@ -14,7 +14,7 @@ export default function Sidebar({ isSuper, newSubmissions, name, role, logout }:
   const groups: Group[] = [
     { title: "Overview", items: [{ label: "Dashboard", href: "/admin" }] },
     { title: "Inbox", items: [{ label: "Submissions", href: "/admin/submissions", badge: newSubmissions }] },
-    { title: "Tools", items: [{ label: "Overview", href: "/admin/tools", exact: true }, { label: "Assessment", href: "/admin/tools/assessment" }, { label: "Calculator", href: "/admin/tools/calculator" }, { label: "Program builder", href: "/admin/tools/builder" }, { label: "Playbook", href: "/admin/tools/playbook" }] },
+    { title: "Tools", items: [{ label: "Overview", href: "/admin/tools", exact: true }, { label: "Assessment", href: "/admin/tools/assessment" }, { label: "Pipeline calculator", href: "/admin/tools/calculator" }, { label: "ROI calculator", href: "/admin/tools/roi-calculator" }, { label: "Compensation calculator", href: "/admin/tools/compensation-calculator" }, { label: "Program builder", href: "/admin/tools/builder" }, { label: "Playbook", href: "/admin/tools/playbook" }] },
     { title: "Directory", items: [{ label: "Programs", href: "/admin/programs" }, { label: "Enrichment", href: "/admin/enrichment" }, { label: "Discovery (test)", href: "/admin/discovery" }, { label: "Early access requests", href: "/admin/requests" }, { label: "Data quality", soon: true }] },
     { title: "Content", items: [{ label: "Blog articles", soon: true }, { label: "Subscribers", soon: true }] },
     { title: "Vendors", items: [{ label: "Vendor accounts", soon: true }, { label: "Claims", soon: true }] },

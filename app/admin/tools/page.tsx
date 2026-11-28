@@ -5,9 +5,9 @@ import { TOOLS } from "@/lib/admin/tools";
 export const dynamic = "force-dynamic";
 const DAY = 86_400_000;
 
-async function times(table: string): Promise<string[] | null> {
+async function times(table: string, filter?: string): Promise<string[] | null> {
   try {
-    const r = await db(`${table}?select=created_at&order=created_at.desc&limit=5000`);
+    const r = await db(`${table}?select=created_at&order=created_at.desc&limit=5000${filter ? `&${filter}` : ""}`);
     return r.ok ? ((await r.json()) as { created_at: string }[]).map((x) => x.created_at) : null;
   } catch { return null; }
 }
@@ -15,7 +15,7 @@ async function times(table: string): Promise<string[] | null> {
 export default async function ToolsOverview() {
   await requireStaff();
   if (!adminConfigured()) return <div className="adm-card cut"><h1>Setup needed</h1></div>;
-  const data = await Promise.all(TOOLS.map((t) => times(t.table)));
+  const data = await Promise.all(TOOLS.map((t) => times(t.table, t.filter)));
   const now = Date.now();
   const cards = TOOLS.map((t, i) => {
     const d = data[i];
